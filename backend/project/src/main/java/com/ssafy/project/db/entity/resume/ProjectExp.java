@@ -44,4 +44,8 @@ public class ProjectExp {
     @Column(nullable = false)
     private String link;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
 }

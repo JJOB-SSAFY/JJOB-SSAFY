@@ -26,4 +26,8 @@ public class University {
     @Column(nullable = false)
     private String major;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
 }

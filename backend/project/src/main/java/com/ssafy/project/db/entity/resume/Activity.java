@@ -29,4 +29,8 @@ public class Activity {
     @Column(nullable = false)
     private String activityInstitution;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
 }

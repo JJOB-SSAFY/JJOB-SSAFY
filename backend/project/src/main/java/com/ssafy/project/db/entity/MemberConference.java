@@ -17,4 +17,12 @@ public class MemberConference {
     @Column(name = "member_conference_id")
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "conference_id")
+    private Conference conference;
+
 }

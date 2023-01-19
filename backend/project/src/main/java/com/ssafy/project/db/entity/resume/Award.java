@@ -27,4 +27,7 @@ public class Award {
     @Column(nullable = false)
     private String awardInstitution;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
 }

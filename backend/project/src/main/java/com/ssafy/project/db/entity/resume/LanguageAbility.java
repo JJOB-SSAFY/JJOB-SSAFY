@@ -29,4 +29,8 @@ public class LanguageAbility {
     @Column(nullable = false)
     private String testDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
 }

@@ -1,5 +1,7 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.db.entity.Company;
+import com.ssafy.project.db.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,5 +31,12 @@ public class Resume {
     private String email;
 
     private String github;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
 }

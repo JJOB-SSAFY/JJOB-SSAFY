@@ -26,4 +26,8 @@ public class Career {
     @Column(nullable = false)
     private String careerContent;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
 }
