@@ -11,7 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Resume {
 
     @Id

@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Certificate {
 
     @Id

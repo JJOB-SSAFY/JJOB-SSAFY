@@ -9,7 +9,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class MemberConference {
 
     @Id
