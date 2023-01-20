@@ -17,6 +17,9 @@ public class Card {
     private Long id;
 
     @Column(nullable = false)
+    private String cardTitle;
+
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -30,5 +33,9 @@ public class Card {
     private String blog;
 
     private String introduce;
+
+    private String skills;
+
+    private String preferredJob;
 
 }

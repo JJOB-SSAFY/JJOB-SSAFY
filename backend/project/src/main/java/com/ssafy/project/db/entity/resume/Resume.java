@@ -19,6 +19,9 @@ public class Resume {
     private Long id;
 
     @Column(nullable = false)
+    private String resumeTitle;
+
+    @Column(nullable = false)
     private String name;
 
     private String blog;
