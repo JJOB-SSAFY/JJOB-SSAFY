@@ -1,6 +1,8 @@
 package com.ssafy.project.api.service;
 
 import com.ssafy.project.api.request.MemberJoinPostReq;
+import com.ssafy.project.common.exception.ApiException;
+import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,12 +35,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional(readOnly = true)
     public Member getMemberByEmail(String email) {
-        Optional<Member> findMember = memberRepository.findMemberByEmail(email);
+        Optional<Member> findMember = memberRepository.findByEmail(email);
 
         if (findMember.isPresent()) {
             return findMember.get();
         }
 
-        return null;
+        throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
     }
 }
