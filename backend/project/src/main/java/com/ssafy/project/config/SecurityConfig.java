@@ -2,8 +2,11 @@ package com.ssafy.project.config;
 
 import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.common.auth.JwtAuthenticationFilter;
+import com.ssafy.project.common.auth.SsafyLoginSuccessHandler;
+import com.ssafy.project.common.auth.SsafyOAuth2UserDetailService;
 import com.ssafy.project.common.auth.SsafyUserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ssafy.project.common.util.JwtTokenUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,12 +22,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private SsafyUserDetailService ssafyUserDetailService;
+    private final SsafyUserDetailService ssafyUserDetailService;
 
-    @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
+
+    private final SsafyOAuth2UserDetailService ssafyOAuth2UserDetailService;
+
+    private final JwtTokenUtil jwtUtil;
 
     // Password 인코딩 방식에 BCrypt 암호화 방식 사용
     @Bean
@@ -58,7 +64,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), memberService)) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
                 .authorizeRequests()
 //                .antMatchers("/api/v1/users/me").authenticated()       //인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
-                .anyRequest().permitAll()
-                .and().cors();
+                .antMatchers("/member/**").permitAll()
+                .anyRequest().authenticated()
+                .and().cors()
+                .and()
+                .oauth2Login().userInfoEndpoint().userService(ssafyOAuth2UserDetailService).and().successHandler(successHandler());
+    }
+
+    @Bean
+    public SsafyLoginSuccessHandler successHandler() {
+        return new SsafyLoginSuccessHandler(jwtUtil);
     }
 }
