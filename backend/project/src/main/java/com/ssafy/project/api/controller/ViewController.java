@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
-    @GetMapping("")
-    public String index() {
+    @GetMapping("/user/login")
+    public String loginForm() {
         return "index";
     }
 }

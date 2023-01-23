@@ -5,7 +5,6 @@ import com.ssafy.project.common.auth.JwtAuthenticationFilter;
 import com.ssafy.project.common.auth.SsafyLoginSuccessHandler;
 import com.ssafy.project.common.auth.SsafyOAuth2UserDetailService;
 import com.ssafy.project.common.auth.SsafyUserDetailService;
-import com.ssafy.project.common.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final SsafyOAuth2UserDetailService ssafyOAuth2UserDetailService;
 
-    private final JwtTokenUtil jwtUtil;
+    private final SsafyLoginSuccessHandler successHandler;
 
     // Password 인코딩 방식에 BCrypt 암호화 방식 사용
     @Bean
@@ -63,16 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), memberService)) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
                 .authorizeRequests()
-//                .antMatchers("/api/v1/users/me").authenticated()       //인증이 필요한 URL과 필요하지 않은 URL에 대하여 설정
                 .antMatchers("/member/**").permitAll()
+                .antMatchers("/user/login").permitAll()
                 .anyRequest().authenticated()
                 .and().cors()
                 .and()
-                .oauth2Login().userInfoEndpoint().userService(ssafyOAuth2UserDetailService).and().successHandler(successHandler());
+                .oauth2Login().userInfoEndpoint().userService(ssafyOAuth2UserDetailService).and().successHandler(successHandler);
     }
 
-    @Bean
-    public SsafyLoginSuccessHandler successHandler() {
-        return new SsafyLoginSuccessHandler(jwtUtil);
-    }
 }

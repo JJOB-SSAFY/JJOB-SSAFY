@@ -35,8 +35,10 @@ dependencies {
     annotationProcessor("com.google.guava:guava:29.0-jre")
 
     // Oauth2
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.security:spring-security-oauth2-client:5.7.5'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // Thymeleaf (뷰 템플릿 엔진)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {
