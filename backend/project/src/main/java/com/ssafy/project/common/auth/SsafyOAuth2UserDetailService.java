@@ -41,17 +41,22 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
         });
 
         String email = null;
+        String name = null;
 
         if (clientName.equals("Google")) {
             email = oAuth2User.getAttribute("email");
+            name = oAuth2User.getAttribute("name");
         } else if (clientName.equals("Kakao")) {
             HashMap<String, String> map = oAuth2User.getAttribute("kakao_account");
+            HashMap<String, String> profile = oAuth2User.getAttribute("properties");
             email = map.get("email");
+            name = profile.get("nickname");
         }
 
         log.info("EMAIL: " + email);
+        log.info("NAME: " + name);
 
-        Member member = saveSocialMember(email);
+        Member member = saveSocialMember(email, name);
 
         SsafyOAuth2UserDetails ssafyOauth2Member = new SsafyOAuth2UserDetails(
                 member.getEmail(),
@@ -68,7 +73,7 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
 
     }
 
-    private Member saveSocialMember(String email) {
+    private Member saveSocialMember(String email, String name) {
 
         Optional<Member> result = memberRepository.findByEmail(email);
 
@@ -80,7 +85,7 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         Member member = Member.builder()
                 .email(email)
-                .name(email)
+                .name(name)
                 .password(new BCryptPasswordEncoder().encode(password))
 //                .fromSocial(true)
                 .build();

@@ -21,12 +21,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public Member join(MemberJoinPostReq memberRegisterInfo) {
-        Member member = Member.builder()
-                .email(memberRegisterInfo.getEmail())
-                .password(new BCryptPasswordEncoder().encode(memberRegisterInfo.getPassword()))
-                .name(memberRegisterInfo.getName())
-                .phone(memberRegisterInfo.getPhone())
-                .build();
+
+        String email = memberRegisterInfo.getEmail();
+
+        Optional<Member> findEmail = memberRepository.findByEmail(email);
+
+        if (findEmail.isPresent()) {
+            throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
+        }
+
+        Member member = Member.from(memberRegisterInfo);
 
         memberRepository.save(member);
         return member;
