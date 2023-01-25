@@ -7,4 +7,6 @@ public interface MemberService {
     Member join(MemberJoinPostReq memberRegisterInfo);
 
     Member getMemberByEmail(String email);
+
+    void emailCheck(String email);
 }
