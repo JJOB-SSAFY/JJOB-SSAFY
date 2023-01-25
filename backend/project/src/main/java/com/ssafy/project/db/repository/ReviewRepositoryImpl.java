@@ -1,13 +1,10 @@
 package com.ssafy.project.db.repository;
 
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.project.api.request.ReviewSearchCondition;
 import com.ssafy.project.api.response.QReviewResponseDto;
 import com.ssafy.project.api.response.ReviewResponseDto;
-import com.ssafy.project.db.entity.QCompany;
-import com.ssafy.project.db.entity.Review;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
