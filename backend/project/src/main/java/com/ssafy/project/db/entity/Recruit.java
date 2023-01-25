@@ -3,19 +3,37 @@ package com.ssafy.project.db.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Recruit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recruit_id")
     private Long id;
+
+    private String recruitTitle;
+
+    private String eduRequirement;
+
+    private String workType;
+
+    private String career;
+
+    private String salary;
+
+    private String location;
+
+    private String imgUrl;
+
+    private String recruitContent;
+
+    private LocalDateTime recruitDate;
 
     private String department;
 

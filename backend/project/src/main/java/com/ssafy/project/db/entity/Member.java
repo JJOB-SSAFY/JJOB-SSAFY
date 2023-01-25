@@ -1,6 +1,8 @@
 package com.ssafy.project.db.entity;
 
+import com.ssafy.project.api.request.MemberJoinPostReq;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 
@@ -9,7 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Member {
 
     @Id
@@ -35,5 +36,14 @@ public class Member {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public static Member from(MemberJoinPostReq memberInfo) {
+        return Member.builder()
+                .email(memberInfo.getEmail())
+                .password(new BCryptPasswordEncoder().encode(memberInfo.getPassword()))
+                .name(memberInfo.getName())
+                .phone(memberInfo.getPhone())
+                .build();
+    }
 
 }

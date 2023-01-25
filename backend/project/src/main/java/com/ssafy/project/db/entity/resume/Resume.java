@@ -11,13 +11,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Resume {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resume_id")
     private Long id;
+
+    @Column(nullable = false)
+    private String resumeTitle;
 
     @Column(nullable = false)
     private String name;

@@ -21,12 +21,27 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation("org.springframework.boot:spring-boot-starter-security")
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation("org.springframework.security:spring-security-test")
+    implementation("com.auth0:java-jwt:3.10.3")
+
+    implementation("com.google.guava:guava:29.0-jre")
+    annotationProcessor("com.google.guava:guava:29.0-jre")
+
+    // Oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // Thymeleaf (뷰 템플릿 엔진)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

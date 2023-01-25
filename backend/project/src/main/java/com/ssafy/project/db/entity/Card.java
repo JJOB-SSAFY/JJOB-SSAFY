@@ -9,13 +9,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "card_id")
     private Long id;
+
+    @Column(nullable = false)
+    private String cardTitle;
 
     @Column(nullable = false)
     private String name;
@@ -31,5 +33,9 @@ public class Card {
     private String blog;
 
     private String introduce;
+
+    private String skills;
+
+    private String preferredJob;
 
 }

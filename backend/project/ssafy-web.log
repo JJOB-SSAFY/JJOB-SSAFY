@@ -1,5 +1,0 @@
-2023-01-25 08:55:41.583  WARN 4732 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1d8h41m55s342ms917µs200ns).
-2023-01-25 08:58:48.380  WARN 4732 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m6s772ms138µs300ns).
-2023-01-25 09:15:08.790  INFO 4732 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-01-25 09:15:08.812  INFO 4732 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-01-25 09:15:08.824  INFO 4732 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

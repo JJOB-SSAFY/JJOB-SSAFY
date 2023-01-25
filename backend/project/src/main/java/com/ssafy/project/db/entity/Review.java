@@ -9,7 +9,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
 public class Review {
 
     @Id
@@ -30,4 +29,5 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
 }
