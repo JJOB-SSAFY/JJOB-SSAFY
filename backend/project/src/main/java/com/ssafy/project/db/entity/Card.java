@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity;
 
+import com.ssafy.project.api.request.MyInfoRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,5 +37,14 @@ public class Card {
     private String skills;
 
     private String preferredJob;
+    public void changeInfo(MyInfoRequestDto newInfo) {
+        this.phone = newInfo.getPhone();
+        this.blog = newInfo.getBlog();
+        this.github = newInfo.getGithub();
+        this.skills = newInfo.getSkills();
+        this.preferredJob = newInfo.getPreferredJob();
+        this.introduce = newInfo.getIntroduce();
+        this.imageUrl = newInfo.getImageUrl();
+    }
 
 }

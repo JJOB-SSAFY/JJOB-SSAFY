@@ -37,6 +37,10 @@ public class Member {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
     public static Member from(MemberJoinPostReq memberInfo) {
         return Member.builder()
                 .email(memberInfo.getEmail())
