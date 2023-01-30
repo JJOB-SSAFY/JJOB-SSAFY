@@ -6,7 +6,6 @@ import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
         Optional<Member> findEmail = memberRepository.findByEmail(email);
 
-        if (findEmail.isPresent()) {
-            throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-        }
+        if (findEmail.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
 
         Member member = Member.from(memberRegisterInfo);
 
@@ -41,10 +38,16 @@ public class MemberServiceImpl implements MemberService {
     public Member getMemberByEmail(String email) {
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
-        if (findMember.isPresent()) {
-            return findMember.get();
-        }
+        if (findMember.isPresent()) return findMember.get();
 
         throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void emailCheck(String email) {
+        Optional<Member> findMember = memberRepository.findByEmail(email);
+
+        if (findMember.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
     }
 }

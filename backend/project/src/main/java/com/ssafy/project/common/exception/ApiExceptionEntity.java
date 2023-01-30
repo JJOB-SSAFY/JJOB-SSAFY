@@ -6,17 +6,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApiExceptionEntity {
-    private String statusCode;
     private String message;
+    private String statusCode;
 
-    public ApiExceptionEntity(String statusCode, String message) {
-        this.statusCode = statusCode;
+    public ApiExceptionEntity(String message, String statusCode) {
         this.message = message;
+        this.statusCode = statusCode;
     }
 
     @Override
     public String toString() {
-        return "ApiExceptionEntity [errorCode=" + statusCode + ", errorMessage=" + statusCode + "]";
+        return "ApiExceptionEntity [errorCode=" + statusCode + ", errorMessage=" + message + "]";
     }
 
 }

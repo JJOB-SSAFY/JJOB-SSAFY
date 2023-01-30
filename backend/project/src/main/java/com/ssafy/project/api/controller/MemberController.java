@@ -5,10 +5,7 @@ import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.common.model.response.BaseResponseBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
@@ -23,6 +20,12 @@ public class MemberController {
         memberService.join(joinInfo);
 
         return ResponseEntity.status(201).body(BaseResponseBody.of(201, "Success"));
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<? extends BaseResponseBody> emailCheck(@PathVariable String email) {
+        memberService.emailCheck(email);
+        return ResponseEntity.status(201).body(BaseResponseBody.of(200, "사용 가능한 이메일 입니다"));
     }
 
 }

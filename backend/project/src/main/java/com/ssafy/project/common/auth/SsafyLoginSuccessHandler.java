@@ -33,21 +33,21 @@ public class SsafyLoginSuccessHandler implements AuthenticationSuccessHandler {
 
         SsafyOAuth2UserDetails authMember = (SsafyOAuth2UserDetails)authentication.getPrincipal();
 
-        String token = jwtUtil.getToken(authMember.getEmail());
-        writeTokenResponse(response, token);
+        String accessToken = jwtUtil.getToken(authMember.getEmail());
+        writeTokenResponse(response, accessToken);
 
-        log.info(token);
+        log.info(accessToken);
 
     }
 
-    private void writeTokenResponse(HttpServletResponse response, String token) throws IOException {
+    private void writeTokenResponse(HttpServletResponse response, String accessToken) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-//        response.addHeader("token", token);
+//        response.addHeader("accessToken", accessToken);
 //        response.setContentType("application/json;charset=UTF-8");
 
         var writer = response.getWriter();
-        writer.println(objectMapper.writeValueAsString(MemberLoginPostRes.of(200, "Success", token)));
+        writer.println(objectMapper.writeValueAsString(MemberLoginPostRes.of(200, "Success", accessToken)));
         writer.flush();
     }
 }
