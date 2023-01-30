@@ -3,8 +3,8 @@ package com.ssafy.project.db.repository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.project.api.request.ReviewSearchCondition;
-import com.ssafy.project.api.response.QReviewResponseDto;
-import com.ssafy.project.api.response.ReviewResponseDto;
+import com.ssafy.project.api.response.QReviewResponseListDto;
+import com.ssafy.project.api.response.ReviewResponseListDto;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -19,9 +19,9 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<ReviewResponseDto> searchReview(ReviewSearchCondition condition) {
+    public List<ReviewResponseListDto> searchReview(ReviewSearchCondition condition) {
         return queryFactory
-                .select(new QReviewResponseDto(review.member.name, review.content))
+                .select(new QReviewResponseListDto(review.member.name, review.content))
                 .from(review)
                 .join(review.company, company)
                 .where(companyEq(condition.getCompanyName()))
