@@ -1,21 +1,22 @@
 package com.ssafy.project.api.response;
 
-import com.ssafy.project.common.model.response.BaseResponseBody;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
-public class MemberLoginPostRes extends BaseResponseBody {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MemberLoginPostRes {
 
     private String accessToken;
 
-    public static MemberLoginPostRes of(Integer statusCode, String message, String accessToken) {
-        MemberLoginPostRes res = new MemberLoginPostRes();
-        res.setStatusCode(statusCode);
-        res.setMessage(message);
-        res.setAccessToken(accessToken);
-        return res;
+    public static MemberLoginPostRes from(String accessToken) {
+        return MemberLoginPostRes.builder()
+                .accessToken(accessToken)
+                .build();
     }
 
 }
