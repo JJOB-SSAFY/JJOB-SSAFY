@@ -30,7 +30,7 @@ public class Conference {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "conference_category_id")
-    private ConferenceCategory conferenceCategory;
+    @Enumerated(EnumType.STRING)
+    private ConferenceEnum conferenceCategory;
+
 }

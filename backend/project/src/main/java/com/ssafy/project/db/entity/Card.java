@@ -16,8 +16,7 @@ public class Card {
     @Column(name = "card_id")
     private Long id;
 
-    @Column(nullable = false)
-    private String cardTitle;
+    private String imageUrl;
 
     @Column(nullable = false)
     private String name;
