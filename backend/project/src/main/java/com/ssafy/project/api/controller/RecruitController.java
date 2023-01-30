@@ -38,4 +38,14 @@ public class RecruitController {
     public ResponseEntity<RecruitResponseDto> getRecruitDetail(@PathVariable Long recruit_id) {
         return new ResponseEntity<>(recruitService.getRecruitDetail(recruit_id), HttpStatus.OK);
     }
+
+    @PatchMapping("/detail/{recruit_id}")
+    public ResponseEntity<RecruitResponseDto> updateRecruit(@PathVariable Long recruit_id, @RequestBody RecruitRequestDto requestDto) {
+        return null;
+    }
+
+    @DeleteMapping("/detail/{recruit_id}")
+    public ResponseEntity<BaseResponseBody> deleteRecruit(@PathVariable Long recruit_id) {
+        return null;
+    }
 }
