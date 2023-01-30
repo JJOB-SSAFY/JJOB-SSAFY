@@ -1,11 +1,18 @@
 package com.ssafy.project.api.controller;
 
 import com.ssafy.project.api.request.MemberJoinPostReq;
+import com.ssafy.project.api.request.MemberLoginPostReq;
+import com.ssafy.project.api.response.MemberLoginPostRes;
 import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.api.response.BaseResponseBody;
+import com.ssafy.project.common.exception.ApiException;
+import com.ssafy.project.common.exception.ExceptionEnum;
+import com.ssafy.project.common.util.JwtTokenUtil;
+import com.ssafy.project.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +28,12 @@ public class MemberController {
         memberService.join(joinInfo);
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<MemberLoginPostRes> login(@RequestBody MemberLoginPostReq loginInfo) {
+
+        return new ResponseEntity<>(memberService.login(loginInfo), HttpStatus.OK);
     }
 
     @GetMapping("/{email}")

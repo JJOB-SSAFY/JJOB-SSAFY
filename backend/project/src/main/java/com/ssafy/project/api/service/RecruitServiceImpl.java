@@ -59,7 +59,7 @@ public class RecruitServiceImpl implements RecruitService {
     public RecruitResponseDto getRecruitDetail(Long recruitId) {
         Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
 
-        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
 
         return RecruitResponseDto.of(findRecruit.get());
     }
