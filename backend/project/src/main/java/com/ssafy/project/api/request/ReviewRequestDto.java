@@ -19,6 +19,7 @@ public class ReviewRequestDto {
 
     private String title;
     private String content;
+
     private String question;
     private String answer;
 
