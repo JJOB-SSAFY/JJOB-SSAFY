@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity;
 
+import com.ssafy.project.api.request.ReviewRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,5 +33,13 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public void updateReview(ReviewRequestDto reviewRequestDto){
+        this.title = reviewRequestDto.getTitle();
+        this.answer = reviewRequestDto.getAnswer();
+        this.content = reviewRequestDto.getContent();
+        this.question = reviewRequestDto.getQuestion();
+    }
+
 
 }
