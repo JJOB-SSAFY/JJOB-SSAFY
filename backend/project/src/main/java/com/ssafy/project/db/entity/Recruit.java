@@ -1,9 +1,14 @@
 package com.ssafy.project.db.entity;
 
+import com.ssafy.project.api.request.CompanyRequestDto;
+import com.ssafy.project.api.request.RecruitRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -33,7 +38,9 @@ public class Recruit {
 
     private String recruitContent;
 
-    private LocalDateTime recruitDate;
+    private LocalDate recruitStartDate;
+
+    private LocalDate recruitEndDate;
 
     private String department;
 
@@ -41,12 +48,30 @@ public class Recruit {
 
     private String requirement;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @OneToMany(mappedBy = "recruit", cascade = CascadeType.REMOVE)
+    private List<MemberRecruit> memberRecruits = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public static Recruit of(RecruitRequestDto requestDto, Company company) {
+        return Recruit.builder()
+                .recruitTitle(requestDto.getRecruitTitle())
+                .eduRequirement(requestDto.getEduRequirement())
+                .workType(requestDto.getWorkType())
+                .career(requestDto.getCareer())
+                .salary(requestDto.getSalary())
+                .location(requestDto.getLocation())
+                .imgUrl(requestDto.getImgUrl())
+                .recruitContent(requestDto.getRecruitContent())
+                .recruitStartDate(requestDto.getRecruitStartDate())
+                .recruitEndDate(requestDto.getRecruitEndDate())
+                .department(requestDto.getDepartment())
+                .work(requestDto.getWork())
+                .requirement(requestDto.getRequirement())
+                .company(company)
+                .build();
+    }
 
 }

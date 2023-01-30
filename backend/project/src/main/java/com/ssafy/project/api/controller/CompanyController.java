@@ -17,7 +17,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<? extends BaseResponseBody> createCompany(@RequestBody CompanyRequestDto requestDto) {
 
         companyService.createCompany(requestDto);
