@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Builder
-public class MyInfoGetRes extends BaseResponseBody {
+public class MyInfoGetRes {
     private String name;
     private String email;
     private String blog;
@@ -19,5 +19,7 @@ public class MyInfoGetRes extends BaseResponseBody {
     private String preferredJob;
     private String introduce;
     private String imgUrl;
+
+
 
 }

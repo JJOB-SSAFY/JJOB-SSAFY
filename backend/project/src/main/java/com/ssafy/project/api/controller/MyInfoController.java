@@ -1,6 +1,7 @@
 package com.ssafy.project.api.controller;
 
 import com.ssafy.project.api.request.MemberJoinPostReq;
+import com.ssafy.project.api.request.MyInfoRequestDto;
 import com.ssafy.project.api.response.MyInfoGetRes;
 import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.api.service.MyInfoService;
@@ -13,7 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/myinfo")
@@ -30,17 +34,28 @@ public class MyInfoController {
     }
     // 내 정보 조회
     @GetMapping("/{email}")
-    public ResponseEntity<? extends BaseResponseBody> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable("email") String email) {
+    public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable("email") String email) {
         //임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
         MyInfoGetRes myInfo = myInfoService.getMyInfo(email);
 
         System.out.println(myInfo);
-        return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.ACCEPTED);
+        return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.OK);
     }
-//    @GetMapping("/{email}")
-//    public ResponseEntity<? extends BaseResponseBody> emailCheck(@PathVariable String email) {
-//        memberService.emailCheck(email);
-//        return ResponseEntity.status(201).body(BaseResponseBody.of(200, "사용 가능한 이메일 입니다"));
-//    }
+    @PatchMapping("/pwd")
+    public ResponseEntity<?> changePwd(@AuthenticationPrincipal SsafyUserDetails userDetails,@RequestBody Map<String,String> map){
+//        logger.info(userDetails.getMember().getEmail());
+//        logger.info(map.get("password"));
+//        logger.info(new BCryptPasswordEncoder().encode(map.get("password")));
+        myInfoService.changePwd(map.get("password"),userDetails.getMember());
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
+    }
+    //내 정보 수정
+    @PatchMapping("/{email}")
+    public ResponseEntity<?> changeInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @RequestBody MyInfoRequestDto requestDto){
+        Long id=userDetails.getMember().getId();
+        myInfoService.changeInfo(requestDto,id);
+
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
+    }
 
 }
