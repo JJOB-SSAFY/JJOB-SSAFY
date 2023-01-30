@@ -2,8 +2,9 @@ package com.ssafy.project.api.controller;
 
 import com.ssafy.project.api.request.CompanyRequestDto;
 import com.ssafy.project.api.service.CompanyService;
-import com.ssafy.project.common.model.response.BaseResponseBody;
+import com.ssafy.project.api.response.BaseResponseBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,6 @@ public class CompanyController {
 
         companyService.createCompany(requestDto);
 
-        return ResponseEntity.status(201).body(BaseResponseBody.of(201, "Success"));
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 }

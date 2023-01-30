@@ -6,7 +6,7 @@ import com.ssafy.project.api.response.ReviewResponseDto;
 import com.ssafy.project.api.response.ReviewResponseListDto;
 import com.ssafy.project.api.service.ReviewService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
-import com.ssafy.project.common.model.response.BaseResponseBody;
+import com.ssafy.project.api.response.BaseResponseBody;
 import com.ssafy.project.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
