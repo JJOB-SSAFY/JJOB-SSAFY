@@ -1,14 +1,11 @@
 package com.ssafy.project.api.controller;
 
-import com.ssafy.project.api.request.MemberJoinPostReq;
 import com.ssafy.project.api.request.ReviewRequestDto;
 import com.ssafy.project.api.request.ReviewSearchCondition;
 import com.ssafy.project.api.response.ReviewResponseListDto;
-import com.ssafy.project.api.service.CompanyService;
 import com.ssafy.project.api.service.ReviewService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
-import com.ssafy.project.common.model.response.BaseResponseBody;
-import com.ssafy.project.db.entity.Company;
+import com.ssafy.project.api.response.BaseResponseBody;
 import com.ssafy.project.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

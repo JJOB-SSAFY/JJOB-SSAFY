@@ -1,7 +1,10 @@
 package com.ssafy.project.api.service;
 
 import com.ssafy.project.api.request.RecruitRequestDto;
+import com.ssafy.project.api.request.RecruitSearchCondition;
 import com.ssafy.project.api.response.MainResponseDto;
+import com.ssafy.project.api.response.RecruitResponseDto;
+import com.ssafy.project.api.response.RecruitResponseListDto;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Company;
@@ -11,6 +14,7 @@ import com.ssafy.project.db.repository.RecruitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +29,7 @@ public class RecruitServiceImpl implements RecruitService {
     private final CompanyRepository companyRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<MainResponseDto> getRecruitOrderByDate() {
         PageRequest pageRequest = PageRequest.of(0, 10);
         List<Recruit> recruitList = recruitRepository.findAllByOrderByRecruitEndDateDesc(pageRequest);
@@ -32,16 +37,31 @@ public class RecruitServiceImpl implements RecruitService {
     }
 
     @Override
+    @Transactional
     public void createRecruit(Long companyId, RecruitRequestDto requestDto) {
         Optional<Company> findCompany = companyRepository.findById(companyId);
 
-        if (!findCompany.isPresent()) {
-            throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
-        }
+        if (!findCompany.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         Recruit recruit = Recruit.of(requestDto, findCompany.get());
 
         recruitRepository.save(recruit);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RecruitResponseListDto> getReviewList(RecruitSearchCondition condition) {
+        return recruitRepository.getRecruitByLocationAndDepartment(condition);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public RecruitResponseDto getRecruitDetail(Long recruitId) {
+        Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
+
+        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+
+        return RecruitResponseDto.of(findRecruit.get());
     }
 
 }
