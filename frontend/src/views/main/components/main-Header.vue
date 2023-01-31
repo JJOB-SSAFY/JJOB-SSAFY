@@ -7,7 +7,7 @@
 		<div class="d-flex align-items-center justify-content-center">
 			<div class="logo">
 				<router-link to="/">
-					<img src="@/assets/images/logo.png" alt="" />
+					<img src="@/assets/images/logo.png" alt="" height="70" width="100" />
 				</router-link>
 			</div>
 
@@ -35,13 +35,8 @@
 								class="navbar-nav main-side-nav font-gordita"
 								id="one-page-nav"
 							>
-								<li class="nav-item dropdown position-static">
-									<a
-										class="nav-link dropdown-toggle"
-										href="#"
-										data-bs-toggle="dropdown"
-										>Home</a
-									>
+								<li class="nav-item">
+									<a class="nav-link" href="/main">Home</a>
 								</li>
 								<li class="nav-item">
 									<a href="#feature" class="nav-link"
@@ -65,9 +60,9 @@
 									>
 								</li>
 								<li class="nav-item">
-									<a href="#feedback" class="nav-link"
+									<a href="/interview" class="nav-link"
 										><span @click.self="menuActive = !menuActive"
-											>Feedback</span
+											>interview</span
 										></a
 									>
 								</li>
