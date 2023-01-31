@@ -20,12 +20,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final SsafyUserDetailService ssafyUserDetailService;
 
-    private final MemberService memberService;
+//    private final MemberService memberService;
 
     private final SsafyOAuth2UserDetailService ssafyOAuth2UserDetailService;
 
@@ -60,10 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 사용 하지않음
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), memberService)) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), ssafyUserDetailService)) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
                 .authorizeRequests()
                 .antMatchers("/member/**").permitAll()
                 .antMatchers("/user/login").permitAll()
+                .antMatchers("/company").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().cors()
                 .and()
