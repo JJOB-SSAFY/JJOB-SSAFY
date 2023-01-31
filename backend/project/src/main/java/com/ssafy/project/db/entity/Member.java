@@ -49,5 +49,8 @@ public class Member {
                 .phone(memberInfo.getPhone())
                 .build();
     }
+    public void createCard(Card newCard){
+        this.card= newCard;
+    }
 
 }

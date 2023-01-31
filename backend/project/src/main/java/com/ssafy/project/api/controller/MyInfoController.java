@@ -6,7 +6,6 @@ import com.ssafy.project.api.response.MyInfoGetRes;
 import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.api.service.MyInfoService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
-import com.ssafy.project.common.model.response.BaseResponseBody;
 import com.ssafy.project.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -35,10 +34,10 @@ public class MyInfoController {
     // 내 정보 조회
     @GetMapping("/{email}")
     public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable("email") String email) {
-        //임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
+        logger.info(email);
         MyInfoGetRes myInfo = myInfoService.getMyInfo(email);
 
-        System.out.println(myInfo);
+
         return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.OK);
     }
     @PatchMapping("/pwd")
@@ -56,6 +55,12 @@ public class MyInfoController {
         myInfoService.changeInfo(requestDto,id);
 
         return new ResponseEntity<String>("Success", HttpStatus.OK);
+    }
+    // 지원현황
+    @GetMapping("/apply/{email}")
+    public ResponseEntity<?> applyStatus(@AuthenticationPrincipal SsafyUserDetails userDetails){
+        Long id=userDetails.getMember().getId();
+        return null;
     }
 
 }

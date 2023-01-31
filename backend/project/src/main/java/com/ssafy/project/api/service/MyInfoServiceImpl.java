@@ -1,11 +1,16 @@
 package com.ssafy.project.api.service;
 
 import com.ssafy.project.api.request.MyInfoRequestDto;
+import com.ssafy.project.api.request.RecruitSearchCondition;
+import com.ssafy.project.api.response.MyInfoApplyGetRes;
 import com.ssafy.project.api.response.MyInfoGetRes;
+import com.ssafy.project.api.response.RecruitResponseListDto;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
+import com.ssafy.project.db.entity.ApplyStatus;
 import com.ssafy.project.db.entity.Card;
 import com.ssafy.project.db.entity.Member;
+import com.ssafy.project.db.repository.ApplyStatusRepository;
 import com.ssafy.project.db.repository.CardRepository;
 import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service("myInfoService")
@@ -21,6 +27,7 @@ public class MyInfoServiceImpl implements MyInfoService {
 
     private final MemberRepository memberRepository;
     private final CardRepository cardRepository;
+    private final ApplyStatusRepository applyStatueRepository;
     @Override
     @Transactional(readOnly = true)
     public MyInfoGetRes getMyInfo(String email) {
@@ -29,6 +36,14 @@ public class MyInfoServiceImpl implements MyInfoService {
         if(!myinfo.isPresent()){
             throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
         }
+        if(myinfo.get().getCard()==null){
+            MyInfoGetRes allMyInfo =MyInfoGetRes.builder().
+                    name(myinfo.get().getName()).
+                    phone(myinfo.get().getPhone()).
+                    email(myinfo.get().getEmail()).build();
+            return allMyInfo;
+        }
+        Optional<Card> info = cardRepository.findById(myinfo.get().getCard().getId());
 
         MyInfoGetRes allMyInfo= MyInfoGetRes.builder().
                 name(myinfo.get().getCard().getName()).
@@ -41,7 +56,6 @@ public class MyInfoServiceImpl implements MyInfoService {
                 imgUrl(myinfo.get().getCard().getImageUrl()).
                 preferredJob(myinfo.get().getCard().getPreferredJob()).build();
 
-        System.out.println(allMyInfo);
         return allMyInfo;
     }
 
@@ -60,13 +74,49 @@ public class MyInfoServiceImpl implements MyInfoService {
     @Override
     @Transactional
     public void changeInfo(MyInfoRequestDto myinfo,long id) {
-        Optional<Card> info = cardRepository.findById(id);
-
-        if(!info.isPresent()){
+        Optional<Member> member = memberRepository.findById(id);
+        if(!member.isPresent()){
             throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
         }
-        info.get().changeInfo(myinfo);
+
+        Card card = Card.builder().
+                phone(myinfo.getPhone()).
+                blog(myinfo.getBlog()).
+                github(myinfo.getGithub()).
+                skills(myinfo.getSkills()).
+                preferredJob(myinfo.getPreferredJob()).
+                introduce(myinfo.getIntroduce()).
+                imageUrl(myinfo.getImageUrl()).
+                email(member.get().getEmail()).
+                name(member.get().getName()).
+                build();
+
+        //초기 카드가 없을때
+        if(member.get().getCard()==null) {
+            cardRepository.save(card);
+            member.get().createCard(card);
+            return;
+        }
+
+        Optional<Card> info = cardRepository.findById(member.get().getCard().getId());
+        info.get().createInfo(card);
     }
+
+    @Override
+    public List<MyInfoApplyGetRes> applyStatus(Long id) {
+//        Optional<ApplyStatus> applyStatus = applyStatueRepository.findById(id);
+//        if(!applyStatus.isPresent()){
+//            throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+//        }
+        //List<ApplyStatus> applyStatus=applyStatueRepository.findB
+        return null;
+    }
+
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<RecruitResponseListDto> getReviewList(RecruitSearchCondition condition) {
+//        return recruitRepository.getRecruitByLocationAndDepartment(condition);
+//    }
 //    @Override
 //    @Transactional
 //    public Member join(MemberJoinPostReq memberRegisterInfo) {
