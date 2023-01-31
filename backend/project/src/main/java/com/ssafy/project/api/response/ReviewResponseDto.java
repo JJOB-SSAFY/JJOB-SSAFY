@@ -1,7 +1,5 @@
 package com.ssafy.project.api.response;
 
-
-import com.ssafy.project.common.model.response.BaseResponseBody;
 import com.ssafy.project.db.entity.Review;
 import lombok.*;
 
