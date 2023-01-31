@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -37,6 +39,14 @@ public class Member {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<MemberRoleEnum> roleSet = new HashSet<>();
+
+    public void addMemberRole(MemberRoleEnum memberRole) {
+        roleSet.add(memberRole);
+    }
+
     public void changePassword(String newPassword) {
         this.password = newPassword;
     }
@@ -48,6 +58,10 @@ public class Member {
                 .name(memberInfo.getName())
                 .phone(memberInfo.getPhone())
                 .build();
+    }
+
+    public void addCompany(Company company) {
+        this.company = company;
     }
 
 }
