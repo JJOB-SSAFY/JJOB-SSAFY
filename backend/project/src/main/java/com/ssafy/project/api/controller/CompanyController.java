@@ -36,7 +36,4 @@ public class CompanyController {
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
-
-
-
 }

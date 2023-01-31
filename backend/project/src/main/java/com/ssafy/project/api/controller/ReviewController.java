@@ -42,17 +42,15 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getDetailReview(review_id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{review_id}")
-    public ResponseEntity<? extends BaseResponseBody> deleteReview(@PathVariable Long review_id) {
-        reviewService.deleteReview(review_id);
-        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
-    }
-
     @PatchMapping("{review_id}")
     public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,  @RequestBody ReviewRequestDto requestDto){
         return new ResponseEntity<>(reviewService.updateReview(review_id, requestDto), HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/{review_id}")
+    public ResponseEntity<? extends BaseResponseBody> deleteReview(@PathVariable Long review_id) {
+        reviewService.deleteReview(review_id);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
+    }
 
 }

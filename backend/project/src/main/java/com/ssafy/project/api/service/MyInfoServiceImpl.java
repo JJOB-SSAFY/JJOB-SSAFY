@@ -106,7 +106,7 @@ public class MyInfoServiceImpl implements MyInfoService {
     @Override
     public List<ApplyStatusRes> applyStatus(Long id) {
         List<ApplyStatusRes> applyList = new ArrayList<>();
-        for(ApplyStatus a : applyStatueRepository.getApplyStatusByMemberId(id)){
+        for(ApplyStatus a : applyStatueRepository.findAllByMemberId(id)){
            
             ApplyStatusRes apply = ApplyStatusRes.builder().
                     recruitTitle(a.getRecruit().getRecruitTitle()).

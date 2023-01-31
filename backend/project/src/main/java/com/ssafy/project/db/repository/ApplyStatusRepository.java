@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ApplyStatusRepository extends JpaRepository<ApplyStatus, Long> {
-    @Query(value="select a from ApplyStatus a join a.member m where m.id =:memberId")
-    List<ApplyStatus> getApplyStatusByMemberId(@Param("memberId") Long memberId);
+
+    List<ApplyStatus> findAllByMemberId(Long memberId);
+
+    void deleteAllByRecruitId(Long recruitId);
 }
