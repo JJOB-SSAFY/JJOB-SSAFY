@@ -19,7 +19,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public List<ResumeListResponseDto> getResumeList(String email) {
-        List<Resume> list = resumeRepository.findAllByMember(email);
+        List<Resume> list = resumeRepository.findAllByMemberEmail(email);
 
         //List<ResumeListResponseDto> collect = list.stream().map((o) -> new ResumeListResponseDto(o)).collect(Collectors.toList());
         List<ResumeListResponseDto> result = list.stream().map(ResumeListResponseDto::new).collect(Collectors.toList());

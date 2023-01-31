@@ -41,5 +41,4 @@ public class Review {
         this.question = reviewRequestDto.getQuestion();
     }
 
-
 }

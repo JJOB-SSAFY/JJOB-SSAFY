@@ -10,6 +10,7 @@ import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.Recruit;
+import com.ssafy.project.db.repository.ApplyStatusRepository;
 import com.ssafy.project.db.repository.CompanyRepository;
 import com.ssafy.project.db.repository.MemberRepository;
 import com.ssafy.project.db.repository.RecruitRepository;
@@ -31,6 +32,8 @@ public class RecruitServiceImpl implements RecruitService {
     private final CompanyRepository companyRepository;
 
     private final MemberRepository memberRepository;
+
+    private final ApplyStatusRepository applyStatusRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -92,6 +95,8 @@ public class RecruitServiceImpl implements RecruitService {
         if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
 
         if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+
+        applyStatusRepository.deleteAllByRecruitId(recruitId);
 
         recruitRepository.deleteById(recruitId);
     }
