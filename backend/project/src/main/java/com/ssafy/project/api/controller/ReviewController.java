@@ -30,9 +30,6 @@ public class ReviewController {
 
     @PostMapping("/{company_id}")
     public ResponseEntity<? extends BaseResponseBody> writeReview(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable String company_id, @RequestBody ReviewRequestDto requestDto){
-
-        Member member = userDetails.getMember();
-
         Long companyId = Long.parseLong(company_id);
 
         reviewService.writeReview(requestDto, userDetails.getMember().getId(), companyId);
@@ -43,7 +40,6 @@ public class ReviewController {
 
     @GetMapping("/detail/{review_id}")
     public ResponseEntity<ReviewResponseDto> detailReview(@PathVariable Long review_id){
-
         return new ResponseEntity<>(reviewService.getDetailReview(review_id), HttpStatus.OK);
 
     }
@@ -56,8 +52,6 @@ public class ReviewController {
 
     @PatchMapping("{review_id}")
     public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,  @RequestBody ReviewRequestDto requestDto){
-
-
         return new ResponseEntity<>(reviewService.updateReview(review_id, requestDto), HttpStatus.OK);
 
     }
