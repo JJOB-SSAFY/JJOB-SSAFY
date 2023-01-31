@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'LINE-Bd';
+  src: url('LINESeedKR-Bd.eot');
+  src: local('LINE Bold'), local('LINE-Bold'),
+    url('LINESeedKR-Bd?#iefix') format('embedded-opentype'),
+    url('LINESeedKR-Bd.woff2') format('woff2'),
+    url('LINESeedKR-Bd.woff') format('woff'),
+    url('LINESeedKR-Bd.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LINE-Rg';
+  src: url('LINESeedKR-Rg.eot');
+  src: local('LINE Regular'), local('LINE-Regular'),
+    url('LINESeedKR-Rg?#iefix') format('embedded-opentype'),
+    url('LINESeedKR-Rg.woff2') format('woff2'),
+    url('LINESeedKR-Rg.woff') format('woff'),
+    url('LINESeedKR-Rg.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LINE-Th';
+  src: url('LINESeedKR-Th.eot');
+  src: local('LINE Regular'), local('LINE-Regular'),
+    url('LINESeedKR-Th?#iefix') format('embedded-opentype'),
+    url('LINESeedKR-Th.woff2') format('woff2'),
+    url('LINESeedKR-Th.woff') format('woff'),
+    url('LINESeedKR-Th.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}

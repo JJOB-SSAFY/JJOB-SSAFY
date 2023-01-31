@@ -1,11 +1,13 @@
 <template>
-	<router-view />
+	<div>설명회</div>
 </template>
 
 <script>
 export default {
-	data() {
+	setup() {
 		return {};
 	},
 };
 </script>
+
+<style lang="scss" scoped></style>

@@ -35,43 +35,34 @@
 								class="navbar-nav main-side-nav font-gordita"
 								id="one-page-nav"
 							>
+								<li v-for="nav in navigations" :key="nav.name" class="nav-item">
+									<router-link :to="nav.href" class="nav-link">
+										{{ nav.name }}
+									</router-link>
+								</li>
+								<!-- 			
 								<li class="nav-item">
 									<a class="nav-link" href="/main">Home</a>
 								</li>
 								<li class="nav-item">
-									<a href="#feature" class="nav-link"
-										><span @click.self="menuActive = !menuActive"
-											>Features</span
-										></a
-									>
+									<a href="#feature" class="nav-link">Features</a>
 								</li>
 								<li class="nav-item">
-									<a href="#effect" class="nav-link"
-										><span @click.self="menuActive = !menuActive"
-											>Effects</span
-										></a
-									>
+									<a href="#feature" class="nav-link">Features</a>
 								</li>
 								<li class="nav-item">
-									<a href="#template" class="nav-link"
-										><span @click.self="menuActive = !menuActive"
-											>Template</span
-										></a
-									>
+									<a href="#feature" class="nav-link">Features</a>
 								</li>
 								<li class="nav-item">
-									<a href="/interview" class="nav-link"
-										><span @click.self="menuActive = !menuActive"
-											>interview</span
-										></a
-									>
-								</li>
+									<a href="#feature" class="nav-link">Features</a>
+								</li> -->
 							</ul>
 						</div>
 					</div>
 				</div>
 			</nav>
 			<div class="right-widget">
+				<v-if></v-if>
 				<ul class="d-flex align-items-center">
 					<li>
 						<router-link
@@ -79,15 +70,16 @@
 							class="signIn-action d-flex align-items-center"
 						>
 							<img src="@/assets/images/icon/lock.svg" alt="" />
-							<span>login</span>
+							<span>로그인</span>
 						</router-link>
 					</li>
 					<li>
 						<router-link to="/register" class="signup-btn"
-							><span>Sign up</span></router-link
+							><span>회원가입</span></router-link
 						>
 					</li>
 				</ul>
+				<v-else></v-else>
 			</div>
 		</div>
 	</div>
@@ -95,25 +87,39 @@
 
 <script>
 export default {
-	name: 'HeaderEight',
-
-	data() {
-		return {
-			isSticky: false,
-			menuActive: false,
-		};
-	},
-	methods: {
-		handleSticky() {
+	setup() {
+		const isSticky = false;
+		const navigations = [
+			{
+				name: '채용공고',
+				href: '/recruit',
+			},
+			{
+				name: '리뷰',
+				href: '/review',
+			},
+			{
+				name: '설명회',
+				href: '/present',
+			},
+			{
+				name: '면접',
+				href: '/interview',
+			},
+			{
+				name: '지원자정보',
+				href: '/infoCards',
+			},
+		];
+		const handleSticky = () => {
 			if (window.scrollY > 80) {
 				this.isSticky = true;
 			} else {
 				this.isSticky = false;
 			}
-		},
-	},
-	mounted() {
-		window.addEventListener('scroll', this.handleSticky);
+		};
+
+		return { navigations, isSticky, handleSticky };
 	},
 };
 </script>

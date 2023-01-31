@@ -1,11 +1,13 @@
 <template>
-	<router-view />
+	<div>지원자정보들</div>
 </template>
 
 <script>
 export default {
-	data() {
+	setup() {
 		return {};
 	},
 };
 </script>
+
+<style lang="scss" scoped></style>
