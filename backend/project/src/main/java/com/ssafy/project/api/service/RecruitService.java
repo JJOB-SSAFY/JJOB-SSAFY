@@ -12,9 +12,13 @@ public interface RecruitService {
 
     List<MainResponseDto> getRecruitOrderByDate();
 
-    void createRecruit(Long companyId, RecruitRequestDto requestDto);
+    void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId);
 
     List<RecruitResponseListDto> getReviewList(RecruitSearchCondition condition);
 
     RecruitResponseDto getRecruitDetail(Long recruitId);
+
+    void updateRecruit(Long memberId, Long recruitId, RecruitRequestDto requestDto);
+
+    void deleteRecruit(Long memberId, Long recruitId);
 }
