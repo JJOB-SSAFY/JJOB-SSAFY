@@ -22,7 +22,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MyInfoController {
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-    private final MemberService memberService;
     private final MyInfoService myInfoService;
 
     // 내 정보 조회
@@ -30,7 +29,6 @@ public class MyInfoController {
     public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable("email") String email) {
         logger.info(email);
         MyInfoGetRes myInfo = myInfoService.getMyInfo(email);
-
 
         return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.OK);
     }

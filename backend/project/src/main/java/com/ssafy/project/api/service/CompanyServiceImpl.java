@@ -6,6 +6,7 @@ import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.repository.CompanyRepository;
+import com.ssafy.project.db.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
+
+    private final ReviewRepository reviewRepository;
 
     @Override
     @Transactional
@@ -38,11 +41,13 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     public CompanyResponseDto updateCompany(Long companyId, CompanyRequestDto requestDto){
         Optional<Company> company = companyRepository.findById(companyId);
+
         if(!company.isPresent())    throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
-//        log.info(""+requestDto.getEmployeeCnt());
-        log.info("////////////////////");
+
         company.get().updateCompany(requestDto);
+
         CompanyResponseDto dto = CompanyResponseDto.of(company.get());
+
         return dto;
     }
 
@@ -51,15 +56,8 @@ public class CompanyServiceImpl implements CompanyService {
     public void deleteCompany(Long companyId){
         Optional<Company> company = companyRepository.findById(companyId);
         if(!company.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        reviewRepository.deleteAllByCompanyId(companyId);
         companyRepository.delete(company.get());
     }
-
-    // @Override
-    //    @Transactional
-    //    public void deleteReview(Long reviewId) {
-    //        Optional<Review> review = reviewRepository.findById(reviewId);
-    //        if(!review.isPresent()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
-    //        reviewRepository.delete(review.get());
-    //    }
 
 }
