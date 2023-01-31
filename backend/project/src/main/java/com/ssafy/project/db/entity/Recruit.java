@@ -48,14 +48,15 @@ public class Recruit {
 
     private String requirement;
 
-    @OneToMany(mappedBy = "recruit", cascade = CascadeType.REMOVE)
-    private List<MemberRecruit> memberRecruits = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
 
-    public static Recruit of(RecruitRequestDto requestDto, Company company) {
+    public static Recruit of(RecruitRequestDto requestDto, Company company, Member member) {
         return Recruit.builder()
                 .recruitTitle(requestDto.getRecruitTitle())
                 .eduRequirement(requestDto.getEduRequirement())
@@ -70,8 +71,25 @@ public class Recruit {
                 .department(requestDto.getDepartment())
                 .work(requestDto.getWork())
                 .requirement(requestDto.getRequirement())
+                .member(member)
                 .company(company)
                 .build();
+    }
+
+    public void updateRecruit(RecruitRequestDto requestDto) {
+        this.recruitTitle = requestDto.getRecruitTitle();
+        this.eduRequirement = requestDto.getEduRequirement();
+        this.workType = requestDto.getWorkType();
+        this.career = requestDto.getCareer();
+        this.salary = requestDto.getSalary();
+        this.location = requestDto.getLocation();
+        this.imgUrl = requestDto.getImgUrl();
+        this.recruitContent = requestDto.getRecruitContent();
+        this.recruitStartDate = requestDto.getRecruitStartDate();
+        this.recruitEndDate = requestDto.getRecruitEndDate();
+        this.department = requestDto.getDepartment();
+        this.work = requestDto.getWork();
+        this.requirement = requestDto.getRequirement();
     }
 
 }

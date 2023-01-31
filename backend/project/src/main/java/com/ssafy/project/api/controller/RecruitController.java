@@ -6,9 +6,11 @@ import com.ssafy.project.api.response.RecruitResponseDto;
 import com.ssafy.project.api.response.RecruitResponseListDto;
 import com.ssafy.project.api.service.RecruitService;
 import com.ssafy.project.api.response.BaseResponseBody;
+import com.ssafy.project.common.auth.SsafyUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,10 +23,11 @@ public class RecruitController {
     private final RecruitService recruitService;
 
     @PostMapping("/{company_id}")
-    public ResponseEntity<BaseResponseBody> createRecruit(@PathVariable Long company_id,
-                                                                    @RequestBody RecruitRequestDto requestDto) {
+    public ResponseEntity<BaseResponseBody> createRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                          @PathVariable Long company_id,
+                                                          @RequestBody RecruitRequestDto requestDto) {
 
-        recruitService.createRecruit(company_id, requestDto);
+        recruitService.createRecruit(company_id, requestDto, userDetails.getMember().getId());
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
@@ -39,13 +42,18 @@ public class RecruitController {
         return new ResponseEntity<>(recruitService.getRecruitDetail(recruit_id), HttpStatus.OK);
     }
 
-    @PatchMapping("/detail/{recruit_id}")
-    public ResponseEntity<RecruitResponseDto> updateRecruit(@PathVariable Long recruit_id, @RequestBody RecruitRequestDto requestDto) {
-        return null;
+    @PatchMapping("/{recruit_id}")
+    public ResponseEntity<BaseResponseBody> updateRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                            @PathVariable Long recruit_id,
+                                                            @RequestBody RecruitRequestDto requestDto) {
+        recruitService.updateRecruit(userDetails.getMember().getId(), recruit_id, requestDto);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
-    @DeleteMapping("/detail/{recruit_id}")
-    public ResponseEntity<BaseResponseBody> deleteRecruit(@PathVariable Long recruit_id) {
-        return null;
+    @DeleteMapping("/{recruit_id}")
+    public ResponseEntity<BaseResponseBody> deleteRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                          @PathVariable Long recruit_id) {
+        recruitService.deleteRecruit(userDetails.getMember().getId(), recruit_id);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 }

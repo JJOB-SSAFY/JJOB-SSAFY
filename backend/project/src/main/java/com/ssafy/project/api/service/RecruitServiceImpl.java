@@ -8,8 +8,10 @@ import com.ssafy.project.api.response.RecruitResponseListDto;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Company;
+import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.Recruit;
 import com.ssafy.project.db.repository.CompanyRepository;
+import com.ssafy.project.db.repository.MemberRepository;
 import com.ssafy.project.db.repository.RecruitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +30,8 @@ public class RecruitServiceImpl implements RecruitService {
 
     private final CompanyRepository companyRepository;
 
+    private final MemberRepository memberRepository;
+
     @Override
     @Transactional(readOnly = true)
     public List<MainResponseDto> getRecruitOrderByDate() {
@@ -38,12 +42,16 @@ public class RecruitServiceImpl implements RecruitService {
 
     @Override
     @Transactional
-    public void createRecruit(Long companyId, RecruitRequestDto requestDto) {
+    public void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId) {
         Optional<Company> findCompany = companyRepository.findById(companyId);
 
         if (!findCompany.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
-        Recruit recruit = Recruit.of(requestDto, findCompany.get());
+        Optional<Member> findMember = memberRepository.findById(memberId);
+
+        if (!findMember.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+
+        Recruit recruit = Recruit.of(requestDto, findCompany.get(), findMember.get());
 
         recruitRepository.save(recruit);
     }
@@ -62,6 +70,30 @@ public class RecruitServiceImpl implements RecruitService {
         if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
 
         return RecruitResponseDto.of(findRecruit.get());
+    }
+
+    @Override
+    @Transactional
+    public void updateRecruit(Long memberId, Long recruitId, RecruitRequestDto requestDto) {
+        Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
+
+        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
+
+        if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+
+        findRecruit.get().updateRecruit(requestDto);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRecruit(Long memberId, Long recruitId) {
+        Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
+
+        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
+
+        if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+
+        recruitRepository.deleteById(recruitId);
     }
 
 }

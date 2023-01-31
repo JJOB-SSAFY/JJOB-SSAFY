@@ -25,7 +25,7 @@ public class ReviewController {
 
     @GetMapping("/list")
     public ResponseEntity<List<ReviewResponseListDto>> getReviewList(@RequestBody ReviewSearchCondition condition) {
-        return ResponseEntity.ok(reviewService.getReviewList(condition));
+        return new ResponseEntity<>(reviewService.getReviewList(condition), HttpStatus.OK);
     }
 
     @PostMapping("/{company_id}")
@@ -35,13 +35,11 @@ public class ReviewController {
         reviewService.writeReview(requestDto, userDetails.getMember().getId(), companyId);
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/detail/{review_id}")
     public ResponseEntity<ReviewResponseDto> detailReview(@PathVariable Long review_id){
         return new ResponseEntity<>(reviewService.getDetailReview(review_id), HttpStatus.OK);
-
     }
 
     @DeleteMapping("/{review_id}")
@@ -53,7 +51,6 @@ public class ReviewController {
     @PatchMapping("{review_id}")
     public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,  @RequestBody ReviewRequestDto requestDto){
         return new ResponseEntity<>(reviewService.updateReview(review_id, requestDto), HttpStatus.OK);
-
     }
 
 
