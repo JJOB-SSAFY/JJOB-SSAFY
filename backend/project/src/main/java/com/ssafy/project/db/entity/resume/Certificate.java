@@ -3,7 +3,6 @@ package com.ssafy.project.db.entity.resume;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -21,7 +20,7 @@ public class Certificate {
     private String certificateName;
 
     @Column(nullable = false)
-    private LocalDateTime certificateDate;
+    private String certificateDate;
 
     @Column(nullable = false)
     private String certificateInstitution;
