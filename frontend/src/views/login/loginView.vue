@@ -80,7 +80,7 @@
 								<input required type="checkbox" id="remember" />
 								<label for="remember">로그인 유지하기</label>
 							</div>
-							<a href="#">비밀번호 까먹</a>
+							<a href="#">비밀번호를 잊으셨나요?</a>
 						</div>
 						<!-- /.agreement-checkbox -->
 					</div>
@@ -97,7 +97,7 @@
 
 <script>
 export default {
-	name: 'LoginArea',
+	name: 'loginView',
 	data() {
 		return {
 			hidePassword: false,
@@ -105,6 +105,7 @@ export default {
 	},
 	methods: {
 		onSubmit() {
+			//서버에 보내서 로그인 확인
 			console.log('Submitted');
 		},
 		handleHidePassword() {

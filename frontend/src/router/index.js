@@ -15,10 +15,18 @@ export default createRouter({
 	routes: [
 		{
 			path: '/',
+			redirect: '/login',
+		},
+		{
+			path: '/login',
+			component: loginView,
+		},
+		{
+			path: '/main',
 			component: mainView,
 			children: [
 				{
-					path: '/',
+					path: '/main',
 					component: mainView,
 				},
 				{
@@ -46,10 +54,6 @@ export default createRouter({
 					component: myInfoView,
 				},
 			],
-		},
-		{
-			path: '/login',
-			component: loginView,
 		},
 		{
 			path: '/register',
