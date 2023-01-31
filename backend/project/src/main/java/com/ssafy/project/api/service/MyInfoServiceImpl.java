@@ -2,7 +2,7 @@ package com.ssafy.project.api.service;
 
 import com.ssafy.project.api.request.MyInfoRequestDto;
 import com.ssafy.project.api.request.RecruitSearchCondition;
-import com.ssafy.project.api.response.MyInfoApplyGetRes;
+import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.api.response.MyInfoGetRes;
 import com.ssafy.project.api.response.RecruitResponseListDto;
 import com.ssafy.project.common.exception.ApiException;
@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,13 +104,19 @@ public class MyInfoServiceImpl implements MyInfoService {
     }
 
     @Override
-    public List<MyInfoApplyGetRes> applyStatus(Long id) {
-//        Optional<ApplyStatus> applyStatus = applyStatueRepository.findById(id);
-//        if(!applyStatus.isPresent()){
-//            throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
-//        }
-        //List<ApplyStatus> applyStatus=applyStatueRepository.findB
-        return null;
+    public List<ApplyStatusRes> applyStatus(Long id) {
+        List<ApplyStatusRes> applyList = new ArrayList<>();
+        for(ApplyStatus a : applyStatueRepository.getApplyStatusByMemberId(id)){
+           
+            ApplyStatusRes apply = ApplyStatusRes.builder().
+                    recruitTitle(a.getRecruit().getRecruitTitle()).
+                    step(a.getStep()).
+                    status(a.getStatus()).
+                    companyName(a.getRecruit().getCompany().getCompanyName()).build();
+            applyList.add(apply);
+
+        }
+        return applyList;
     }
 
 //    @Override
