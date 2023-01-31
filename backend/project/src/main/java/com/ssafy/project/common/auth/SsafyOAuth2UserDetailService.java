@@ -1,9 +1,11 @@
 package com.ssafy.project.common.auth;
 
 import com.ssafy.project.db.entity.Member;
+import com.ssafy.project.db.entity.MemberRoleEnum;
 import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -61,10 +64,10 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
         SsafyOAuth2UserDetails ssafyOauth2Member = new SsafyOAuth2UserDetails(
                 member.getEmail(),
                 member.getPassword(),
-//                member.getRoleSet()
-//                        .stream()
-//                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
-//                        .collect(Collectors.toList()),
+                member.getRoleSet()
+                        .stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                        .collect(Collectors.toList()),
                 oAuth2User.getAttributes()
         );
         ssafyOauth2Member.setName(member.getName());
@@ -87,10 +90,9 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
                 .email(email)
                 .name(name)
                 .password(new BCryptPasswordEncoder().encode(password))
-//                .fromSocial(true)
                 .build();
 
-//        clubMember.addMemberRole(ClubMemberRole.USER);
+        member.addMemberRole(MemberRoleEnum.USER);
 
         memberRepository.save(member);
 

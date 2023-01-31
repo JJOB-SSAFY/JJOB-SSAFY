@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
-public class SsafyOAuth2UserDetails implements OAuth2User {
+public class SsafyOAuth2UserDetails extends User implements OAuth2User {
 
     private String email;
 
@@ -28,9 +29,9 @@ public class SsafyOAuth2UserDetails implements OAuth2User {
 
     public SsafyOAuth2UserDetails(String username,
                                   String password,
+                                  Collection<? extends GrantedAuthority> authorities,
                                   Map<String, Object> attr) {
-        this.email = username;
-        this.password = password;
+        super(username, password, authorities);
         this.attr = attr;
     }
 
@@ -39,8 +40,4 @@ public class SsafyOAuth2UserDetails implements OAuth2User {
         return this.attr;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 }

@@ -1,7 +1,6 @@
 package com.ssafy.project.common.auth;
 
 import com.ssafy.project.db.entity.Member;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class SsafyUserDetails implements UserDetails {
-    @Autowired
+
     Member member;
     boolean accountNonExpired;
     boolean accountNonLocked;
