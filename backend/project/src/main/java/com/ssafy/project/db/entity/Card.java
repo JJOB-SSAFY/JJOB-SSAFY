@@ -46,5 +46,16 @@ public class Card {
         this.introduce = newInfo.getIntroduce();
         this.imageUrl = newInfo.getImageUrl();
     }
+    public void createInfo(Card newCard){
+        this.phone = newCard.getPhone();
+        this.blog = newCard.getBlog();
+        this.github = newCard.getGithub();
+        this.skills = newCard.getSkills();
+        this.preferredJob = newCard.getPreferredJob();
+        this.introduce = newCard.getIntroduce();
+        this.imageUrl = newCard.getImageUrl();
+        this.name=newCard.getName();
+        this.email=newCard.getEmail();
+    }
 
 }
