@@ -25,10 +25,10 @@ public class MyInfoController {
     private final MyInfoService myInfoService;
 
     // 내 정보 조회
-    @GetMapping("/{email}")
-    public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable("email") String email) {
-        logger.info(email);
-        MyInfoGetRes myInfo = myInfoService.getMyInfo(email);
+    @GetMapping("")
+    public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails) {
+        logger.info(userDetails.getMember().getEmail());
+        MyInfoGetRes myInfo = myInfoService.getMyInfo(userDetails.getMember().getEmail());
 
         return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class MyInfoController {
         return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
     //내 정보 수정
-    @PatchMapping("/{email}")
+    @PatchMapping("")
     public ResponseEntity<?> changeInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @RequestBody MyInfoRequestDto requestDto){
         Long id=userDetails.getMember().getId();
         myInfoService.changeInfo(requestDto,id);
@@ -49,7 +49,7 @@ public class MyInfoController {
         return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
     // 지원현황
-    @GetMapping("/apply/{email}")
+    @GetMapping("/apply")
     public ResponseEntity<?> applyStatus(@AuthenticationPrincipal SsafyUserDetails userDetails){
         Long id=userDetails.getMember().getId();
         List<ApplyStatusRes> list = myInfoService.applyStatus(id);
