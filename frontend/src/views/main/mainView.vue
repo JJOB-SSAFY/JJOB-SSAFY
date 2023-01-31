@@ -1,15 +1,14 @@
 <template>
-	<div>
-		<h3>메인뷰</h3>
-	</div>
+	<main-header />
 </template>
 
 <script>
+import MainHeader from '@/views/main/components/main-Header.vue';
 export default {
-	setup() {
+	name: 'mainView',
+	components: { MainHeader },
+	data() {
 		return {};
 	},
 };
 </script>
-
-<style lang="scss" scoped></style>

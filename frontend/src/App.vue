@@ -1,14 +1,10 @@
-<template>
-	<main-header></main-header>
-	<router-view></router-view>
-</template>
+<template><main-view></main-view></template>
 
 <script>
-import MainHeader from '@/views/main/components/main-Header.vue';
+import MainView from '@/views/main/mainView.vue';
 export default {
-	name: 'mainView',
 	components: {
-		MainHeader,
+		MainView,
 	},
 	data() {
 		return {};

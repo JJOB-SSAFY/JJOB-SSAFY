@@ -3,7 +3,6 @@ package com.ssafy.project.api.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
@@ -17,4 +16,7 @@ public class MemberJoinPostReq {
     private String name;
 
     private String phone;
+
+    private String companyName;
+
 }
