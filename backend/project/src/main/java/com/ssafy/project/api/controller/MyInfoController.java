@@ -1,19 +1,16 @@
 package com.ssafy.project.api.controller;
 
-import com.ssafy.project.api.request.MemberJoinPostReq;
 import com.ssafy.project.api.request.MyInfoRequestDto;
 import com.ssafy.project.api.response.MyInfoGetRes;
 import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.api.service.MyInfoService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
-import com.ssafy.project.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;

@@ -1,6 +1,5 @@
 package com.ssafy.project.api.response;
 
-
 import com.ssafy.project.db.entity.Review;
 import lombok.*;
 
