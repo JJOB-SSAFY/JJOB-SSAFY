@@ -1,6 +1,7 @@
 package com.ssafy.project.api.controller;
 
 import com.ssafy.project.api.request.MyInfoRequestDto;
+import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.api.response.MyInfoGetRes;
 import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.api.service.MyInfoService;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,11 +25,6 @@ public class MyInfoController {
     private final MemberService memberService;
     private final MyInfoService myInfoService;
 
-    @GetMapping
-    public ResponseEntity<?> test(){
-        logger.info("함시연");
-        return null;
-    }
     // 내 정보 조회
     @GetMapping("/{email}")
     public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable("email") String email) {
@@ -57,7 +54,8 @@ public class MyInfoController {
     @GetMapping("/apply/{email}")
     public ResponseEntity<?> applyStatus(@AuthenticationPrincipal SsafyUserDetails userDetails){
         Long id=userDetails.getMember().getId();
-        return null;
+        List<ApplyStatusRes> list = myInfoService.applyStatus(id);
+        return new ResponseEntity<List<ApplyStatusRes>>(list,HttpStatus.OK);
     }
 
 }
