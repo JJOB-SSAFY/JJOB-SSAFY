@@ -1,7 +1,12 @@
 package com.ssafy.project.db.repository;
 
 import com.ssafy.project.db.entity.MemberConference;
-import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberConferenceRepository extends JpaAttributeConverter<MemberConference, Long> {
+import java.util.List;
+
+public interface MemberConferenceRepository extends JpaRepository<MemberConference, Long> {
+    List<MemberConference> findAllByMemberId(long memberId);
+
+    void deleteAllByConferenceId(Long id);
 }

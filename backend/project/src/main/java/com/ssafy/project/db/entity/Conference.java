@@ -33,4 +33,11 @@ public class Conference {
     @Enumerated(EnumType.STRING)
     private ConferenceEnum conferenceCategory;
 
+    public void changeConference(Conference conference){
+        this.conferenceCategory=conference.getConferenceCategory();
+        this.callEndTime = conference.callEndTime;
+        this.callStartTime = conference.callStartTime;
+        this.conferenceTitle = conference.getConferenceTitle();
+    }
+
 }
