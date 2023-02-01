@@ -21,7 +21,11 @@ a,
   }
 }
 
+<<<<<<< HEAD
 @media (min-width: 1024px) {
+=======
+/* @media (min-width: 1024px) {
+>>>>>>> b32f73ab117a113daa5cd89c40f200ef88f447ce
   body {
     display: flex;
     place-items: center;
@@ -29,7 +33,14 @@ a,
 
   #app {
     display: grid;
+<<<<<<< HEAD
     /* grid-template-columns: 1fr 1fr; */
     padding: 0 2rem;
   }
 }
+=======
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+} */
+>>>>>>> b32f73ab117a113daa5cd89c40f200ef88f447ce
