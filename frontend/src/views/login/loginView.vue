@@ -10,16 +10,6 @@
 					alt=""
 					class="illustration"
 				/>
-				<img
-					src="../../assets/images/assets/ils_08.1.svg"
-					alt=""
-					class="shapes shape-one"
-				/>
-				<img
-					src="../../assets/images/assets/ils_08.2.svg"
-					alt=""
-					class="shapes shape-two"
-				/>
 			</div>
 		</div>
 		<!-- /.illustration-wrapper -->
@@ -35,24 +25,38 @@
 					>홈으로</router-link
 				>
 			</div>
-			<form @submit.prevent="onSubmit" class="user-data-form mt-80 md-mt-40">
+			<form
+				@submit.prevent="clickLogin"
+				:model="loginState.form"
+				:rules="loginState.rules"
+				ref="loginForm"
+				class="user-data-form mt-80 md-mt-40"
+			>
 				<p class="header-info pt-30 pb-50"></p>
 
 				<div class="row">
 					<div class="col-12">
 						<div class="input-group-meta mb-80 sm-mb-70">
 							<label>이메일</label>
-							<input required type="email" placeholder="email01234@kakao.com" />
+							<input
+								v-model.lazy="loginState.form.email"
+								required
+								type="email"
+								placeholder="email01234@kakao.com"
+								ref="email"
+							/>
 						</div>
 					</div>
 					<div class="col-12">
 						<div class="input-group-meta mb-15">
 							<label class="font-LINE-Bd">비밀번호</label>
 							<input
+								v-model.lazy="loginState.form.password"
 								required
 								:type="hidePassword ? 'text' : 'password'"
 								placeholder="Enter Password"
 								class="pass_log_id"
+								ref="passowrd"
 							/>
 							<span class="placeholder_icon">
 								<span
@@ -69,7 +73,7 @@
 							class="agreement-checkbox d-flex justify-content-between align-items-center"
 						>
 							<div>
-								<input required type="checkbox" id="remember" />
+								<input type="checkbox" id="remember" />
 								<label for="remember">로그인 기억하기</label>
 							</div>
 							<a href="#">비밀번호를 잊어버리셨나요?</a>
@@ -77,7 +81,10 @@
 						<!-- /.agreement-checkbox -->
 					</div>
 					<div class="col-12">
-						<button class="theme-btn-one mt-50 mb-50 font-LINE-Bd">
+						<button
+							class="theme-btn-one mt-50 mb-50 font-LINE-Bd"
+							@click="clickLogin"
+						>
 							로그인
 						</button>
 					</div>
@@ -92,20 +99,55 @@
 </template>
 
 <script>
+import { ref, reactive } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
 	name: 'loginView',
-	data() {
-		return {
-			hidePassword: false,
+	setup() {
+		const hidePassword = ref(false);
+
+		const handleHidePassword = () => {
+			hidePassword.value = !hidePassword.value;
 		};
-	},
-	methods: {
-		onSubmit() {
-			console.log('Submitted');
-		},
-		handleHidePassword() {
-			this.hidePassword = !this.hidePassword;
-		},
+		const store = useStore();
+
+		const loginForm = ref(null);
+
+		const loginState = reactive({
+			form: {
+				email: '',
+				password: '',
+			},
+		});
+
+		const clickLogin = () => {
+			if (!loginState.form.email) {
+				alert('아이디를 입력해주세요');
+				this.$ref.email.focus();
+				return;
+			} else if (!loginState.form.password) {
+				alert('아이디를 입력해주세요');
+				this.$ref.password.focus();
+				return;
+			}
+
+			const loginInfo = {
+				email: loginState.form.email,
+				password: loginState.form.password,
+			};
+
+			store.dispatch('auth/login', loginInfo);
+
+			console.log(store.getters['auth/getAccessToken']);
+		};
+		return {
+			hidePassword,
+			loginState,
+			loginForm,
+			handleHidePassword,
+			clickLogin,
+		};
 	},
 };
 </script>
