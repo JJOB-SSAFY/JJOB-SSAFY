@@ -49,13 +49,13 @@ public class MyInfoServiceImpl implements MyInfoService {
         MyInfoGetRes allMyInfo= MyInfoGetRes.builder().
                 name(myinfo.get().getCard().getName()).
                 phone(myinfo.get().getCard().getPhone()).
-                blog(myinfo.get().getCard().getBlog()).
+                blog(info.get().getBlog()).
                 email(myinfo.get().getCard().getEmail()).
-                github(myinfo.get().getCard().getGithub()).
-                introduce(myinfo.get().getCard().getIntroduce()).
-                skills(myinfo.get().getCard().getSkills()).
-                imgUrl(myinfo.get().getCard().getImageUrl()).
-                preferredJob(myinfo.get().getCard().getPreferredJob()).build();
+                github(info.get().getGithub()).
+                introduce(info.get().getIntroduce()).
+                skills(info.get().getSkills()).
+                imgUrl(info.get().getImageUrl()).
+                preferredJob(info.get().getPreferredJob()).build();
 
         return allMyInfo;
     }
@@ -107,7 +107,7 @@ public class MyInfoServiceImpl implements MyInfoService {
     public List<ApplyStatusRes> applyStatus(Long id) {
         List<ApplyStatusRes> applyList = new ArrayList<>();
         for(ApplyStatus a : applyStatueRepository.findAllByMemberId(id)){
-           
+
             ApplyStatusRes apply = ApplyStatusRes.builder().
                     recruitTitle(a.getRecruit().getRecruitTitle()).
                     step(a.getStep()).
@@ -118,6 +118,7 @@ public class MyInfoServiceImpl implements MyInfoService {
         }
         return applyList;
     }
+
 
 //    @Override
 //    @Transactional(readOnly = true)
