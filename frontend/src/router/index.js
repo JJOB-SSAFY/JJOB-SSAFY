@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import loginView from '../views/login/loginView.vue';
 import registerView from '../views/register/registerView.vue';
-
 import mainView from '@/views/main/mainView.vue';
+
+import homepageView from '@/views/main/homepage/homepageView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
 import infoCardsView from '@/views/main/infoCards/infoCardsView.vue';
 import presentationView from '@/views/main/presentation/presentationView.vue';
@@ -15,7 +16,7 @@ export default createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/login',
+			redirect: '/main',
 		},
 		{
 			path: '/login',
@@ -24,10 +25,11 @@ export default createRouter({
 		{
 			path: '/main',
 			component: mainView,
+			redirect: '/home',
 			children: [
 				{
-					path: '/main',
-					component: mainView,
+					path: '/home',
+					component: homepageView,
 				},
 				{
 					path: '/interview',
