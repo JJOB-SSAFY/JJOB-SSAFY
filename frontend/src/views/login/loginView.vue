@@ -3,10 +3,7 @@
 		<div
 			class="illustration-wrapper d-flex align-items-center justify-content-between flex-column"
 		>
-			<h3 class="font-rubik">
-				Want your best managment <br />software?
-				<router-link to="/register">sign up</router-link>
-			</h3>
+			<h3 class="font-LINE-Bd">취업할래? <br />JJOP SSAFY</h3>
 			<div class="illustration-holder">
 				<img
 					src="../../assets/images/assets/ils_08.svg"
@@ -35,29 +32,22 @@
 					</router-link>
 				</div>
 				<router-link to="/" class="font-rubik go-back-button"
-					>Go to home</router-link
+					>홈으로</router-link
 				>
 			</div>
 			<form @submit.prevent="onSubmit" class="user-data-form mt-80 md-mt-40">
-				<h2>
-					Hi buddy, welcome <br />
-					Back!
-				</h2>
-				<p class="header-info pt-30 pb-50">
-					Still don't have an account?
-					<router-link to="/register">Sign up</router-link>
-				</p>
+				<p class="header-info pt-30 pb-50"></p>
 
 				<div class="row">
 					<div class="col-12">
 						<div class="input-group-meta mb-80 sm-mb-70">
-							<label>Email</label>
-							<input required type="email" placeholder="bolcovfed@ce.edu" />
+							<label>이메일</label>
+							<input required type="email" placeholder="email01234@kakao.com" />
 						</div>
 					</div>
 					<div class="col-12">
 						<div class="input-group-meta mb-15">
-							<label>Password</label>
+							<label class="font-LINE-Bd">비밀번호</label>
 							<input
 								required
 								:type="hidePassword ? 'text' : 'password'"
@@ -80,19 +70,19 @@
 						>
 							<div>
 								<input required type="checkbox" id="remember" />
-								<label for="remember">Keep me logged in</label>
+								<label for="remember">로그인 기억하기</label>
 							</div>
-							<a href="#">Forget Password?</a>
+							<a href="#">비밀번호를 잊어버리셨나요?</a>
 						</div>
 						<!-- /.agreement-checkbox -->
 					</div>
 					<div class="col-12">
-						<button class="theme-btn-one mt-50 mb-50">Login</button>
+						<button class="theme-btn-one mt-50 mb-50 font-LINE-Bd">
+							로그인
+						</button>
 					</div>
 					<div class="col-12">
-						<p class="text-center font-rubik copyright-text">
-							© Copyright 2021 deski
-						</p>
+						<p class="text-center font-rubik copyright-text"></p>
 					</div>
 				</div>
 			</form>

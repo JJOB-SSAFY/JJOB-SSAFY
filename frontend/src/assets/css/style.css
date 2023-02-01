@@ -823,7 +823,8 @@ h6 {
 
 /*^^^^^^^^^^^^^^^^^^^^^ Theme Button ^^^^^^^^^^^^^^^^^^^^^^^^^*/
 body .theme-btn-one {
-  font-size: 16px;
+  font-family: "LINE-Rg";
+  font-size: 20px;
   font-weight: 500;
   color: #fff;
   line-height: 50px;
@@ -878,6 +879,7 @@ body .theme-btn-three:hover {
 }
 
 body .theme-btn-four {
+  font-family: "LINE-Rg";
   font-size: 17px;
   color: var(--blue-dark);
   border: 2px solid var(--blue-dark);
@@ -922,6 +924,7 @@ body .theme-btn-five:hover:before {
 }
 
 body .theme-btn-six {
+  font-family: "LINE-Rg";
   font-size: 16px;
   font-weight: 500;
   line-height: 50px;
@@ -942,6 +945,7 @@ body .theme-btn-six:hover {
 }
 
 body .theme-btn-seven {
+  font-family: "LINE-Rg";
   font-weight: 500;
   text-align: center;
   line-height: 60px;
@@ -957,6 +961,7 @@ body .theme-btn-seven:hover {
 }
 
 body .theme-btn-eight {
+  font-family: "LINE-Rg";
   font-weight: 500;
   font-size: 16px;
   line-height: 58px;
@@ -989,6 +994,7 @@ body .theme-btn-nine:hover {
 }
 
 body .theme-btn-ten {
+  font-family: "LINE-Rg";
   font-weight: 500;
   font-size: 18px;
   letter-spacing: -0.5px;
@@ -998,6 +1004,7 @@ body .theme-btn-ten {
 }
 
 body .theme-btn-ten .fa {
+  font-family: "LINE-Rg";
   font-size: 14px;
   margin-left: 5px;
 }
@@ -6670,6 +6677,7 @@ body .theme-btn-fourteen:hover {
 }
 
 .user-data-page .illustration-wrapper h3 {
+  font-family: "LINE-Rg";
   font-size: 36px;
   line-height: 1.27em;
   padding: 40px 0;
@@ -6677,6 +6685,7 @@ body .theme-btn-fourteen:hover {
 
 .user-data-page .illustration-wrapper h3 a {
   text-decoration: underline;
+  font-family: "LINE-Rg";
 }
 
 .user-data-page .illustration-wrapper .illustration-holder {
@@ -6712,6 +6721,7 @@ body .theme-btn-fourteen:hover {
 }
 
 .user-data-page .go-back-button {
+  font-family: "LINE-Rg";
   font-size: 15px;
 }
 
@@ -6762,6 +6772,7 @@ body .theme-btn-fourteen:hover {
 }
 
 .user-data-form .input-group-meta label {
+  font-family: LINE-Bd;
   font-size: 15px;
   font-weight: normal;
   color: #bfbfbf;
@@ -6831,6 +6842,7 @@ body .theme-btn-fourteen:hover {
 .user-data-form .agreement-checkbox label {
   position: relative;
   font-size: 15px;
+  font-family: "LINE-Rg";
   color: var(--heading);
   cursor: pointer;
   padding-left: 22px;
@@ -6871,7 +6883,9 @@ body .theme-btn-fourteen:hover {
 }
 
 .user-data-form .agreement-checkbox a {
+  font-family: "LINE-Rg";
   position: relative;
+
   font-size: 15px;
   color: rgba(30, 30, 30, 0.55);
 }
@@ -9854,7 +9868,9 @@ body .theme-btn-fourteen:hover {
 }
 
 .theme-menu-five .navbar-nav .nav-item .nav-link {
-  font-size: 20px;
+  font-family: "LINE-Bd";
+  font-size: 25px;
+  letter-spacing: 2px;
   margin: 0 23px;
 }
 
