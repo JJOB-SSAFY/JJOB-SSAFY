@@ -7,7 +7,7 @@
 		<div class="d-flex align-items-center justify-content-center">
 			<div class="logo">
 				<router-link to="/">
-					<img src="@/assets/images/logo.png" alt="" height="70" width="100" />
+					<img src="@/assets/images/logo.png" alt="" height="47" width="80" />
 				</router-link>
 			</div>
 
@@ -18,7 +18,7 @@
 						data-bs-toggle="collapse"
 						data-bs-target="#collapsibleNavbar"
 						:class="menuActive ? 'navbar-toggler open' : 'navbar-toggler'"
-						@click="menuActive = !menuActive"
+						@click="buttonClick"
 					>
 						<span></span>
 					</button>
@@ -32,7 +32,7 @@
 					>
 						<div class="d-lg-flex justify-content-between align-items-center">
 							<ul
-								class="navbar-nav main-side-nav font-gordita"
+								class="navbar-nav main-side-nav font-LINE-Bd"
 								id="one-page-nav"
 							>
 								<li v-for="nav in navigations" :key="nav.name" class="nav-item">
@@ -40,22 +40,6 @@
 										{{ nav.name }}
 									</router-link>
 								</li>
-								<!-- 			
-								<li class="nav-item">
-									<a class="nav-link" href="/main">Home</a>
-								</li>
-								<li class="nav-item">
-									<a href="#feature" class="nav-link">Features</a>
-								</li>
-								<li class="nav-item">
-									<a href="#feature" class="nav-link">Features</a>
-								</li>
-								<li class="nav-item">
-									<a href="#feature" class="nav-link">Features</a>
-								</li>
-								<li class="nav-item">
-									<a href="#feature" class="nav-link">Features</a>
-								</li> -->
 							</ul>
 						</div>
 					</div>
@@ -70,7 +54,7 @@
 							class="signIn-action d-flex align-items-center"
 						>
 							<img src="@/assets/images/icon/lock.svg" alt="" />
-							<span>로그인</span>
+							<span>로그인 </span>
 						</router-link>
 					</li>
 					<li>
@@ -86,9 +70,11 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
 	setup() {
-		const isSticky = false;
+		const isSticky = ref(false);
+		const menuActive = ref(false);
 		const navigations = [
 			{
 				name: '채용공고',
@@ -118,8 +104,11 @@ export default {
 				this.isSticky = false;
 			}
 		};
+		const buttonClick = () => {
+			menuActive.value = !menuActive.value;
+		};
 
-		return { navigations, isSticky, handleSticky };
+		return { navigations, isSticky, menuActive, buttonClick, handleSticky };
 	},
 };
 </script>
