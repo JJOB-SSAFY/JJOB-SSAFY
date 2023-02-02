@@ -11,6 +11,8 @@ import recruitView from '@/views/main/recruit/recruitView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
 
+import openviduView from '@/views/main/openvidu/conferenceView.vue';
+
 export default createRouter({
 	history: createWebHistory(),
 	routes: [
@@ -54,6 +56,10 @@ export default createRouter({
 				{
 					path: '/myInfo',
 					component: myInfoView,
+				},
+				{
+					path: '/openvidu/:participant/:session',
+					component: openviduView,
 				},
 			],
 		},
