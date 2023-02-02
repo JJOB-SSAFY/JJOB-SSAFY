@@ -1,4 +1,4 @@
-package com.ssafy.project.api.response;
+package com.ssafy.project.api.response.resume;
 
 
 import com.ssafy.project.db.entity.resume.Resume;

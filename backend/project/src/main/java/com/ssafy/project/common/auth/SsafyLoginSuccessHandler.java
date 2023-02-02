@@ -5,7 +5,6 @@ import com.ssafy.project.api.response.MemberLoginPostRes;
 import com.ssafy.project.common.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import lombok.var;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;

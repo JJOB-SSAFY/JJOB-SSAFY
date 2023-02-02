@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.LanguageAbilityRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,5 +32,20 @@ public class LanguageAbility {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
     private Resume resume;
+
+    public LanguageAbility(Resume resume, LanguageAbilityRequestDto requestDto){
+        this.resume = resume;
+        this.language = requestDto.getLanguage();
+        this.testName = requestDto.getTestName();
+        this.grade = requestDto.getGrade();
+        this.testDate = requestDto.getTestDate();
+    }
+
+    public void updateLanguageAbility(LanguageAbilityRequestDto requestDto) {
+        this.language = requestDto.getLanguage();
+        this.testName = requestDto.getTestName();
+        this.grade = requestDto.getGrade();
+        this.testDate = requestDto.getTestDate();
+    }
 
 }
