@@ -40,9 +40,8 @@ public class ReviewServiceImpl implements ReviewService {
         Optional<Member> member = memberRepository.findById(memberId);
         Optional<Company> company = companyRepository.findById(companyId);
 
-        if(!member.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-        if(!company.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
-
+        if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
+        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         Review review = Review.builder().member(member.get())
                 .title(requestDto.getTitle())
@@ -59,18 +58,16 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional(readOnly = true)
     public ReviewResponseDto getDetailReview(Long reviewId) {
         Optional<Review> review = reviewRepository.findById(reviewId);
-        if(!review.isPresent()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
+        if(review.isEmpty()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
 
-        ReviewResponseDto dto = ReviewResponseDto.of(review.get());
-
-        return dto;
+        return ReviewResponseDto.of(review.get());
     }
 
     @Override
     @Transactional
     public void deleteReview(Long reviewId) {
         Optional<Review> review = reviewRepository.findById(reviewId);
-        if(!review.isPresent()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
+        if(review.isEmpty()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
         reviewRepository.delete(review.get());
     }
 
@@ -78,13 +75,11 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public ReviewResponseDto updateReview(Long reviewId, ReviewRequestDto requestDto) {
         Optional<Review> review = reviewRepository.findById(reviewId);
-        if(!review.isPresent()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
+        if(review.isEmpty()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
 
         review.get().updateReview(requestDto);
-        ReviewResponseDto dto = ReviewResponseDto.of(review.get());
 
-        return dto;
+        return ReviewResponseDto.of(review.get());
     }
-
 
 }

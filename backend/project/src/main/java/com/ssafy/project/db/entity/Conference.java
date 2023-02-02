@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity;
 
+import com.ssafy.project.api.request.ConferenceRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,8 +34,18 @@ public class Conference {
     @Enumerated(EnumType.STRING)
     private ConferenceEnum conferenceCategory;
 
+    public static Conference of(ConferenceRequestDto requestDto, Member member) {
+        return Conference.builder()
+                .conferenceTitle(requestDto.getConferenceTitle())
+                .callStartTime(requestDto.getCallStartTime())
+                .callEndTime(requestDto.getCallEndTime())
+                .conferenceCategory(ConferenceEnum.valueOf(requestDto.getConferenceCategory()))
+                .member(member)
+                .build();
+    }
+
     public void changeConference(Conference conference){
-        this.conferenceCategory=conference.getConferenceCategory();
+        this.conferenceCategory = conference.getConferenceCategory();
         this.callEndTime = conference.callEndTime;
         this.callStartTime = conference.callStartTime;
         this.conferenceTitle = conference.getConferenceTitle();
