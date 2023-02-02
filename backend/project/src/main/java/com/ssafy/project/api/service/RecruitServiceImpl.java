@@ -48,11 +48,11 @@ public class RecruitServiceImpl implements RecruitService {
     public void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId) {
         Optional<Company> findCompany = companyRepository.findById(companyId);
 
-        if (!findCompany.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if (findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         Optional<Member> findMember = memberRepository.findById(memberId);
 
-        if (!findMember.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+        if (findMember.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
 
         Recruit recruit = Recruit.of(requestDto, findCompany.get(), findMember.get());
 
@@ -70,7 +70,7 @@ public class RecruitServiceImpl implements RecruitService {
     public RecruitResponseDto getRecruitDetail(Long recruitId) {
         Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
 
-        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
+        if (findRecruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
 
         return RecruitResponseDto.of(findRecruit.get());
     }
@@ -80,7 +80,7 @@ public class RecruitServiceImpl implements RecruitService {
     public void updateRecruit(Long memberId, Long recruitId, RecruitRequestDto requestDto) {
         Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
 
-        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
+        if (findRecruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
 
         if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
@@ -92,7 +92,7 @@ public class RecruitServiceImpl implements RecruitService {
     public void deleteRecruit(Long memberId, Long recruitId) {
         Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
 
-        if (!findRecruit.isPresent()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
+        if (findRecruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
 
         if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 

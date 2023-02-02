@@ -66,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
 
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
-        if (!findMember.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+        if (findMember.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
 
         Member member = findMember.get();
 
@@ -96,7 +96,7 @@ public class MemberServiceImpl implements MemberService {
     private Company companyExistCheck(String companyName) {
         Optional<Company> findCompany = companyRepository.findByCompanyName(companyName);
 
-        if (!findCompany.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if (findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         return findCompany.get();
     }
