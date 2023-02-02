@@ -34,7 +34,7 @@ public class MyInfoServiceImpl implements MyInfoService {
     public MyInfoGetRes getMyInfo(String email) {
 
         Optional<Member> myinfo = memberRepository.findByEmail(email);
-        if(!myinfo.isPresent()){
+        if(myinfo.isEmpty()){
             throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
         }
         if(myinfo.get().getCard()==null){
@@ -65,7 +65,7 @@ public class MyInfoServiceImpl implements MyInfoService {
     public void changePwd(String password, Member member) {
         Optional<Member> memberOptional = memberRepository.findById(member.getId());
 
-        if(!memberOptional.isPresent()){
+        if(memberOptional.isEmpty()){
             throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
         }
 
@@ -76,7 +76,7 @@ public class MyInfoServiceImpl implements MyInfoService {
     @Transactional
     public void changeInfo(MyInfoRequestDto myinfo,long id) {
         Optional<Member> member = memberRepository.findById(id);
-        if(!member.isPresent()){
+        if(member.isEmpty()){
             throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
         }
 
@@ -119,45 +119,4 @@ public class MyInfoServiceImpl implements MyInfoService {
         return applyList;
     }
 
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<RecruitResponseListDto> getReviewList(RecruitSearchCondition condition) {
-//        return recruitRepository.getRecruitByLocationAndDepartment(condition);
-//    }
-//    @Override
-//    @Transactional
-//    public Member join(MemberJoinPostReq memberRegisterInfo) {
-//
-//        String email = memberRegisterInfo.getEmail();
-//
-//        Optional<Member> findEmail = memberRepository.findByEmail(email);
-//
-//        if (findEmail.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-//
-//        Member member = Member.from(memberRegisterInfo);
-//
-//        memberRepository.save(member);
-//        return member;
-//    }
-
-
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public Member getMemberByEmail(String email) {
-//        Optional<Member> findMember = memberRepository.findByEmail(email);
-//
-//        if (findMember.isPresent()) return findMember.get();
-//
-//        throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
-//    }
-
-//    @Override
-//    @Transactional(readOnly = true)
-//    public void emailCheck(String email) {
-//        Optional<Member> findMember = memberRepository.findByEmail(email);
-//
-//        if (findMember.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-//    }
 }

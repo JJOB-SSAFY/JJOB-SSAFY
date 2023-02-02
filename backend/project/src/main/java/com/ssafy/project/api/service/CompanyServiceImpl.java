@@ -42,7 +42,7 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyResponseDto updateCompany(Long companyId, CompanyRequestDto requestDto){
         Optional<Company> company = companyRepository.findById(companyId);
 
-        if(!company.isPresent())    throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         company.get().updateCompany(requestDto);
 
@@ -55,7 +55,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     public void deleteCompany(Long companyId){
         Optional<Company> company = companyRepository.findById(companyId);
-        if(!company.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
         reviewRepository.deleteAllByCompanyId(companyId);
         companyRepository.delete(company.get());
     }
