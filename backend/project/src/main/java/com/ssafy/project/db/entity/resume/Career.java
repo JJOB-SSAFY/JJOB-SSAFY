@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.CareerRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +29,18 @@ public class Career {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
     private Resume resume;
+
+    public Career(Resume resume, CareerRequestDto requestDto){
+        this.resume = resume;
+        this.companyName = requestDto.getCompanyName();
+        this.careerPeriod = requestDto.getCareerPeriod();
+        this.careerContent = requestDto.getCareerContent();
+    }
+
+    public void updateCareer(CareerRequestDto requestDto){
+        this.companyName = requestDto.getCompanyName();
+        this.careerPeriod = requestDto.getCareerPeriod();
+        this.careerContent = requestDto.getCareerContent();
+    }
 
 }

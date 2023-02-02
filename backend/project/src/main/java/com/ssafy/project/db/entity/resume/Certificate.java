@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.CertificateRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +29,19 @@ public class Certificate {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
     private Resume resume;
+
+    public Certificate(Resume resume, CertificateRequestDto requestDto){
+        this.resume = resume;
+        this.certificateName = requestDto.getCertificateName();
+        this.certificateDate = requestDto.getCertificateDate();
+        this.certificateInstitution = requestDto.getCertificateInstitution();
+
+    }
+
+    public void updateCertificate(CertificateRequestDto requestDto){
+        this.certificateName = requestDto.getCertificateName();
+        this.certificateDate = requestDto.getCertificateDate();
+        this.certificateInstitution = requestDto.getCertificateInstitution();
+    }
 
 }

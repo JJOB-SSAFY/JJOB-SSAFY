@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.ProjectExpRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,5 +47,30 @@ public class ProjectExp {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
     private Resume resume;
+
+    public ProjectExp(Resume resume, ProjectExpRequestDto requestDto){
+        this.resume = resume;
+        this.projectName = requestDto.getProjectName();
+        this.projectPeriod = requestDto.getProjectPeriod();
+        this.memberCnt = requestDto.getMemberCnt();
+        this.summary = requestDto.getSummary();
+        this.techEnv = requestDto.getTechEnv();
+        this.position = requestDto.getPosition();
+        this.function = requestDto.getFunction();
+        this.result = requestDto.getResult();
+        this.link = requestDto.getLink();
+    }
+
+    public void updateProjectExp(ProjectExpRequestDto requestDto) {
+        this.projectName = requestDto.getProjectName();
+        this.projectPeriod = requestDto.getProjectPeriod();
+        this.memberCnt = requestDto.getMemberCnt();
+        this.summary = requestDto.getSummary();
+        this.techEnv = requestDto.getTechEnv();
+        this.position = requestDto.getPosition();
+        this.function = requestDto.getFunction();
+        this.result = requestDto.getResult();
+        this.link = requestDto.getLink();
+    }
 
 }

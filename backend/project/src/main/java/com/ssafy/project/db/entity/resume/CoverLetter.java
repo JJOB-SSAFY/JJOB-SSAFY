@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.CoverLetterRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,5 +26,16 @@ public class CoverLetter {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
     private Resume resume;
+
+    public CoverLetter(Resume resume, CoverLetterRequestDto requestDto){
+        this.resume = resume;
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+    }
+
+    public void updateCoverLetter(CoverLetterRequestDto requestDto){
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+    }
 
 }

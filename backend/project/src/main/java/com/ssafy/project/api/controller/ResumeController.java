@@ -3,10 +3,10 @@ package com.ssafy.project.api.controller;
 
 import com.ssafy.project.api.request.resume.ResumeRequestDto;
 import com.ssafy.project.api.response.BaseResponseBody;
-import com.ssafy.project.api.response.ResumeListResponseDto;
+import com.ssafy.project.api.response.resume.ResumeListResponseDto;
+import com.ssafy.project.api.response.resume.ResumeResponseDto;
 import com.ssafy.project.api.service.ResumeService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
-import com.ssafy.project.db.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,15 +24,39 @@ public class ResumeController{
 
     @GetMapping
     ResponseEntity<List<ResumeListResponseDto>> getResumeList(@AuthenticationPrincipal SsafyUserDetails userDetails){
-
         return new ResponseEntity<>(resumeService.getResumeList(userDetails.getMember().getEmail()), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails,
+    @PostMapping("/{company_id}")
+    public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable Long company_id,
                                                          @RequestBody ResumeRequestDto requestDto) {
-        System.out.println(requestDto.getName());
-        System.out.println(requestDto.getEducationDtoList().get(0).getEducationName());
-        return null;
+        resumeService.createResume(requestDto, userDetails.getMember().getId(), company_id);
+
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
+
+    //   @PatchMapping("{review_id}")
+    //    public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,  @RequestBody ReviewRequestDto requestDto){
+    //        return new ResponseEntity<>(reviewService.updateReview(review_id, requestDto), HttpStatus.OK);
+    //    }
+    @PatchMapping("/{resume_id}")
+    ResponseEntity<? extends BaseResponseBody> updateResume(@PathVariable Long resume_id, @RequestBody ResumeRequestDto requestDto){
+        resumeService.updateResume(requestDto, resume_id);
+        return new ResponseEntity(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{resume_id}")
+    ResponseEntity<? extends BaseResponseBody> deleteResume(@PathVariable Long resume_id){
+        resumeService.deleteResume(resume_id);
+        return new ResponseEntity(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{resume_id}")
+    ResponseEntity<ResumeResponseDto> getResume(@PathVariable Long resume_id) {
+        return new ResponseEntity<>(resumeService.getResume(resume_id), HttpStatus.OK);
+
+    }
+
+
+
 }

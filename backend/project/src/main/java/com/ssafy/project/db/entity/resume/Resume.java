@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.ResumeRequestDto;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
 import lombok.*;
@@ -45,5 +46,18 @@ public class Resume {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public void updateResume(ResumeRequestDto requestDto){
+        this.resumeTitle = requestDto.getResumeTitle();
+        this.subTitle = requestDto.getSubTitle();
+        this.introduce = requestDto.getIntroduce();
+        this.name = requestDto.getName();
+        this.blog = requestDto.getBlog();
+        this.phone = requestDto.getPhone();
+        this.portfolio = requestDto.getPortfolio();
+        this.email = requestDto.getEmail();
+        this.github = requestDto.getGithub();
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity.resume;
 
+import com.ssafy.project.api.request.resume.UniversityRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +29,18 @@ public class University {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resume_id")
     private Resume resume;
+
+    public University(Resume resume, UniversityRequestDto requestDto) {
+        this.resume = resume;
+        this.universityPeriod = requestDto.getUniversityPeriod();
+        this.universityName = requestDto.getUniversityName();
+        this.major = requestDto.getMajor();
+    }
+
+    public void updateUniversity(UniversityRequestDto requestDto) {
+        this.universityPeriod = requestDto.getUniversityPeriod();
+        this.universityName = requestDto.getUniversityName();
+        this.major = requestDto.getMajor();
+    }
 
 }
