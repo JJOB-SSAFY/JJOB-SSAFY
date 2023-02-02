@@ -6,7 +6,7 @@
 			<h3 class="font-LINE-Bd">취업할래? <br />JJOP SSAFY</h3>
 			<div class="illustration-holder">
 				<img
-					src="../../assets/images/assets/ils_08.svg"
+					src="@/assets/images/logo-removebg.png"
 					alt=""
 					class="illustration"
 				/>
@@ -17,32 +17,23 @@
 		<div class="form-wrapper">
 			<div class="d-flex justify-content-between">
 				<div class="logo">
-					<router-link to="/">
-						<img src="../../assets/images/logo/deski_01.svg" alt="" />
-					</router-link>
+					<router-link to="/"> </router-link>
 				</div>
 				<router-link to="/" class="font-rubik go-back-button"
 					>홈으로</router-link
 				>
 			</div>
-			<form
-				@submit.prevent="clickLogin"
-				:model="loginState.form"
-				:rules="loginState.rules"
-				ref="loginForm"
-				class="user-data-form mt-80 md-mt-40"
-			>
+			<div class="user-data-form mt-80 md-mt-40">
 				<p class="header-info pt-30 pb-50"></p>
-
 				<div class="row">
 					<div class="col-12">
 						<div class="input-group-meta mb-80 sm-mb-70">
 							<label>이메일</label>
 							<input
-								v-model.lazy="loginState.form.email"
+								v-model.lazy.trim="loginState.form.email"
 								required
 								type="email"
-								placeholder="email01234@kakao.com"
+								placeholder="email@naver.com"
 								ref="email"
 							/>
 						</div>
@@ -51,7 +42,7 @@
 						<div class="input-group-meta mb-15">
 							<label class="font-LINE-Bd">비밀번호</label>
 							<input
-								v-model.lazy="loginState.form.password"
+								v-model.lazy.trim="loginState.form.password"
 								required
 								:type="hidePassword ? 'text' : 'password'"
 								placeholder="Enter Password"
@@ -76,23 +67,24 @@
 								<input type="checkbox" id="remember" />
 								<label for="remember">로그인 기억하기</label>
 							</div>
-							<a href="#">비밀번호를 잊어버리셨나요?</a>
+							<a href="#">비밀번호를 잊어버리셨나요? </a>
 						</div>
 						<!-- /.agreement-checkbox -->
 					</div>
 					<div class="col-12">
 						<button
 							class="theme-btn-one mt-50 mb-50 font-LINE-Bd"
-							@click="clickLogin"
+							@click="Login"
+							@keyup.enter="Login"
 						>
 							로그인
 						</button>
 					</div>
 					<div class="col-12">
-						<p class="text-center font-rubik copyright-text"></p>
+						<p class="text-center font-LINE-Rg copyright-text"></p>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
 		<!-- /.form-wrapper -->
 	</div>
@@ -100,8 +92,9 @@
 
 <script>
 import { ref, reactive } from 'vue';
+import { computed, watch } from 'vue';
 import { useStore } from 'vuex';
-
+import { useRouter } from 'vue-router';
 export default {
 	name: 'loginView',
 	setup() {
@@ -110,9 +103,11 @@ export default {
 		const handleHidePassword = () => {
 			hidePassword.value = !hidePassword.value;
 		};
-		const store = useStore();
 
-		const loginForm = ref(null);
+		const store = useStore();
+		const router = useRouter();
+
+		const token = ref('');
 
 		const loginState = reactive({
 			form: {
@@ -120,15 +115,17 @@ export default {
 				password: '',
 			},
 		});
+		const email = ref(null);
+		const password = ref(null);
 
-		const clickLogin = () => {
+		const Login = () => {
 			if (!loginState.form.email) {
 				alert('아이디를 입력해주세요');
-				this.$ref.email.focus();
+				email.value.focus();
 				return;
 			} else if (!loginState.form.password) {
-				alert('아이디를 입력해주세요');
-				this.$ref.password.focus();
+				alert('비밀번호를 입력해주세요');
+				password.value.focus();
 				return;
 			}
 
@@ -136,17 +133,22 @@ export default {
 				email: loginState.form.email,
 				password: loginState.form.password,
 			};
-
 			store.dispatch('auth/login', loginInfo);
 
-			console.log(store.getters['auth/getAccessToken']);
+			console.log(store.getters['auth/isAuthenticated']);
 		};
+		watch(
+			() => store.getters['auth/isAuthenticated'],
+			function () {
+				console.log('watch ');
+			},
+		);
+
 		return {
 			hidePassword,
 			loginState,
-			loginForm,
 			handleHidePassword,
-			clickLogin,
+			Login,
 		};
 	},
 };

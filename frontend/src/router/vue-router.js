@@ -28,36 +28,44 @@ export default createRouter({
 			redirect: '/home',
 			children: [
 				{
+					name: 'home',
 					path: '/home',
 					component: homepageView,
 				},
 				{
+					name: 'interview',
 					path: '/interview',
 					component: interviewView,
 				},
 				{
+					name: 'infoCards',
 					path: '/infoCards',
 					component: infoCardsView,
 				},
 				{
+					name: 'present',
 					path: '/present',
 					component: presentationView,
 				},
 				{
+					name: 'recruit',
 					path: '/recruit',
 					component: recruitView,
 				},
 				{
+					name: 'review',
 					path: '/review',
 					component: reviewView,
 				},
 				{
+					name: 'myInfo',
 					path: '/myInfo',
 					component: myInfoView,
 				},
 			],
 		},
 		{
+			name: 'register',
 			path: '/register',
 			component: registerView,
 		},

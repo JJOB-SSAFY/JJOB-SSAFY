@@ -1,7 +1,8 @@
 import http from '@/api/http';
 import jwt from '@/common/jwt';
+import vueRouter from '../router/vue-router';
 
-const auth = {
+export const auth = {
 	namespaced: true,
 	state: {
 		user: null,
@@ -24,13 +25,16 @@ const auth = {
 		},
 	},
 	actions: {
-		login({ commit, dispatch }, payload = {}) {
+		login({ commit }, payload = {}) {
 			http
 				.post('/member/login', payload)
-				.then(({ data }) => {
-					const token = data.accessToken;
-					commit('SET_TOKEN', 'Bearer ' + token);
-					dispatch('getInfo');
+				.then(function (response) {
+					console.log(response);
+					if (response.status == '200') {
+						const token = response.data.accessToken;
+						commit('SET_TOKEN', token);
+						vueRouter.push({ name: 'home' });
+					}
 				})
 				.catch(err => {
 					commit('ERROR_HANDLE', err);
@@ -74,5 +78,3 @@ const auth = {
 		},
 	},
 };
-
-export default auth;

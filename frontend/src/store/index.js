@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 import createPersistedState from 'vuex-persistedstate';
 
-import auth from './auth';
+import { auth } from '@/store/auth';
 
 export default createStore({
 	modules: { auth },
