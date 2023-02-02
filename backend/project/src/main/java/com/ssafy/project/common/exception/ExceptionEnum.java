@@ -18,8 +18,8 @@ public enum ExceptionEnum {
     PASSWORD_NOT_MATCHED_EXCEPTION(HttpStatus.FORBIDDEN, "M003", "비밀번호가 일치하지 않습니다."),
     COMPANY_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND,"404", "등록되지 않은 회사입니다."),
     REVIEW_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 리뷰입니다."),
-    RECRUIT_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 공고입니다.");
-
+    RECRUIT_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 공고입니다."),
+    RESUME_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 이력서입니다");
     private final HttpStatus status;
     private final String code;
     private String message;
