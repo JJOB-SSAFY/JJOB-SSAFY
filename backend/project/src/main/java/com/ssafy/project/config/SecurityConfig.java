@@ -25,8 +25,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final SsafyUserDetailService ssafyUserDetailService;
 
-//    private final MemberService memberService;
-
     private final SsafyOAuth2UserDetailService ssafyOAuth2UserDetailService;
 
     private final SsafyLoginSuccessHandler successHandler;
@@ -65,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/member/**").permitAll()
                 .antMatchers("/user/login").permitAll()
                 .antMatchers("/company").hasRole("ADMIN")
-//                .anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
+//                .anyRequest().permitAll()
                 .and().cors()
                 .and()
                 .oauth2Login().userInfoEndpoint().userService(ssafyOAuth2UserDetailService).and().successHandler(successHandler);

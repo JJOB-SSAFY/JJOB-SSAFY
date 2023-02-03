@@ -31,32 +31,24 @@ public class ResumeController{
     public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable Long company_id,
                                                          @RequestBody ResumeRequestDto requestDto) {
         resumeService.createResume(requestDto, userDetails.getMember().getId(), company_id);
-
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
-    //   @PatchMapping("{review_id}")
-    //    public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,  @RequestBody ReviewRequestDto requestDto){
-    //        return new ResponseEntity<>(reviewService.updateReview(review_id, requestDto), HttpStatus.OK);
-    //    }
     @PatchMapping("/{resume_id}")
-    ResponseEntity<? extends BaseResponseBody> updateResume(@PathVariable Long resume_id, @RequestBody ResumeRequestDto requestDto){
+    ResponseEntity<BaseResponseBody> updateResume(@PathVariable Long resume_id, @RequestBody ResumeRequestDto requestDto){
         resumeService.updateResume(requestDto, resume_id);
-        return new ResponseEntity(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{resume_id}")
-    ResponseEntity<? extends BaseResponseBody> deleteResume(@PathVariable Long resume_id){
+    ResponseEntity<BaseResponseBody> deleteResume(@PathVariable Long resume_id){
         resumeService.deleteResume(resume_id);
-        return new ResponseEntity(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
     @GetMapping("/{resume_id}")
     ResponseEntity<ResumeResponseDto> getResume(@PathVariable Long resume_id) {
         return new ResponseEntity<>(resumeService.getResume(resume_id), HttpStatus.OK);
-
     }
-
-
 
 }

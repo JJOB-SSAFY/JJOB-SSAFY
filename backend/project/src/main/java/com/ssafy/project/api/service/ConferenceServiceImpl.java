@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-@Service
+@Service("conferenceService")
 @RequiredArgsConstructor
 @Slf4j
 public class ConferenceServiceImpl implements ConferenceService {
@@ -36,7 +36,8 @@ public class ConferenceServiceImpl implements ConferenceService {
     public void createConference(ConferenceRequestDto requestDto, Long id) {
 
         Optional<Member> member = memberRepository.findById(id);
-        if(!member.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+
+        if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
 
         Conference conference = Conference.of(requestDto, member.get());
 
@@ -54,7 +55,7 @@ public class ConferenceServiceImpl implements ConferenceService {
             String email = stringStringMap.get("email");
             Optional<Member> memberEmail = memberRepository.findByEmail(email);
 
-            if (!memberEmail.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+            if (memberEmail.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
 
             MemberConference memberConference = MemberConference.builder().
                     member(memberEmail.get()).
@@ -94,18 +95,18 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Override
     @Transactional
     public void updateConference(ConferenceRequestDto requestDto, Long id) {
-        Optional<Conference> conference = conferenceRepository.findById(id);
-        if(conference.isEmpty()){ // 오류 수정
-            throw new ApiException(ExceptionEnum.CONFERENCE_NOT_EXIST_EXCEPTION);
-        }
-            Conference conferenceUpdate = Conference.builder().
-                conferenceTitle(requestDto.getConferenceTitle()).
-                conferenceCategory(ConferenceEnum.valueOf(requestDto.getConferenceCategory())).
-                callStartTime(requestDto.getCallStartTime()).
-                callEndTime((requestDto.getCallEndTime())).
-                build();
-
-            conference.get().changeConference(conferenceUpdate);
+//        Optional<Conference> conference = conferenceRepository.findById(id);
+//        if(conference.isEmpty()){ // 오류 수정
+//            throw new ApiException(ExceptionEnum.CONFERENCE_NOT_EXIST_EXCEPTION);
+//        }
+//            Conference conferenceUpdate = Conference.builder().
+//                conferenceTitle(requestDto.getConferenceTitle()).
+//                conferenceCategory(ConferenceEnum.valueOf(requestDto.getConferenceCategory())).
+//                callStartTime(requestDto.getCallStartTime()).
+//                callEndTime((requestDto.getCallEndTime())).
+//                build();
+//
+//            conference.get().changeConference(conferenceUpdate);
 
     }
 
