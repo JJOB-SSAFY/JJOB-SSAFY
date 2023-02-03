@@ -61,7 +61,7 @@ export default {
 			},
 			{
 				name: '면접',
-				href: '/openvidu/11/11',
+				href: '/interview',
 			},
 			{
 				name: '지원자정보',
