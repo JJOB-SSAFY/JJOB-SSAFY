@@ -32,6 +32,16 @@ public class Company {
     @Column(nullable = false)
     private String companyDesc;
 
+    public static Company from(CompanyRequestDto requestDto) {
+        return Company.builder()
+                .companyName(requestDto.getCompanyName())
+                .companyUrl(requestDto.getCompanyUrl())
+                .companyAddress(requestDto.getCompanyAddress())
+                .employeeCnt(requestDto.getEmployeeCnt())
+                .companyDesc(requestDto.getCompanyDesc())
+                .build();
+    }
+
     public void updateCompany(CompanyRequestDto companyRequestDto){
         this.companyName = companyRequestDto.getCompanyName();
         this.companyUrl = companyRequestDto.getCompanyUrl();

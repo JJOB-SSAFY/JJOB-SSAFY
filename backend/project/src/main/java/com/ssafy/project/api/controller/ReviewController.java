@@ -29,10 +29,11 @@ public class ReviewController {
     }
 
     @PostMapping("/{company_id}")
-    public ResponseEntity<? extends BaseResponseBody> writeReview(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable String company_id, @RequestBody ReviewRequestDto requestDto){
-        Long companyId = Long.parseLong(company_id);
+    public ResponseEntity<? extends BaseResponseBody> writeReview(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                                  @PathVariable Long company_id,
+                                                                  @RequestBody ReviewRequestDto requestDto){
 
-        reviewService.writeReview(requestDto, userDetails.getMember().getId(), companyId);
+        reviewService.writeReview(requestDto, userDetails.getMember().getId(), company_id);
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
@@ -43,12 +44,15 @@ public class ReviewController {
     }
 
     @PatchMapping("{review_id}")
-    public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,  @RequestBody ReviewRequestDto requestDto){
+    public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable Long review_id,
+                                                          @RequestBody ReviewRequestDto requestDto){
+
         return new ResponseEntity<>(reviewService.updateReview(review_id, requestDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{review_id}")
-    public ResponseEntity<? extends BaseResponseBody> deleteReview(@PathVariable Long review_id) {
+    public ResponseEntity<BaseResponseBody> deleteReview(@PathVariable Long review_id) {
+
         reviewService.deleteReview(review_id);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }

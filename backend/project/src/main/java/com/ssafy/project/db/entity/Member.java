@@ -43,14 +43,6 @@ public class Member {
     @Builder.Default
     private Set<MemberRoleEnum> roleSet = new HashSet<>();
 
-    public void addMemberRole(MemberRoleEnum memberRole) {
-        roleSet.add(memberRole);
-    }
-
-    public void changePassword(String newPassword) {
-        this.password = newPassword;
-    }
-
     public static Member from(MemberJoinPostReq memberInfo) {
         return Member.builder()
                 .email(memberInfo.getEmail())
@@ -59,6 +51,15 @@ public class Member {
                 .phone(memberInfo.getPhone())
                 .build();
     }
+
+    public void addMemberRole(MemberRoleEnum memberRole) {
+        roleSet.add(memberRole);
+    }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
     public void createCard(Card newCard){
         this.card= newCard;
     }

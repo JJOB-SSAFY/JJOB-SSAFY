@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Service
+@Service("companyService")
 @RequiredArgsConstructor
 @Slf4j
 public class CompanyServiceImpl implements CompanyService {
@@ -26,14 +26,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional
     public void createCompany(CompanyRequestDto requestDto) {
-        Company company = Company.builder()
-                .companyName(requestDto.getCompanyName())
-                .companyUrl(requestDto.getCompanyUrl())
-                .companyAddress(requestDto.getCompanyAddress())
-                .employeeCnt(requestDto.getEmployeeCnt())
-                .companyDesc(requestDto.getCompanyDesc())
-                .build();
-
+        Company company = Company.from(requestDto);
         companyRepository.save(company);
     }
 
@@ -42,20 +35,18 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyResponseDto updateCompany(Long companyId, CompanyRequestDto requestDto){
         Optional<Company> company = companyRepository.findById(companyId);
 
-        if(!company.isPresent())    throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         company.get().updateCompany(requestDto);
 
-        CompanyResponseDto dto = CompanyResponseDto.of(company.get());
-
-        return dto;
+        return CompanyResponseDto.from(company.get());
     }
 
     @Override
     @Transactional
     public void deleteCompany(Long companyId){
         Optional<Company> company = companyRepository.findById(companyId);
-        if(!company.isPresent()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
         reviewRepository.deleteAllByCompanyId(companyId);
         companyRepository.delete(company.get());
     }

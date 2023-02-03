@@ -37,6 +37,21 @@ public class Card {
     private String skills;
 
     private String preferredJob;
+
+    public static Card of(Member member, MyInfoRequestDto requestDto) {
+        return Card.builder()
+                .imageUrl(requestDto.getImageUrl())
+                .name(member.getName())
+                .email(member.getEmail())
+                .phone(requestDto.getPhone())
+                .github(requestDto.getGithub())
+                .blog(requestDto.getBlog())
+                .introduce(requestDto.getIntroduce())
+                .skills(requestDto.getSkills())
+                .preferredJob(requestDto.getPreferredJob())
+                .build();
+    }
+
     public void changeInfo(MyInfoRequestDto newInfo) {
         this.phone = newInfo.getPhone();
         this.blog = newInfo.getBlog();
@@ -45,17 +60,6 @@ public class Card {
         this.preferredJob = newInfo.getPreferredJob();
         this.introduce = newInfo.getIntroduce();
         this.imageUrl = newInfo.getImageUrl();
-    }
-    public void createInfo(Card newCard){
-        this.phone = newCard.getPhone();
-        this.blog = newCard.getBlog();
-        this.github = newCard.getGithub();
-        this.skills = newCard.getSkills();
-        this.preferredJob = newCard.getPreferredJob();
-        this.introduce = newCard.getIntroduce();
-        this.imageUrl = newCard.getImageUrl();
-        this.name=newCard.getName();
-        this.email=newCard.getEmail();
     }
 
 }
