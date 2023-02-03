@@ -4,13 +4,11 @@ import registerView from '../views/register/registerView.vue';
 import mainView from '@/views/main/mainView.vue';
 
 import homepageView from '@/views/main/homepage/homepageView.vue';
-import interviewView from '@/views/main/interview/interviewView.vue';
 import infoCardsView from '@/views/main/infoCards/infoCardsView.vue';
 import presentationView from '@/views/main/presentation/presentationView.vue';
 import recruitView from '@/views/main/recruit/recruitView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
-
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 
 export default createRouter({
@@ -33,11 +31,6 @@ export default createRouter({
 					name: 'home',
 					path: '/home',
 					component: homepageView,
-				},
-				{
-					name: 'interview',
-					path: '/interview',
-					component: interviewView,
 				},
 				{
 					name: 'infoCards',
@@ -65,6 +58,7 @@ export default createRouter({
 					component: myInfoView,
 				},
 				{
+					name: 'openVidu',
 					path: '/openvidu/:participant/:session',
 					component: openviduView,
 				},

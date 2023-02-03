@@ -1,80 +1,51 @@
 <template>
-	<div
-		:class="`theme-main-menu sticky-menu theme-menu-five ${
-			isSticky ? 'fixed' : ''
-		}`"
-	>
-		<div class="d-flex align-items-center justify-content-center">
-			<div class="logo">
-				<router-link to="/">
-					<img src="@/assets/images/logo.png" alt="" height="47" width="80" />
-				</router-link>
-			</div>
-
-			<nav id="mega-menu-holder" class="navbar navbar-expand-lg">
-				<div class="nav-container">
-					<button
-						class="navbar-toggler"
-						data-bs-toggle="collapse"
-						data-bs-target="#collapsibleNavbar"
-						:class="menuActive ? 'navbar-toggler open' : 'navbar-toggler'"
-						@click="buttonClick"
-					>
-						<span></span>
-					</button>
-					<div
-						:class="
-							menuActive
-								? 'navbar-collapse collapse ss'
-								: 'navbar-collapse collapse'
-						"
-						id="collapsibleNavbar"
-					>
-						<div class="d-lg-flex justify-content-between align-items-center">
-							<ul
-								class="navbar-nav main-side-nav font-LINE-Bd"
-								id="one-page-nav"
-							>
-								<li v-for="nav in navigations" :key="nav.name" class="nav-item">
-									<router-link :to="nav.href" class="nav-link">
-										{{ nav.name }}
-									</router-link>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
-			<div class="right-widget">
-				<v-if></v-if>
-				<ul class="d-flex align-items-center">
-					<li>
-						<router-link
-							to="/login"
-							class="signIn-action d-flex align-items-center"
-						>
-							<img src="@/assets/images/icon/lock.svg" alt="" />
-							<span>로그인 </span>
-						</router-link>
-					</li>
-					<li>
-						<router-link to="/register" class="signup-btn"
-							><span>회원가입</span></router-link
-						>
-					</li>
-				</ul>
-				<v-else></v-else>
-			</div>
+	<nav class="navbar">
+		<div class="navbar-logo">
+			<router-link to="/">
+				<img
+					src="@/assets/images/logo/logo-removebg.png"
+					alt=""
+					height="47"
+					width="80"
+				/>
+			</router-link>
 		</div>
-	</div>
+		<ul class="navbar-menu" ref="menu">
+			<li v-for="nav in navigations" :key="nav.name" class="nav-item">
+				<router-link :to="nav.href" class="nav-link font-LINE-Bd">
+					{{ nav.name }}
+				</router-link>
+			</li>
+		</ul>
+		<ul class="navbar-icons" ref="icons">
+			<li>
+				<router-link to="/login" class="navbar-icon">
+					<fa-icon icon="fa-solid fa-right-to-bracket" />
+					<span> 로그인 </span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="/register" class="navbar-icon">
+					<fa-icon icon="fa-solid fa-user-plus" /><span>
+						회원가입</span
+					></router-link
+				>
+			</li>
+		</ul>
+
+		<a @click="menuClick" class="navbar-toggleBtn">
+			<fa-icon icon="fa-solid fa-bars" />
+		</a>
+	</nav>
 </template>
 
 <script>
 import { ref } from 'vue';
+
 export default {
 	setup() {
-		const isSticky = ref(false);
-		const menuActive = ref(false);
+		const menuActive = ref(null);
+
 		const navigations = [
 			{
 				name: '채용공고',
@@ -90,25 +61,20 @@ export default {
 			},
 			{
 				name: '면접',
-				href: '/interview',
+				href: '/openvidu/11/11',
 			},
 			{
 				name: '지원자정보',
 				href: '/infoCards',
 			},
 		];
-		const handleSticky = () => {
-			if (window.scrollY > 80) {
-				this.isSticky = true;
-			} else {
-				this.isSticky = false;
-			}
-		};
-		const buttonClick = () => {
+
+		const menuClick = () => {
 			menuActive.value = !menuActive.value;
 		};
-
-		return { navigations, isSticky, menuActive, buttonClick, handleSticky };
+		return { navigations, menuActive, menuClick };
 	},
 };
 </script>
+
+<style lang="scss" scoped></style>
