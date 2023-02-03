@@ -10,6 +10,7 @@ import recruitView from '@/views/main/recruit/recruitView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
+import interviewView from '@/views/main/interview/interviewView.vue';
 
 export default createRouter({
 	history: createWebHistory(),
@@ -56,6 +57,11 @@ export default createRouter({
 					name: 'myInfo',
 					path: '/myInfo',
 					component: myInfoView,
+				},
+				{
+					name: 'interview',
+					path: '/interview',
+					component: interviewView,
 				},
 				{
 					name: 'openVidu',
