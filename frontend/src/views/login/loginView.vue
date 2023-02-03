@@ -4,7 +4,7 @@
 		<div class="login-div">
 			<div class="row">
 				<div class="col-12">
-					<div class="input-group mb-80">
+					<div class="input-group mb-80 sm-mb-70">
 						<label>이메일</label>
 						<input
 							v-model.lazy.trim="loginState.form.email"
@@ -16,12 +16,12 @@
 					</div>
 				</div>
 				<div class="col-12">
-					<div class="input-group">
+					<div class="input-group mb-15">
 						<label>비밀번호</label>
 						<input
-							v-model.lazy.trim="loginState.form.email"
+							v-model.lazy.trim="loginState.form.password"
 							required
-							type="password"
+							:type="hidePassword ? 'text' : 'password'"
 							placeholder="비밀번호를 입력하세요"
 							ref="password"
 						/>
@@ -34,6 +34,24 @@
 							</span>
 						</span>
 					</div>
+				</div>
+				<div class="col-12">
+					<div class="agreement-checkbox">
+						<div>
+							<input type="checkbox" id="remember" />
+							<label for="remember">로그인 기억하기</label>
+						</div>
+						<a href="#">비밀번호를 잊어버리셨나요? </a>
+					</div>
+				</div>
+				<div class="col-12">
+					<button
+						class="login-btn mt-50 mb-50 font-LINE-Bd"
+						@click="Login"
+						@keyup.enter="Login"
+					>
+						로그인
+					</button>
 				</div>
 			</div>
 		</div>
@@ -55,8 +73,8 @@ export default {
 		};
 
 		const store = useStore();
-		const router = useRouter();
 
+		const router = useRouter();
 		const token = ref('');
 
 		const loginState = reactive({
@@ -85,7 +103,7 @@ export default {
 			};
 			store.dispatch('auth/login', loginInfo);
 
-			console.log(store.getters['auth/isAuthenticated']);
+			console.log('asbasd' + store.getters['auth/isAuthenticated']);
 		};
 		watch(
 			() => store.getters['auth/isAuthenticated'],

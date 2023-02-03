@@ -17,7 +17,8 @@
 				</router-link>
 			</li>
 		</ul>
-		<ul class="navbar-icons" ref="icons">
+
+		<ul v-if="!token" class="navbar-icons" ref="icons">
 			<li>
 				<router-link to="/login" class="navbar-icon">
 					<fa-icon icon="fa-solid fa-right-to-bracket" />
@@ -32,6 +33,20 @@
 				>
 			</li>
 		</ul>
+		<ul v-else class="navbar-icons" ref="icons">
+			<li>
+				<router-link to="/myInfo" class="navbar-icon">
+					<fa-icon icon="fas fa-solid fa-user " />
+					<span> 마이페이지 </span>
+				</router-link>
+			</li>
+			<li>
+				<router-link to="/register" class="navbar-icon">
+					<fa-icon icon="fas fa-solid fa-right-from-bracket" />
+					<span>로그아웃</span>
+				</router-link>
+			</li>
+		</ul>
 
 		<a @click="menuClick" class="navbar-toggleBtn">
 			<fa-icon icon="fa-solid fa-bars" />
@@ -41,11 +56,14 @@
 
 <script>
 import { ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
 	setup() {
 		const menuActive = ref(null);
+		const store = useStore();
 
+		const token = store.getters['auth/isAuthenticated'];
 		const navigations = [
 			{
 				name: '채용공고',
@@ -72,7 +90,10 @@ export default {
 		const menuClick = () => {
 			menuActive.value = !menuActive.value;
 		};
-		return { navigations, menuActive, menuClick };
+
+		const logout = () => {};
+
+		return { navigations, menuActive, menuClick, token };
 	},
 };
 </script>
