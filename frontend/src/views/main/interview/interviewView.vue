@@ -1,7 +1,11 @@
 <template>
 	<ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto">
-		<li class="infinite-list-item" v-for="i in state.count" :key="i">
-			<interview />
+		<li
+			class="infinite-list-item"
+			v-for="info in interviewList"
+			:key="info.conferenceId"
+		>
+			<interview :info="info" />
 		</li>
 	</ul>
 </template>
@@ -19,11 +23,12 @@ export default {
 
 	setup() {
 		const state = reactive({
-			count: 12,
+			// count: 12,
+			interviewList: null,
 		});
 
 		const load = function () {
-			state.count += 4;
+			// state.count += 4;
 		};
 
 		axios({
@@ -31,10 +36,11 @@ export default {
 			url: 'http://localhost:8080/conference/list/INTERVIEW',
 			headers: {
 				Authorization:
-					'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaXNzIjoic3NhZnkuY29tIiwiZXhwIjoxNjc2NzA3NDU0LCJpYXQiOjE2NzU0MTE0NTR9.URHNiJaHd85kTneItnT9JfrQSOj7NryfzNRgeAfW26rD6Ok7VKYFfM4rq849CsXNwGOJaiw1n14wQeZccuv7ew',
+					'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaXNzIjoic3NhZnkuY29tIiwiZXhwIjoxNjc2NzA4NzY4LCJpYXQiOjE2NzU0MTI3Njh9.mobOSKc_lKBNKSKKdkgqjdHQiC8DgpQIOkg0xu3iRjmsDixvrh4Jj32jOFFskcQjuMwKs40XD75ko6hvXm8n1g',
 			},
 		}).then(res => {
-			console.log(res);
+			state.interviewList = res.data;
+			console.log(state.interviewList);
 		});
 
 		return { state, load };
