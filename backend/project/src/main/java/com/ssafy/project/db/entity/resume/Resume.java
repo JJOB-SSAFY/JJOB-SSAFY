@@ -47,6 +47,22 @@ public class Resume {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    public static Resume of(Member member, Company company, ResumeRequestDto requestDto) {
+        return Resume.builder()
+                .member(member)
+                .company(company)
+                .resumeTitle(requestDto.getResumeTitle())
+                .subTitle(requestDto.getSubTitle())
+                .introduce(requestDto.getIntroduce())
+                .name(requestDto.getName())
+                .blog(requestDto.getBlog())
+                .phone(requestDto.getPhone())
+                .portfolio(requestDto.getPortfolio())
+                .email(requestDto.getEmail())
+                .github(requestDto.getGithub())
+                .build();
+    }
+
     public void updateResume(ResumeRequestDto requestDto){
         this.resumeTitle = requestDto.getResumeTitle();
         this.subTitle = requestDto.getSubTitle();
@@ -57,7 +73,6 @@ public class Resume {
         this.portfolio = requestDto.getPortfolio();
         this.email = requestDto.getEmail();
         this.github = requestDto.getGithub();
-
     }
 
 }

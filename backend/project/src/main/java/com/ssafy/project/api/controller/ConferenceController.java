@@ -2,6 +2,7 @@ package com.ssafy.project.api.controller;
 
 
 import com.ssafy.project.api.request.ConferenceRequestDto;
+import com.ssafy.project.api.response.BaseResponseBody;
 import com.ssafy.project.api.response.ConferenceResponseDto;
 import com.ssafy.project.api.service.ConferenceService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
@@ -23,38 +24,32 @@ public class ConferenceController {
     private final ConferenceService conferenceService;
 
     @PostMapping("")
-    public ResponseEntity<?> CreateConference(@AuthenticationPrincipal SsafyUserDetails userDetails,
-                                              @RequestBody ConferenceRequestDto conReq) {
-
+    public ResponseEntity<BaseResponseBody> CreateConference(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                             @RequestBody ConferenceRequestDto conReq) {
         logger.info(conReq.getCallEndTime().toString());
         conferenceService.createConference(conReq, userDetails.getMember().getId());
-
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
     @GetMapping("/list/{type}")
     public ResponseEntity<?> getConferenceList(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                @PathVariable String type) {
-
         List<ConferenceResponseDto> list = conferenceService.getConferenceList(userDetails.getMember().getId(),type);
-
-        return new ResponseEntity<List<ConferenceResponseDto>>(list,HttpStatus.OK);
+        return new ResponseEntity<List<ConferenceResponseDto>>(list, HttpStatus.OK);
     }
 
     @DeleteMapping("/{conferenceId}")
-    public ResponseEntity<?> deleteConference(@AuthenticationPrincipal SsafyUserDetails userDetails,
-                                              @PathVariable Long conferenceId){
-
+    public ResponseEntity<BaseResponseBody> deleteConference(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                             @PathVariable Long conferenceId){
         conferenceService.deleteConference(userDetails.getMember().getId(), conferenceId);
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
     @PatchMapping("/{conferenceId}")
-    public ResponseEntity<?> updateConference(@PathVariable Long conferenceId,
-                                              @RequestBody ConferenceRequestDto conReq){
-
+    public ResponseEntity<BaseResponseBody> updateConference(@PathVariable Long conferenceId,
+                                                             @RequestBody ConferenceRequestDto conReq){
         conferenceService.updateConference(conReq,conferenceId);
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
 }

@@ -20,7 +20,8 @@ public enum ExceptionEnum {
     REVIEW_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 리뷰입니다."),
     RECRUIT_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 공고입니다."),
     RESUME_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "등록되지 않은 이력서입니다"),
-    CONFERENCE_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "존재하지 않은 방입니다.");
+    CONFERENCE_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "존재하지 않은 방입니다."),
+    CARD_NOT_EXIST_EXCEPTION(HttpStatus.NOT_FOUND, "404", "카드정보가 존재하지 않습니다.");
     private final HttpStatus status;
     private final String code;
     private String message;

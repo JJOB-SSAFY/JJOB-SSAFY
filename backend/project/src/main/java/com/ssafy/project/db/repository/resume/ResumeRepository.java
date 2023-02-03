@@ -9,10 +9,6 @@ import java.util.List;
 
 
 public interface ResumeRepository extends JpaRepository<Resume, Long> {
-
-    @Query("select r from Resume r join r.member m where m.email = :email")
-    List<Resume> findAllByMember(@Param("email") String email);
-
     List<Resume> findAllByMemberEmail(String email);
     void deleteById(Long resumeId);
 }

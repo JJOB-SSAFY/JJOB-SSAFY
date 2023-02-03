@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+@Service("recruitService")
 @RequiredArgsConstructor
 public class RecruitServiceImpl implements RecruitService {
 

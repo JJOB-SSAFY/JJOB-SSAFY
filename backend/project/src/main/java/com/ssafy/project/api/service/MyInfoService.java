@@ -11,7 +11,7 @@ public interface MyInfoService {
     MyInfoGetRes getMyInfo(String email);
     void changePwd(String password, Member member);
 
-    void changeInfo(MyInfoRequestDto myinfo,long id);
+    void changeInfo(MyInfoRequestDto myInfo,Long id);
 
     List<ApplyStatusRes> applyStatus(Long id);
 

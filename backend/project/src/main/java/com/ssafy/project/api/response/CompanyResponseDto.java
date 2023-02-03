@@ -19,16 +19,7 @@ public class CompanyResponseDto {
 
     private String companyDesc;
 
-    //public static ReviewResponseDto of(Review dto){
-    //        return ReviewResponseDto.builder()
-    //                .title(dto.getTitle())
-    //                .content(dto.getContent())
-    //                .question(dto.getQuestion())
-    //                .answer(dto.getAnswer())
-    //                .build();
-    //    }
-
-    public static CompanyResponseDto of(Company dto){
+    public static CompanyResponseDto from(Company dto){
         return CompanyResponseDto.builder()
                 .companyAddress(dto.getCompanyAddress())
                 .companyName(dto.getCompanyName())
