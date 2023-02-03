@@ -24,7 +24,6 @@ public class MyInfoGetRes {
     public static MyInfoGetRes from(Member member) {
         return MyInfoGetRes.builder()
                 .name(member.getName())
-                .phone(member.getPhone())
                 .email(member.getEmail())
                 .build();
     }
