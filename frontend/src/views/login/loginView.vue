@@ -105,12 +105,12 @@ export default {
 
 			console.log('asbasd' + store.getters['auth/isAuthenticated']);
 		};
-		watch(
-			() => store.getters['auth/isAuthenticated'],
-			function () {
-				console.log('watch ');
-			},
-		);
+		// watch(
+		// 	() => store.getters['auth/isAuthenticated'],
+		// 	function () {
+		// 		console.log('watch ');
+		// 	},
+		// );
 
 		return {
 			hidePassword,

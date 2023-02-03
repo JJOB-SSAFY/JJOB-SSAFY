@@ -74,7 +74,7 @@ a:hover {
   font-size: 32px;
 }
 
-
+/* 
 @media screen and (max-width:1060px) {
   .navbar {
     flex-direction: column;
@@ -110,4 +110,4 @@ a:hover {
   .navbar-icons.active {
     display: flex;
   }
-}
+} */
