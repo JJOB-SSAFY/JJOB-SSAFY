@@ -26,9 +26,7 @@ public class RecruitController {
     public ResponseEntity<BaseResponseBody> createRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                           @PathVariable Long company_id,
                                                           @RequestBody RecruitRequestDto requestDto) {
-
         recruitService.createRecruit(company_id, requestDto, userDetails.getMember().getId());
-
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 

@@ -43,13 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
         if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
         if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
-        Review review = Review.builder().member(member.get())
-                .title(requestDto.getTitle())
-                .company(company.get())
-                .content(requestDto.getContent())
-                .question(requestDto.getQuestion())
-                .answer(requestDto.getAnswer())
-                .build();
+        Review review = Review.of(member.get(), company.get(), requestDto);
 
         reviewRepository.save(review);
     }

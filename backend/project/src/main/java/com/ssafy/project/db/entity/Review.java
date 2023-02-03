@@ -34,6 +34,17 @@ public class Review {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    public static Review of(Member member, Company company, ReviewRequestDto requestDto) {
+        return Review.builder()
+                .member(member)
+                .title(requestDto.getTitle())
+                .company(company)
+                .content(requestDto.getContent())
+                .question(requestDto.getQuestion())
+                .answer(requestDto.getAnswer())
+                .build();
+    }
+
     public void updateReview(ReviewRequestDto reviewRequestDto){
         this.title = reviewRequestDto.getTitle();
         this.answer = reviewRequestDto.getAnswer();

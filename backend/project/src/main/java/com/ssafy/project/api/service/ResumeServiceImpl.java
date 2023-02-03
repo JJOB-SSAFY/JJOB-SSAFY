@@ -38,8 +38,6 @@ public class ResumeServiceImpl implements ResumeService {
     private final SkillRepository skillRepository;
     private final UniversityRepository universityRepository;
 
-
-
     @Override
     @Transactional(readOnly = true)
     public List<ResumeListResponseDto> getResumeList(String email) {
@@ -58,19 +56,7 @@ public class ResumeServiceImpl implements ResumeService {
         if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         //넣어야하는 resume 엔티티와 연결되어 있는 모든 엔티티를 생성해준다.
-        Resume resume = Resume.builder()
-                .member(member.get())
-                .company(company.get())
-                .resumeTitle(requestDto.getResumeTitle())
-                .subTitle(requestDto.getSubTitle())
-                .introduce(requestDto.getIntroduce())
-                .name(requestDto.getName())
-                .blog(requestDto.getBlog())
-                .phone(requestDto.getPhone())
-                .portfolio(requestDto.getPortfolio())
-                .email(requestDto.getEmail())
-                .github(requestDto.getGithub())
-                .build();
+        Resume resume = Resume.of(member.get(), company.get(), requestDto);
         resumeRepository.save(resume);
 
         //activity entity
@@ -95,7 +81,7 @@ public class ResumeServiceImpl implements ResumeService {
         List<Certificate> certificateList = certificateRequestDtoList.stream().map((o)-> new Certificate(resume, o)).collect(toList());
         certificateRepository.saveAll(certificateList);
 
-        //coverletter
+        //coverLetter
         List<CoverLetterRequestDto> coverLetterRequestDtoList = requestDto.getCoverLetterDtoList();
         List<CoverLetter> coverLetterList = coverLetterRequestDtoList.stream().map((o)-> new CoverLetter(resume, o)).collect(toList());
         coverLetterRepository.saveAll(coverLetterList);
@@ -163,7 +149,7 @@ public class ResumeServiceImpl implements ResumeService {
         List<Certificate> certificateList = certificateRequestDtoList.stream().map((o)-> new Certificate(resume.get(), o)).collect(toList());
         certificateRepository.saveAll(certificateList);
 
-        //coverletter
+        //coverLetter
         List<CoverLetterRequestDto> coverLetterRequestDtoList = requestDto.getCoverLetterDtoList();
         List<CoverLetter> coverLetterList = coverLetterRequestDtoList.stream().map((o)-> new CoverLetter(resume.get(), o)).collect(toList());
         coverLetterRepository.saveAll(coverLetterList);

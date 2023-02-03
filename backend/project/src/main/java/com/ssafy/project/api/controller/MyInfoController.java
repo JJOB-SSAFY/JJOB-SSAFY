@@ -2,8 +2,8 @@ package com.ssafy.project.api.controller;
 
 import com.ssafy.project.api.request.MyInfoRequestDto;
 import com.ssafy.project.api.response.ApplyStatusRes;
+import com.ssafy.project.api.response.BaseResponseBody;
 import com.ssafy.project.api.response.MyInfoGetRes;
-import com.ssafy.project.api.service.MemberService;
 import com.ssafy.project.api.service.MyInfoService;
 import com.ssafy.project.common.auth.SsafyUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -32,22 +32,26 @@ public class MyInfoController {
 
         return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.OK);
     }
+
     @PatchMapping("/pwd")
-    public ResponseEntity<?> changePwd(@AuthenticationPrincipal SsafyUserDetails userDetails,@RequestBody Map<String,String> map){
+    public ResponseEntity<BaseResponseBody> changePwd(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                      @RequestBody Map<String,String> map){
 //        logger.info(userDetails.getMember().getEmail());
 //        logger.info(map.get("password"));
 //        logger.info(new BCryptPasswordEncoder().encode(map.get("password")));
         myInfoService.changePwd(map.get("password"),userDetails.getMember());
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
+
     //내 정보 수정
     @PatchMapping("")
-    public ResponseEntity<?> changeInfo(@AuthenticationPrincipal SsafyUserDetails userDetails, @RequestBody MyInfoRequestDto requestDto){
-        Long id=userDetails.getMember().getId();
-        myInfoService.changeInfo(requestDto,id);
+    public ResponseEntity<BaseResponseBody> changeInfo(@AuthenticationPrincipal SsafyUserDetails userDetails,
+                                                       @RequestBody MyInfoRequestDto requestDto){
+        myInfoService.changeInfo(requestDto,userDetails.getMember().getId());
 
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
+
     // 지원현황
     @GetMapping("/apply")
     public ResponseEntity<?> applyStatus(@AuthenticationPrincipal SsafyUserDetails userDetails){
