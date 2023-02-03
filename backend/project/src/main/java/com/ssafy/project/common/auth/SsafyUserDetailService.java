@@ -29,7 +29,7 @@ public class SsafyUserDetailService implements UserDetailsService {
 
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
-        if (!findMember.isPresent()) throw new UsernameNotFoundException("Check User Email or from Social ");
+        if (findMember.isEmpty()) throw new UsernameNotFoundException("Check User Email or from Social ");
 
         Member member = findMember.get();
 
