@@ -1,0 +1,439 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+html,
+body {
+  background-color: #fff;
+  font-family: Montserrat;
+}
+
+.login-section {
+  width: 100%;
+  height: 100%;
+}
+
+.div-illustration {
+  position: relative;
+  height: 100vh;
+  max-width: 800px;
+  background: url("../../images/logo-background.jpg") no-repeat center center scroll;
+  background-size: cover;
+  float: left;
+  -webkit-animation: bgslide 2.3s forwards;
+  animation: bgslide 2.3s forwards;
+}
+
+.div-illustration img {
+  width: 248px;
+  height: auto;
+}
+
+@-webkit-keyframes bgslide {
+  from {
+    left: -100%;
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    width: 800px;
+    opacity: 1;
+  }
+}
+
+@keyframes {
+  from {
+    left: -100%;
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    width: 1000px;
+    opacity: 1;
+  }
+}
+
+.div-login {
+  height: auto;
+  float: left;
+  padding: 0px 50px 0px 50px;
+  width: calc(100% - 800px);
+}
+
+.div-login login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.div-login .login-container h1 {
+  font-size: 38px;
+}
+
+.div-login .login-container .login-form form {
+  display: grid;
+}
+
+.div-login .login-container .login-form form input {
+  font-size: 18px;
+  background: rgba(241, 241, 241, 0.87);
+  margin-top: 12px;
+  height: 60px;
+  border: none;
+  border-radius: 12px;
+  padding: 5px 20px;
+}
+
+.div-login .login-container .login-form form button {
+  background: -webkit-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
+  background: -o-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
+  background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+  border: none;
+  width: 240px;
+  height: 50px;
+  text-transform: uppercase;
+  color: white;
+  border-radius: 10px;
+  position: relative;
+  margin-left: auto;
+  top: 20px;
+  bottom: 70px;
+  z-index: 2;
+  font-size: 25px;
+}
+
+.div-login .login-container .login-form form button:hover::after {
+  opacity: 1;
+}
+
+.div-login .login-container .login-form form button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 10px;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  -webkit-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  right: 0;
+  bottom: 0;
+  background: -webkit-gradient(linear, left bottom, left top, from(#fa7087), to(#fdb68a));
+  background: -webkit-linear-gradient(110deg, #fa7087 0%, #fdb68a 100%);
+  background: -o-linear-gradient(110deg, #fa7087 0%, #fdb68a 100%);
+  background: linear-gradient(-20deg, #fa7087 0%, #fdb68a 100%);
+}
+
+.div-login .login-container .div-sub-option {
+  margin: 15px 5px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* .div-login .login-container .remember-form {
+  position: relative;
+  margin-left: 5px;
+} */
+
+.div-login .login-container .remember-form input[type=checkbox] {
+  height: auto;
+}
+
+.div-login .login-container .remember-form span {
+  margin-left: 3px;
+  font-size: 16px;
+}
+
+.div-login .login-container .forget-password {
+  margin-top: 9px;
+  margin-left: auto;
+}
+
+.div-login .login-container .forget-password a {
+  font-size: 16px;
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  .div-illustration {
+    width: 52%;
+    -webkit-animation: none;
+    animation: none;
+  }
+
+  .div-login {
+    width: 48%;
+  }
+}
+
+
+@media only screen and (max-width: 1024px) {
+  @-webkit-keyframes slideIn {
+    from {
+      left: -100%;
+      opacity: 0;
+    }
+
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      left: -100%;
+      opacity: 0;
+    }
+
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  .div-illustration {
+    float: none;
+    background: url("../../images/logo-background.jpg") center center;
+    background-size: cover;
+    -webkit-animation: slideIn 0.8s ease-in-out forwards;
+    animation: slideIn 0.8s ease-in-out forwards;
+    width: 100%;
+    height: 190px;
+    text-align: center;
+  }
+
+  .div-illustration img {
+    width: 100px;
+    height: auto;
+    margin: 20px auto !important;
+    text-align: center;
+  }
+
+
+  .div-login {
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .div-login .login-container {
+    -webkit-animation: slideIn 0.8s ease-in-out forwards;
+    animation: slideIn 0.8s ease-in-out forwards;
+    width: 85%;
+    float: none;
+  }
+
+  .div-login .login-container h1 {
+    font-size: 25px;
+    margin-top: 40px;
+  }
+
+  .div-login .login-container .login-form {
+    margin-top: 90px;
+  }
+
+  .div-login .login-container .login-form form input {
+    height: 45px;
+  }
+
+  .div-login .login-container .login-form form button {
+    height: 45px;
+    margin-top: 5px;
+  }
+
+  .div-login .login-container .div-sub-option {
+    margin: 15px 5px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+
+  .div-login .login-container .login-form .remember-form span {
+    font-size: 16px;
+    margin-top: 22px;
+    top: inherit;
+  }
+
+  .div-login .login-container .forget-password a {
+    font-size: 16px;
+  }
+
+  .div-login .login-container .forget-password a::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    border-radius: 100px;
+    background: -webkit-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
+    background: -o-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
+    background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+    bottom: -4px;
+    left: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    opacity: 0;
+    right: 0;
+  }
+
+  .div-login .login-container .forget-pass a:hover::after {
+    opacity: 1;
+  }
+
+}
+
+@media only screen and (max-width: 1024px) {
+  @-webkit-keyframes slideIn {
+    from {
+      left: -100%;
+      opacity: 0;
+    }
+
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      left: -100%;
+      opacity: 0;
+    }
+
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  .div-illustration {
+    margin: auto;
+    float: none;
+    background: url("../../images/logo-background.jpg") center center;
+    background-size: cover;
+    -webkit-animation: slideIn 0.8s ease-in-out forwards;
+    animation: slideIn 0.8s ease-in-out forwards;
+    width: 100%;
+    height: 190px;
+    text-align: center;
+  }
+
+  .div-illustration img {
+    width: 100px;
+    height: auto;
+    margin: 20px auto !important;
+    text-align: center;
+  }
+
+
+  .div-login {
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .div-login .login-container {
+    -webkit-animation: slideIn 0.8s ease-in-out forwards;
+    animation: slideIn 0.8s ease-in-out forwards;
+    width: 100%;
+    float: none;
+  }
+
+  .div-login .login-container h1 {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 50px;
+  }
+
+  .div-login .login-container .login-form {
+    margin: 50px 0px;
+  }
+
+  .div-login .login-container .login-form form input {
+    height: 45px;
+  }
+
+  .div-login .login-container .login-form form button {
+    height: 45px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .div-login .login-container .div-sub-option {
+    margin: 15px 5px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+
+  .div-login .login-container .login-form .remember-form span {
+    font-size: 16px;
+    margin-top: 22px;
+    top: inherit;
+  }
+
+  .div-login .login-container .forget-password a {
+    font-size: 16px;
+  }
+
+  .div-login .login-container .forget-password a::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    border-radius: 100px;
+    background: -webkit-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
+    background: -o-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
+    background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
+    bottom: -4px;
+    left: 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    opacity: 0;
+    right: 0;
+  }
+
+  .div-login .login-container .forget-pass a:hover::after {
+    opacity: 1;
+  }
+
+}
+
+/*높이 조절*/
+@media only screen and (min-width: 1024px) and (max-height:560px) {
+  .div-illustration {
+    height: 120vh;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height:490px) {
+  .div-illustration {
+    height: 150vh;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height:390px) {
+  .div-illustration {
+    height: 180vh;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height:325px) {
+  .div-illustration {
+    height: 200vh;
+  }
+}
