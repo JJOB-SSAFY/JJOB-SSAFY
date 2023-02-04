@@ -1,6 +1,11 @@
 <template>
-	<main-header />
-	<router-view />
+	<header>
+		<main-header />
+	</header>
+	<hr />
+	<section>
+		<router-view />
+	</section>
 </template>
 
 <script>
