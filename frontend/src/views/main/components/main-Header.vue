@@ -11,29 +11,14 @@
 			</router-link>
 		</div>
 		<ul class="navbar-menu" ref="menu">
-			<li v-for="nav in navigations" :key="nav.name" class="nav-item">
+			<li v-for="nav in filterNav" :key="nav.name" class="nav-item">
 				<router-link :to="nav.href" class="nav-link font-LINE-Bd">
 					{{ nav.name }}
 				</router-link>
 			</li>
 		</ul>
 
-		<ul v-if="!token" class="navbar-icons" ref="icons">
-			<li>
-				<router-link to="/login" class="navbar-icon">
-					<fa-icon icon="fa-solid fa-right-to-bracket" />
-					<span> 로그인 </span>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="/register" class="navbar-icon">
-					<fa-icon icon="fa-solid fa-user-plus" /><span>
-						회원가입</span
-					></router-link
-				>
-			</li>
-		</ul>
-		<ul v-else class="navbar-icons" ref="icons">
+		<ul class="navbar-icons" ref="icons">
 			<li>
 				<router-link to="/myInfo" class="navbar-icon">
 					<fa-icon icon="fas fa-solid fa-user " />
@@ -41,9 +26,9 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/register" class="navbar-icon">
+				<router-link to="/login" class="navbar-icon">
 					<fa-icon icon="fas fa-solid fa-right-from-bracket" />
-					<span>로그아웃</span>
+					<span v-on:click="logout">로그아웃</span>
 				</router-link>
 			</li>
 		</ul>
@@ -55,16 +40,20 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
 	setup() {
 		const menuActive = ref(null);
 		const store = useStore();
-
-		const token = store.getters['auth/isAuthenticated'];
-		const navigations = [
+		const userGrade = 'U';
+		const filterNav = computed(() => {
+			return userGrade === 'U'
+				? navigations.value.filter(nav => !nav.name.includes('지원자정보'))
+				: navigations.value;
+		});
+		const navigations = ref([
 			{
 				name: '채용공고',
 				href: '/recruit',
@@ -85,15 +74,23 @@ export default {
 				name: '지원자정보',
 				href: '/infoCards',
 			},
-		];
+		]);
 
 		const menuClick = () => {
 			menuActive.value = !menuActive.value;
 		};
-
-		const logout = () => {};
-
-		return { navigations, menuActive, menuClick, token };
+		const logout = () => {
+			console.log('sgi' + store.getters.isAuthenticated);
+			console.log(localStorage.getItem('jjob.s.token'));
+			// console.log(localToken);
+			if (localStorage.getItem('jjob.s.token')) {
+				store.dispatch('auth/logout');
+			}
+		};
+		return { navigations, filterNav, menuActive, menuClick, logout };
+	},
+	onMounted() {
+		this.token = ref(localStorage.getItem('jjob.s.token'));
 	},
 };
 </script>

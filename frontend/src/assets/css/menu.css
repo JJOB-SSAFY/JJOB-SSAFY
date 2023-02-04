@@ -12,7 +12,7 @@ a:hover {
 
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
   padding: 8px 12px;
@@ -20,7 +20,7 @@ a:hover {
 
 .navbar-logo {
   font-size: 24px;
-  margin: 0px 50px 0px 20px;
+  margin: 0px 70px 0px 20px;
 }
 
 .navbar-menu {
@@ -48,7 +48,7 @@ a:hover {
   display: flex;
   padding-left: 0;
   color: white;
-  margin: 0px 20px 0px 50px;
+  margin: 0px 0px 0px 50px;
 }
 
 .navbar-icons li {
