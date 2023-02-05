@@ -32,7 +32,11 @@
 								<a href="#">비밀번호를 잊어버리셨나요?</a>
 							</div>
 						</div>
-						<button @click="Login" class="font-LINE-Bd">로그인</button>
+						<div class="div-button">
+							<button id="login-kakao-btn" @click="kakaoLogin">카카오</button>
+							<button id="login-google-btn" @click="googleLogin">구글</button>
+							<button @click="Login" class="font-LINE-Bd">로그인</button>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -44,6 +48,8 @@
 import { ref, reactive } from 'vue';
 import { watch } from 'vue';
 import { useStore } from 'vuex';
+
+import { KAKAO_AUTH_URL } from '@/common/OAuth.js';
 export default {
 	name: 'loginView',
 	setup() {
@@ -79,10 +85,15 @@ export default {
 				email: loginState.form.email,
 				password: loginState.form.password,
 			};
-			console.log(loginInfo);
 			store.dispatch('auth/login', loginInfo);
+		};
+		const kakaoLogin = () => {
+			console.log(KAKAO_AUTH_URL);
+			location.href = KAKAO_AUTH_URL;
+		};
 
-			console.log('asbasd' + store.getters['auth/isAuthenticated']);
+		const googleLogin = () => {
+			location.href = 'http://localhost:8080/oauth2/authorization/google';
 		};
 		watch(
 			() => store.getters['auth/isAuthenticated'],
@@ -96,6 +107,8 @@ export default {
 			loginState,
 			handleHidePassword,
 			Login,
+			kakaoLogin,
+			googleLogin,
 			inputEmail,
 			inputPassword,
 		};
