@@ -1,42 +1,51 @@
 <template>
-	<nav class="navbar">
-		<div class="navbar-logo">
-			<router-link to="/">
-				<img
-					src="@/assets/images/logo/logo-removebg.png"
-					alt=""
-					height="47"
-					width="80"
-				/>
-			</router-link>
-		</div>
-		<ul class="navbar-menu" ref="menu">
-			<li v-for="nav in filterNav" :key="nav.name" class="nav-item">
-				<router-link :to="nav.href" class="nav-link font-LINE-Bd">
-					{{ nav.name }}
+	<div>
+		<nav class="navbar">
+			<div class="navbar-logo">
+				<router-link to="/">
+					<img
+						src="@/assets/images/logo/logo-removebg.png"
+						alt=""
+						height="47"
+						width="80"
+					/>
 				</router-link>
-			</li>
-		</ul>
+			</div>
+			<ul class="navbar-menu" ref="menu">
+				<li v-for="nav in filterNav" :key="nav.name" class="nav-item">
+					<router-link :to="nav.href" class="nav-link font-LINE-Bd">
+						{{ nav.name }}
+					</router-link>
+				</li>
+			</ul>
 
-		<ul class="navbar-icons" ref="icons">
-			<li>
-				<router-link to="/myInfo" class="navbar-icon">
-					<fa-icon icon="fas fa-solid fa-user " />
-					<span> 마이페이지 </span>
-				</router-link>
-			</li>
-			<li>
-				<router-link to="/login" class="navbar-icon">
-					<fa-icon icon="fas fa-solid fa-right-from-bracket" />
-					<span v-on:click="logout">로그아웃</span>
-				</router-link>
-			</li>
-		</ul>
-
-		<a @click="menuClick" href="#" class="navbar-toggleBtn">
-			<fa-icon icon="fa-solid fa-bars" />
-		</a>
-	</nav>
+			<ul class="navbar-icons" ref="icons">
+				<!--  v-if="Role == 'admin'" -->
+				<li>
+					<router-link to="/register" class="navbar-icon">
+						<fa-icon icon="fas fa-solid fa-user " />
+						<span> 회원등록 </span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/myInfo" class="navbar-icon">
+						<fa-icon icon="fas fa-solid fa-user " />
+						<span> 마이페이지 </span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/login" class="navbar-icon">
+						<fa-icon icon="fas fa-solid fa-right-from-bracket" />
+						<span v-on:click="logout">로그아웃</span>
+					</router-link>
+				</li>
+				<register-view />
+			</ul>
+			<a @click="menuClick" class="navbar-toggleBtn">
+				<fa-icon icon="fa-solid fa-bars" />
+			</a>
+		</nav>
+	</div>
 </template>
 
 <script>
@@ -45,9 +54,8 @@ import { useStore } from 'vuex';
 
 export default {
 	setup() {
-		const menuActive = ref(false);
-		const menu = ref(null);
-		const icons = ref(null);
+		const role = ref(localStorage.getItem('role'));
+		const menuActive = ref(null);
 		const store = useStore();
 		const userGrade = 'U';
 		const filterNav = computed(() => {
@@ -77,21 +85,8 @@ export default {
 				href: '/infoCards',
 			},
 		]);
-
 		const menuClick = () => {
-			
 			menuActive.value = !menuActive.value;
-			console.log(menuActive.value);
-
-			const nav = document.querySelector('.navbar-menu');
-			const ni = document.querySelector('.navbar-icons');
-
-			nav.classList.toggle("active");
-			ni.classList.toggle("active");
-			
-				
-
-
 		};
 		const logout = () => {
 			console.log('sgi' + store.getters.isAuthenticated);
@@ -101,7 +96,13 @@ export default {
 				store.dispatch('auth/logout');
 			}
 		};
-		return { navigations, filterNav, menuActive, menuClick, logout };
+		return {
+			navigations,
+			filterNav,
+			menuActive,
+			menuClick,
+			logout,
+		};
 	},
 	onMounted() {
 		this.token = ref(localStorage.getItem('jjob.s.token'));
