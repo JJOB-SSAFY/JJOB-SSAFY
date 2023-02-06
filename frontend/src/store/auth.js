@@ -32,7 +32,7 @@ export const auth = {
 					console.log(response);
 					if (response.status == '200') {
 						const token = response.data.accessToken;
-						commit('SET_TOKEN', token);
+						commit('SET_TOKEN', 'Bearer ' + token);
 						console.log(token);
 						vueRouter.push({ name: 'home' });
 					}

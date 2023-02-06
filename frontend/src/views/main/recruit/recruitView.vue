@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import recruitRecommend from './components/recruit-recommend.vue';
+import recruitRecommend from './components/recruit-item.vue';
 import axios from 'axios';
 
 export default {
@@ -23,26 +23,20 @@ export default {
 			work: '',
 			requirement: '',
 		};
+		const condition = { location: '', department: '' };
+		axios({
+			method: 'POST',
+			url: 'http://localhost:8080/recruit/list',
+			headers: {
+				Authorization:
+					'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG5hdmVyLmNvbSIsImlzcyI6InNzYWZ5LmNvbSIsImV4cCI6MTY3Njk0MzE1MiwiaWF0IjoxNjc1NjQ3MTUyfQ.dg_kavwNggw9jvrdn661cFYJ4D2MMsEiSznxOpfpk7AtyDsNfUnXacBQXVANQLMFuLRZR6ytec1bQTNYlOqbAg',
+			},
+			data: condition,
+		}).then(res => {
+			console.log(res);
+		});
 
-		const getInfo = () => {
-			axios({
-				method: 'get',
-				url: 'http://localhost:8080/recruit/list',
-			})
-				.then(res => {
-					console.log(res);
-					info.companyName = res.data.recruits.companyName;
-					info.recruitTitle = res.data.recruits.recruitTitle;
-					info.recruitDate = res.data.recruits.recruitDate;
-					info.work = res.data.recruits.work;
-					info.requirement = res.data.recruits.requirement;
-				})
-				.catch(err => {
-					console.log(err);
-				});
-		};
-
-		return { getInfo, info, test1 };
+		return { info, test1 };
 	},
 };
 </script>
