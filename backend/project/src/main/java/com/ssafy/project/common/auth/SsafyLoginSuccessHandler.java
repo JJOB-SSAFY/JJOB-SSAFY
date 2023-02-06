@@ -45,8 +45,8 @@ public class SsafyLoginSuccessHandler implements AuthenticationSuccessHandler {
 //        response.addHeader("accessToken", accessToken);
 //        response.setContentType("application/json;charset=UTF-8");
 
-        var writer = response.getWriter();
-        writer.println(objectMapper.writeValueAsString(MemberLoginPostRes.from(accessToken)));
-        writer.flush();
+//        var writer = response.getWriter();
+//        writer.println(objectMapper.writeValueAsString(MemberLoginPostRes.from(accessToken)));
+//        writer.flush();
     }
 }
