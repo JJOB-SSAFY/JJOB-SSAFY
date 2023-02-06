@@ -1,11 +1,24 @@
 <template>
-	<!-- <div>채용공고</div> -->
-	<recruit-Recommend :test1="test1" />
+	<div class="div-recruit-list">
+		<div div-search>
+			<input type="text" v-model.lazy="searchCondition.location" />
+			<input type="text" v-model.lazy="searchCondition.department" />
+			<button>검색</button>
+		</div>
+		<div
+			class="recruit-list-items"
+			v-for="info in state.recruitList"
+			:key="info.recruit"
+		>
+			<recruit-Recommend :info="info" />
+		</div>
+	</div>
 </template>
 
 <script>
 import recruitRecommend from './components/recruit-item.vue';
 import axios from 'axios';
+import { ref, reactive } from 'vue';
 
 export default {
 	name: 'recruitView',
@@ -14,31 +27,51 @@ export default {
 		recruitRecommend,
 	},
 	setup() {
-		const test1 = 'testtesttesttesttesttesttest';
+		const state = reactive({
+			recruitList: '',
+		});
 
-		const info = {
-			companyName: '',
-			recruitTitle: '',
-			recruitDate: '',
-			work: '',
-			requirement: '',
+		const searchCondition = reactive({
+			location: '',
+			department: '',
+		});
+
+		const searchClick = () => {
+			const searchInfo = {
+				location: searchCondition.location,
+				department: searchCondition.locationlocation,
+			};
 		};
-		const condition = { location: '', department: '' };
 		axios({
 			method: 'POST',
 			url: 'http://localhost:8080/recruit/list',
 			headers: {
-				Authorization:
-					'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QG5hdmVyLmNvbSIsImlzcyI6InNzYWZ5LmNvbSIsImV4cCI6MTY3Njk0MzE1MiwiaWF0IjoxNjc1NjQ3MTUyfQ.dg_kavwNggw9jvrdn661cFYJ4D2MMsEiSznxOpfpk7AtyDsNfUnXacBQXVANQLMFuLRZR6ytec1bQTNYlOqbAg',
+				Authorization: localStorage.getItem('jjob.s.token'),
 			},
-			data: condition,
+			data: searchCondition,
 		}).then(res => {
-			console.log(res);
+			state.recruitList = res.data;
+			console.log(searchCondition.department);
 		});
+		// onMounted(() => {
+		// 	store.dispatch('recruit/getList');
+		// });
 
-		return { info, test1 };
+		return { state, searchCondition, searchClick };
 	},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.div-recruit-list {
+	display: flex;
+	border: 1px solid black;
+	width: auto;
+}
+
+.recruit-list-items {
+	display: block;
+	width: auto;
+	/* border: 1px solid black; */
+}
+</style>
