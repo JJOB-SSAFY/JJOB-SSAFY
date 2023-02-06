@@ -1,9 +1,9 @@
 <template>
-	<div class="login-section">
+	<div class="register-section">
 		<div class="div-illustration">
 			<img src="../../assets/images/logo/logo-removebg.png" alt="logo" />
 		</div>
-		<div class="div-login">
+		<div class="div-register">
 			<div class="login-container">
 				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
 				<div class="login-form mt-110">

@@ -29,14 +29,10 @@ export const auth = {
 			http
 				.post('/member/login', payload)
 				.then(function (response) {
-					console.log(response);
-					if (response.status == '200') {
-						const token = response.data.accessToken;
-						commit('SET_TOKEN', 'Bearer ' + token);
-						console.log(token);
-						vueRouter.push({ name: 'home' });
-					}
+					const token = response.data.accessToken;
+					commit('SET_TOKEN', 'Bearer ' + token);
 				})
+				.then(() => vueRouter.push({ name: 'home' }))
 				.catch(err => {
 					commit('ERROR_HANDLE', err);
 				});

@@ -20,8 +20,7 @@
 			</ul>
 
 			<ul class="navbar-icons" ref="icons">
-				<!--  v-if="Role == 'admin'" -->
-				<li>
+				<li v-if="`{{userGrade}} === 'C'`">
 					<router-link to="/register" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user " />
 						<span> 회원등록 </span>
@@ -87,7 +86,15 @@ export default {
 		]);
 		const menuClick = () => {
 			menuActive.value = !menuActive.value;
+			console.log(menuActive.value);
+
+			const nav = document.querySelector('.navbar-menu');
+			const ni = document.querySelector('.navbar-icons');
+
+			nav.classList.toggle('active');
+			ni.classList.toggle('active');
 		};
+
 		const logout = () => {
 			console.log('sgi' + store.getters.isAuthenticated);
 			console.log(localStorage.getItem('jjob.s.token'));

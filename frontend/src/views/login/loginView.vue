@@ -48,7 +48,7 @@
 import { ref, reactive } from 'vue';
 import { watch } from 'vue';
 import { useStore } from 'vuex';
-import { axios } from 'axios';
+import axios from 'axios';
 
 import { REDIRECT_URL } from '@/common/OAuth.js';
 // import { http } from '@/api/http.js';

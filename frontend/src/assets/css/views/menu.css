@@ -17,7 +17,7 @@
   list-style: none;
   padding-left: 0;
   margin: 0px 70px 0px 70px;
-  
+
 }
 
 .navbar-menu li {
@@ -39,7 +39,7 @@
   padding-left: 0;
   color: white;
   margin: 0px 0px 0px 50px;
-  
+
 }
 
 .navbar-icons li {
@@ -79,7 +79,7 @@
     align-items: center;
     margin: 0px;
     width: 100%;
-    
+
   }
 
   .navbar-menu li {
@@ -100,9 +100,43 @@
     display: block;
   }
 
-  .navbar-menu.active,
+  .navbar-menu.active {
+    display: flex;
+
+    -webkit-animation: menuSlideDown 1.3s forwards;
+    animation: menuSlideDown 1.3s forwards;
+  }
+
   .navbar-icons.active {
     display: flex;
-    
   }
-} 
+
+  @-webkit-keyframes menuSlideDown {
+    from {
+      top: -100%;
+      height: 0;
+      opacity: 0;
+    }
+
+    to {
+      top: 0;
+      height: 200px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes {
+    from {
+      top: -100%;
+      height: 0;
+      opacity: 0;
+    }
+
+    to {
+      top: 0;
+      height: 200px;
+      opacity: 1;
+    }
+  }
+
+}
