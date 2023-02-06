@@ -3,8 +3,9 @@
 	<ul class="infinite-list" style="overflow: auto">
 		<li
 			class="infinite-list-item"
-			v-for="info in interviewList"
+			v-for="info in state.interviewList"
 			:key="info.conferenceId"
+			@click="clickConference(info.conferenceId)"
 		>
 			<interview :info="info" />
 		</li>
@@ -13,6 +14,7 @@
 <script>
 import Interview from './components/interview.vue';
 import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 export default {
@@ -23,6 +25,8 @@ export default {
 	},
 
 	setup() {
+		const router = useRouter();
+
 		const state = reactive({
 			// count: 12,
 			interviewList: null,
@@ -36,15 +40,26 @@ export default {
 			method: 'get',
 			url: 'http://localhost:8080/conference/list/INTERVIEW',
 			headers: {
-				Authorization:
-					'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaXNzIjoic3NhZnkuY29tIiwiZXhwIjoxNjc2NzA4NzY4LCJpYXQiOjE2NzU0MTI3Njh9.mobOSKc_lKBNKSKKdkgqjdHQiC8DgpQIOkg0xu3iRjmsDixvrh4Jj32jOFFskcQjuMwKs40XD75ko6hvXm8n1g',
+				Authorization: localStorage.getItem('jjob.s.token'),
 			},
 		}).then(res => {
 			state.interviewList = res.data;
 			console.log(state.interviewList);
 		});
 
-		return { state, load };
+		const clickConference = function (id) {
+			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
+			router.push({
+				name: 'openVidu',
+				params: {
+					participant: '김기윤',
+					session: id,
+				},
+			});
+			// loadingInstance1.close()
+		};
+
+		return { state, load, clickConference };
 	},
 };
 </script>
