@@ -23,7 +23,7 @@ public class ReviewController {
     private final ReviewService reviewService;
 
 
-    @GetMapping("/list")
+    @PostMapping("/list")
     public ResponseEntity<List<ReviewResponseListDto>> getReviewList(@RequestBody ReviewSearchCondition condition) {
         return new ResponseEntity<>(reviewService.getReviewList(condition), HttpStatus.OK);
     }
