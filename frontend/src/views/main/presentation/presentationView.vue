@@ -1,13 +1,74 @@
 <template>
-	<div>설명회</div>
+	<!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto"> -->
+	<ul class="infinite-list" style="overflow: auto">
+		<li
+			class="infinite-list-item"
+			v-for="info in state.presentationList"
+			:key="info.conferenceId"
+		>
+			<interview :info="info" />
+		</li>
+	</ul>
 </template>
-
 <script>
+import Interview from './components/presentation.vue';
+import { reactive } from 'vue';
+import axios from 'axios';
+
 export default {
+	name: 'presentationView',
+
+	components: {
+		Interview,
+	},
+
 	setup() {
-		return {};
+		const state = reactive({
+			// count: 12,
+			presentationList: null,
+		});
+
+		const load = function () {
+			// state.count += 4;
+		};
+
+		axios({
+			method: 'get',
+			url: 'http://localhost:8080/conference/list/PRESENTATION',
+			headers: {
+				Authorization: localStorage.getItem('jjob.s.token'),
+			},
+		}).then(res => {
+			state.presentationList = res.data;
+			console.log(state.presentationList);
+		});
+
+		return { state, load };
 	},
 };
 </script>
+<style>
+.infinite-list {
+	padding-left: 0;
+	max-height: calc(100% - 35px);
+}
 
-<style lang="scss" scoped></style>
+@media (min-width: 701px) and (max-width: 1269px) {
+	.infinite-list {
+		min-width: 700px;
+	}
+}
+
+@media (min-width: 1270px) {
+	.infinite-list {
+		min-width: 1021px;
+	}
+}
+
+.infinite-list .infinite-list-item {
+	min-width: 335px;
+	max-width: 25%;
+	display: inline-block;
+	cursor: pointer;
+}
+</style>
