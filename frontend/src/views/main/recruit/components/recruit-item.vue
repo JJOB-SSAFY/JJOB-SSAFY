@@ -1,21 +1,23 @@
 <template>
-	<div>
-		<div>{{ test1 }}</div>
-		<b-card :title="test1" sub-title="Card subtitle">
-			<b-card-text>{{ test1 }} </b-card-text>
-
-			<b-card-text>A s</b-card-text>
-
-			<a href="#" class="card-link">link</a>
-			<b-link href="#" class="card-link">link</b-link>
-		</b-card>
-	</div>
+	<a href="#">
+		<div class="card">
+			<h5 class="card-header">회사이름 {{ info.recruitTitle }}</h5>
+			<div class="card-body">
+				<h5 class="card-title">채용직무 {{ info.department }}</h5>
+				<p class="card-text">요구사항 {{ info.requirement }}</p>
+				<p class="card-text">업무{{ info.workType }}</p>
+				<p class="card-text">경력사항 {{ info.work }}</p>
+				<p class="card-text">지원 마감일 {{ info.recruitEndDate }}</p>
+				<a href="#" class="btn btn-primary">지원하기 버튼</a>
+			</div>
+		</div>
+	</a>
 </template>
 
 <script>
 export default {
 	props: {
-		test1: String,
+		info: String,
 	},
 	setup() {
 		return {};
@@ -23,4 +25,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>
