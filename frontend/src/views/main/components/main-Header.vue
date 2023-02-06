@@ -20,15 +20,15 @@
 			</ul>
 
 			<ul class="navbar-icons" ref="icons">
-				<li v-if="`{{userGrade}} === 'C'`">
+				<li v-if="role === 'COMPANY' || role === 'ADMIN'">
 					<router-link to="/register" class="navbar-icon">
-						<fa-icon icon="fas fa-solid fa-user " />
+						<fa-icon icon="fas fa-solid fa-user" />
 						<span> 회원등록 </span>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/myInfo" class="navbar-icon">
-						<fa-icon icon="fas fa-solid fa-user " />
+						<fa-icon icon="fas fa-solid fa-user" />
 						<span> 마이페이지 </span>
 					</router-link>
 				</li>
@@ -48,17 +48,17 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
 	setup() {
-		const role = ref(localStorage.getItem('role'));
 		const menuActive = ref(null);
 		const store = useStore();
-		const userGrade = 'U';
+
+		const role = ref(store.getters['auth/getUserRole']);
 		const filterNav = computed(() => {
-			return userGrade === 'U'
+			return role.value === 'USER'
 				? navigations.value.filter(nav => !nav.name.includes('지원자정보'))
 				: navigations.value;
 		});
@@ -86,7 +86,6 @@ export default {
 		]);
 		const menuClick = () => {
 			menuActive.value = !menuActive.value;
-			console.log(menuActive.value);
 
 			const nav = document.querySelector('.navbar-menu');
 			const ni = document.querySelector('.navbar-icons');
@@ -96,23 +95,23 @@ export default {
 		};
 
 		const logout = () => {
-			console.log('sgi' + store.getters.isAuthenticated);
+			console.log(store.getters['auth/getUserInfo']);
+			console.log(store.getters['auth/getUserRole']);
 			console.log(localStorage.getItem('jjob.s.token'));
+
 			// console.log(localToken);
 			if (localStorage.getItem('jjob.s.token')) {
 				store.dispatch('auth/logout');
 			}
 		};
 		return {
+			role,
 			navigations,
 			filterNav,
 			menuActive,
 			menuClick,
 			logout,
 		};
-	},
-	onMounted() {
-		this.token = ref(localStorage.getItem('jjob.s.token'));
 	},
 };
 </script>
