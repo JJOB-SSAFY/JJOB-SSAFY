@@ -25,12 +25,14 @@ export const auth = {
 		},
 	},
 	actions: {
-		login({ commit }, payload = {}) {
+		login({ commit, dispatch }, payload = {}) {
 			http
 				.post('/member/login', payload)
 				.then(function (response) {
+					console.log(response);
 					const token = response.data.accessToken;
 					commit('SET_TOKEN', 'Bearer ' + token);
+					dispatch('getInfo');
 				})
 				.then(() => vueRouter.push({ name: 'home' }))
 				.catch(err => {
@@ -47,10 +49,14 @@ export const auth = {
 		},
 
 		getInfo({ commit }) {
-			http.get('/member/info').then(({ data }) => {
-				commit('SET_USER_INFO', data);
-				commit('ERROR_HANDLE', null);
-			});
+			http
+				.get('/myinfo')
+				.then(({ data }) => {
+					commit('SET_USER_INFO', data);
+				})
+				.catch(err => {
+					commit('ERROR_HANDLE', null);
+				});
 		},
 	},
 	mutations: {
