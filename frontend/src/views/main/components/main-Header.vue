@@ -33,7 +33,7 @@
 			</li>
 		</ul>
 
-		<a @click="menuClick" class="navbar-toggleBtn">
+		<a @click="menuClick" href="#" class="navbar-toggleBtn">
 			<fa-icon icon="fa-solid fa-bars" />
 		</a>
 	</nav>
@@ -45,7 +45,9 @@ import { useStore } from 'vuex';
 
 export default {
 	setup() {
-		const menuActive = ref(null);
+		const menuActive = ref(false);
+		const menu = ref(null);
+		const icons = ref(null);
 		const store = useStore();
 		const userGrade = 'U';
 		const filterNav = computed(() => {
@@ -77,7 +79,19 @@ export default {
 		]);
 
 		const menuClick = () => {
+			
 			menuActive.value = !menuActive.value;
+			console.log(menuActive.value);
+
+			const nav = document.querySelector('.navbar-menu');
+			const ni = document.querySelector('.navbar-icons');
+
+			nav.classList.toggle("active");
+			ni.classList.toggle("active");
+			
+				
+
+
 		};
 		const logout = () => {
 			console.log('sgi' + store.getters.isAuthenticated);

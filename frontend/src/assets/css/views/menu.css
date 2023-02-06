@@ -17,6 +17,7 @@
   list-style: none;
   padding-left: 0;
   margin: 0px 70px 0px 70px;
+  
 }
 
 .navbar-menu li {
@@ -38,6 +39,7 @@
   padding-left: 0;
   color: white;
   margin: 0px 0px 0px 50px;
+  
 }
 
 .navbar-icons li {
@@ -63,7 +65,7 @@
   font-size: 32px;
 }
 
-/* 
+
 @media screen and (max-width:1060px) {
   .navbar {
     flex-direction: column;
@@ -77,11 +79,13 @@
     align-items: center;
     margin: 0px;
     width: 100%;
+    
   }
 
   .navbar-menu li {
     width: 100%;
     text-align: center;
+    animation-duration: 0.4s;
   }
 
   .navbar-icons {
@@ -89,6 +93,7 @@
     justify-content: center;
     width: 100%;
     margin: 0px;
+    animation-duration: 0.4s;
   }
 
   .navbar-toggleBtn {
@@ -98,5 +103,6 @@
   .navbar-menu.active,
   .navbar-icons.active {
     display: flex;
+    
   }
-} */
+} 
