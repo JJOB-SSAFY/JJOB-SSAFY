@@ -38,6 +38,9 @@ public class Card {
 
     private String preferredJob;
 
+    @Column(columnDefinition="BOOLEAN DEFAULT false")
+    private boolean visible;
+
     public static Card of(Member member, MyInfoRequestDto requestDto) {
         return Card.builder()
                 .imageUrl(requestDto.getImageUrl())
@@ -60,6 +63,7 @@ public class Card {
         this.preferredJob = newInfo.getPreferredJob();
         this.introduce = newInfo.getIntroduce();
         this.imageUrl = newInfo.getImageUrl();
+        this.visible = newInfo.isVisible();
     }
 
 }

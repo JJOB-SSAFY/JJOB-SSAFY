@@ -18,5 +18,6 @@ public class MyInfoRequestDto {
     private String preferredJob;
     private String introduce;
     private String imageUrl;
+    private boolean visible;
 
 }
