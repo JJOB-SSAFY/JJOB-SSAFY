@@ -29,13 +29,15 @@
 								<span class="font-LINE-Rg">기억하기</span>
 							</div>
 							<div class="forget-password font-LINE-Rg">
-								<a href="#">비밀번호를 잊어버리셨나요?</a>
+								<a href="#">비밀번호를 잊어버리셨나요? {{ test }}</a>
 							</div>
 						</div>
 						<div class="div-button">
+							<button @click="Login" @keyup.enter="Login" class="font-LINE-Bd">
+								로그인
+							</button>
 							<button id="login-kakao-btn" @click="kakaoLogin">카카오</button>
 							<button id="login-google-btn" @click="googleLogin">구글</button>
-							<button @click="Login" class="font-LINE-Bd">로그인</button>
 						</div>
 					</form>
 				</div>
@@ -46,7 +48,7 @@
 
 <script>
 import { ref, reactive } from 'vue';
-import { watch } from 'vue';
+import { watch, computed } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
 
@@ -55,11 +57,6 @@ import { REDIRECT_URL } from '@/common/OAuth.js';
 export default {
 	name: 'loginView',
 	setup() {
-		const hidePassword = ref(false);
-
-		const handleHidePassword = () => {
-			hidePassword.value = !hidePassword.value;
-		};
 		const store = useStore();
 
 		const inputEmail = ref();
@@ -101,17 +98,16 @@ export default {
 		const googleLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/google';
 		};
-		watch(
-			() => store.getters['auth/isAuthenticated'],
-			function () {
-				console.log('watch ');
-			},
-		);
+		// watch(
+		// 	() => store.getters['auth/getUserInfo'],
+		// 	function () {
+		// 		console.log(store.getters['auth/getUserInfo']);
+		// 	},
+		// );
+		// const test = computed(() => store.getters['auth/getUserInfo']);
 
 		return {
-			hidePassword,
 			loginState,
-			handleHidePassword,
 			Login,
 			kakaoLogin,
 			googleLogin,

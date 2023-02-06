@@ -6,6 +6,7 @@ export const auth = {
 	namespaced: true,
 	state: () => ({
 		user: null,
+		role: null,
 		token: {
 			accessToken: jwt.getToken(),
 		},
@@ -20,6 +21,12 @@ export const auth = {
 		isAuthenticated: function (state) {
 			return state.isAuthenticated;
 		},
+		getUserInfo: function (state) {
+			return state.user;
+		},
+		getUserRole: function (state) {
+			return state.role;
+		},
 		getError: function (state) {
 			return state.error;
 		},
@@ -29,10 +36,15 @@ export const auth = {
 			http
 				.post('/member/login', payload)
 				.then(function (response) {
-					console.log(response);
-					const token = response.data.accessToken;
+					const token = 'Bearer ' + response.data.accessToken;
 					commit('SET_TOKEN', 'Bearer ' + token);
-					dispatch('getInfo');
+					commit('SET_USER_ROLE', response.data.role);
+					const config = {
+						headers: {
+							Authorization: token,
+						},
+					};
+					dispatch('getInfo', config);
 				})
 				.then(() => vueRouter.push({ name: 'home' }))
 				.catch(err => {
@@ -48,14 +60,14 @@ export const auth = {
 			});
 		},
 
-		getInfo({ commit }) {
+		getInfo({ commit }, payload) {
 			http
-				.get('/myinfo')
+				.get('/myinfo', payload)
 				.then(({ data }) => {
 					commit('SET_USER_INFO', data);
 				})
 				.catch(err => {
-					commit('ERROR_HANDLE', null);
+					commit('ERROR_HANDLE', err);
 				});
 		},
 	},
@@ -69,10 +81,14 @@ export const auth = {
 			state.token.accessToken = '';
 			state.isAuthenticated = false;
 			state.user = null;
+			state.role = null;
 			jwt.destroyToken();
 		},
 		SET_USER_INFO(state, user) {
 			state.user = user;
+		},
+		SET_USER_ROLE(state, role) {
+			state.role = role;
 		},
 		TOGGLE_REMEMBER(state) {
 			state.remember = !state.remember;
