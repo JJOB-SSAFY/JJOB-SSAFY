@@ -49,7 +49,8 @@ import { ref, reactive } from 'vue';
 import { watch } from 'vue';
 import { useStore } from 'vuex';
 
-import { KAKAO_AUTH_URL } from '@/common/OAuth.js';
+import { REDIRECT_URL } from '@/common/OAuth.js';
+// import { http } from '@/api/http.js';
 export default {
 	name: 'loginView',
 	setup() {
@@ -88,9 +89,20 @@ export default {
 			store.dispatch('auth/login', loginInfo);
 		};
 		const kakaoLogin = () => {
-			console.log(KAKAO_AUTH_URL);
-			location.href = KAKAO_AUTH_URL;
+			location.href = REDIRECT_URL;
 		};
+		// const kakaoLogin = () => {
+		// 	console.log(window.Kakao);
+		// 	window.Kakao.Auth.login({
+		// 		scope: 'profile_neickname, acount_email',
+		// 		success: this.getKakaoAccount,
+		// 	});
+		// };
+		// const getKakaoAccount = () => {
+		// 	window.Kakao.API.request({
+		// 		url: '/v2/user/',
+		// 	});
+		// };
 
 		const googleLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/google';
