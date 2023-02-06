@@ -20,8 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.ssafy.project.db.entity.MemberRoleEnum.COMPANY;
-import static com.ssafy.project.db.entity.MemberRoleEnum.USER;
+import static com.ssafy.project.db.entity.MemberRoleEnum.*;
 import static org.springframework.util.StringUtils.hasText;
 
 @Service("memberService")
@@ -76,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
         if (new BCryptPasswordEncoder().matches(password, member.getPassword())) {
 
             // 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
-            return MemberLoginPostRes.from(JwtTokenUtil.getToken(email));
+            return MemberLoginPostRes.from(JwtTokenUtil.getToken(email), member.getName(), getRole(roleSet));
         }
 
         // 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
@@ -97,6 +96,15 @@ public class MemberServiceImpl implements MemberService {
         if (findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
         return findCompany.get();
+    }
+
+    private String getRole(Set<MemberRoleEnum> roleSet) {
+        if (roleSet.contains(ADMIN)) {
+            return "ADMIN";
+        } else if (roleSet.contains(COMPANY)) {
+            return "COMPANY";
+        }
+        return "USER";
     }
 
 }

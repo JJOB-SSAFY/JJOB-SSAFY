@@ -48,8 +48,10 @@
 import { ref, reactive } from 'vue';
 import { watch } from 'vue';
 import { useStore } from 'vuex';
+import axios from 'axios';
 
-import { KAKAO_AUTH_URL } from '@/common/OAuth.js';
+import { REDIRECT_URL } from '@/common/OAuth.js';
+// import { http } from '@/api/http.js';
 export default {
 	name: 'loginView',
 	setup() {
@@ -88,8 +90,12 @@ export default {
 			store.dispatch('auth/login', loginInfo);
 		};
 		const kakaoLogin = () => {
-			console.log(KAKAO_AUTH_URL);
-			location.href = KAKAO_AUTH_URL;
+			axios({
+				method: 'GET',
+				url: REDIRECT_URL,
+			}).then(res => {
+				console.log(res);
+			});
 		};
 
 		const googleLogin = () => {
