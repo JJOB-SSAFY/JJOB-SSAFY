@@ -1,5 +1,6 @@
 <template>
-	<ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto">
+	<!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto"> -->
+	<ul class="infinite-list" style="overflow: auto">
 		<li
 			class="infinite-list-item"
 			v-for="info in interviewList"
