@@ -16,7 +16,6 @@
   display: flex;
   list-style: none;
   padding-left: 0;
-  margin: 0px 70px 0px 70px;
 
 }
 
@@ -27,10 +26,10 @@
 }
 
 .navbar-menu li:hover {
-  background-color: #d49466;
   border-radius: 4px;
-
-  transition: 1s;
+  transform: scale(1.02);
+  color: rgb(73, 73, 73);
+  transition: 0.3s;
 }
 
 .navbar-icons {
@@ -45,7 +44,6 @@
 .navbar-icons li {
   padding: 8px 12px;
   font-size: 18px;
-  font-family: 'LINE-Bd';
 }
 
 .navbar-icons li:link {
@@ -63,6 +61,11 @@
   right: 32px;
   top: 1px;
   font-size: 32px;
+}
+
+.navbar-toggleBtn :hover {
+  transform: scale(1.04);
+  transition: 0.3s;
 }
 
 
@@ -109,6 +112,9 @@
 
   .navbar-icons.active {
     display: flex;
+
+    -webkit-animation: iconOpacity 1.5s forwards;
+    animation: iconOpacity 1.5s forwards;
   }
 
   @-webkit-keyframes menuSlideDown {
@@ -135,6 +141,27 @@
     to {
       top: 0;
       height: 200px;
+      opacity: 1;
+    }
+  }
+
+
+  @-webkit-keyframes iconOpacity {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes {
+    from {
+      opacity: 0;
+    }
+
+    to {
       opacity: 1;
     }
   }

@@ -19,23 +19,23 @@
 				</li>
 			</ul>
 
-			<ul class="navbar-icons" ref="icons">
+			<ul class="navbar-icons font-LINE-Rg" ref="icons">
 				<li v-if="role === 'COMPANY' || role === 'ADMIN'">
 					<router-link to="/register" class="navbar-icon">
-						<fa-icon icon="fas fa-solid fa-user" />
-						<span> 회원등록 </span>
+						<fa-icon icon="fas fa-solid fa-user-plus" />
+						<span> &nbsp회원등록 </span>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/myInfo" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user" />
-						<span> 마이페이지 </span>
+						<span> &nbsp마이페이지 </span>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/login" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-right-from-bracket" />
-						<span v-on:click="logout">로그아웃</span>
+						<span v-on:click="logout">&nbsp로그아웃</span>
 					</router-link>
 				</li>
 				<register-view />
