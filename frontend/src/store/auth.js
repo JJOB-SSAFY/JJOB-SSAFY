@@ -4,7 +4,7 @@ import vueRouter from '../router/vue-router';
 
 export const auth = {
 	namespaced: true,
-	state: {
+	state: () => ({
 		user: null,
 		token: {
 			accessToken: jwt.getToken(),
@@ -12,7 +12,7 @@ export const auth = {
 		isAuthenticated: !!jwt.getToken(),
 		remember: false,
 		error: null,
-	},
+	}),
 	getters: {
 		getAccessToken: function (state) {
 			return state.token.accessToken;
@@ -33,6 +33,7 @@ export const auth = {
 					if (response.status == '200') {
 						const token = response.data.accessToken;
 						commit('SET_TOKEN', token);
+						console.log(token);
 						vueRouter.push({ name: 'home' });
 					}
 				})
@@ -41,13 +42,14 @@ export const auth = {
 				});
 		},
 		logout({ commit }) {
-			return new Promise(res => {
+			return new Promise(resolve => {
 				setTimeout(() => {
 					commit('DESTROY_TOKEN');
-					res();
+					resolve();
 				}, 1000);
 			});
 		},
+
 		getInfo({ commit }) {
 			http.get('/member/info').then(({ data }) => {
 				commit('SET_USER_INFO', data);

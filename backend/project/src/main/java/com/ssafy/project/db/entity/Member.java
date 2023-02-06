@@ -29,8 +29,6 @@ public class Member {
     @Column(nullable = false)
     private String name;
 
-    private String phone;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
     private Card card;
@@ -48,7 +46,6 @@ public class Member {
                 .email(memberInfo.getEmail())
                 .password(new BCryptPasswordEncoder().encode(memberInfo.getPassword()))
                 .name(memberInfo.getName())
-                .phone(memberInfo.getPhone())
                 .build();
     }
 

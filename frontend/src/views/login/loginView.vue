@@ -1,68 +1,55 @@
 <template>
-	<section class="login-section">
-		<div class="login-logo"></div>
-		<div class="login-div">
-			<div class="row">
-				<div class="col-12">
-					<div class="input-group mb-80 sm-mb-70">
-						<label>이메일</label>
+	<div class="login-section">
+		<div class="div-illustration">
+			<img src="../../assets/images/logo/logo-removebg.png" alt="logo" />
+		</div>
+		<div class="div-login">
+			<div class="login-container">
+				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
+				<div class="login-form mt-110">
+					<form @submit.prevent="onSubmit">
 						<input
+							class="font-LINE-Rg"
 							v-model.lazy.trim="loginState.form.email"
-							required
 							type="email"
-							placeholder="email@naver.com"
-							ref="email"
+							ref="inputEmail"
+							placeholder="이메일을 입력해주세요"
 						/>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="input-group mb-15">
-						<label>비밀번호</label>
+
 						<input
+							class="font-LINE-Rg"
 							v-model.lazy.trim="loginState.form.password"
-							required
-							:type="hidePassword ? 'text' : 'password'"
-							placeholder="비밀번호를 입력하세요"
-							ref="password"
+							type="password"
+							ref="inputPassword"
+							placeholder="비밀번호를 입력해주세요"
 						/>
-						<span class="placeholder_icon">
-							<span
-								:class="`passVicon ${hidePassword ? 'hide-pass' : ''}`"
-								@click="handleHidePassword"
-							>
-								<img src="../../assets/images/icon/view.svg" alt="" />
-							</span>
-						</span>
-					</div>
-				</div>
-				<div class="col-12">
-					<div class="agreement-checkbox">
-						<div>
-							<input type="checkbox" id="remember" />
-							<label for="remember">로그인 기억하기</label>
+						<div class="div-sub-option">
+							<div class="remember-form font-LINE-Rg">
+								<input type="checkbox" />
+								<span class="font-LINE-Rg">기억하기</span>
+							</div>
+							<div class="forget-password font-LINE-Rg">
+								<a href="#">비밀번호를 잊어버리셨나요?</a>
+							</div>
 						</div>
-						<a href="#">비밀번호를 잊어버리셨나요? </a>
-					</div>
-				</div>
-				<div class="col-12">
-					<button
-						class="login-btn mt-50 mb-50 font-LINE-Bd"
-						@click="Login"
-						@keyup.enter="Login"
-					>
-						로그인
-					</button>
+						<div class="div-button">
+							<button id="login-kakao-btn" @click="kakaoLogin">카카오</button>
+							<button id="login-google-btn" @click="googleLogin">구글</button>
+							<button @click="Login" class="font-LINE-Bd">로그인</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 </template>
 
 <script>
 import { ref, reactive } from 'vue';
-import { computed, watch } from 'vue';
+import { watch } from 'vue';
 import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
+
+import { KAKAO_AUTH_URL } from '@/common/OAuth.js';
 export default {
 	name: 'loginView',
 	setup() {
@@ -71,11 +58,10 @@ export default {
 		const handleHidePassword = () => {
 			hidePassword.value = !hidePassword.value;
 		};
-
 		const store = useStore();
 
-		const router = useRouter();
-		const token = ref('');
+		const inputEmail = ref();
+		const inputPassword = ref();
 
 		const loginState = reactive({
 			form: {
@@ -83,17 +69,15 @@ export default {
 				password: '',
 			},
 		});
-		const email = ref(null);
-		const password = ref(null);
 
 		const Login = () => {
 			if (!loginState.form.email) {
 				alert('아이디를 입력해주세요');
-				email.value.focus();
+				inputEmail.value.focus();
 				return;
 			} else if (!loginState.form.password) {
 				alert('비밀번호를 입력해주세요');
-				password.value.focus();
+				inputPassword.value.focus();
 				return;
 			}
 
@@ -102,8 +86,14 @@ export default {
 				password: loginState.form.password,
 			};
 			store.dispatch('auth/login', loginInfo);
+		};
+		const kakaoLogin = () => {
+			console.log(KAKAO_AUTH_URL);
+			location.href = KAKAO_AUTH_URL;
+		};
 
-			console.log('asbasd' + store.getters['auth/isAuthenticated']);
+		const googleLogin = () => {
+			location.href = 'http://localhost:8080/oauth2/authorization/google';
 		};
 		watch(
 			() => store.getters['auth/isAuthenticated'],
@@ -117,6 +107,10 @@ export default {
 			loginState,
 			handleHidePassword,
 			Login,
+			kakaoLogin,
+			googleLogin,
+			inputEmail,
+			inputPassword,
 		};
 	},
 };
