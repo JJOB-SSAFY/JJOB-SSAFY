@@ -87,12 +87,13 @@ export default {
 			store.dispatch('auth/login', loginInfo);
 		};
 		const kakaoLogin = () => {
-			axios({
-				method: 'GET',
-				url: REDIRECT_URL,
-			}).then(res => {
-				console.log(res);
-			});
+			location.href = 'http://localhost:8080/oauth2/authorization/kakao';
+			// axios({
+			// 	method: 'GET',
+			// 	url: REDIRECT_URL,
+			// }).then(res => {
+			// 	console.log(res);
+			// });
 		};
 
 		const googleLogin = () => {
