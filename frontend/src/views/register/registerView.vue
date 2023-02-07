@@ -4,10 +4,10 @@
 			<img src="../../assets/images/logo/logo-removebg.png" alt="logo" />
 		</div>
 		<div class="div-register">
-			<div class="login-container">
+			<div class="register-container">
 				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
-				<div class="login-form mt-110">
-					<form @submit.prevent="onSubmit">
+				<div class="register-form mt-110">
+					<form @submit.prevent="register">
 						<input
 							class="font-LINE-Rg"
 							type="email"
@@ -31,7 +31,7 @@
 							placeholder="이름을 입력해주세요"
 						/>
 						<div class="div-button">
-							<button @click="register" class="font-LINE-Bd"></button>
+							<button class="font-LINE-Bd"></button>
 						</div>
 					</form>
 				</div>

@@ -13,7 +13,7 @@
 <script>
 import Presentation from './components/presentation.vue';
 import { reactive } from 'vue';
-import presentationService from '@/src/api/presentationServie';
+import presentationService from '@/api/presentationService';
 export default {
 	name: 'presentationView',
 
