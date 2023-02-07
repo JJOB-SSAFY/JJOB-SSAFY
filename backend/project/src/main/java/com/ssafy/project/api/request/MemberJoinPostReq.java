@@ -15,8 +15,6 @@ public class MemberJoinPostReq {
 
     private String name;
 
-    private String phone;
-
     private String companyName;
 
 }
