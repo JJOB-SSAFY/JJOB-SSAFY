@@ -49,10 +49,12 @@ export default {
 
 		const clickConference = function (id) {
 			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
+			// const username = localStorage.getItem('name');
+
 			router.push({
 				name: 'openVidu',
 				params: {
-					participant: '김기윤',
+					participant: 'username',
 					session: id,
 				},
 			});

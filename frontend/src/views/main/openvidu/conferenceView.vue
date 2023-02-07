@@ -34,6 +34,15 @@
 		<div id="session" v-if="session">
 			<div id="session-header">
 				<h1 id="session-title">{{ mySessionId }}</h1>
+				<!-- Button trigger modal -->
+				<button
+					type="button"
+					class="btn btn-primary"
+					data-bs-toggle="modal"
+					data-bs-target="#exampleModal"
+				>
+					leaveSession
+				</button>
 				<input
 					class="btn btn-large btn-danger"
 					type="button"
@@ -58,6 +67,51 @@
 				/>
 			</div>
 		</div>
+
+		<!-- Modal -->
+		<div
+			class="modal fade"
+			id="exampleModal"
+			tabindex="-1"
+			aria-labelledby="exampleModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">리뷰쓰기</h5>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="modal-body">
+						싸피 후배들을 위해 후기를 써주세요. 지금 리뷰를 작성하면 500
+						마일리지를 받습니다.
+					</div>
+					<div class="modal-footer">
+						<button
+							type="button"
+							class="btn btn-secondary"
+							data-bs-dismiss="modal"
+							@click="goToInterviewView"
+						>
+							나가기
+						</button>
+						<button
+							type="button"
+							class="btn btn-primary"
+							data-bs-dismiss="modal"
+							@click="goToReviewView"
+						>
+							리뷰쓰기
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -65,10 +119,13 @@
 import { OpenVidu } from 'openvidu-browser';
 import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
+import { useRouter } from 'vue-router';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const APPLICATION_SERVER_URL = 'http://localhost:8080/';
+
+const router = useRouter();
 
 export default {
 	name: 'conferenceView',
@@ -185,6 +242,20 @@ export default {
 			this.mainStreamManager = stream;
 		},
 
+		goToReviewView() {
+			this.leaveSession();
+			this.$router.push({
+				name: 'review',
+			});
+		},
+
+		goToInterviewView() {
+			this.leaveSession();
+			this.$router.push({
+				name: 'interview',
+			});
+		},
+
 		/**
 		 * --------------------------------------------
 		 * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -229,3 +300,5 @@ export default {
 	},
 };
 </script>
+
+<style></style>
