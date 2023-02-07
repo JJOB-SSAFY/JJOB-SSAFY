@@ -47,14 +47,17 @@ public class SsafyLoginSuccessHandler implements AuthenticationSuccessHandler {
         Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
         Cookie nameCookie = new Cookie("name", name);
         Cookie roleCookie = new Cookie("role", role);
+        Cookie typeCookie = new Cookie("type", "social");
 
         accessTokenCookie.setPath("/");
         nameCookie.setPath("/");
         roleCookie.setPath("/");
+        typeCookie.setPath("/");
 
         response.addCookie(accessTokenCookie);
         response.addCookie(nameCookie);
         response.addCookie(roleCookie);
+        response.addCookie(typeCookie);
 
         String url = makeRedirectUrl();
 
