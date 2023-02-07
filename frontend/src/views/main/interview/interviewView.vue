@@ -1,15 +1,17 @@
 <template>
 	<!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto"> -->
-	<ul class="infinite-list" style="overflow: auto">
-		<li
-			class="infinite-list-item"
-			v-for="info in state.interviewList"
-			:key="info.conferenceId"
-			@click="clickConference(info.conferenceId)"
-		>
-			<interview-item :info="info" />
-		</li>
-	</ul>
+	<div class="container">
+		<ul class="infinite-list justify-content-evenly row" style="overflow: auto">
+			<li
+				class="infinite-list-item col-4"
+				v-for="info in state.interviewList"
+				:key="info.conferenceId"
+				style="margin-bottom: 50px"
+			>
+				<interview :info="info" />
+			</li>
+		</ul>
+	</div>
 </template>
 <script>
 import InterviewItem from './components/interview.vue';
@@ -25,8 +27,6 @@ export default {
 	},
 
 	setup() {
-		const router = useRouter();
-
 		const state = reactive({
 			// count: 12,
 			interviewList: null,
@@ -40,34 +40,7 @@ export default {
 			state.interviewList = data;
 		});
 
-		// const
-		// axios({
-		// 	method: 'get',
-		// 	url: 'http://localhost:8080/conference/list/INTERVIEW',
-		// 	headers: {
-		// 		Authorization: localStorage.getItem('jjob.s.token'),
-		// 	},
-		// })
-		// .then(res => {
-		// 	state.interviewList = res.data;
-		// 	console.log(state.interviewList);
-		// });
-
-		const clickConference = function (id) {
-			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
-			// const username = localStorage.getItem('name');
-
-			router.push({
-				name: 'openVidu',
-				params: {
-					participant: 'username',
-					session: id,
-				},
-			});
-			// loadingInstance1.close()
-		};
-
-		return { state, load, clickConference };
+		return { state, load };
 	},
 };
 </script>

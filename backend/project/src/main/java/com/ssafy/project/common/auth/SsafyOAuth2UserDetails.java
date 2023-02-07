@@ -29,8 +29,17 @@ public class SsafyOAuth2UserDetails extends User implements OAuth2User {
                                   String password,
                                   Collection<? extends GrantedAuthority> authorities,
                                   Map<String, Object> attr) {
-        super(username, password, authorities);
+        this(username, password, authorities);
         this.attr = attr;
+    }
+
+    public SsafyOAuth2UserDetails(String username,
+                             String password,
+                             Collection<? extends GrantedAuthority> authorities) {
+
+        super(username, password, authorities);
+        this.email = username;
+        this.password = password;
     }
 
     @Override

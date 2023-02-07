@@ -31,6 +31,9 @@ export const auth = {
 		getError: function (state) {
 			return state.error;
 		},
+		getName: function (state) {
+			return state.name;
+		},
 	},
 	actions: {
 		login({ commit, dispatch }, payload = {}) {
