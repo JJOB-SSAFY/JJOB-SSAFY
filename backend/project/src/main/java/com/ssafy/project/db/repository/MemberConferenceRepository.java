@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MemberConferenceRepository extends JpaRepository<MemberConference, Long> {
-    List<MemberConference> findAllByMemberIdAndConference_ConferenceCategory(Long member_id, ConferenceEnum conference_conferenceCategory);
+    List<MemberConference> findAllByMemberIdAndConference_conferenceCategoryOrderByConference_callStartTimeDesc(Long member_id, ConferenceEnum conference_conferenceCategory);
 
     void deleteAllByConferenceId(Long id);
 }

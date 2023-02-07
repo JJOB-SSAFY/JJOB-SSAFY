@@ -16,7 +16,6 @@
 <script>
 import InterviewItem from './components/interview.vue';
 import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import interviewSevice from '@/api/interviewService';
 
 export default {

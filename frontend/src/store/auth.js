@@ -44,7 +44,6 @@ export const auth = {
 					const token = 'Bearer ' + response.data.accessToken;
 					commit('SET_TOKEN', token);
 					commit('SET_USER', response.data);
-					console.log(token);
 					const config = {
 						headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -62,7 +61,6 @@ export const auth = {
 			const token = 'Bearer ' + loginInfo.accessToken;
 			commit('SET_TOKEN', token);
 			commit('SET_USER', loginInfo);
-			console.log(token);
 			const config = {
 				headers: {
 					'Content-Type': 'application/json;charset=utf-8',

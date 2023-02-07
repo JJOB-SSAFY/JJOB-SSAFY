@@ -12,8 +12,9 @@
 				종료시간 : {{ endTime }}
 			</p>
 			<button
-				class="keeey"
-				@click="clickConference(info.conferenceId)"
+				@click="
+					clickConference(info.conferenceId, info.companyId, info.companyName)
+				"
 				style="
 					margin: 10px 0 auto;
 					padding: 5px;
@@ -28,11 +29,7 @@
 		</div>
 	</div>
 </template>
-<style>
-.keeey:hover {
-	background: black;
-}
-</style>
+<style></style>
 <script>
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -64,7 +61,7 @@ export default {
 
 		const store = useStore();
 
-		const clickConference = function (id) {
+		const clickConference = function (id, companyId, companyName) {
 			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
 			const name = store.getters['auth/getName'];
 
@@ -73,6 +70,8 @@ export default {
 				params: {
 					participant: name,
 					session: id,
+					companyId: companyId,
+					companyName: companyName,
 				},
 			});
 			// loadingInstance1.close()
