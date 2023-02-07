@@ -18,7 +18,7 @@ export default createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/main',
+			redirect: '/login',
 		},
 		{
 			path: '/login',

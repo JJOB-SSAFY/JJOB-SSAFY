@@ -40,6 +40,7 @@ export const auth = {
 			http
 				.post('/member/login', payload)
 				.then(function (response) {
+					console.log(response);
 					const token = 'Bearer ' + response.data.accessToken;
 					commit('SET_TOKEN', token);
 					commit('SET_USER', response.data);

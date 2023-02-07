@@ -14,15 +14,16 @@
 	</div>
 </template>
 <script>
-import Interview from './components/interview.vue';
+import InterviewItem from './components/interview.vue';
 import { reactive } from 'vue';
-import axios from 'axios';
+import { useRouter } from 'vue-router';
+import interviewSevice from '@/api/interviewService';
 
 export default {
 	name: 'interviewView',
 
 	components: {
-		Interview,
+		InterviewItem,
 	},
 
 	setup() {
@@ -34,16 +35,9 @@ export default {
 		const load = function () {
 			// state.count += 4;
 		};
-
-		axios({
-			method: 'get',
-			url: 'http://localhost:8080/conference/list/INTERVIEW',
-			headers: {
-				Authorization: localStorage.getItem('jjob.s.token'),
-			},
-		}).then(res => {
-			state.interviewList = res.data;
-			console.log(state.interviewList);
+		const interviewAPI = new interviewSevice();
+		interviewAPI.getInterviewList().then(data => {
+			state.interviewList = data;
 		});
 
 		return { state, load };

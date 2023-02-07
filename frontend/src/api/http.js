@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const url = 'http://localhost:8080';
 // axios 객체 생성
 const http = axios.create({
 	baseURL: 'http://localhost:8080',
@@ -8,4 +9,5 @@ const http = axios.create({
 	},
 });
 
+export { url, http };
 export default http;

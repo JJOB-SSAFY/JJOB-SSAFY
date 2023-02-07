@@ -7,7 +7,7 @@
 			<div class="login-container">
 				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
 				<div class="login-form mt-110">
-					<form @submit.prevent="onSubmit">
+					<form @submit.prevent="Login">
 						<input
 							class="font-LINE-Rg"
 							v-model.lazy.trim="loginState.form.email"
@@ -48,12 +48,8 @@
 
 <script>
 import { ref, reactive } from 'vue';
-import { watch, computed } from 'vue';
 import { useStore } from 'vuex';
-import axios from 'axios';
 
-import { REDIRECT_URL } from '@/common/OAuth.js';
-// import { http } from '@/api/http.js';
 export default {
 	name: 'loginView',
 	setup() {

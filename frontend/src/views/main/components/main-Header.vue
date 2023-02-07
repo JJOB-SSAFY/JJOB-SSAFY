@@ -11,7 +11,7 @@
 					/>
 				</router-link>
 			</div>
-			<ul class="navbar-menu" ref="menu">
+			<ul :class="`navbar-menu ${role === 'U' ? '' : 'five'}`" ref="menu">
 				<li v-for="nav in filterNav" :key="nav.name" class="nav-item">
 					<router-link :to="nav.href" class="nav-link font-LINE-Bd">
 						{{ nav.name }}
@@ -19,8 +19,8 @@
 				</li>
 			</ul>
 
-			<ul class="navbar-icons font-LINE-Rg" ref="icons">
-				<li v-if="role === 'COMPANY' || role === 'ADMIN'">
+			<ul :class="`navbar-icons ${role === 'U' ? '' : 'five'}`" ref="icons">
+				<li v-if="role === 'ADMIN'">
 					<router-link to="/register" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user-plus" />
 						<span> &nbsp회원등록 </span>
