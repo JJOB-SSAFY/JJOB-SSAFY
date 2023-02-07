@@ -13,8 +13,7 @@
 <script>
 import Presentation from './components/presentation.vue';
 import { reactive } from 'vue';
-import axios from 'axios';
-
+import presentationService from '@/src/api/presentationServie';
 export default {
 	name: 'presentationView',
 
@@ -31,18 +30,10 @@ export default {
 		const load = function () {
 			// state.count += 4;
 		};
-
-		axios({
-			method: 'get',
-			url: 'http://localhost:8080/conference/list/PRESENTATION',
-			headers: {
-				Authorization: localStorage.getItem('jjob.s.token'),
-			},
-		}).then(res => {
-			state.presentationList = res.data;
-			console.log(state.presentationList);
+		const presentationAPI = new presentationService();
+		presentationAPI.getPresentList().then(data => {
+			state.presentationList = data;
 		});
-
 		return { state, load };
 	},
 };
