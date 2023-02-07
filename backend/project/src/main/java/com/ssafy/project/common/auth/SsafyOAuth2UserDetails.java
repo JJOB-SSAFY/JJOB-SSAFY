@@ -23,8 +23,6 @@ public class SsafyOAuth2UserDetails extends User implements OAuth2User {
 
     private String name;
 
-    private String phone;
-
     private Map<String, Object> attr;
 
     public SsafyOAuth2UserDetails(String username,
