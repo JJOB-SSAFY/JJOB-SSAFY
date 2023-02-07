@@ -31,16 +31,21 @@ public class Conference {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     @Enumerated(EnumType.STRING)
     private ConferenceEnum conferenceCategory;
 
-    public static Conference of(ConferenceRequestDto requestDto, Member member) {
+    public static Conference of(ConferenceRequestDto requestDto, Member member, Company company) {
         return Conference.builder()
                 .conferenceTitle(requestDto.getConferenceTitle())
                 .callStartTime(requestDto.getCallStartTime())
                 .callEndTime(requestDto.getCallEndTime())
                 .conferenceCategory(ConferenceEnum.valueOf(requestDto.getConferenceCategory()))
                 .member(member)
+                .company(company)
                 .build();
     }
 

@@ -33,11 +33,20 @@
 							</div>
 						</div>
 						<div class="div-button">
-							<button @click="Login" @keyup.enter="Login" class="font-LINE-Bd">
+							<button
+								type="button"
+								@click="Login"
+								@keyup.enter="Login"
+								class="font-LINE-Bd"
+							>
 								로그인
 							</button>
-							<button id="login-kakao-btn" @click="kakaoLogin">카카오</button>
-							<button id="login-google-btn" @click="googleLogin">구글</button>
+							<button type="button" id="login-kakao-btn" @click="kakaoLogin">
+								카카오
+							</button>
+							<button type="button" id="login-google-btn" @click="googleLogin">
+								구글
+							</button>
 						</div>
 					</form>
 				</div>

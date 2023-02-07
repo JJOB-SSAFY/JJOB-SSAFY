@@ -56,7 +56,7 @@ export default createRouter({
 				},
 				{
 					name: 'reviewWrite',
-					path: '/reviewWrite',
+					path: '/reviewWrite/:companyId/:companyName',
 					component: reviewWriteView,
 				},
 				{
@@ -71,7 +71,7 @@ export default createRouter({
 				},
 				{
 					name: 'openVidu',
-					path: '/openvidu/:participant/:session',
+					path: '/openvidu/:participant/:session/:companyId/:companyName',
 					component: openviduView,
 				},
 			],

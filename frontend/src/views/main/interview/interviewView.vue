@@ -8,7 +8,7 @@
 				:key="info.conferenceId"
 				style="margin-bottom: 50px"
 			>
-				<interview :info="info" />
+				<interview-item :info="info" />
 			</li>
 		</ul>
 	</div>
@@ -16,7 +16,6 @@
 <script>
 import InterviewItem from './components/interview.vue';
 import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import interviewSevice from '@/api/interviewService';
 
 export default {
