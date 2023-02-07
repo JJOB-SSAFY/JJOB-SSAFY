@@ -5,7 +5,7 @@
 				<h1>Join a video session</h1>
 				<div class="form-group">
 					<p>
-						<label>Participant</label>
+						<label>이름</label>
 						<input
 							v-model="myUserName"
 							class="form-control"
@@ -14,7 +14,7 @@
 						/>
 					</p>
 					<p>
-						<label>Session</label>
+						<label>방 번호</label>
 						<input
 							v-model="mySessionId"
 							class="form-control"
@@ -24,7 +24,13 @@
 					</p>
 					<p class="text-center">
 						<button class="btn btn-lg btn-success" @click="joinSession()">
-							Join!
+							입장하기
+						</button>
+						<button
+							class="btn btn-lg btn-secondary"
+							@click="backToInterviewView()"
+						>
+							돌아가기
 						</button>
 					</p>
 				</div>
@@ -43,13 +49,6 @@
 				>
 					leaveSession
 				</button>
-				<input
-					class="btn btn-large btn-danger"
-					type="button"
-					id="buttonLeaveSession"
-					@click="leaveSession"
-					value="Leave session"
-				/>
 			</div>
 			<div id="main-video" class="col-md-6">
 				<user-video :stream-manager="mainStreamManager" />
@@ -94,19 +93,19 @@
 					<div class="modal-footer">
 						<button
 							type="button"
-							class="btn btn-secondary"
-							data-bs-dismiss="modal"
-							@click="goToInterviewView"
-						>
-							나가기
-						</button>
-						<button
-							type="button"
 							class="btn btn-primary"
 							data-bs-dismiss="modal"
 							@click="goToReviewView"
 						>
 							리뷰쓰기
+						</button>
+						<button
+							type="button"
+							class="btn btn-secondary"
+							data-bs-dismiss="modal"
+							@click="goToInterviewView"
+						>
+							나가기
 						</button>
 					</div>
 				</div>
@@ -245,12 +244,18 @@ export default {
 		goToReviewView() {
 			this.leaveSession();
 			this.$router.push({
-				name: 'review',
+				name: 'reviewWrite',
 			});
 		},
 
 		goToInterviewView() {
 			this.leaveSession();
+			this.$router.push({
+				name: 'interview',
+			});
+		},
+
+		backToInterviewView() {
 			this.$router.push({
 				name: 'interview',
 			});
