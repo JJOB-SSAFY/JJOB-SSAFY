@@ -8,6 +8,7 @@ import infoCardsView from '@/views/main/infoCards/infoCardsView.vue';
 import presentationView from '@/views/main/presentation/presentationView.vue';
 import recruitView from '@/views/main/recruit/recruitView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
+import reviewWriteView from '@/views/main/review/reviewWriteView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
@@ -52,6 +53,11 @@ export default createRouter({
 					name: 'review',
 					path: '/review',
 					component: reviewView,
+				},
+				{
+					name: 'reviewWrite',
+					path: '/reviewWrite',
+					component: reviewWriteView,
 				},
 				{
 					name: 'myInfo',
