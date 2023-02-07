@@ -3,6 +3,7 @@
 		<div class="card">
 			<h5 class="card-header">이름 {{ info.name }}</h5>
 			<div class="card-body">
+				<img :src="info.imageUrl" />
 				<h5 class="card-title">휴대폰</h5>
 				<p class="card-text">{{ info.phone }}</p>
 				<h5 class="card-title">이메일</h5>
