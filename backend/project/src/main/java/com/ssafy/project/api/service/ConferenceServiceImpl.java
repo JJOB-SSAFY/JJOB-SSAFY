@@ -6,6 +6,7 @@ import com.ssafy.project.api.response.ConferenceResponseDto;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.*;
+import com.ssafy.project.db.repository.CompanyRepository;
 import com.ssafy.project.db.repository.ConferenceRepository;
 import com.ssafy.project.db.repository.MemberConferenceRepository;
 import com.ssafy.project.db.repository.MemberRepository;
@@ -31,15 +32,21 @@ public class ConferenceServiceImpl implements ConferenceService {
     private final MemberConferenceRepository memberConferenceRepository;
     private final ConferenceRepository conferenceRepository;
 
+    private final CompanyRepository companyRepository;
+
     @Override
     @Transactional
-    public void createConference(ConferenceRequestDto requestDto, Long id) {
+    public void createConference(ConferenceRequestDto requestDto, Long memberId, Long companyId) {
 
-        Optional<Member> member = memberRepository.findById(id);
+        Optional<Member> member = memberRepository.findById(memberId);
 
         if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
 
-        Conference conference = Conference.of(requestDto, member.get());
+        Optional<Company> findCompany = companyRepository.findById(companyId);
+
+        if(findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+
+        Conference conference = Conference.of(requestDto, member.get(), findCompany.get());
 
         conferenceRepository.save(conference);
 
@@ -69,7 +76,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Transactional(readOnly = true)
     public List<ConferenceResponseDto> getConferenceList(Long memberId, String type) {
         List<MemberConference> memberConferenceList = memberConferenceRepository
-                .findAllByMemberIdAndConference_ConferenceCategory(memberId, ConferenceEnum.valueOf(type));
+                .findAllByMemberIdAndConference_conferenceCategoryOrderByConference_callStartTimeDesc(memberId, ConferenceEnum.valueOf(type));
 
         return memberConferenceList.stream().map((o) -> new ConferenceResponseDto(o.getConference())).collect(toList());
     }
@@ -86,7 +93,7 @@ public class ConferenceServiceImpl implements ConferenceService {
 
         if (findConference.isEmpty()) throw new ApiException(ExceptionEnum.CONFERENCE_NOT_EXIST_EXCEPTION);
 
-        if (!findMember.get().getId().equals(findConference.get().getId())) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+        if (!findMember.get().getId().equals(findConference.get().getMember().getId())) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
         memberConferenceRepository.deleteAllByConferenceId(conferenceId);
         conferenceRepository.deleteAllById(conferenceId);

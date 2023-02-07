@@ -23,18 +23,19 @@ public class ConferenceController {
     private static final Logger logger = LoggerFactory.getLogger(ConferenceController.class);
     private final ConferenceService conferenceService;
 
-    @PostMapping("")
+    @PostMapping("/{companyId}")
     public ResponseEntity<BaseResponseBody> CreateConference(@AuthenticationPrincipal SsafyUserDetails userDetails,
-                                                             @RequestBody ConferenceRequestDto conReq) {
+                                                             @RequestBody ConferenceRequestDto conReq,
+                                                             @PathVariable Long companyId) {
         logger.info(conReq.getCallEndTime().toString());
-        conferenceService.createConference(conReq, userDetails.getMember().getId());
+        conferenceService.createConference(conReq, userDetails.getMember().getId(), companyId);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
     @GetMapping("/list/{type}")
     public ResponseEntity<?> getConferenceList(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                @PathVariable String type) {
-        List<ConferenceResponseDto> list = conferenceService.getConferenceList(userDetails.getMember().getId(),type);
+        List<ConferenceResponseDto> list = conferenceService.getConferenceList(userDetails.getMember().getId(), type);
         return new ResponseEntity<List<ConferenceResponseDto>>(list, HttpStatus.OK);
     }
 

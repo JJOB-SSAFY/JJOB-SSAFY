@@ -119,7 +119,7 @@ import { OpenVidu } from 'openvidu-browser';
 import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
 import { useRouter } from 'vue-router';
-import url from '../../../api/http';
+import { url } from '../../../api/http';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -146,6 +146,8 @@ export default {
 			// Join form
 			mySessionId: this.$route.params.session,
 			myUserName: this.$route.params.participant,
+			companyId: this.$route.params.companyId,
+			companyName: this.$route.params.companyName,
 		};
 	},
 
@@ -246,6 +248,10 @@ export default {
 			this.leaveSession();
 			this.$router.push({
 				name: 'reviewWrite',
+				params: {
+					companyId: this.companyId,
+					companyName: this.companyName,
+				},
 			});
 		},
 
@@ -284,7 +290,7 @@ export default {
 
 		async createSession(sessionId) {
 			const response = await axios.post(
-				APPLICATION_SERVER_URL + 'api/sessions',
+				APPLICATION_SERVER_URL + '/api/sessions',
 				{ customSessionId: sessionId },
 				{
 					headers: { 'Content-Type': 'application/json' },
@@ -295,7 +301,7 @@ export default {
 
 		async createToken(sessionId) {
 			const response = await axios.post(
-				APPLICATION_SERVER_URL + 'api/sessions/' + sessionId + '/connections',
+				APPLICATION_SERVER_URL + '/api/sessions/' + sessionId + '/connections',
 				{},
 				{
 					headers: { 'Content-Type': 'application/json' },
