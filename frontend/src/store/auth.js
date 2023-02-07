@@ -41,6 +41,7 @@ export const auth = {
 					commit('SET_USER_ROLE', response.data.role);
 					const config = {
 						headers: {
+							'Content-Type': 'application/json;charset=utf-8',
 							Authorization: token,
 						},
 					};
