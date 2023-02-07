@@ -16,18 +16,18 @@
 			</form>
 			<p>{{ searchClick }}</p>
 		</div>
-		<!-- <div
+		<div
 			class="recruit-list-items"
 			v-for="info in state.recruitList"
 			:key="info.recruit"
 		>
-			<recruit-Recommend :info="info" />
-		</div> -->
+			<div>{{ info }}</div>
+		</div>
 	</div>
 </template>
 
 <script>
-import recruitItme from './components/recruit-item.vue';
+// import recruitItemView from './recruitView.vue';
 import { ref, reactive, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
@@ -36,7 +36,7 @@ export default {
 	name: 'recruitView',
 
 	components: {
-		recruitItme,
+		// recruitItemView,
 	},
 	setup() {
 		const store = useStore();
