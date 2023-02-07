@@ -48,12 +48,8 @@
 
 <script>
 import { ref, reactive } from 'vue';
-import { watch, computed } from 'vue';
 import { useStore } from 'vuex';
-import axios from 'axios';
 
-import { REDIRECT_URL } from '@/common/OAuth.js';
-// import { http } from '@/api/http.js';
 export default {
 	name: 'loginView',
 	setup() {
