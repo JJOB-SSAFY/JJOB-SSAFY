@@ -16,8 +16,9 @@
 
 <script>
 export default {
+	name: 'recruitItemView',
 	props: {
-		info: String,
+		info: Object,
 	},
 	setup() {
 		return {};
