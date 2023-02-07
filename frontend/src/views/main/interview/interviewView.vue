@@ -8,7 +8,7 @@
 				:key="info.conferenceId"
 				style="margin-bottom: 50px"
 			>
-				<interview :info="info" />
+				<interview-item :info="info" />
 			</li>
 		</ul>
 	</div>

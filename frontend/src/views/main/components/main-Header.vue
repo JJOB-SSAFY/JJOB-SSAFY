@@ -2,7 +2,7 @@
 	<div>
 		<nav class="navbar">
 			<div class="navbar-logo">
-				<router-link to="/">
+				<router-link to="/main">
 					<img
 						src="@/assets/images/logo/logo-removebg.png"
 						alt=""
@@ -11,7 +11,7 @@
 					/>
 				</router-link>
 			</div>
-			<ul :class="`navbar-menu ${role === 'U' ? '' : 'five'}`" ref="menu">
+			<ul :class="`navbar-menu ${role === 'USER' ? '' : 'five'}`" ref="menu">
 				<li v-for="nav in filterNav" :key="nav.name" class="nav-item">
 					<router-link :to="nav.href" class="nav-link font-LINE-Bd">
 						{{ nav.name }}
@@ -19,7 +19,7 @@
 				</li>
 			</ul>
 
-			<ul :class="`navbar-icons ${role === 'U' ? '' : 'five'}`" ref="icons">
+			<ul :class="`navbar-icons ${role === 'USER' ? '' : 'five'}`" ref="icons">
 				<li v-if="role === 'ADMIN'">
 					<router-link to="/register" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user-plus" />
