@@ -29,6 +29,7 @@ export default {
 		const getList = () => {
 			infoCardService.getCardList().then(data => {
 				cardList.card = data;
+				console.log(data);
 			});
 		};
 		// const search = () => {
