@@ -120,10 +120,11 @@ import { OpenVidu } from 'openvidu-browser';
 import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
 import { useRouter } from 'vue-router';
+import url from '../../../api/http';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-const APPLICATION_SERVER_URL = 'http://localhost:8080/';
+const APPLICATION_SERVER_URL = url;
 
 const router = useRouter();
 
