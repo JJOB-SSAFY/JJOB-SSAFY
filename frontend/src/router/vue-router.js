@@ -11,7 +11,7 @@ import reviewView from '@/views/main/review/reviewView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
-
+import test from '@/views/test.vue';
 export default createRouter({
 	history: createWebHistory(),
 	routes: [
@@ -74,6 +74,11 @@ export default createRouter({
 			name: 'register',
 			path: '/register',
 			component: registerView,
+		},
+		{
+			name: 'test',
+			path: '/test',
+			component: test,
 		},
 	],
 });
