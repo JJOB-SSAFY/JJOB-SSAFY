@@ -24,8 +24,6 @@ public class CardServiceImpl implements CardService {
     public List<CardResponseDto> getCard() {
 
         List<Card> cardList=cardRepository.findAllByVisible(true);
-        System.out.println(cardList.get(0).getPhone());
-        System.out.println(cardList.get(1).getPhone());
         return cardList.stream().map(CardResponseDto::new).collect(Collectors.toList());
     }
 }

@@ -20,7 +20,6 @@ public class CardController {
 
     @GetMapping("")
     public ResponseEntity<?> getCard(){
-        System.out.println("111111");
         List<CardResponseDto> cardList = cardList=cardService.getCard();
         return new ResponseEntity<List<CardResponseDto>>(cardList, HttpStatus.OK);
     }
