@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router/vue-router';
 import store from './store';
+import VueCookies from 'vue-cookies';
 
 import BootstrapVueNext from 'bootstrap-vue-next';
 
@@ -27,4 +28,5 @@ let app = createApp(App);
 app.use(BootstrapVueNext);
 app.use(router);
 app.use(store);
+app.use(VueCookies);
 app.component('fa-icon', FontAwesomeIcon).mount('#app');

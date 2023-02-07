@@ -7,6 +7,7 @@ export const auth = {
 	state: () => ({
 		user: null,
 		role: null,
+		name: null,
 		token: {
 			accessToken: jwt.getToken(),
 		},
@@ -37,8 +38,9 @@ export const auth = {
 				.post('/member/login', payload)
 				.then(function (response) {
 					const token = 'Bearer ' + response.data.accessToken;
-					commit('SET_TOKEN', 'Bearer ' + token);
-					commit('SET_USER_ROLE', response.data.role);
+					commit('SET_TOKEN', token);
+					commit('SET_USER', response.data);
+					console.log(token);
 					const config = {
 						headers: {
 							'Content-Type': 'application/json;charset=utf-8',
@@ -51,6 +53,19 @@ export const auth = {
 				.catch(err => {
 					commit('ERROR_HANDLE', err);
 				});
+		},
+		socialLogin({ commit, dispatch }, loginInfo) {
+			const token = 'Bearer ' + loginInfo.accessToken;
+			commit('SET_TOKEN', token);
+			commit('SET_USER', loginInfo);
+			console.log(token);
+			const config = {
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8',
+					Authorization: token,
+				},
+			};
+			dispatch('getInfo', config);
 		},
 		logout({ commit }) {
 			return new Promise(resolve => {
@@ -88,8 +103,9 @@ export const auth = {
 		SET_USER_INFO(state, user) {
 			state.user = user;
 		},
-		SET_USER_ROLE(state, role) {
-			state.role = role;
+		SET_USER(state, data) {
+			state.role = data.role;
+			state.name = data.name;
 		},
 		TOGGLE_REMEMBER(state) {
 			state.remember = !state.remember;
