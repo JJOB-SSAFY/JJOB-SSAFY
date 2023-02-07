@@ -6,12 +6,12 @@
 			v-for="info in state.presentationList"
 			:key="info.conferenceId"
 		>
-			<interview :info="info" />
+			<presentation :info="info" />
 		</li>
 	</ul>
 </template>
 <script>
-import Interview from './components/presentation.vue';
+import Presentation from './components/presentation.vue';
 import { reactive } from 'vue';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ export default {
 	name: 'presentationView',
 
 	components: {
-		Interview,
+		Presentation,
 	},
 
 	setup() {

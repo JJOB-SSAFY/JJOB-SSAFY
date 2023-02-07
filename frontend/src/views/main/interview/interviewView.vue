@@ -7,21 +7,21 @@
 			:key="info.conferenceId"
 			@click="clickConference(info.conferenceId)"
 		>
-			<interview :info="info" />
+			<interview-item :info="info" />
 		</li>
 	</ul>
 </template>
 <script>
-import Interview from './components/interview.vue';
+import InterviewItem from './components/interview.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
+import interviewSevice from '@/api/interviewService';
 
 export default {
 	name: 'interviewView',
 
 	components: {
-		Interview,
+		InterviewItem,
 	},
 
 	setup() {
@@ -35,17 +35,23 @@ export default {
 		const load = function () {
 			// state.count += 4;
 		};
-
-		axios({
-			method: 'get',
-			url: 'http://localhost:8080/conference/list/INTERVIEW',
-			headers: {
-				Authorization: localStorage.getItem('jjob.s.token'),
-			},
-		}).then(res => {
-			state.interviewList = res.data;
-			console.log(state.interviewList);
+		const interviewAPI = new interviewSevice();
+		interviewAPI.getInterviewList().then(data => {
+			state.interviewList = data;
 		});
+
+		// const
+		// axios({
+		// 	method: 'get',
+		// 	url: 'http://localhost:8080/conference/list/INTERVIEW',
+		// 	headers: {
+		// 		Authorization: localStorage.getItem('jjob.s.token'),
+		// 	},
+		// })
+		// .then(res => {
+		// 	state.interviewList = res.data;
+		// 	console.log(state.interviewList);
+		// });
 
 		const clickConference = function (id) {
 			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
