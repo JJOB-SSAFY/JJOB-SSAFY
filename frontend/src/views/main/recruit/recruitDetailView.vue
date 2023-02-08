@@ -1,20 +1,36 @@
 <template>
-	<div>채용공고</div>
-	<div>{{ recruitDetail }}</div>
+	<div>
+		채용공고
+		{{ recruitId }}
+	</div>
+	<!-- <div>{{ recruitDetail }}</div> -->
 </template>
 
 <script>
 import { reactive, ref } from 'vue';
-import { useStore } from 'vuex';
+import axios from 'axios';
+import { url } from '../../../api/http';
 
 export default {
-	setup() {
-		const store = useStore();
-		const recruitDetail = ref(store.getters['recruit/getRecruitList']);
+	name: 'recruitDetailView',
 
-		return { recruitDetail };
+	data() {
+		return {
+			recruitId: this.$route.params.recruitId,
+		};
+	},
+
+	setup() {
+		axios({
+			method: 'GET',
+			url: url + 'recruit/detail/',
+		});
+		// const store = useStore();
+		// const recruitDetail = ref(store.getters['recruit/getRecruitList']);
+
+		return {};
 	},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>
