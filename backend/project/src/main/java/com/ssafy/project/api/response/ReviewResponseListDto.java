@@ -8,12 +8,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewResponseListDto {
 
+    private Long reviewId;
     private String name;
+    private String title;
     private String content;
+    private String question;
+    private String answer;
 
     @QueryProjection
-    public ReviewResponseListDto(String name, String content) {
+    public ReviewResponseListDto(Long reviewId, String name, String title, String content, String question, String answer) {
+        this.reviewId = reviewId;
         this.name = name;
+        this.title = title;
         this.content = content;
+        this.question = question;
+        this.answer = answer;
     }
 }

@@ -21,7 +21,14 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
     @Override
     public List<ReviewResponseListDto> searchReview(ReviewSearchCondition condition) {
         return queryFactory
-                .select(new QReviewResponseListDto(review.member.name, review.title))
+                .select(new QReviewResponseListDto(
+                        review.id,
+                        review.member.name,
+                        review.title,
+                        review.content,
+                        review.question,
+                        review.answer)
+                )
                 .from(review)
                 .join(review.company, company)
                 .where(companyEq(condition.getCompanyName()))

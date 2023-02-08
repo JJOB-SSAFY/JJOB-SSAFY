@@ -1,19 +1,20 @@
 <template>
-	<div class="review-container">
+	<div class="review-write-container">
 		<h1>{{ companyName }} 면접 리뷰</h1>
 		<form @submit.prevent="saveReview(companyId)">
 			<div class="mb-3">
-				<label for="exampleInputEmail1" class="form-label">제목</label>
+				<label for="interview-title" class="form-label">제목</label>
 				<input
+					id="interview-title"
 					class="form-control"
-					aria-describedby="emailHelp"
 					v-model.lazy.trim="interviewState.form.title"
 					ref="interviewTitle"
 				/>
 			</div>
 			<div class="mb-3">
-				<label for="exampleInputPassword1" class="form-label">면접 리뷰</label>
+				<label for="interview-review" class="form-label">면접 리뷰</label>
 				<textarea
+					id="interview-review"
 					class="form-control"
 					v-model.lazy.trim="interviewState.form.review"
 					ref="interviewReview"
@@ -21,8 +22,9 @@
 				/>
 			</div>
 			<div class="mb-3">
-				<label for="exampleInputPassword1" class="form-label">면접 질문</label>
+				<label for="interview-question" class="form-label">면접 질문</label>
 				<textarea
+					id="interview-question"
 					class="form-control"
 					v-model.lazy.trim="interviewState.form.question"
 					ref="interviewQuestion"
@@ -30,8 +32,9 @@
 				/>
 			</div>
 			<div class="mb-3">
-				<label for="exampleInputPassword1" class="form-label">면접 답변</label>
+				<label for="interview-answer" class="form-label">면접 답변</label>
 				<textarea
+					id="interview-answer"
 					class="form-control"
 					v-model.lazy.trim="interviewState.form.answer"
 					ref="interviewAnswer"
@@ -144,7 +147,7 @@ export default {
 </script>
 
 <style>
-.review-container {
+.review-write-container {
 	width: 40%;
 	margin: 100px auto;
 	border: 1px black solid;
@@ -152,7 +155,7 @@ export default {
 	padding: 50px;
 }
 
-.review-container h1 {
+.review-write-container h1 {
 	margin-bottom: 50px;
 }
 </style>
