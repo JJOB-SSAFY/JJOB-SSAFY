@@ -10,7 +10,7 @@ import recruitView from '@/views/main/recruit/recruitView.vue';
 import recruitDetailView from '@/views/main/recruit/recruitDetailView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import reviewWriteView from '@/views/main/review/reviewWriteView.vue';
-import myInfoView from '@/views/main/myInfo/myInfoView.vue';
+import myInfoView from '@/views/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
 import resumeCreateView from '@/views/main/resume/resumeCreateView.vue';
@@ -66,11 +66,7 @@ export default createRouter({
 					path: '/reviewWrite/:companyId/:companyName',
 					component: reviewWriteView,
 				},
-				{
-					name: 'myInfo',
-					path: '/myInfo',
-					component: myInfoView,
-				},
+
 				{
 					name: 'interview',
 					path: '/interview',
@@ -87,6 +83,11 @@ export default createRouter({
 					component: resumeCreateView,
 				},
 			],
+		},
+		{
+			name: 'myInfo',
+			path: '/myInfo',
+			component: myInfoView,
 		},
 		{
 			name: 'register',

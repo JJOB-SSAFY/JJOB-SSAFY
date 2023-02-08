@@ -68,8 +68,9 @@
 
 .div-info-first .info-title,
 .div-info-second .info-title {
-  color: rgb(39, 117, 139);
+  color: var(--primary-color-1);
   font-size: 20px;
+  font-family: LINE-Bd;
 }
 
 .div-info-first .info-content,
