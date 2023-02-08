@@ -1,33 +1,44 @@
 <template>
 	<div>
 		<div div-search>
-			<form @submit.prevent="serchInfo">
+			<form @submit.prevent="searchInfo">
 				<input
 					type="text"
-					v-model.lazy="state.form.location"
+					v-model.lazy="condition.form.location"
 					placeholder="Location"
 				/>
 				<input
 					type="text"
-					v-model.lazy="state.form.department"
+					v-model.lazy="condition.form.department"
 					placeholder="Department"
 				/>
 				<button>검색</button>
 			</form>
-			<p>{{ searchClick }}</p>
 		</div>
-		<div
+		<div div-itemList>
+			<ul class="recruit-list">
+				<li
+					class="recruit-list-item"
+					v-for="info in searchList"
+					:key="info.list"
+				>
+					<recruitItemView :info="info" />
+				</li>
+			</ul>
+			<!-- <p>{{ searchList }}</p> -->
+		</div>
+		<!-- <div
 			class="recruit-list-items"
 			v-for="info in state.recruitList"
 			:key="info.recruit"
 		>
 			<div>{{ info }}</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
 <script>
-// import recruitItemView from './recruitView.vue';
+import recruitItemView from './components/recruit-item.vue';
 import { ref, reactive, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
@@ -36,26 +47,37 @@ export default {
 	name: 'recruitView',
 
 	components: {
-		// recruitItemView,
+		recruitItemView,
 	},
 	setup() {
 		const store = useStore();
 
-		const state = reactive({
+		// const item = reactive({
+		// 	itemList: '',
+		// });
+
+		// onMounted(() => {
+		// 	store.dispatch('recruit/getList').then(({ res }) => {
+		// 		item.itemList = res.data;
+		// 		console.log(item.itemList);
+		// 	});
+		// });
+
+		const condition = reactive({
 			form: {
 				location: '',
 				department: '',
 			},
 		});
 
-		const serchInfo = function () {
+		const searchInfo = function () {
 			store.dispatch('recruit/getList', {
-				location: state.form.location,
-				department: state.form.department,
+				location: condition.form.location,
+				department: condition.form.department,
 			});
 		};
 
-		const searchClick = computed(() => {
+		const searchList = computed(() => {
 			// 조건에 맞는것들만 보이게 해야됌
 			return store.getters['recruit/getRecruitList'];
 		});
@@ -72,19 +94,19 @@ export default {
 		// 	console.log(searchCondition.department);
 		// });
 
-		return { state, searchClick, serchInfo };
+		return { condition, searchList, searchInfo };
 	},
 };
 </script>
 
 <style scoped>
-.div-recruit-list {
+.recruit-list {
 	display: flex;
 	border: 1px solid black;
 	width: auto;
 }
 
-.recruit-list-items {
+.recruit-list-item {
 	display: block;
 	width: auto;
 	/* border: 1px solid black; */
