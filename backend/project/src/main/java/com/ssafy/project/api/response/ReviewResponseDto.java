@@ -15,8 +15,6 @@ public class ReviewResponseDto{
     private String question;
     private String answer;
 
-
-
     public static ReviewResponseDto of(Review dto){
         return ReviewResponseDto.builder()
                 .title(dto.getTitle())
