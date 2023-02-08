@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/company")
 @RequiredArgsConstructor
@@ -33,6 +36,12 @@ public class CompanyController {
     public ResponseEntity<? extends BaseResponseBody> deleteCompany(@PathVariable Long company_id){
         companyService.deleteCompany(company_id);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> getCompanyList(){
+
+        return new ResponseEntity<>(companyService.getCompany(), HttpStatus.OK);
     }
 
 }
