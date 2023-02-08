@@ -7,6 +7,7 @@ import homepageView from '@/views/main/homepage/homepageView.vue';
 import infoCardsView from '@/views/main/infoCards/infoCardsView.vue';
 import presentationView from '@/views/main/presentation/presentationView.vue';
 import recruitView from '@/views/main/recruit/recruitView.vue';
+import recruitDetailView from '@/views/main/recruit/recruitDetailView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import reviewWriteView from '@/views/main/review/reviewWriteView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
@@ -48,6 +49,11 @@ export default createRouter({
 					name: 'recruit',
 					path: '/recruit',
 					component: recruitView,
+				},
+				{
+					name: 'recruitDetail',
+					path: '/recruit/detail/:recruitId/',
+					component: recruitDetailView,
 				},
 				{
 					name: 'review',
