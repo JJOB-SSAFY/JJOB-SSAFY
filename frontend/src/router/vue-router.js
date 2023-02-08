@@ -13,6 +13,7 @@ import reviewWriteView from '@/views/main/review/reviewWriteView.vue';
 import myInfoView from '@/views/main/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
+import resumeCreateView from '@/views/main/resume/resumeCreateView.vue';
 import test from '@/views/test.vue';
 export default createRouter({
 	history: createWebHistory(),
@@ -79,6 +80,11 @@ export default createRouter({
 					name: 'openVidu',
 					path: '/openvidu/:participant/:session/:companyId/:companyName',
 					component: openviduView,
+				},
+				{
+					name: 'resumeCreate',
+					path: '/resume/create',
+					component: resumeCreateView,
 				},
 			],
 		},
