@@ -2,7 +2,7 @@
 	<header>
 		<main-header />
 	</header>
-	<hr />
+	<hr class="hr-main" />
 	<section>
 		<router-view />
 	</section>

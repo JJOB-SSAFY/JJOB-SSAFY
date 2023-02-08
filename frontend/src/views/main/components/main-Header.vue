@@ -6,8 +6,8 @@
 					<img
 						src="@/assets/images/logo/logo-removebg.png"
 						alt=""
-						height="47"
-						width="80"
+						height="77"
+						width="110"
 					/>
 				</router-link>
 			</div>

@@ -1,0 +1,5 @@
+@import url('@/assets/css/views/mypage-card.css');
+
+/* tab setting */
+$tab-count : 3;
+$indicator-width :50px;
