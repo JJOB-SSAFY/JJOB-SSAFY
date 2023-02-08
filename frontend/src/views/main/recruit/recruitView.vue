@@ -1,39 +1,36 @@
 <template>
-	<div>
-		<div div-search>
-			<form @submit.prevent="searchInfo">
+	<div style="width: 80%; margin: auto">
+		<div class="div-search">
+			<form class="recruit-search-form" @submit.prevent="searchInfo">
 				<input
+					class="form-control review-search-input"
 					type="text"
 					v-model.lazy="condition.form.location"
-					placeholder="Location"
+					placeholder="지역"
 				/>
 				<input
+					class="form-control review-search-input"
 					type="text"
 					v-model.lazy="condition.form.department"
-					placeholder="Department"
+					placeholder="직무"
 				/>
 				<button>검색</button>
 			</form>
 		</div>
-		<div div-itemList>
-			<ul class="recruit-list">
-				<li
-					class="recruit-list-item"
-					v-for="info in searchList"
-					:key="info.list"
-				>
-					<recruitItemView :info="info" />
-				</li>
-			</ul>
-			<!-- <p>{{ searchList }}</p> -->
+
+		<div class="div-itemList">
+			<div>
+				<ul class="recruit-list">
+					<li
+						class="recruit-list-item"
+						v-for="info in searchList"
+						:key="info.list"
+					>
+						<recruitItemView :info="info" />
+					</li>
+				</ul>
+			</div>
 		</div>
-		<!-- <div
-			class="recruit-list-items"
-			v-for="info in state.recruitList"
-			:key="info.recruit"
-		>
-			<div>{{ info }}</div>
-		</div> -->
 	</div>
 </template>
 
@@ -52,17 +49,6 @@ export default {
 	setup() {
 		const store = useStore();
 
-		// const item = reactive({
-		// 	itemList: '',
-		// });
-
-		// onMounted(() => {
-		// 	store.dispatch('recruit/getList').then(({ res }) => {
-		// 		item.itemList = res.data;
-		// 		console.log(item.itemList);
-		// 	});
-		// });
-
 		const condition = reactive({
 			form: {
 				location: '',
@@ -78,21 +64,8 @@ export default {
 		};
 
 		const searchList = computed(() => {
-			// 조건에 맞는것들만 보이게 해야됌
 			return store.getters['recruit/getRecruitList'];
 		});
-
-		// axios({
-		// 	method: 'POST',
-		// 	url: 'http://localhost:8080/recruit/list',
-		// 	headers: {
-		// 		Authorization: localStorage.getItem('jjob.s.token'),
-		// 	},
-		// 	data: searchCondition,
-		// }).then(res => {
-		// 	state.recruitList = res.data;
-		// 	console.log(searchCondition.department);
-		// });
 
 		return { condition, searchList, searchInfo };
 	},
@@ -100,15 +73,36 @@ export default {
 </script>
 
 <style scoped>
-.recruit-list {
+.div-search {
 	display: flex;
-	border: 1px solid black;
-	width: auto;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	top: 20px;
 }
 
-.recruit-list-item {
+.div-itemList {
+	background-color: whitesmoke;
+	border-radius: 10px;
+	padding: 40px 10px 10px 10px;
+	box-sizing: border-box;
+}
+
+.recruit-search-form {
+	display: flex;
+	align-items: center;
+	width: 30%;
+	height: 45px;
+}
+
+.recruit-search-input {
+	padding: 5px;
+	box-sizing: border-box;
+	margin: auto;
+	height: 100%;
+}
+
+.recruit-list {
 	display: block;
-	width: auto;
-	/* border: 1px solid black; */
 }
 </style>
