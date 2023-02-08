@@ -19,6 +19,15 @@ public class CompanyResponseDto {
 
     private String companyDesc;
 
+    public CompanyResponseDto(Company company) {
+        this.companyName=company.getCompanyName();
+        this.companyUrl=company.getCompanyUrl();
+        this.companyAddress=company.getCompanyAddress();
+        this.employeeCnt=company.getEmployeeCnt();
+        this.companyDesc=company.getCompanyDesc();
+    }
+
+
     public static CompanyResponseDto from(Company dto){
         return CompanyResponseDto.builder()
                 .companyAddress(dto.getCompanyAddress())

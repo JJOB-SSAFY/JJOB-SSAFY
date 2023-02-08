@@ -12,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service("companyService")
 @RequiredArgsConstructor
@@ -49,6 +52,13 @@ public class CompanyServiceImpl implements CompanyService {
         if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
         reviewRepository.deleteAllByCompanyId(companyId);
         companyRepository.delete(company.get());
+    }
+
+    @Override
+    public List<CompanyResponseDto> getCompany() {
+        List<Company> companyList = companyRepository.findAll();
+        return companyList.stream().map(CompanyResponseDto::new).collect(Collectors.toList());
+        // return cardList.stream().map(CardResponseDto::new).collect(Collectors.toList());
     }
 
 }
