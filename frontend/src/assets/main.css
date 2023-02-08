@@ -19,10 +19,7 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
 
-/* semantic color variables for this project */
-:root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
@@ -33,8 +30,18 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
 
+
+  --primary-color-1: #13AAFF;
+  --primary-color-2: #30B488;
+
+  --primary-color-black: #000000;
+  --primary-color-black-hover: #282828;
+
   --section-gap: 160px;
 }
+
+/* semantic color variables for this project */
+:root {}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -82,13 +89,13 @@ body {
 
 a {
   text-decoration: none;
-  color: rgb(48, 180, 136);
+  color: var(--primary-color-2);
   transition: 1s;
 }
 
 a:hover {
   text-decoration: none;
-  color: rgb(48, 180, 136);
+  color: var(--primary-color-2);
   transform: scale(1.05);
   transition: 1s;
 }
