@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class RecruitResponseListDto {
 
+    private Long recruitId;
+
     private String recruitTitle;
 
     private String department;
@@ -23,8 +25,9 @@ public class RecruitResponseListDto {
     private LocalDate recruitEndDate;
 
     @QueryProjection
-    public RecruitResponseListDto(String recruitTitle, String department, String workType,
+    public RecruitResponseListDto(Long recruitId, String recruitTitle, String department, String workType,
                                   String work, String requirement, LocalDate recruitEndDate) {
+        this.recruitId = recruitId;
         this.recruitTitle = recruitTitle;
         this.department = department;
         this.workType = workType;
