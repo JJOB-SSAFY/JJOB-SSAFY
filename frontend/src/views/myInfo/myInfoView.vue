@@ -8,7 +8,7 @@
 					<div>지원자 현황~~~</div>
 				</b-tab>
 				<b-tab title="이력서관리">
-					<div>이력서 현황~~~</div>
+					<div><myinfo-resume /></div>
 				</b-tab>
 				<b-tab title="내정보변경">
 					<div>
@@ -22,10 +22,12 @@
 
 <script>
 import MyinfoCard from './components/myInfo-card.vue';
+import MyinfoResume from './components/myInfo-resume.vue';
 import MyinfoUpdate from './components/myinfo-update.vue';
 export default {
 	components: {
 		MyinfoCard,
+		MyinfoResume,
 		MyinfoUpdate,
 	},
 	setup() {},
