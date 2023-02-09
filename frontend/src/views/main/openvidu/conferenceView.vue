@@ -1,117 +1,121 @@
 <template>
-	<div id="main-container" class="container">
-		<div id="join" v-if="!session">
-			<div id="join-dialog" class="jumbotron vertical-center">
-				<h1>Join a video session</h1>
-				<div class="form-group">
-					<p>
-						<label>이름</label>
-						<input
-							v-model="myUserName"
-							class="form-control"
-							type="text"
-							required
-						/>
-					</p>
-					<p>
-						<label>방 번호</label>
-						<input
-							v-model="mySessionId"
-							class="form-control"
-							type="text"
-							required
-						/>
-					</p>
-					<p class="text-center">
-						<button class="btn btn-lg btn-success" @click="joinSession()">
-							입장하기
-						</button>
-						<button
-							class="btn btn-lg btn-secondary"
-							@click="backToInterviewView()"
-						>
-							돌아가기
-						</button>
-					</p>
-				</div>
-			</div>
-		</div>
+   <div id="main-container" class="container">
+      <div id="join" v-if="!session">
+         <div id="join-dialog" class="jumbotron vertical-center">
+            <h1>Join a video session</h1>
+            <div class="form-group">
+               <p>
+                  <label>이름</label>
+                  <input
+                     v-model="myUserName"
+                     class="form-control"
+                     type="text"
+                     required
+                  />
+               </p>
+               <p>
+                  <label>방 번호</label>
+                  <input
+                     v-model="mySessionId"
+                     class="form-control"
+                     type="text"
+                     required
+                  />
+               </p>
+               <p class="text-center">
+                  <button class="btn btn-lg btn-success" @click="joinSession()">
+                     입장하기
+                  </button>
+                  <button
+                     class="btn btn-lg btn-secondary"
+                     @click="backToInterviewView()"
+                  >
+                     돌아가기
+                  </button>
+               </p>
+            </div>
+         </div>
+      </div>
 
-		<div id="session" v-if="session">
-			<div id="session-header">
-				<h1 id="session-title">{{ mySessionId }}</h1>
-				<!-- Button trigger modal -->
-				<button
-					type="button"
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#exampleModal"
-				>
-					leaveSession
-				</button>
-			</div>
-			<div id="main-video" class="col-md-6">
-				<user-video :stream-manager="mainStreamManager" />
-			</div>
-			<div id="video-container" class="col-md-6">
-				<user-video
-					:stream-manager="publisher"
-					@click="updateMainVideoStreamManager(publisher)"
-				/>
-				<user-video
-					v-for="sub in subscribers"
-					:key="sub.stream.connection.connectionId"
-					:stream-manager="sub"
-					@click="updateMainVideoStreamManager(sub)"
-				/>
-			</div>
-		</div>
+      <div id="session" v-if="session">
+         <div id="session-header">
+            <h1 id="session-title">{{ mySessionId }}</h1>
+            <!-- Button trigger modal -->
+            <button
+               type="button"
+               class="btn btn-primary"
+               data-bs-toggle="modal"
+               data-bs-target="#exampleModal"
+            >
+               leaveSession
+            </button>
+         </div>
+         <div id="flex-container" style="display:flex">
+            <div id="main-video" class="col-md-6">
+               <user-video :stream-manager="mainStreamManager" />
+            </div>
+            <div id="video-container" class="col-md-6">
+               <!--<user-video
+                  :stream-manager="publisher"
+                  @click="updateMainVideoStreamManager(publisher)"
+               />-->
+               <user-video
+                  v-for="sub in subscribers"
+                  :key="sub.stream.connection.connectionId"
+                  :stream-manager="sub"
+                  @click="updateMainVideoStreamManager(sub)"
+               />
+               
 
-		<!-- Modal -->
-		<div
-			class="modal fade"
-			id="exampleModal"
-			tabindex="-1"
-			aria-labelledby="exampleModalLabel"
-			aria-hidden="true"
-		>
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">리뷰쓰기</h5>
-						<button
-							type="button"
-							class="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-						></button>
-					</div>
-					<div class="modal-body">
-						싸피 후배들을 위해 후기를 써주세요. 지금 리뷰를 작성하면 500
-						마일리지를 받습니다.
-					</div>
-					<div class="modal-footer">
-						<button
-							type="button"
-							class="btn btn-primary"
-							data-bs-dismiss="modal"
-							@click="goToReviewView"
-						>
-							리뷰쓰기
-						</button>
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-bs-dismiss="modal"
-							@click="goToInterviewView"
-						>
-							나가기
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+         class="modal fade"
+         id="exampleModal"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true"
+      >
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">리뷰쓰기</h5>
+                  <button
+                     type="button"
+                     class="btn-close"
+                     data-bs-dismiss="modal"
+                     aria-label="Close"
+                  ></button>
+               </div>
+               <div class="modal-body">
+                  싸피 후배들을 위해 후기를 써주세요. 지금 리뷰를 작성하면 500
+                  마일리지를 받습니다.
+               </div>
+               <div class="modal-footer">
+                  <button
+                     type="button"
+                     class="btn btn-primary"
+                     data-bs-dismiss="modal"
+                     @click="goToReviewView"
+                  >
+                     리뷰쓰기
+                  </button>
+                  <button
+                     type="button"
+                     class="btn btn-secondary"
+                     data-bs-dismiss="modal"
+                     @click="goToInterviewView"
+                  >
+                     나가기
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </template>
 
 <script>
@@ -128,188 +132,188 @@ const APPLICATION_SERVER_URL = url;
 const router = useRouter();
 
 export default {
-	name: 'conferenceView',
+   name: 'conferenceView',
 
-	components: {
-		UserVideo,
-	},
+   components: {
+      UserVideo,
+   },
 
-	data() {
-		return {
-			// OpenVidu objects
-			OV: undefined,
-			session: undefined,
-			mainStreamManager: undefined,
-			publisher: undefined,
-			subscribers: [],
+   data() {
+      return {
+         // OpenVidu objects
+         OV: undefined,
+         session: undefined,
+         mainStreamManager: undefined,
+         publisher: undefined,
+         subscribers: [],
 
-			// Join form
-			mySessionId: this.$route.params.session,
-			myUserName: this.$route.params.participant,
-			companyId: this.$route.params.companyId,
-			companyName: this.$route.params.companyName,
-		};
-	},
+         // Join form
+         mySessionId: this.$route.params.session,
+         myUserName: this.$route.params.participant,
+         companyId: this.$route.params.companyId,
+         companyName: this.$route.params.companyName,
+      };
+   },
 
-	methods: {
-		joinSession() {
-			// --- 1) Get an OpenVidu object ---
-			this.OV = new OpenVidu();
+   methods: {
+      joinSession() {
+         // --- 1) Get an OpenVidu object ---
+         this.OV = new OpenVidu();
 
-			// --- 2) Init a session ---
-			this.session = this.OV.initSession();
+         // --- 2) Init a session ---
+         this.session = this.OV.initSession();
 
-			// --- 3) Specify the actions when events take place in the session ---
+         // --- 3) Specify the actions when events take place in the session ---
 
-			// On every new Stream received...
-			this.session.on('streamCreated', ({ stream }) => {
-				const subscriber = this.session.subscribe(stream);
-				this.subscribers.push(subscriber);
-			});
+         // On every new Stream received...
+         this.session.on('streamCreated', ({ stream }) => {
+            const subscriber = this.session.subscribe(stream);
+            this.subscribers.push(subscriber);
+         });
 
-			// On every Stream destroyed...
-			this.session.on('streamDestroyed', ({ stream }) => {
-				const index = this.subscribers.indexOf(stream.streamManager, 0);
-				if (index >= 0) {
-					this.subscribers.splice(index, 1);
-				}
-			});
+         // On every Stream destroyed...
+         this.session.on('streamDestroyed', ({ stream }) => {
+            const index = this.subscribers.indexOf(stream.streamManager, 0);
+            if (index >= 0) {
+               this.subscribers.splice(index, 1);
+            }
+         });
 
-			// On every asynchronous exception...
-			this.session.on('exception', ({ exception }) => {
-				console.warn(exception);
-			});
+         // On every asynchronous exception...
+         this.session.on('exception', ({ exception }) => {
+            console.warn(exception);
+         });
 
-			// --- 4) Connect to the session with a valid user token ---
+         // --- 4) Connect to the session with a valid user token ---
 
-			// Get a token from the OpenVidu deployment
-			this.getToken(this.mySessionId).then(token => {
-				// First param is the token. Second param can be retrieved by every user on event
-				// 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-				this.session
-					.connect(token, { clientData: this.myUserName })
-					.then(() => {
-						// --- 5) Get your own camera stream with the desired properties ---
+         // Get a token from the OpenVidu deployment
+         this.getToken(this.mySessionId).then(token => {
+            // First param is the token. Second param can be retrieved by every user on event
+            // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
+            this.session
+               .connect(token, { clientData: this.myUserName })
+               .then(() => {
+                  // --- 5) Get your own camera stream with the desired properties ---
 
-						// Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-						// element: we will manage it on our own) and with the desired properties
-						let publisher = this.OV.initPublisher(undefined, {
-							audioSource: undefined, // The source of audio. If undefined default microphone
-							videoSource: undefined, // The source of video. If undefined default webcam
-							publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-							publishVideo: true, // Whether you want to start publishing with your video enabled or not
-							resolution: '640x480', // The resolution of your video
-							frameRate: 30, // The frame rate of your video
-							insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
-							mirror: false, // Whether to mirror your local video or not
-						});
+                  // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
+                  // element: we will manage it on our own) and with the desired properties
+                  let publisher = this.OV.initPublisher(undefined, {
+                     audioSource: undefined, // The source of audio. If undefined default microphone
+                     videoSource: undefined, // The source of video. If undefined default webcam
+                     publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
+                     publishVideo: true, // Whether you want to start publishing with your video enabled or not
+                     resolution: '640x480', // The resolution of your video
+                     frameRate: 30, // The frame rate of your video
+                     insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
+                     mirror: false, // Whether to mirror your local video or not
+                  });
 
-						// Set the main video in the page to display our webcam and store our Publisher
-						this.mainStreamManager = publisher;
-						this.publisher = publisher;
+                  // Set the main video in the page to display our webcam and store our Publisher
+                  this.mainStreamManager = publisher;
+                  this.publisher = publisher;
 
-						// --- 6) Publish your stream ---
+                  // --- 6) Publish your stream ---
 
-						this.session.publish(this.publisher);
-					})
-					.catch(error => {
-						console.log(
-							'There was an error connecting to the session:',
-							error.code,
-							error.message,
-						);
-					});
-			});
+                  this.session.publish(this.publisher);
+               })
+               .catch(error => {
+                  console.log(
+                     'There was an error connecting to the session:',
+                     error.code,
+                     error.message,
+                  );
+               });
+         });
 
-			window.addEventListener('beforeunload', this.leaveSession);
-		},
+         window.addEventListener('beforeunload', this.leaveSession);
+      },
 
-		leaveSession() {
-			// --- 7) Leave the session by calling 'disconnect' method over the Session object ---
-			if (this.session) this.session.disconnect();
+      leaveSession() {
+         // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
+         if (this.session) this.session.disconnect();
 
-			// Empty all properties...
-			this.session = undefined;
-			this.mainStreamManager = undefined;
-			this.publisher = undefined;
-			this.subscribers = [];
-			this.OV = undefined;
+         // Empty all properties...
+         this.session = undefined;
+         this.mainStreamManager = undefined;
+         this.publisher = undefined;
+         this.subscribers = [];
+         this.OV = undefined;
 
-			// Remove beforeunload listener
-			window.removeEventListener('beforeunload', this.leaveSession);
-		},
+         // Remove beforeunload listener
+         window.removeEventListener('beforeunload', this.leaveSession);
+      },
 
-		updateMainVideoStreamManager(stream) {
-			if (this.mainStreamManager === stream) return;
-			this.mainStreamManager = stream;
-		},
+      updateMainVideoStreamManager(stream) {
+         if (this.mainStreamManager === stream) return;
+         this.mainStreamManager = stream;
+      },
 
-		goToReviewView() {
-			this.leaveSession();
-			this.$router.push({
-				name: 'reviewWrite',
-				params: {
-					companyId: this.companyId,
-					companyName: this.companyName,
-				},
-			});
-		},
+      goToReviewView() {
+         this.leaveSession();
+         this.$router.push({
+            name: 'reviewWrite',
+            params: {
+               companyId: this.companyId,
+               companyName: this.companyName,
+            },
+         });
+      },
 
-		goToInterviewView() {
-			this.leaveSession();
-			this.$router.push({
-				name: 'interview',
-			});
-		},
+      goToInterviewView() {
+         this.leaveSession();
+         this.$router.push({
+            name: 'interview',
+         });
+      },
 
-		backToInterviewView() {
-			this.$router.push({
-				name: 'interview',
-			});
-		},
+      backToInterviewView() {
+         this.$router.push({
+            name: 'interview',
+         });
+      },
 
-		/**
-		 * --------------------------------------------
-		 * GETTING A TOKEN FROM YOUR APPLICATION SERVER
-		 * --------------------------------------------
-		 * The methods below request the creation of a Session and a Token to
-		 * your application server. This keeps your OpenVidu deployment secure.
-		 *
-		 * In this sample code, there is no user control at all. Anybody could
-		 * access your application server endpoints! In a real production
-		 * environment, your application server must identify the user to allow
-		 * access to the endpoints.
-		 *
-		 * Visit https://docs.openvidu.io/en/stable/application-server to learn
-		 * more about the integration of OpenVidu in your application server.
-		 */
-		async getToken(mySessionId) {
-			const sessionId = await this.createSession(mySessionId);
-			return await this.createToken(sessionId);
-		},
+      /**
+       * --------------------------------------------
+       * GETTING A TOKEN FROM YOUR APPLICATION SERVER
+       * --------------------------------------------
+       * The methods below request the creation of a Session and a Token to
+       * your application server. This keeps your OpenVidu deployment secure.
+       *
+       * In this sample code, there is no user control at all. Anybody could
+       * access your application server endpoints! In a real production
+       * environment, your application server must identify the user to allow
+       * access to the endpoints.
+       *
+       * Visit https://docs.openvidu.io/en/stable/application-server to learn
+       * more about the integration of OpenVidu in your application server.
+       */
+      async getToken(mySessionId) {
+         const sessionId = await this.createSession(mySessionId);
+         return await this.createToken(sessionId);
+      },
 
-		async createSession(sessionId) {
-			const response = await axios.post(
-				APPLICATION_SERVER_URL + '/api/sessions',
-				{ customSessionId: sessionId },
-				{
-					headers: { 'Content-Type': 'application/json' },
-				},
-			);
-			return response.data; // The sessionId
-		},
+      async createSession(sessionId) {
+         const response = await axios.post(
+            APPLICATION_SERVER_URL + '/api/sessions',
+            { customSessionId: sessionId },
+            {
+               headers: { 'Content-Type': 'application/json' },
+            },
+         );
+         return response.data; // The sessionId
+      },
 
-		async createToken(sessionId) {
-			const response = await axios.post(
-				APPLICATION_SERVER_URL + '/api/sessions/' + sessionId + '/connections',
-				{},
-				{
-					headers: { 'Content-Type': 'application/json' },
-				},
-			);
-			return response.data; // The token
-		},
-	},
+      async createToken(sessionId) {
+         const response = await axios.post(
+            APPLICATION_SERVER_URL + '/api/sessions/' + sessionId + '/connections',
+            {},
+            {
+               headers: { 'Content-Type': 'application/json' },
+            },
+         );
+         return response.data; // The token
+      },
+   },
 };
 </script>
 
