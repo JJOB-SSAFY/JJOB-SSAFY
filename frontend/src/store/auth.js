@@ -8,6 +8,7 @@ export const auth = {
 		user: null,
 		role: null,
 		name: null,
+		resumeList: null,
 		token: {
 			accessToken: jwt.getToken(),
 		},
@@ -27,6 +28,9 @@ export const auth = {
 		},
 		getUserRole: function (state) {
 			return state.role;
+		},
+		getResumeList: function (state) {
+			return state.resumeList;
 		},
 		getError: function (state) {
 			return state.error;
@@ -50,6 +54,7 @@ export const auth = {
 						},
 					};
 					dispatch('getInfo', config);
+					dispatch('getResumeList', config);
 				})
 				.then(() => vueRouter.push({ name: 'home' }))
 				.catch(err => {
@@ -87,6 +92,16 @@ export const auth = {
 					commit('ERROR_HANDLE', err);
 				});
 		},
+		getResumeList({ commit }, payload) {
+			http
+				.get('/resume', payload)
+				.then(({ data }) => {
+					commit('SET_RESUME_LIST', data);
+				})
+				.catch(err => {
+					commit('ERROR_HANDEL', err);
+				});
+		},
 	},
 	mutations: {
 		SET_TOKEN(state, token) {
@@ -107,6 +122,9 @@ export const auth = {
 		SET_USER(state, data) {
 			state.role = data.role;
 			state.name = data.name;
+		},
+		SET_RESUME_LIST(state, list) {
+			state.resumeList = list;
 		},
 		TOGGLE_REMEMBER(state) {
 			state.remember = !state.remember;

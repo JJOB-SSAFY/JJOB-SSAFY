@@ -1,12 +1,12 @@
 import http from './http.js';
 const token = localStorage.getItem('jjob.s.token');
 const config = {
-  headers: {
-    Authorization: token,
-  },
+	headers: {
+		Authorization: token,
+	},
 };
-export default class myInfoCardService {
-  async getMyResume() {
-    return await http.get(`card`, config).then(data => data.data);
-  }
+export default class myInfoService {
+	async getResumeList() {
+		return await http.get(`resume`, config).then(data => data.data);
+	}
 }
