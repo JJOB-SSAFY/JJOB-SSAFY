@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import { reactive, toRaw } from 'vue';
-import { useStore } from 'vuex';
 import MyinfoCard from './components/myInfo-card.vue';
 export default {
 	components: {
