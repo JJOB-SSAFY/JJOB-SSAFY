@@ -60,8 +60,6 @@ public class ResumeResponseDto {
                                        ){
         return ResumeResponseDto.builder()
                 .resumeTitle(dto.getResumeTitle())
-                .subTitle(dto.getSubTitle())
-                .introduce(dto.getIntroduce())
                 .name(dto.getName())
                 .blog(dto.getBlog())
                 .phone(dto.getPhone())

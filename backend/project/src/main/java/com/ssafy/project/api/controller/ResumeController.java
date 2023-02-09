@@ -30,6 +30,7 @@ public class ResumeController{
     @PostMapping
     public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                          @RequestBody ResumeRequestDto requestDto) {
+        System.out.println(requestDto);
         resumeService.createResume(requestDto, userDetails.getMember().getId());
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
