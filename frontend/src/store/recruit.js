@@ -38,3 +38,4 @@ export const recruit = {
 		},
 	},
 };
+export default recruit;
