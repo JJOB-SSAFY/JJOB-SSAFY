@@ -52,8 +52,6 @@ public class Resume {
                 .member(member)
                 .company(company)
                 .resumeTitle(requestDto.getResumeTitle())
-                .subTitle(requestDto.getSubTitle())
-                .introduce(requestDto.getIntroduce())
                 .name(requestDto.getName())
                 .blog(requestDto.getBlog())
                 .phone(requestDto.getPhone())
@@ -65,8 +63,6 @@ public class Resume {
 
     public void updateResume(ResumeRequestDto requestDto){
         this.resumeTitle = requestDto.getResumeTitle();
-        this.subTitle = requestDto.getSubTitle();
-        this.introduce = requestDto.getIntroduce();
         this.name = requestDto.getName();
         this.blog = requestDto.getBlog();
         this.phone = requestDto.getPhone();
