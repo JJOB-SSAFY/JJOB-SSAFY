@@ -9,8 +9,7 @@ export const resume = {
     },
   },
   actions: {
-    getList({ commit }) {
-
-    },
-    mutations: {},
-  };
+    getList({ commit }) { },
+  },
+  mutations: {},
+};
