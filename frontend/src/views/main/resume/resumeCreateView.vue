@@ -345,6 +345,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { url } from '../../../api/http';
+
 export default {
 	name: 'resumeCreateView',
 
@@ -436,17 +439,17 @@ export default {
 
 			certificateItems: [
 				{
-					title: 'certificatename1',
+					name: 'certificatename1',
 					date: 'certificatedate1',
 					agency: 'certificateagency1',
 				},
 				{
-					title: 'certificatename2',
+					name: 'certificatename2',
 					date: 'certificatedate2',
 					agency: 'certificateagency2',
 				},
 				{
-					title: 'certificatename3',
+					name: 'certificatename3',
 					date: 'certificatedate3',
 					agency: 'certificateagency3',
 				},
@@ -566,94 +569,607 @@ export default {
 			const github = this.github;
 			const blog = this.blog;
 
-			const uniperiod1 = document.getElementById('uniperiod1');
-			const uniperiod2 = document.getElementById('uniperiod2');
-			const uniperiod3 = document.getElementById('uniperiod3');
-			const uniname1 = document.getElementById('uniname1');
-			const uniname2 = document.getElementById('uniname2');
-			const uniname3 = document.getElementById('uniname3');
-			const unimajor1 = document.getElementById('unimajor1');
-			const unimajor2 = document.getElementById('unimajor2');
-			const unimajor3 = document.getElementById('unimajor3');
+			const uniperiod1 = document.getElementById('uniperiod1').value.trim();
+			const uniperiod2 = document.getElementById('uniperiod2').value.trim();
+			const uniperiod3 = document.getElementById('uniperiod3').value.trim();
+			const uniname1 = document.getElementById('uniname1').value.trim();
+			const uniname2 = document.getElementById('uniname2').value.trim();
+			const uniname3 = document.getElementById('uniname3').value.trim();
+			const unimajor1 = document.getElementById('unimajor1').value.trim();
+			const unimajor2 = document.getElementById('unimajor2').value.trim();
+			const unimajor3 = document.getElementById('unimajor3').value.trim();
 
-			const eduname1 = document.getElementById('eduname1');
-			const eduname2 = document.getElementById('eduname2');
-			const eduname3 = document.getElementById('eduname3');
-			const eduperiod1 = document.getElementById('eduperiod1');
-			const eduperiod2 = document.getElementById('eduperiod2');
-			const eduperiod3 = document.getElementById('eduperiod3');
-			const educontent1 = document.getElementById('educontent1');
-			const educontent2 = document.getElementById('educontent2');
-			const educontent3 = document.getElementById('educontent3');
-			const eduagency1 = document.getElementById('eduagency1');
-			const eduagency2 = document.getElementById('eduagency2');
-			const eduagency3 = document.getElementById('eduagency3');
+			const eduname1 = document.getElementById('eduname1').value.trim();
+			const eduname2 = document.getElementById('eduname2').value.trim();
+			const eduname3 = document.getElementById('eduname3').value.trim();
+			const eduperiod1 = document.getElementById('eduperiod1').value.trim();
+			const eduperiod2 = document.getElementById('eduperiod2').value.trim();
+			const eduperiod3 = document.getElementById('eduperiod3').value.trim();
+			const educontent1 = document.getElementById('educontent1').value.trim();
+			const educontent2 = document.getElementById('educontent2').value.trim();
+			const educontent3 = document.getElementById('educontent3').value.trim();
+			const eduagency1 = document.getElementById('eduagency1').value.trim();
+			const eduagency2 = document.getElementById('eduagency2').value.trim();
+			const eduagency3 = document.getElementById('eduagency3').value.trim();
 
-			const actname1 = document.getElementById('actname1');
-			const actname2 = document.getElementById('actname2');
-			const actname3 = document.getElementById('actname3');
-			const actperiod1 = document.getElementById('actperiod1');
-			const actperiod2 = document.getElementById('actperiod2');
-			const actperiod3 = document.getElementById('actperiod3');
-			const actcontent1 = document.getElementById('actcontent1');
-			const actcontent2 = document.getElementById('actcontent2');
-			const actcontent3 = document.getElementById('actcontent3');
-			const actagency1 = document.getElementById('actagency1');
-			const actagency2 = document.getElementById('actagency2');
-			const actagency3 = document.getElementById('actagency3');
+			const actname1 = document.getElementById('actname1').value.trim();
+			const actname2 = document.getElementById('actname2').value.trim();
+			const actname3 = document.getElementById('actname3').value.trim();
+			const actperiod1 = document.getElementById('actperiod1').value.trim();
+			const actperiod2 = document.getElementById('actperiod2').value.trim();
+			const actperiod3 = document.getElementById('actperiod3').value.trim();
+			const actcontent1 = document.getElementById('actcontent1').value.trim();
+			const actcontent2 = document.getElementById('actcontent2').value.trim();
+			const actcontent3 = document.getElementById('actcontent3').value.trim();
+			const actagency1 = document.getElementById('actagency1').value.trim();
+			const actagency2 = document.getElementById('actagency2').value.trim();
+			const actagency3 = document.getElementById('actagency3').value.trim();
 
-			const careername1 = document.getElementById('careername1');
-			const careername2 = document.getElementById('careername2');
-			const careername3 = document.getElementById('careername3');
-			const careerperiod1 = document.getElementById('careerperiod1');
-			const careerperiod2 = document.getElementById('careerperiod2');
-			const careerperiod3 = document.getElementById('careerperiod3');
-			const careerwork1 = document.getElementById('careerwork1');
-			const careerwork2 = document.getElementById('careerwork2');
-			const careerwork3 = document.getElementById('careerwork3');
+			const careername1 = document.getElementById('careername1').value.trim();
+			const careername2 = document.getElementById('careername2').value.trim();
+			const careername3 = document.getElementById('careername3').value.trim();
+			const careerperiod1 = document
+				.getElementById('careerperiod1')
+				.value.trim();
+			const careerperiod2 = document
+				.getElementById('careerperiod2')
+				.value.trim();
+			const careerperiod3 = document
+				.getElementById('careerperiod3')
+				.value.trim();
+			const careerwork1 = document.getElementById('careerwork1').value.trim();
+			const careerwork2 = document.getElementById('careerwork2').value.trim();
+			const careerwork3 = document.getElementById('careerwork3').value.trim();
 
-			const awardname1 = document.getElementById('awardname1');
-			const awardname2 = document.getElementById('awardname2');
-			const awardname3 = document.getElementById('awardname3');
-			const awarddate1 = document.getElementById('awarddate1');
-			const awarddate2 = document.getElementById('awarddate2');
-			const awarddate3 = document.getElementById('awarddate3');
-			const awardagency1 = document.getElementById('awardagency1');
-			const awardagency2 = document.getElementById('awardagency2');
-			const awardagency3 = document.getElementById('awardagency3');
+			const awardname1 = document.getElementById('awardname1').value.trim();
+			const awardname2 = document.getElementById('awardname2').value.trim();
+			const awardname3 = document.getElementById('awardname3').value.trim();
+			const awarddate1 = document.getElementById('awarddate1').value.trim();
+			const awarddate2 = document.getElementById('awarddate2').value.trim();
+			const awarddate3 = document.getElementById('awarddate3').value.trim();
+			const awardagency1 = document.getElementById('awardagency1').value.trim();
+			const awardagency2 = document.getElementById('awardagency2').value.trim();
+			const awardagency3 = document.getElementById('awardagency3').value.trim();
 
-			const certificatename1 = document.getElementById('certificatename1');
-			const certificatename2 = document.getElementById('certificatename2');
-			const certificatename3 = document.getElementById('certificatename3');
-			const certificatedate1 = document.getElementById('certificatedate1');
-			const certificatedate2 = document.getElementById('certificatedate2');
-			const certificatedate3 = document.getElementById('certificatedate3');
-			const certificateagency1 = document.getElementById('certificateagency1');
-			const certificateagency2 = document.getElementById('certificateagency2');
-			const certificateagency3 = document.getElementById('certificateagency3');
+			const certificatename1 = document
+				.getElementById('certificatename1')
+				.value.trim();
+			const certificatename2 = document
+				.getElementById('certificatename2')
+				.value.trim();
+			const certificatename3 = document
+				.getElementById('certificatename3')
+				.value.trim();
+			const certificatedate1 = document
+				.getElementById('certificatedate1')
+				.value.trim();
+			const certificatedate2 = document
+				.getElementById('certificatedate2')
+				.value.trim();
+			const certificatedate3 = document
+				.getElementById('certificatedate3')
+				.value.trim();
+			const certificateagency1 = document
+				.getElementById('certificateagency1')
+				.value.trim();
+			const certificateagency2 = document
+				.getElementById('certificateagency2')
+				.value.trim();
+			const certificateagency3 = document
+				.getElementById('certificateagency3')
+				.value.trim();
 
-			const language1 = document.getElementById('language1');
-			const language2 = document.getElementById('language2');
-			const language3 = document.getElementById('language3');
-			const languagename1 = document.getElementById('languagename1');
-			const languagename2 = document.getElementById('languagename2');
-			const languagename3 = document.getElementById('languagename3');
-			const languagegrade1 = document.getElementById('languagegrade1');
-			const languagegrade2 = document.getElementById('languagegrade2');
-			const languagegrade3 = document.getElementById('languagegrade3');
-			const languagedate1 = document.getElementById('languagedate1');
-			const languagedate2 = document.getElementById('languagedate2');
-			const languagedate3 = document.getElementById('languagedate3');
+			const language1 = document.getElementById('language1').value.trim();
+			const language2 = document.getElementById('language2').value.trim();
+			const language3 = document.getElementById('language3').value.trim();
+			const languagename1 = document
+				.getElementById('languagename1')
+				.value.trim();
+			const languagename2 = document
+				.getElementById('languagename2')
+				.value.trim();
+			const languagename3 = document
+				.getElementById('languagename3')
+				.value.trim();
+			const languagegrade1 = document
+				.getElementById('languagegrade1')
+				.value.trim();
+			const languagegrade2 = document
+				.getElementById('languagegrade2')
+				.value.trim();
+			const languagegrade3 = document
+				.getElementById('languagegrade3')
+				.value.trim();
+			const languagedate1 = document
+				.getElementById('languagedate1')
+				.value.trim();
+			const languagedate2 = document
+				.getElementById('languagedate2')
+				.value.trim();
+			const languagedate3 = document
+				.getElementById('languagedate3')
+				.value.trim();
 
-			// const uniperiod1 = document.getElementById('uniperiod1');
-			// const uniperiod2 = document.getElementById('uniperiod2');
-			// const uniperiod3 = document.getElementById('uniperiod3');
-			// const uniname1 = document.getElementById('uniname1');
-			// const uniname2 = document.getElementById('uniname2');
-			// const uniname3 = document.getElementById('uniname3');
-			// const unimajor1 = document.getElementById('unimajor1');
-			// const unimajor2 = document.getElementById('unimajor2');
-			// const unimajor3 = document.getElementById('unimajor3');
+			const skillname1 = document.getElementById('skillname1').value.trim();
+			const skillname2 = document.getElementById('skillname2').value.trim();
+			const skillname3 = document.getElementById('skillname3').value.trim();
+			const skilllevel1 = document.getElementById('skilllevel1').value.trim();
+			const skilllevel2 = document.getElementById('skilllevel2').value.trim();
+			const skilllevel3 = document.getElementById('skilllevel3').value.trim();
+			const skilldetail1 = document.getElementById('skilldetail1').value.trim();
+			const skilldetail2 = document.getElementById('skilldetail2').value.trim();
+			const skilldetail3 = document.getElementById('skilldetail3').value.trim();
+
+			const projectname1 = document.getElementById('projectname1').value.trim();
+			const projectname2 = document.getElementById('projectname2').value.trim();
+			const projectname3 = document.getElementById('projectname3').value.trim();
+			const projectperiod1 = document
+				.getElementById('projectperiod1')
+				.value.trim();
+			const projectperiod2 = document
+				.getElementById('projectperiod2')
+				.value.trim();
+			const projectperiod3 = document
+				.getElementById('projectperiod3')
+				.value.trim();
+			const projectuserCount1 = document
+				.getElementById('projectuserCount1')
+				.value.trim();
+			const projectuserCount2 = document
+				.getElementById('projectuserCount2')
+				.value.trim();
+			const projectuserCount3 = document
+				.getElementById('projectuserCount3')
+				.value.trim();
+			const projectoutline1 = document
+				.getElementById('projectoutline1')
+				.value.trim();
+			const projectoutline2 = document
+				.getElementById('projectoutline2')
+				.value.trim();
+			const projectoutline3 = document
+				.getElementById('projectoutline3')
+				.value.trim();
+			const projectdevEnv1 = document
+				.getElementById('projectdevEnv1')
+				.value.trim();
+			const projectdevEnv2 = document
+				.getElementById('projectdevEnv2')
+				.value.trim();
+			const projectdevEnv3 = document
+				.getElementById('projectdevEnv3')
+				.value.trim();
+			const projectrole1 = document.getElementById('projectrole1').value.trim();
+			const projectrole2 = document.getElementById('projectrole2').value.trim();
+			const projectrole3 = document.getElementById('projectrole3').value.trim();
+			const projectfunction1 = document
+				.getElementById('projectfunction1')
+				.value.trim();
+			const projectfunction2 = document
+				.getElementById('projectfunction2')
+				.value.trim();
+			const projectfunction3 = document
+				.getElementById('projectfunction3')
+				.value.trim();
+			const projectreulst1 = document
+				.getElementById('projectreulst1')
+				.value.trim();
+			const projectreulst2 = document
+				.getElementById('projectreulst2')
+				.value.trim();
+			const projectreulst3 = document
+				.getElementById('projectreulst3')
+				.value.trim();
+			const projectlink1 = document.getElementById('projectlink1').value.trim();
+			const projectlink2 = document.getElementById('projectlink2').value.trim();
+			const projectlink3 = document.getElementById('projectlink3').value.trim();
+
+			const coverLetterTitle1 = document
+				.getElementById('coverLetterTitle1')
+				.value.trim();
+			const coverLetterTitle2 = document
+				.getElementById('coverLetterTitle2')
+				.value.trim();
+			const coverLetterTitle3 = document
+				.getElementById('coverLetterTitle3')
+				.value.trim();
+			const coverLetterContent1 = document
+				.getElementById('coverLetterContent1')
+				.value.trim();
+			const coverLetterContent2 = document
+				.getElementById('coverLetterContent2')
+				.value.trim();
+			const coverLetterContent3 = document
+				.getElementById('coverLetterContent3')
+				.value.trim();
+
+			const resumeInfo = {
+				resumeTitle: resumeTitle,
+				name: name,
+				blog: blog,
+				phone: phone,
+				portfolio: portfolio,
+				email: email,
+				github: github,
+				universityDtoList: [],
+				educationDtoList: [],
+				activityDtoList: [],
+				careerDtoList: [],
+				awardDtoList: [],
+				certificateDtoList: [],
+				languageAbilityDtoList: [],
+				skillDtoList: [],
+				projectExpDtoList: [],
+				coverLetterDtoList: [],
+			};
+
+			if (!resumeTitle) {
+				alert('이력서 제목을 입력해주세요');
+				return;
+			} else if (!name) {
+				alert('이름을 입력해주세요');
+				return;
+			}
+
+			if (uniperiod1 !== '' || uniname1 !== '' || unimajor1 !== '') {
+				resumeInfo.universityDtoList.push({
+					universityPeriod: uniperiod1,
+					universityName: uniname1,
+					major: unimajor1,
+				});
+			}
+
+			if (uniperiod2 !== '' || uniname2 !== '' || unimajor2 !== '') {
+				resumeInfo.universityDtoList.push({
+					universityPeriod: uniperiod2,
+					universityName: uniname2,
+					major: unimajor2,
+				});
+			}
+
+			if (uniperiod3 !== '' || uniname3 !== '' || unimajor3 !== '') {
+				resumeInfo.universityDtoList.push({
+					universityPeriod: uniperiod3,
+					universityName: uniname3,
+					major: unimajor3,
+				});
+			}
+
+			if (
+				eduname1 !== '' ||
+				eduperiod1 !== '' ||
+				educontent1 !== '' ||
+				eduagency1 !== ''
+			) {
+				resumeInfo.educationDtoList.push({
+					educationName: eduname1,
+					educationPeriod: eduperiod1,
+					educationContent: educontent1,
+					educationInstitution: eduagency1,
+				});
+			}
+
+			if (
+				eduname2 !== '' ||
+				eduperiod2 !== '' ||
+				educontent2 !== '' ||
+				eduagency2 !== ''
+			) {
+				resumeInfo.educationDtoList.push({
+					educationName: eduname2,
+					educationPeriod: eduperiod2,
+					educationContent: educontent2,
+					educationInstitution: eduagency2,
+				});
+			}
+
+			if (
+				eduname3 !== '' ||
+				eduperiod3 !== '' ||
+				educontent3 !== '' ||
+				eduagency3 !== ''
+			) {
+				resumeInfo.educationDtoList.push({
+					educationName: eduname3,
+					educationPeriod: eduperiod3,
+					educationContent: educontent3,
+					educationInstitution: eduagency3,
+				});
+			}
+
+			if (
+				actname1 !== '' ||
+				actperiod1 !== '' ||
+				actcontent1 !== '' ||
+				actagency1 !== ''
+			) {
+				resumeInfo.activityDtoList.push({
+					activityName: actname1,
+					activityPeriod: actperiod1,
+					activityContent: actcontent1,
+					activityInstitution: actagency1,
+				});
+			}
+
+			if (
+				actname2 !== '' ||
+				actperiod2 !== '' ||
+				actcontent2 !== '' ||
+				actagency2 !== ''
+			) {
+				resumeInfo.activityDtoList.push({
+					activityName: actname2,
+					activityPeriod: actperiod2,
+					activityContent: actcontent2,
+					activityInstitution: actagency2,
+				});
+			}
+
+			if (
+				actname3 !== '' ||
+				actperiod3 !== '' ||
+				actcontent3 !== '' ||
+				actagency3 !== ''
+			) {
+				resumeInfo.activityDtoList.push({
+					activityName: actname3,
+					activityPeriod: actperiod3,
+					activityContent: actcontent3,
+					activityInstitution: actagency3,
+				});
+			}
+
+			if (careername1 !== '' || careerperiod1 !== '' || careerwork1 !== '') {
+				resumeInfo.careerDtoList.push({
+					companyName: careername1,
+					careerPeriod: careerperiod1,
+					careerContent: careerwork1,
+				});
+			}
+
+			if (careername2 !== '' || careerperiod2 !== '' || careerwork2 !== '') {
+				resumeInfo.careerDtoList.push({
+					companyName: careername2,
+					careerPeriod: careerperiod2,
+					careerContent: careerwork2,
+				});
+			}
+
+			if (careername3 !== '' || careerperiod3 !== '' || careerwork3 !== '') {
+				resumeInfo.careerDtoList.push({
+					companyName: careername3,
+					careerPeriod: careerperiod3,
+					careerContent: careerwork3,
+				});
+			}
+
+			if (awardname1 !== '' || awarddate1 !== '' || awardagency1 !== '') {
+				resumeInfo.awardDtoList.push({
+					awardName: awardname1,
+					awardDate: awarddate1,
+					awardInstitution: awardagency1,
+				});
+			}
+
+			if (awardname2 !== '' || awarddate2 !== '' || awardagency2 !== '') {
+				resumeInfo.awardDtoList.push({
+					awardName: awardname2,
+					awardDate: awarddate2,
+					awardInstitution: awardagency2,
+				});
+			}
+
+			if (awardname3 !== '' || awarddate3 !== '' || awardagency3 !== '') {
+				resumeInfo.awardDtoList.push({
+					awardName: awardname3,
+					awardDate: awarddate3,
+					awardInstitution: awardagency3,
+				});
+			}
+
+			if (
+				certificatename1 !== '' ||
+				certificatedate1 !== '' ||
+				certificateagency1 !== ''
+			) {
+				resumeInfo.awardDtoList.push({
+					certificateName: certificatename1,
+					certificateDate: certificatedate1,
+					certificateInstitution: certificateagency1,
+				});
+			}
+
+			if (
+				certificatename2 !== '' ||
+				certificatedate2 !== '' ||
+				certificateagency2 !== ''
+			) {
+				resumeInfo.awardDtoList.push({
+					certificateName: certificatename2,
+					certificateDate: certificatedate2,
+					certificateInstitution: certificateagency2,
+				});
+			}
+
+			if (
+				certificatename3 !== '' ||
+				certificatedate3 !== '' ||
+				certificateagency3 !== ''
+			) {
+				resumeInfo.awardDtoList.push({
+					certificateName: certificatename3,
+					certificateDate: certificatedate3,
+					certificateInstitution: certificateagency3,
+				});
+			}
+
+			if (
+				language1 !== '' ||
+				languagename1 !== '' ||
+				languagegrade1 !== '' ||
+				languagedate1 !== ''
+			) {
+				resumeInfo.languageAbilityDtoList.push({
+					language: language1,
+					testName: languagename1,
+					grade: languagegrade1,
+					testDate: languagedate1,
+				});
+			}
+
+			if (
+				language2 !== '' ||
+				languagename2 !== '' ||
+				languagegrade2 !== '' ||
+				languagedate2 !== ''
+			) {
+				resumeInfo.languageAbilityDtoList.push({
+					language: language2,
+					testName: languagename2,
+					grade: languagegrade2,
+					testDate: languagedate2,
+				});
+			}
+
+			if (
+				language3 !== '' ||
+				languagename3 !== '' ||
+				languagegrade3 !== '' ||
+				languagedate3 !== ''
+			) {
+				resumeInfo.languageAbilityDtoList.push({
+					language: language3,
+					testName: languagename3,
+					grade: languagegrade3,
+					testDate: languagedate3,
+				});
+			}
+
+			if (skillname1 !== '' || skilllevel1 !== '' || skilldetail1 !== '') {
+				resumeInfo.skillDtoList.push({
+					skillName: skillname1,
+					skillLevel: skilllevel1,
+					detail: skilldetail1,
+				});
+			}
+
+			if (skillname2 !== '' || skilllevel2 !== '' || skilldetail2 !== '') {
+				resumeInfo.skillDtoList.push({
+					skillName: skillname2,
+					skillLevel: skilllevel2,
+					detail: skilldetail2,
+				});
+			}
+
+			if (skillname3 !== '' || skilllevel3 !== '' || skilldetail3 !== '') {
+				resumeInfo.skillDtoList.push({
+					skillName: skillname3,
+					skillLevel: skilllevel3,
+					detail: skilldetail3,
+				});
+			}
+
+			if (
+				projectname1 !== '' ||
+				projectperiod1 !== '' ||
+				projectuserCount1 !== '' ||
+				projectoutline1 !== '' ||
+				projectdevEnv1 !== '' ||
+				projectrole1 !== '' ||
+				projectfunction1 !== '' ||
+				projectreulst1 !== '' ||
+				projectlink1 !== ''
+			) {
+				resumeInfo.projectExpDtoList.push({
+					projectName: projectname1,
+					projectPeriod: projectperiod1,
+					memberCnt: projectuserCount1,
+					summary: projectoutline1,
+					techEnv: projectdevEnv1,
+					position: projectrole1,
+					function: projectfunction1,
+					result: projectreulst1,
+					link: projectlink1,
+				});
+			}
+
+			if (
+				projectname2 !== '' ||
+				projectperiod2 !== '' ||
+				projectuserCount2 !== '' ||
+				projectoutline2 !== '' ||
+				projectdevEnv2 !== '' ||
+				projectrole2 !== '' ||
+				projectfunction2 !== '' ||
+				projectreulst2 !== '' ||
+				projectlink2 !== ''
+			) {
+				resumeInfo.projectExpDtoList.push({
+					projectName: projectname2,
+					projectPeriod: projectperiod2,
+					memberCnt: projectuserCount2,
+					summary: projectoutline2,
+					techEnv: projectdevEnv2,
+					position: projectrole2,
+					function: projectfunction2,
+					result: projectreulst2,
+					link: projectlink2,
+				});
+			}
+
+			if (
+				projectname3 !== '' ||
+				projectperiod3 !== '' ||
+				projectuserCount3 !== '' ||
+				projectoutline3 !== '' ||
+				projectdevEnv3 !== '' ||
+				projectrole3 !== '' ||
+				projectfunction3 !== '' ||
+				projectreulst3 !== '' ||
+				projectlink3 !== ''
+			) {
+				resumeInfo.projectExpDtoList.push({
+					projectName: projectname3,
+					projectPeriod: projectperiod3,
+					memberCnt: projectuserCount3,
+					summary: projectoutline3,
+					techEnv: projectdevEnv3,
+					position: projectrole3,
+					function: projectfunction3,
+					result: projectreulst3,
+					link: projectlink3,
+				});
+			}
+
+			if (coverLetterTitle1 !== '' || coverLetterContent1 !== '') {
+				resumeInfo.skillDtoList.push({
+					title: coverLetterTitle1,
+					content: coverLetterContent1,
+				});
+			}
+
+			if (coverLetterTitle2 !== '' || coverLetterContent2 !== '') {
+				resumeInfo.skillDtoList.push({
+					title: coverLetterTitle2,
+					content: coverLetterContent2,
+				});
+			}
+
+			if (coverLetterTitle3 !== '' || coverLetterContent3 !== '') {
+				resumeInfo.skillDtoList.push({
+					title: coverLetterTitle3,
+					content: coverLetterContent3,
+				});
+			}
+
+			axios({
+				method: 'POST',
+				url: url + '/resume',
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: resumeInfo,
+			}).then(res => {});
 		},
 
 		save() {},
