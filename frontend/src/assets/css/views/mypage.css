@@ -1,0 +1,26 @@
+@import url('./mypage-card.css');
+
+.div-three-tab {}
+
+.nav-tabs {
+  margin: 0px 100px;
+}
+
+.nav-tabs .nav-link {
+  color: var(--primary-color-black);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-color-1)
+}
+
+.nav-tabs .nav-link:hover {
+  transform: scale(1.07);
+  transition: 0.5s;
+  color: var(--primary-color-black-hover);
+}
+
+.nav-fill .nav-item .nav-link,
+.nav-justified .nav-item .nav-link {
+  width: 90%;
+}

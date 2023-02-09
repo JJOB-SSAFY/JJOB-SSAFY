@@ -21,7 +21,7 @@
 
 .navbar-menu li {
   padding: 8px 12px;
-  font-size: 20px;
+  font-size: 23px;
   font-family: 'LINE-Bd';
 }
 
@@ -58,8 +58,8 @@
 .navbar-toggleBtn {
   display: none;
   position: absolute;
-  right: 32px;
-  top: 1px;
+  right: 50px;
+  top: 27px;
   font-size: 32px;
 }
 
@@ -162,7 +162,7 @@
 
     to {
       top: 0;
-      height: 250px;
+      height: 260px;
       opacity: 1;
     }
   }
@@ -176,7 +176,7 @@
 
     to {
       top: 0;
-      height: 250px;
+      height: 260px;
       opacity: 1;
     }
   }

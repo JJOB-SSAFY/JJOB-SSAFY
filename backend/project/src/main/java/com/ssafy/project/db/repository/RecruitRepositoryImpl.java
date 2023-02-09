@@ -24,6 +24,7 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom {
     public List<RecruitResponseListDto> getRecruitByLocationAndDepartment(RecruitSearchCondition condition) {
         return queryFactory
                 .select(new QRecruitResponseListDto(
+                        recruit.id,
                         recruit.recruitTitle,
                         recruit.department,
                         recruit.workType,

@@ -1,0 +1,124 @@
+.div-mycard {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.div-mycard:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.cover-backgroud {
+  background-position-y: -50px;
+  background-image: url(@/assets/images/city.jpg);
+  background-size: cover;
+
+  height: 100px;
+  border-radius: 20px 20px 0 0;
+}
+
+.div-mycard .mycard-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: -60px;
+  margin-left: 20px;
+  padding: 20px
+}
+
+.first-detail,
+.second-detail {
+  padding: 5px;
+}
+
+/* profile */
+.div-profile {
+  display: flex;
+  flex-direction: column;
+  min-width: 30%;
+}
+
+.div-profile .img-container {
+  background-color: white;
+  border-radius: 25% 35% / 35% 40%;
+}
+
+.div-profile .profile-img {
+  padding: 10px;
+  border: 1px solid white;
+  width: 300px;
+  height: 300px;
+  border-radius: 25% 35% / 35% 40%;
+  overflow: hidden;
+
+}
+
+.div-profile .profile-name {
+  text-align: center;
+  font-size: 48px;
+}
+
+/* 정보 창*/
+.div-info {
+  min-width: 200px;
+}
+
+.div-info-first .info-title,
+.div-info-second .info-title {
+  color: var(--primary-color-1);
+  font-size: 20px;
+  font-family: LINE-Bd;
+}
+
+.div-info-first .info-content,
+.div-info-second .info-content {
+  font-size: 17px;
+  margin-left: 2px;
+}
+
+
+/* 첫번째 정보 */
+
+
+
+.div-info-first {
+  margin-left: 30px;
+  min-width: 200px;
+}
+
+.div-info-second {
+  min-width: 200px;
+}
+
+
+/* 두번째 정보 */
+.div-info .first-detail p {
+  word-wrap: break-word;
+}
+
+
+
+/* 두번째 정보 */
+.div-info .second-detail p {
+  word-wrap: break-word;
+}
+
+/* 구분선 */
+.hr-div {
+  height: 3px;
+  background-color: #fff;
+  padding: 0;
+  margin: 20px 70px;
+}
+
+.hr-div {
+  height: 3px;
+  border: 0;
+  border-bottom: 2px dashed #eee;
+
+  margin: 20px 150px;
+  background: #999;
+}

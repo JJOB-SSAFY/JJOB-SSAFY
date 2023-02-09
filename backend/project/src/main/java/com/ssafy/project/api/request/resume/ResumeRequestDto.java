@@ -12,10 +12,6 @@ public class ResumeRequestDto {
 
     private String resumeTitle;
 
-    private String subTitle;
-
-    private String introduce;
-
     private String name;
 
     private String blog;

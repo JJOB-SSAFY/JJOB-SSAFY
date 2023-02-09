@@ -7,11 +7,13 @@ import homepageView from '@/views/main/homepage/homepageView.vue';
 import infoCardsView from '@/views/main/infoCards/infoCardsView.vue';
 import presentationView from '@/views/main/presentation/presentationView.vue';
 import recruitView from '@/views/main/recruit/recruitView.vue';
+import recruitDetailView from '@/views/main/recruit/recruitDetailView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import reviewWriteView from '@/views/main/review/reviewWriteView.vue';
-import myInfoView from '@/views/main/myInfo/myInfoView.vue';
+import myInfoView from '@/views/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
+import resumeCreateView from '@/views/main/resume/resumeCreateView.vue';
 import test from '@/views/test.vue';
 export default createRouter({
 	history: createWebHistory(),
@@ -50,6 +52,11 @@ export default createRouter({
 					component: recruitView,
 				},
 				{
+					name: 'recruitDetail',
+					path: '/recruit/detail/:recruitId/',
+					component: recruitDetailView,
+				},
+				{
 					name: 'review',
 					path: '/review',
 					component: reviewView,
@@ -59,11 +66,7 @@ export default createRouter({
 					path: '/reviewWrite/:companyId/:companyName',
 					component: reviewWriteView,
 				},
-				{
-					name: 'myInfo',
-					path: '/myInfo',
-					component: myInfoView,
-				},
+
 				{
 					name: 'interview',
 					path: '/interview',
@@ -74,7 +77,17 @@ export default createRouter({
 					path: '/openvidu/:participant/:session/:companyId/:companyName',
 					component: openviduView,
 				},
+				{
+					name: 'resumeCreate',
+					path: '/resume/create',
+					component: resumeCreateView,
+				},
 			],
+		},
+		{
+			name: 'myInfo',
+			path: '/myInfo',
+			component: myInfoView,
 		},
 		{
 			name: 'register',

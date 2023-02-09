@@ -10,7 +10,13 @@ export default class memberService {
   async emailCheck(param) {
     return await http.get(`/member/${param}`, config);
   }
-  async register(parma) {
-    return await http.post(`/member/join`, config);
+  async registerUser(param) {
+    return await http.post(`/member/join`, param, config);
+  }
+  async registerCompany(param) {
+    await http.post(`/company`, param, config).then(data => data.data);
+  }
+  async getCompany() {
+    return await http.get(`/company`, config).then(data => console.log(data));
   }
 }

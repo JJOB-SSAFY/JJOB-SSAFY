@@ -1,4 +1,4 @@
-<template>
+<template class="homepage">
 	<home-banner />
 	<!-- <router-view /> -->
 	wdfe
