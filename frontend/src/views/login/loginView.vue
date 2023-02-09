@@ -7,7 +7,7 @@
 			<div class="login-container">
 				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
 				<div class="login-form mt-110">
-					<form @submit.prevent="Login">
+					<form @submit.prevent>
 						<input
 							class="font-LINE-Rg"
 							v-model.lazy.trim="loginState.form.email"
@@ -33,12 +33,7 @@
 							</div>
 						</div>
 						<div class="div-button">
-							<button
-								type="button"
-								@click="Login"
-								@keyup.enter="Login"
-								class="font-LINE-Bd"
-							>
+							<button @click="Login" @keyup.enter="Login" class="font-LINE-Bd">
 								로그인
 							</button>
 							<button type="button" id="login-kakao-btn" @click="kakaoLogin">
