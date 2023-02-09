@@ -39,14 +39,14 @@
 							비밀번호를 다시 확인해 주세요.
 						</div>
 						<input
-							class="font-LINE-Rg"
+							class="register-form-input font-LINE-Rg"
 							type="text"
 							placeholder="이름을 입력해주세요"
 							v-model="info.name"
 						/>
 						<br />
 						<input
-							class="font-LINE-Rg"
+							class="register-form-input font-LINE-Rg"
 							type="text"
 							placeholder="전화번호을 입력해주세요"
 							v-model="info.phone"
@@ -54,17 +54,18 @@
 						<p>역활?</p>
 						<label for="checkBox"
 							><input
+								class="input-checkbox"
 								type="checkbox"
 								v-model="info.role"
 								true-value="company"
 								false-value="user"
 								id="checkBox"
-							/>일반회원</label
+							/>기업 회원 등록</label
 						>
-						기업 정보 기입
+
 						<div>
 							<input
-								class="font-LINE-Rg"
+								class="register-form-input font-LINE-Rg"
 								type="text"
 								placeholder="기업 이름"
 								v-model="companyInfo.companyName"
@@ -72,7 +73,7 @@
 							/>
 							<br />
 							<input
-								class="font-LINE-Rg"
+								class="register-form-input font-LINE-Rg"
 								type="text"
 								placeholder="기업 주소"
 								v-model="companyInfo.companyAddress"
@@ -80,7 +81,7 @@
 							/>
 							<br />
 							<input
-								class="font-LINE-Rg"
+								class="register-form-input font-LINE-Rg"
 								type="text"
 								placeholder="기업 설명"
 								v-model="companyInfo.companyDesc"
@@ -88,7 +89,7 @@
 							/>
 							<br />
 							<input
-								class="font-LINE-Rg"
+								class="register-form-input font-LINE-Rg"
 								type="text"
 								placeholder="사원수"
 								v-model="companyInfo.employeeCnt"
@@ -96,7 +97,7 @@
 							/>
 							<br />
 							<input
-								class="font-LINE-Rg"
+								class="register-form-input font-LINE-Rg"
 								type="text"
 								placeholder="기업 홈페이지"
 								v-model="companyInfo.companyUrl"
@@ -106,7 +107,12 @@
 						</div>
 
 						<div class="div-button">
-							<b-button type="button" class="font-LINE-Bd" @click="register">
+							<b-button
+								type="button"
+								variant="outline-primary"
+								class="div-button font-LINE-Bd"
+								@click="register"
+							>
 								등록
 							</b-button>
 						</div>
@@ -121,11 +127,13 @@
 import { watch } from 'vue';
 import { reactive, ref } from 'vue';
 import MemberService from '../../api/memberService';
+import CompanyService from '../../api/companyService';
 export default {
 	name: 'registerView',
 	setup() {
 		const emailValidCk = ref(false);
 		const memberService = new MemberService();
+		const companyService = new CompanyService();
 		const companySuccess = ref(false);
 		const invalidEmail = ref(true);
 		const invalidPassowrd = ref(true);
@@ -205,7 +213,7 @@ export default {
 			emailValidCk.value = false;
 		};
 		const registerCompany = async function (param) {
-			await memberService
+			await companyService
 				.registerCompany(param)
 				.then(data => {
 					alert(userInfo.companyName + ' 기업 등록 성공');
@@ -353,5 +361,11 @@ export default {
 }
 .register-form .register-form-input:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.div-button {
+	width: 500px;
+	padding-left: 10px;
+}
+.input-checkbox {
 }
 </style>
