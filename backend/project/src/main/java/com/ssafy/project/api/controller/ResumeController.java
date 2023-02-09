@@ -27,10 +27,10 @@ public class ResumeController{
         return new ResponseEntity<>(resumeService.getResumeList(userDetails.getMember().getEmail()), HttpStatus.OK);
     }
 
-    @PostMapping("/{company_id}")
-    public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails, @PathVariable Long company_id,
+    @PostMapping
+    public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                          @RequestBody ResumeRequestDto requestDto) {
-        resumeService.createResume(requestDto, userDetails.getMember().getId(), company_id);
+        resumeService.createResume(requestDto, userDetails.getMember().getId());
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
