@@ -347,6 +347,9 @@
 <script>
 import axios from 'axios';
 import { url } from '../../../api/http';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 export default {
 	name: 'resumeCreateView',
@@ -553,10 +556,6 @@ export default {
 			github: null,
 			blog: null,
 		};
-	},
-
-	setup() {
-		return {};
 	},
 
 	methods: {
@@ -972,7 +971,7 @@ export default {
 				certificatedate1 !== '' ||
 				certificateagency1 !== ''
 			) {
-				resumeInfo.awardDtoList.push({
+				resumeInfo.certificateDtoList.push({
 					certificateName: certificatename1,
 					certificateDate: certificatedate1,
 					certificateInstitution: certificateagency1,
@@ -984,7 +983,7 @@ export default {
 				certificatedate2 !== '' ||
 				certificateagency2 !== ''
 			) {
-				resumeInfo.awardDtoList.push({
+				resumeInfo.certificateDtoList.push({
 					certificateName: certificatename2,
 					certificateDate: certificatedate2,
 					certificateInstitution: certificateagency2,
@@ -996,7 +995,7 @@ export default {
 				certificatedate3 !== '' ||
 				certificateagency3 !== ''
 			) {
-				resumeInfo.awardDtoList.push({
+				resumeInfo.certificateDtoList.push({
 					certificateName: certificatename3,
 					certificateDate: certificatedate3,
 					certificateInstitution: certificateagency3,
@@ -1142,21 +1141,21 @@ export default {
 			}
 
 			if (coverLetterTitle1 !== '' || coverLetterContent1 !== '') {
-				resumeInfo.skillDtoList.push({
+				resumeInfo.coverLetterDtoList.push({
 					title: coverLetterTitle1,
 					content: coverLetterContent1,
 				});
 			}
 
 			if (coverLetterTitle2 !== '' || coverLetterContent2 !== '') {
-				resumeInfo.skillDtoList.push({
+				resumeInfo.coverLetterDtoList.push({
 					title: coverLetterTitle2,
 					content: coverLetterContent2,
 				});
 			}
 
 			if (coverLetterTitle3 !== '' || coverLetterContent3 !== '') {
-				resumeInfo.skillDtoList.push({
+				resumeInfo.coverLetterDtoList.push({
 					title: coverLetterTitle3,
 					content: coverLetterContent3,
 				});
@@ -1172,7 +1171,12 @@ export default {
 			}).then(res => {});
 		},
 
-		save() {},
+		save() {
+			this.saveImpl();
+			this.$router.push({
+				name: 'myInfo',
+			});
+		},
 	},
 };
 </script>

@@ -61,10 +61,12 @@
 import { watch } from 'vue';
 import { reactive, ref } from 'vue';
 import MemberService from '../../api/memberService';
+import CompanyService from '../../api/companyService';
 export default {
 	name: 'registerView',
 	setup() {
 		const memberService = new MemberService();
+		const companyService = new CompanyService();
 		const info = reactive({
 			email: '',
 			password: '',

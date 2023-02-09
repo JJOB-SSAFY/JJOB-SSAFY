@@ -23,11 +23,6 @@ public class Resume {
     private String resumeTitle;
 
     @Column(nullable = false)
-    private String subTitle;
-
-    private String introduce;
-
-    @Column(nullable = false)
     private String name;
 
     private String blog;

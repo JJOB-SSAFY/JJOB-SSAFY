@@ -11,7 +11,9 @@
 					<div><myinfo-resume /></div>
 				</b-tab>
 				<b-tab title="내정보변경">
-					<div>내정보 변경~~~</div>
+					<div>
+						<myinfo-update />
+					</div>
 				</b-tab>
 			</b-tabs>
 		</div>
@@ -21,10 +23,12 @@
 <script>
 import MyinfoCard from './components/myInfo-card.vue';
 import MyinfoResume from './components/myInfo-resume.vue';
+import MyinfoUpdate from './components/myinfo-update.vue';
 export default {
 	components: {
 		MyinfoCard,
 		MyinfoResume,
+		MyinfoUpdate,
 	},
 	setup() {},
 };

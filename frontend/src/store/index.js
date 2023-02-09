@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate';
 
 import { auth } from '@/store/auth';
 import { recruit } from '@/store/recruit';
+
 export default createStore({
 	modules: { auth, recruit },
 	plugins: [
