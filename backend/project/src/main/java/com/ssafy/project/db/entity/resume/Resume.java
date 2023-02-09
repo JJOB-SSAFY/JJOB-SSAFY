@@ -43,14 +43,9 @@ public class Resume {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id")
-    private Company company;
-
-    public static Resume of(Member member, Company company, ResumeRequestDto requestDto) {
+    public static Resume of(Member member, ResumeRequestDto requestDto) {
         return Resume.builder()
                 .member(member)
-                .company(company)
                 .resumeTitle(requestDto.getResumeTitle())
                 .subTitle(requestDto.getSubTitle())
                 .introduce(requestDto.getIntroduce())
