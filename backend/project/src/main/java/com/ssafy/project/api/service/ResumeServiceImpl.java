@@ -48,15 +48,14 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     @Transactional
-    public void createResume(ResumeRequestDto requestDto, Long memberId, Long companyId) {
+    public void createResume(ResumeRequestDto requestDto, Long memberId) {
         Optional<Member> member = memberRepository.findById(memberId);
-        Optional<Company> company = companyRepository.findById(companyId);
 
         if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+
 
         //넣어야하는 resume 엔티티와 연결되어 있는 모든 엔티티를 생성해준다.
-        Resume resume = Resume.of(member.get(), company.get(), requestDto);
+        Resume resume = Resume.of(member.get(), requestDto);
         resumeRepository.save(resume);
 
         //activity entity
