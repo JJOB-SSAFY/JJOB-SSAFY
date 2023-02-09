@@ -4,12 +4,13 @@ import createPersistedState from 'vuex-persistedstate';
 
 import { auth } from '@/store/auth';
 import { recruit } from '@/store/recruit';
+import { resume } from '@/store/recruit';
 
 export default createStore({
-	modules: { auth, recruit },
+	modules: { auth, recruit, resume },
 	plugins: [
 		createPersistedState({
-			paths: ['auth', 'recruit'],
+			paths: ['auth', 'recruit', 'resume'],
 		}),
 	],
 });
