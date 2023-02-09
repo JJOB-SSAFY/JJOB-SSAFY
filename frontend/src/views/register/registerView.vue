@@ -9,7 +9,7 @@
 					<h1 class="font-LINE-Bd mt-100">회원등록 <br />JJOB SSAFY입니다</h1>
 				</div>
 				<div class="register-form mt-110">
-					<form @submit.prevent="register">
+					<form @submit.prevent="register" id="register">
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="email"
@@ -52,55 +52,63 @@
 							v-model="info.phone"
 						/>
 						<p>역활?</p>
-						<input type="radio" v-model="info.role" value="user" />
-						일반회원
-						<input type="radio" v-model="info.role" value="company" />
-						기업
-						<div v-if="info.role == 'company'">
-							기업 정보 기입
-							<div>
-								<input
-									class="font-LINE-Rg"
-									type="text"
-									placeholder="기업 이름"
-									v-model="companyInfo.companyName"
-									focos
-								/>
-								<br />
-								<input
-									class="font-LINE-Rg"
-									type="text"
-									placeholder="기업 주소"
-									v-model="companyInfo.companyAddress"
-								/>
-								<br />
-								<input
-									class="font-LINE-Rg"
-									type="text"
-									placeholder="기업 설명"
-									v-model="companyInfo.companyDesc"
-								/>
-								<br />
-								<input
-									class="font-LINE-Rg"
-									type="text"
-									placeholder="사원수"
-									v-model="companyInfo.employeeCnt"
-								/>
-								<br />
-								<input
-									class="font-LINE-Rg"
-									type="text"
-									placeholder="기업 홈페이지"
-									v-model="companyInfo.companyUrl"
-								/>
-								<br />
-							</div>
+						<label for="checkBox"
+							><input
+								type="checkbox"
+								v-model="info.role"
+								true-value="company"
+								false-value="user"
+								id="checkBox"
+							/>일반회원</label
+						>
+						기업 정보 기입
+						<div>
+							<input
+								class="font-LINE-Rg"
+								type="text"
+								placeholder="기업 이름"
+								v-model="companyInfo.companyName"
+								:disabled="info.role != 'company'"
+							/>
+							<br />
+							<input
+								class="font-LINE-Rg"
+								type="text"
+								placeholder="기업 주소"
+								v-model="companyInfo.companyAddress"
+								:disabled="info.role != 'company'"
+							/>
+							<br />
+							<input
+								class="font-LINE-Rg"
+								type="text"
+								placeholder="기업 설명"
+								v-model="companyInfo.companyDesc"
+								:disabled="info.role != 'company'"
+							/>
+							<br />
+							<input
+								class="font-LINE-Rg"
+								type="text"
+								placeholder="사원수"
+								v-model="companyInfo.employeeCnt"
+								:disabled="info.role != 'company'"
+							/>
+							<br />
+							<input
+								class="font-LINE-Rg"
+								type="text"
+								placeholder="기업 홈페이지"
+								v-model="companyInfo.companyUrl"
+								:disabled="info.role != 'company'"
+							/>
+							<br />
 						</div>
+
 						<div class="div-button">
-							<button type="button" class="font-LINE-Bd" @click="register">
+							<b-button type="button" class="font-LINE-Bd" @click="register">
 								등록
-							</button>
+							</b-button>
 						</div>
 					</form>
 				</div>
@@ -117,13 +125,14 @@ export default {
 	name: 'registerView',
 	setup() {
 		const memberService = new MemberService();
+		const companySuccess = ref(false);
 		const info = reactive({
 			email: '',
 			password: '',
 			passwordCk: '',
 			name: '',
 			phone: '',
-			role: '',
+			role: 'user',
 		});
 		const companyInfo = reactive({
 			companyAddress: '',
@@ -142,7 +151,7 @@ export default {
 		});
 		const invalidEmail = ref(true);
 		const invalidPassowrd = ref(true);
-		const register = () => {
+		const register = async () => {
 			console.log('register');
 			if (
 				info.email == null ||
@@ -180,22 +189,61 @@ export default {
 					alert('모든 정보를 입력해주세요');
 					return;
 				}
-				registerCompany(companyInfo);
+				await registerCompany(companyInfo);
+				if (companySuccess.value) {
+					companySuccess.value = false;
+					registerUser(userInfo);
+				}
 			}
 			document.getElementById('register').reset();
 		};
-		const registerCompany = param => {
-			memberService
+		const registerCompany = async function (param) {
+			await memberService
 				.registerCompany(param)
 				.then(data => {
+					alert(userInfo.companyName + ' 기업 등록 성공');
 					console.log(userInfo.companyName);
+					companySuccess.value = true;
 				})
-				.then(registerUser(userInfo));
+				.catch(err => {
+					console.log(err);
+					alert('기업 등록 실패');
+					return;
+				});
 		};
 		const registerUser = param => {
 			userInfo.companyName = companyInfo.companyName;
 			console.log(userInfo.companyName);
-			memberService.registerUser(param).then(data => console.log(data));
+			memberService
+				.registerUser(param)
+				.then(data => {
+					console.log(data);
+					alert(info.email + '등록 성공');
+					initData();
+				})
+				.catch(err => {
+					alert('유저등록실패');
+					console.log(err);
+				});
+		};
+		const initData = () => {
+			info.email =
+				info.password =
+				info.passwordCk =
+				info.name =
+				info.phone =
+				userInfo.companyName =
+				userInfo.email =
+				userInfo.name =
+				userInfo.password =
+				userInfo.phone =
+				companyInfo.companyAddress =
+				companyInfo.companyDesc =
+				companyInfo.companyName =
+				companyInfo.companyUrl =
+				companyInfo.employeeCnt =
+					'';
+			info.role = 'user';
 		};
 		const emailCk = param => {
 			memberService
@@ -249,6 +297,14 @@ export default {
 				}
 			},
 		);
+		watch(
+			() => info.role,
+			function () {
+				if (info.role == 'user') {
+					companyInfo.companyName = '';
+				}
+			},
+		);
 		return {
 			register,
 			invalidEmail,
@@ -259,6 +315,7 @@ export default {
 			companyInfo,
 			registerCompany,
 			registerUser,
+			companySuccess,
 		};
 	},
 };
@@ -277,7 +334,8 @@ export default {
 	margin: 40px 79px 0 10px;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-
+.register-title {
+}
 .register-form .register-form-input:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
