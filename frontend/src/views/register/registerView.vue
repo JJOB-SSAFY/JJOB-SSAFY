@@ -124,8 +124,11 @@ import MemberService from '../../api/memberService';
 export default {
 	name: 'registerView',
 	setup() {
+		const emailValidCk = ref(false);
 		const memberService = new MemberService();
 		const companySuccess = ref(false);
+		const invalidEmail = ref(true);
+		const invalidPassowrd = ref(true);
 		const info = reactive({
 			email: '',
 			password: '',
@@ -149,8 +152,7 @@ export default {
 			phone: info.phone,
 			companyName: '',
 		});
-		const invalidEmail = ref(true);
-		const invalidPassowrd = ref(true);
+
 		const register = async () => {
 			console.log('register');
 			if (
@@ -171,7 +173,11 @@ export default {
 			userInfo.name = info.name;
 			userInfo.phone = info.phone;
 			userInfo.companyName = '';
-			if (info.role == 'user') {
+			emailValid(userInfo.email);
+			if (!emailValidCk.value) {
+				alert('올바른 이메일 형식을 작성해주세요!');
+				return;
+			} else if (info.role == 'user') {
 				registerUser(userInfo);
 			} else {
 				if (
@@ -195,7 +201,8 @@ export default {
 					registerUser(userInfo);
 				}
 			}
-			document.getElementById('register').reset();
+			initData();
+			emailValidCk.value = false;
 		};
 		const registerCompany = async function (param) {
 			await memberService
@@ -219,7 +226,6 @@ export default {
 				.then(data => {
 					console.log(data);
 					alert(info.email + '등록 성공');
-					initData();
 				})
 				.catch(err => {
 					alert('유저등록실패');
@@ -261,7 +267,16 @@ export default {
 					}
 				});
 		};
-		//이메일 중복 확인 수정필
+		const emailValid = param => {
+			var expert = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+			if (expert.test(param)) {
+				emailValidCk.value = true;
+				console.log('유효성 통과');
+			} else {
+				emailValidCk.value = false;
+				console.log('유효성 실패');
+			}
+		};
 		watch(
 			() => info.email,
 			function () {
