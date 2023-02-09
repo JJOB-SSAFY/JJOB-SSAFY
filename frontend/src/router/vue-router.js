@@ -37,6 +37,11 @@ export default createRouter({
 					component: homepageView,
 				},
 				{
+					name: 'register',
+					path: '/register',
+					component: registerView,
+				},
+				{
 					name: 'infoCards',
 					path: '/infoCards',
 					component: infoCardsView,
@@ -82,18 +87,14 @@ export default createRouter({
 					path: '/resume/create',
 					component: resumeCreateView,
 				},
+				{
+					name: 'myInfo',
+					path: '/myInfo',
+					component: myInfoView,
+				},
 			],
 		},
-		{
-			name: 'myInfo',
-			path: '/myInfo',
-			component: myInfoView,
-		},
-		{
-			name: 'register',
-			path: '/register',
-			component: registerView,
-		},
+
 		{
 			name: 'test',
 			path: '/test',
