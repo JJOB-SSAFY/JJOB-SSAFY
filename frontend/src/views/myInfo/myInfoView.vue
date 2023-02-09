@@ -11,7 +11,9 @@
 					<div>이력서 현황~~~</div>
 				</b-tab>
 				<b-tab title="내정보변경">
-					<div>내정보 변경~~~</div>
+					<div>
+						<myinfo-update />
+					</div>
 				</b-tab>
 			</b-tabs>
 		</div>
@@ -20,9 +22,11 @@
 
 <script>
 import MyinfoCard from './components/myInfo-card.vue';
+import MyinfoUpdate from './components/myinfo-update.vue';
 export default {
 	components: {
 		MyinfoCard,
+		MyinfoUpdate,
 	},
 	setup() {},
 };
