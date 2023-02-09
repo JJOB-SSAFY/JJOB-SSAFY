@@ -48,6 +48,7 @@ export default {
 	},
 	setup() {
 		const store = useStore();
+		const all = onMounted(() => store.getters['recruit/getRecruitList']);
 
 		const condition = reactive({
 			form: {
@@ -67,7 +68,7 @@ export default {
 			return store.getters['recruit/getRecruitList'];
 		});
 
-		return { condition, searchList, searchInfo };
+		return { all, condition, searchList, searchInfo };
 	},
 };
 </script>

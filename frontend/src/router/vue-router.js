@@ -52,7 +52,7 @@ export default createRouter({
 				},
 				{
 					name: 'recruitDetail',
-					path: '/recruit/detail/:recruitId/',
+					path: '/recruit/detail/:recruitId',
 					component: recruitDetailView,
 				},
 				{
