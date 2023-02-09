@@ -14,7 +14,6 @@
 			<div class="rightbox">
 				<div class="card-body">
 					<p>지원마감일 {{ info.recruitEndDate }}</p>
-					<p>{{ info.recruitId }}</p>
 					<button class="btn btn-primary" @click="clickDetail(info.recruitId)">
 						상세
 					</button>
@@ -25,8 +24,10 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { Store, storeKey } from 'vuex';
 
 export default {
 	name: 'recruitItemView',
@@ -34,17 +35,20 @@ export default {
 		info: Object,
 	},
 	setup() {
-		const store = useStore();
+		// const store = useStore();
 		const router = useRouter();
+		const store = useStore();
 
-		const clickDetail = function (recruitId) {
-			const detail_id = store.getters['recruit/getRecruitList'];
-			console.log(detail_id);
+		const clickDetail = function (id) {
+			// const detail_id = store.getters['recruit/getRecruitList'];
+			// console.log(detail_id);
+			// store.dispatch('recruit/getId');
+			localStorage.setItem('page', id);
 
 			router.push({
 				name: 'recruitDetail',
 				params: {
-					recruitId: recruitId,
+					recruitId: id,
 				},
 			});
 		};
