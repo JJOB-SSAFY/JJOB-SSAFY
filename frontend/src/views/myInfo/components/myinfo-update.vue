@@ -36,6 +36,20 @@
 						<p class="info-title">한줄 자기소개</p>
 						<input v-model="myInfo.state.introduce" class="info-content" />
 					</div>
+					<div class="second-detail info-visible">
+						<p class="info-title">한줄 자기소개</p>
+						<input v-model="myInfo.state.introduce" class="info-content" />
+					</div>
+					<label for="checkBox"
+						><input
+							class="input-checkbox"
+							type="checkbox"
+							v-model="visible"
+							true-value="1"
+							false-value="0"
+							id="checkBox"
+						/>카드 보여줄건지?</label
+					>
 					<b-button @Clic="updateCard">정보변경</b-button>
 				</div>
 			</div>
@@ -70,6 +84,7 @@ import { useStore } from 'vuex';
 export default {
 	setup() {
 		const store = useStore();
+		const visible = ref(false);
 		const password = reactive({
 			current: '',
 			change: '',
@@ -80,8 +95,19 @@ export default {
 		});
 		const getMyInfo = store.getters['auth/getUserInfo'];
 		myInfo.state = toRaw(getMyInfo);
-		const updateCard = () => {};
-		return { myInfo, password };
+		const updateCard = () => {
+			const param = {
+				blog: myInfo.state.blog,
+				skills: myInfo.state.skills,
+				phone: myInfo.state.phone,
+				github: myInfo.state.github,
+				preferredJob: myInfo.state.preferredJob,
+				introduce: myInfo.state.introduce,
+				imageUrl: myInfo.state.imageUrl,
+				visible: visible,
+			};
+		};
+		return { myInfo, password, visible };
 	},
 };
 </script>
