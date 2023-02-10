@@ -345,7 +345,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import resumeService from '../../../api/resumeService';
 import { toRaw } from 'vue';
 
