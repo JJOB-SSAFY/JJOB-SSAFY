@@ -40,9 +40,6 @@ public class MyInfoController {
 //        logger.info(userDetails.getMember().getEmail());
 //        logger.info(map.get("password"));
 //        logger.info(new BCryptPasswordEncoder().encode(map.get("password")));
-        System.out.println(map.get("change")+"change");
-        System.out.println(map.get("current")+"current");
-        System.out.println(userDetails);
 
         String status=myInfoService.changePwd(map.get("change"),map.get("current"),userDetails.getMember());
         return new ResponseEntity<>(new BaseResponseBody(status, 200), HttpStatus.OK);
