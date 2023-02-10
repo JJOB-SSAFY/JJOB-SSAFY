@@ -66,26 +66,41 @@
 
 		<div class="mt-50">
 			<div id="session" v-if="session">
-				<div id="session-header" class="mb-30">
-					<h1 id="session-title">{{ title }}</h1>
-					<!-- Button trigger modal -->
-				</div>
-				<div id="flex-container" style="display: flex">
-					<div id="main-video" class="col-md-6">
-						<user-video :stream-manager="mainStreamManager" />
+				<div class="openvidu-room-container">
+					<div class="openvidu-room-left">
+						<div id="session-header" class="mb-30">
+							<div class="openvidu-room-header">
+								<img
+									src="@/assets/images/logo/logo-removebg.png"
+									alt=""
+									height="91"
+									width="132"
+								/>
+								<h1 id="session-title">{{ title }}</h1>
+							</div>
+							<!-- Button trigger modal -->
+							<!-- <hr /> -->
+						</div>
+						<div id="flex-container" class="mt-170" style="display: flex">
+							<div id="main-video" class="col-md-6">
+								<user-video :stream-manager="mainStreamManager" />
+							</div>
+							<div id="video-container" class="row">
+								<!--<user-video
+												:stream-manager="publisher"
+												@click="updateMainVideoStreamManager(publisher)"
+										 />-->
+								<user-video
+									v-for="sub in subscribers"
+									:key="sub.stream.connection.connectionId"
+									:stream-manager="sub"
+									@click="updateMainVideoStreamManager(sub)"
+									class="col-6"
+								/>
+							</div>
+						</div>
 					</div>
-					<div id="video-container" class="col-md-6">
-						<!--<user-video
-										:stream-manager="publisher"
-										@click="updateMainVideoStreamManager(publisher)"
-								 />-->
-						<user-video
-							v-for="sub in subscribers"
-							:key="sub.stream.connection.connectionId"
-							:stream-manager="sub"
-							@click="updateMainVideoStreamManager(sub)"
-						/>
-					</div>
+					<div class="openvidu-room-right"></div>
 				</div>
 				<div class="openvidu-room-footer">
 					<button
@@ -187,6 +202,11 @@ export default {
 
 	methods: {
 		joinSession() {
+			if (this.subscribers.length >= 5) {
+				alert('입장 가능한 인원이 초과되었습니다.');
+				return;
+			}
+
 			// --- 1) Get an OpenVidu object ---
 			this.OV = new OpenVidu();
 
@@ -356,13 +376,8 @@ export default {
 .openvidu-join-header {
 	position: fixed;
 	width: 100%;
-	/* height: 80px; */
-	/* background: white; */
-	/* bottom: 0; */
 	top: 0;
 	right: 0;
-	/* display: flex; */
-	/* justify-content: right; */
 	align-items: center;
 	border-top: 1px lightgray solid;
 }
@@ -382,6 +397,18 @@ export default {
 	padding-bottom: 40px;
 }
 
+.openvidu-room-header {
+	position: fixed;
+	width: 100%;
+	height: 20%;
+	background: white;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px lightgray solid;
+}
+
 .openvidu-room-footer {
 	position: fixed;
 	width: 100%;
@@ -393,6 +420,18 @@ export default {
 	align-items: center;
 	border-top: 1px lightgray solid;
 	background-color: black;
+}
+
+.openvidu-room-container {
+	display: flex;
+}
+
+.openvidu-room-left {
+	width: 80%;
+}
+
+.openvidu-room-right {
+	width: 20%;
 }
 
 .leave-session-btn {
