@@ -346,7 +346,7 @@
 
 <script>
 import axios from 'axios';
-import { url } from '../../../api/http';
+import resumeService from '../../../api/resumeService';
 import { toRaw } from 'vue';
 
 export default {
@@ -561,13 +561,9 @@ export default {
 	},
 
 	created() {
-		axios({
-			method: 'GET',
-			url: url + '/resume/' + this.resumeId,
-			headers: {
-				Authorization: localStorage.getItem('jjob.s.token'),
-			},
-		}).then(res => {
+		this.resumeService = new resumeService();
+
+		this.resumeService.getResume().then(res => {
 			this.resumeInfo = res.data;
 			this.phone = res.data.phone;
 			this.email = res.data.email;
@@ -1316,15 +1312,7 @@ export default {
 					content: coverLetterContent3,
 				});
 			}
-
-			axios({
-				method: 'PATCH',
-				url: url + '/resume/' + this.resumeId,
-				headers: {
-					Authorization: localStorage.getItem('jjob.s.token'),
-				},
-				data: resumeInfo,
-			}).then(res => {});
+			this.resumeService.modify(this.resumeId, resumeInfo);
 		},
 
 		update() {

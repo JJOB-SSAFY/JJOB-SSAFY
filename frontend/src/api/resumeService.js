@@ -7,7 +7,18 @@ const config = {
   },
 };
 export default class resumeService {
+  async getResume(id, params) {
+    return await http
+      .get(`resume/` + id, params, config)
+      .then(data => data.data);
+  }
   async register(params) {
     return await http.post(`resume`, params, config).then(data => data.data);
+  }
+
+  async modify(id, params) {
+    return await http
+      .patch(`resume/` + id, params, config)
+      .then(data => data.data);
   }
 }

@@ -1164,9 +1164,7 @@ export default {
 					content: coverLetterContent3,
 				});
 			}
-			this.resumeService.register(resumeInfo).then(data => {
-				console.log(data);
-			});
+			this.resumeService.register(resumeInfo);
 		},
 
 		save() {
