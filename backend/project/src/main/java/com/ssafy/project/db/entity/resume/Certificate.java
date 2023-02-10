@@ -17,13 +17,10 @@ public class Certificate {
     @Column(name = "certificate_id")
     private Long id;
 
-    @Column(nullable = false)
     private String certificateName;
 
-    @Column(nullable = false)
     private String certificateDate;
 
-    @Column(nullable = false)
     private String certificateInstitution;
 
     @ManyToOne(fetch = FetchType.LAZY)

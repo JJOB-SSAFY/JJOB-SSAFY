@@ -17,13 +17,10 @@ public class University {
     @Column(name = "university_id")
     private Long id;
 
-    @Column(nullable = false)
     private String universityPeriod;
 
-    @Column(nullable = false)
     private String universityName;
 
-    @Column(nullable = false)
     private String major;
 
     @ManyToOne(fetch = FetchType.LAZY)
