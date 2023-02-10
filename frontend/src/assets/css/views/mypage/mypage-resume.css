@@ -53,3 +53,18 @@
   transform: scale(1.04);
   transition: 0.3s;
 }
+
+.resume-create-btn {
+  width: 55px;
+  height: 55px;
+  background-color: #ff8585;
+  margin: auto;
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+}
+
+.resume-create-btn:hover {
+  transform: scale(1.17);
+  transition: 0.3s;
+}

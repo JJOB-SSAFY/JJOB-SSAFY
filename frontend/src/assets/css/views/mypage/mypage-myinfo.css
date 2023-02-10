@@ -115,7 +115,6 @@
 
 .div-myinfo-update .info-visible input:hover {
   margin-left: 10px;
-
   transform: scale(1.04);
 }
 
@@ -152,7 +151,7 @@
   overflow: hidden;
 }
 
-.line-clamp {
+.div-item .line-clamp {
   font-size: 17px;
   width: 90%;
   word-break: break-all;

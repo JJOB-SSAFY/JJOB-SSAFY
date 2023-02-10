@@ -20,7 +20,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import { reactive, toRaw, computed, onMounted } from 'vue';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import resumeService from '../../../api/resumeService';
 
@@ -34,24 +34,10 @@ export default {
 		const getResumeList = reactive({
 			state: {},
 		});
-		// const resumeList = store.getters['auth/getResumeList'];
-		// getResumeList.state = toRaw(resumeList);
 		const resService = new resumeService();
 		resService.getResumeList().then(data => {
 			getResumeList.state = data;
 		});
-
-		// const getResumeList = computed(() => {
-		// 	return store.getters['auth/getResumeList'];
-		// });
-		// resumeList.state = toRaw(getResumeList);
-
-		// console.log('12341242314');
-
-		// const getList = store.getters['resume/getList'];
-
-		// resumeList.state = toRaw(getList);
-		// console.log(getResumeList);
 		const showDetailResume = e => {
 			router.push({
 				name: 'resumeDetail',
@@ -75,14 +61,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.resume-create-btn {
-	width: 55px;
-	height: 55px;
-	background-color: #ff8585;
-	margin: auto;
-	color: white;
-	border-radius: 50%;
-	font-size: 24px;
-}
-</style>
+<style scoped></style>
