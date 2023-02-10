@@ -1,43 +1,62 @@
 <template>
 	<div class="div-myinfo-update">
 		<div class="myinfo-update-container">
-			<div class="div-block">
-				<div class="div-myinfo-update-first font-LINE-Rg">
+			<div class="myinfo-section">
+				<div class="div-myinfo-update-top font-LINE-Rg">
 					<div class="div-myinfo-update-left font-LINE-Rg">
-						<div class="first-detail info-phone">
+						<div class="div-item info-phone">
 							<p class="info-title">휴대폰</p>
-							<input v-model="myInfo.state.phone" class="info-content" />
+							<input
+								v-model="myInfo.state.phone"
+								class="info-content effect-1"
+							/>
 						</div>
-						<div class="first-detail info-email">
+						<div class="div-item info-email">
 							<p class="info-title">이메일</p>
-							<p class="info-content">{{ myInfo.state.email }}</p>
+							<input
+								disabled
+								v-model="myInfo.state.email"
+								class="info-content effect-1"
+							/>
 						</div>
-						<div class="first-detail info-github">
+						<div class="div-item info-github">
 							<p class="info-title">Github</p>
-							<input v-model="myInfo.state.github" class="info-content" />
+							<input
+								v-model="myInfo.state.github"
+								class="info-content effect-1"
+							/>
 						</div>
-						<div class="first-detail info-blog">
+						<div class="div-item info-blog">
 							<p class="info-title">Blog</p>
-							<input v-model="myInfo.state.blog" class="info-content" />
+							<input
+								v-model="myInfo.state.blog"
+								class="info-content effect-1"
+							/>
 						</div>
 					</div>
 
 					<div class="div-myinfo-update-right font-LINE-Rg">
-						<div class="second-detail info-skill">
+						<div class="div-item info-skill">
 							<p class="info-title">Skills</p>
-							<input v-model="myInfo.state.skills" class="info-content" />
+							<input
+								v-model="myInfo.state.skills"
+								class="info-content effect-1"
+							/>
 						</div>
 
-						<div class="second-detail info-preferredJob">
+						<div class="div-item info-preferredJob">
 							<p class="info-title">선호 직무</p>
-							<input v-model="myInfo.state.preferredJob" class="info-content" />
+							<input
+								v-model="myInfo.state.preferredJob"
+								class="info-content effect-1"
+							/>
 						</div>
 
-						<div class="second-detail info-introduce">
+						<div class="div-item info-introduce">
 							<p class="info-title">한줄 자기소개</p>
 							<input
 								v-model="myInfo.state.introduce"
-								class="line-clamp-introduce"
+								class="line-clamp-introduce effect-1"
 							/>
 						</div>
 						<div class="info-image">
@@ -51,7 +70,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="div-info-modify">
+				<div class="div-myinfo-update-bottom font-LINE-Rg">
 					<div class="info-visible">
 						<span for="checkBox">
 							지원자 정보에 카드를 보여주실건가요?
@@ -66,44 +85,54 @@
 						</span>
 					</div>
 
-					<b-button @Click="updateCard">정보변경</b-button>
+					<button
+						id="update-myinfo"
+						class="font-LINE-Rg btnFade btnBlueGreen btnLightBlue"
+						@Click="updateCard"
+					>
+						정보변경
+					</button>
 				</div>
 			</div>
-			<div class="temp1">
-				<div class="div-myinfo-update-second font-LINE-Rg">
-					<div class="temp-1">
-						<div class="div-myinfo-update-password font-LINE-Rg">
-							<div>
-								<div class="first-detail">
-									<p class="info-title">현재 비밀번호</p>
-									<input
-										type="password"
-										v-model="password.current"
-										class="info-content"
-									/>
-								</div>
-								<div class="first-detail">
-									<p class="info-title">변경할 비밀번호</p>
-									<input
-										type="password"
-										v-model="password.change"
-										class="info-content"
-									/>
-								</div>
-								<div class="first-detail">
-									<p class="info-title">변경할 비밀번호 확인</p>
-									<input
-										type="password"
-										v-model="password.changeCk"
-										class="info-content"
-									/>
-								</div>
+			<div class="password-section">
+				<div class="div-password-top font-LINE-Rg">
+					<div class="div-password-update font-LINE-Rg">
+						<div>
+							<div class="div-item">
+								<p class="info-title">현재 비밀번호</p>
+								<input
+									type="password"
+									v-model="password.current"
+									class="info-content"
+								/>
+							</div>
+							<div class="div-item">
+								<p class="info-title">변경할 비밀번호</p>
+								<input
+									type="password"
+									v-model="password.change"
+									class="info-content"
+								/>
+							</div>
+							<div class="div-item">
+								<p class="info-title">변경할 비밀번호 확인</p>
+								<input
+									type="password"
+									v-model="password.changeCk"
+									class="info-content"
+								/>
 							</div>
 						</div>
 					</div>
-					<div>
-						<button @Click="changePwd">비밀번호변경</button>
-					</div>
+				</div>
+				<div class="div-password-bottom">
+					<button
+						id="update-myinfo-password"
+						class="font-LINE-Rg btnFade btnBlueGreen btnLightBlue"
+						@Click="changePwd"
+					>
+						비밀번호변경
+					</button>
 				</div>
 			</div>
 		</div>
