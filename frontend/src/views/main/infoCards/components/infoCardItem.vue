@@ -1,46 +1,45 @@
 <template>
-	<div class="div-mycard">
-		<div class="cover-backgroud"></div>
-		<div class="mycard-container">
-			<div class="div-profile font-LINE-Bd">
-				<div class="img-container">
-					<img class="profile-img" :src="info.imageUrl" />
+	<div>
+		<div>
+			<div>
+				<div>
+					<img :src="info.imageUrl" />
 				</div>
-				<p class="profile-name">{{ info.name }}</p>
+				<p>{{ info.name }}</p>
 			</div>
-			<div class="div-info-first font-LINE-Rg">
-				<div class="first-detail info-phone">
-					<p class="info-title">휴대폰</p>
-					<p class="info-content">{{ info.phone }}</p>
+			<div>
+				<div>
+					<p>휴대폰</p>
+					<p>{{ info.phone }}</p>
 				</div>
-				<div class="first-detail info-email">
-					<p class="info-title">이메일</p>
-					<p class="info-content">{{ info.email }}</p>
+				<div>
+					<p>이메일</p>
+					<p>{{ info.email }}</p>
 				</div>
-				<div class="first-detail info-github">
-					<p class="info-title">Github</p>
-					<p class="info-content">{{ info.github }}</p>
+				<div>
+					<p>Github</p>
+					<p>{{ info.github }}</p>
 				</div>
-				<div class="first-detail info-blog">
-					<p class="info-title">Blog</p>
-					<p class="info-content">{{ info.blog }}</p>
+				<div>
+					<p>Blog</p>
+					<p>{{ info.blog }}</p>
 				</div>
 			</div>
 
-			<div class="div-info-second font-LINE-Rg">
-				<div class="second-detail info-skill">
-					<p class="info-title">Skills</p>
-					<p class="info-content">{{ info.skills }}</p>
+			<div>
+				<div>
+					<p>Skills</p>
+					<p>{{ info.skills }}</p>
 				</div>
 
-				<div class="second-detail info-preferredJob">
-					<p class="info-title">선호 직무</p>
-					<p class="info-content">{{ info.preferredJob }}</p>
+				<div>
+					<p>선호 직무</p>
+					<p>{{ info.preferredJob }}</p>
 				</div>
 
-				<div class="second-detail info-introduce">
-					<p class="info-title">한줄 자기소개</p>
-					<div class="line-clamp">
+				<div>
+					<p>한줄 자기소개</p>
+					<div>
 						{{ info.introduce }}
 					</div>
 				</div>
@@ -61,20 +60,10 @@ export default {
 </script>
 
 <style scoped>
-.div-profile .profile-name {
-	text-align: center;
-	font-size: 20px;
+.card-info-title {
+	background-color: red;
 }
-.div-info-first .info-title,
-.div-info-second .info-title {
-	color: var(--primary-color-1);
-	font-size: 10px;
-	font-family: LINE-Bd;
-}
-.div-profile .img-container {
-	background-color: white;
-	width: 200px;
-	height: 200px;
-	border-radius: 25% 35% / 35% 40%;
+.card-info-content {
+	background-color: blue;
 }
 </style>
