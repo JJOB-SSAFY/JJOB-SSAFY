@@ -1,14 +1,9 @@
 <template>
-	<button class="test" @click="getList">aaa</button>
-	<div class="card-list">
-		<div class="search"></div>
+	<div>
+		<div></div>
 		<!-- card list 불러오기 -->
-		<div class="card-list-container">
-			<div
-				class="card-list-items"
-				v-for="info in cardList.card"
-				:key="info.card"
-			>
+		<div>
+			<div v-for="info in cardList.card" :key="info.card">
 				<infoCardItem :info="info" />
 			</div>
 		</div>
@@ -32,18 +27,17 @@ export default {
 		const searchCardList = reactive({
 			card: '',
 		});
-		const getList = () => {
-			infoCardService.getCardList().then(data => {
-				cardList.card = data;
-				console.log(data);
-			});
-		};
+
+		infoCardService.getCardList().then(data => {
+			cardList.card = data;
+			console.log(data);
+		});
+
 		// const search = () => {
 		// 	searchCardList.card = cardList
 		// }
 		return {
 			cardList,
-			getList,
 		};
 	},
 };
@@ -62,6 +56,6 @@ export default {
 	/* border: 1px solid black; */
 }
 .card-list-container {
-	display: flex;
+	display: auto;
 }
 </style>
