@@ -17,13 +17,10 @@ public class Award {
     @Column(name = "award_id")
     private Long id;
 
-    @Column(nullable = false)
     private String awardName;
 
-    @Column(nullable = false)
     private String awardDate;
 
-    @Column(nullable = false)
     private String awardInstitution;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -17,16 +17,12 @@ public class Education {
     @Column(name = "education_id")
     private Long id;
 
-    @Column(nullable = false)
     private String educationName;
 
-    @Column(nullable = false)
     private String educationPeriod;
 
-    @Column(nullable = false)
     private String educationContent;
 
-    @Column(nullable = false)
     private String educationInstitution;
 
     @ManyToOne(fetch = FetchType.LAZY)
