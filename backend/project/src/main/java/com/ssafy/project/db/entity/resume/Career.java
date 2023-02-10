@@ -17,13 +17,10 @@ public class Career {
     @Column(name = "career_id")
     private Long id;
 
-    @Column(nullable = false)
     private String companyName;
 
-    @Column(nullable = false)
     private String careerPeriod;
 
-    @Column(nullable = false)
     private String careerContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
