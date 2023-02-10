@@ -138,8 +138,6 @@ export default {
 				detailList.salary = response.data.salary;
 				detailList.work = response.data.work;
 				detailList.workType = response.data.workType;
-
-				console.log(toRaw(detailList));
 			})
 			.catch(err => {
 				console.log(err);
