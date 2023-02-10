@@ -1337,4 +1337,132 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.resume-container {
+	width: 90%;
+	margin: 50px auto 150px;
+	display: flex;
+	border: 2px black solid;
+	border-radius: 10px;
+}
+
+.left-container {
+	width: 30%;
+	background-color: #aad6ff;
+	padding: 0 50px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.left-fix {
+	position: sticky;
+	top: 20px;
+	margin-bottom: 150px;
+	box-sizing: border-box;
+}
+
+.left-container label {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.resume-profile-image {
+	width: 75%;
+	aspect-ratio: 1/1;
+	margin: 50px auto 25px;
+	border: 10px white solid;
+	border-radius: 40%;
+}
+
+.right-container {
+	width: 70%;
+	background-color: white;
+	padding: 60px 20px 20px 20px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.right-container h4 {
+	font-weight: bold;
+	margin: 10px;
+}
+
+.title-input-box {
+	margin-bottom: 40px;
+}
+
+.resume-box {
+	padding: 20px;
+}
+
+.resume-box table {
+	margin-bottom: 40px;
+}
+
+table.type09 {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+}
+
+table.type09 thead th {
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #369;
+	border-bottom: 3px solid #036;
+}
+
+table.type09 tbody th {
+	width: 150px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+table.type09 td {
+	width: 350px;
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+table.type09 td input {
+	border: none;
+}
+
+.resume-write-footer {
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	background: white;
+	bottom: 0;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	border-top: 1px lightgray solid;
+}
+
+.resume-save-impl-btn {
+	width: 200px;
+	height: 40px;
+	border: 1px dodgerblue solid;
+	border-radius: 20px;
+	background: white;
+	font-weight: 900;
+	margin-right: 50px;
+}
+
+.resume-save-btn {
+	width: 200px;
+	height: 40px;
+	border: 1px dodgerblue solid;
+	border-radius: 20px;
+	background: dodgerblue;
+	color: white;
+	font-weight: 900;
+	margin-right: 100px;
+}
+</style>
