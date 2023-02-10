@@ -7,9 +7,13 @@ const config = {
   },
 };
 export default class resumeService {
+  async getResumeList() {
+    return await http.get(`resume`, config).then(data => data.data);
+  }
+
   async getResume(id, params) {
     return await http
-      .get(`resume/` + id, params, config)
+      .get(`resume/${id}`, params, config)
       .then(data => data.data);
   }
   async register(params) {
@@ -18,7 +22,7 @@ export default class resumeService {
 
   async modify(id, params) {
     return await http
-      .patch(`resume/` + id, params, config)
+      .patch(`resume/${id}`, params, config)
       .then(data => data.data);
   }
 }
