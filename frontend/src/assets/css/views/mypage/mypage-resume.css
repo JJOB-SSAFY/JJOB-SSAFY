@@ -7,10 +7,8 @@
   width: 70%;
   display: flex;
   justify-content: space-between;
-  /* border: 3px solid var(--primary-color-grey); */
-  background-color: #bebebe34;
-  border-radius: 30px;
-  padding: 10px 20px;
+  border: 3px solid #eeeeee;
+  border-radius: 20px;
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
@@ -21,17 +19,19 @@
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  padding-right: 10px;
-  min-width: 90px;
+  min-width: 70px;
   text-align: center;
   vertical-align: middle;
-  border-right: solid 1.5px var(--primary-color-black);
+  border-right: solid 3px #eeeeee;
 }
 
 .resume-container .resume-title {
+  width: 100%;
+  padding-left: 20px;
   display: flex;
   align-items: center;
-  font-size: 30px;
+  text-align: left;
+  font-size: 25px;
 }
 
 .resume-container button {
@@ -40,10 +40,10 @@
   align-items: center;
   text-align: center;
   font-size: 25px;
-  min-width: 90px;
-  padding-left: 10px;
+  min-width: 70px;
   color: var(--primary-color-black);
-  border-left: solid 1.5px var(--primary-color-black);
+  background-color: #eeeeee;
+  border-radius: 0 12px 12px 0;
 }
 
 

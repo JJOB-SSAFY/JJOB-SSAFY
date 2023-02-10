@@ -41,7 +41,7 @@
 				<div class="second-detail info-introduce">
 					<p class="info-title">한줄 자기소개</p>
 					<div class="line-clamp">
-						introduce1introduce1introduce1introduce1introduce1introduce1introduce1introduce1introoduce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1introduce1
+						{{ myInfo.state.introduce }}
 					</div>
 				</div>
 			</div>

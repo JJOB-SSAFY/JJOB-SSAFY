@@ -5,7 +5,7 @@
 			:key="resume.resumeId"
 			class="resume-container"
 		>
-			<div class="resume-id font-LINE-Bd">이력서 {{ index + 1 }}</div>
+			<div class="resume-id font-LINE-Bd">{{ index + 1 }}</div>
 
 			<div class="resume-title font-LINE-Rg">{{ resume.resumeTitle }}</div>
 			<button @click="showDetailResume(resume.resumeId)" class="resume-view-bt">
