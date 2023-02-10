@@ -1,10 +1,16 @@
 <template>
+	<button class="test" @click="getList">aaa</button>
 	<div class="card-list">
 		<div class="search"></div>
 		<!-- card list 불러오기 -->
-		<button class="test" @click="getList">aaa</button>
-		<div class="card-list-items" v-for="info in cardList.card" :key="info.card">
-			<infoCardItem :info="info" />
+		<div class="card-list-container">
+			<div
+				class="card-list-items"
+				v-for="info in cardList.card"
+				:key="info.card"
+			>
+				<infoCardItem :info="info" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -54,5 +60,8 @@ export default {
 	display: block;
 	width: auto;
 	/* border: 1px solid black; */
+}
+.card-list-container {
+	display: flex;
 }
 </style>

@@ -16,12 +16,15 @@ import interviewView from '@/views/main/interview/interviewView.vue';
 import resumeCreateView from '@/views/myInfo/resume/resumeCreateView.vue';
 import resumeDetailView from '@/views/myInfo/resume/resumeDetailView.vue';
 import test from '@/views/test.vue';
-export default createRouter({
+import jwt from '@/common/jwt';
+
+const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
 			path: '/',
 			redirect: '/login',
+			meta: { authRequired: true },
 		},
 		{
 			path: '/login',
@@ -108,3 +111,16 @@ export default createRouter({
 		},
 	],
 });
+
+router.beforeEach((to, from, next) => {
+	if (to.path != '/login') {
+		if (jwt.getToken()) {
+			next();
+		} else {
+			next('/login');
+		}
+	} else {
+		next();
+	}
+});
+export default router;
