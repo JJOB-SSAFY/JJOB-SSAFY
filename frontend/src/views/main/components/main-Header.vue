@@ -44,28 +44,29 @@
 				<register-view />
 			</ul>
 			<div class="hamburger-menu">
-				<input id="menu__toggle" type="checkbox" />
-				<label class="menu__btn" for="menu__toggle">
+				<input id="menu-toggle" type="checkbox" />
+				<label class="menu-btn" for="menu-toggle">
 					<span></span>
 				</label>
 				<ul
-					:class="`navbar-icons menu__box ${role === 'USER' ? '' : 'five'}`"
+					:class="`navbar-icons menu-box ${role === 'USER' ? '' : 'five'}`"
 					ref="icons"
 				>
+					<li class="mt-50"></li>
 					<li v-if="role === 'ADMIN'">
-						<router-link to="/register" class="navbar-icon menu__item">
+						<router-link to="/register" class="navbar-icon menu-item mt-30">
 							<fa-icon icon="fas fa-solid fa-user-plus" />
 							<span> &nbsp회원등록 </span>
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/myInfo" class="navbar-icon menu__item">
+						<router-link to="/myInfo" class="navbar-icon menu-item">
 							<fa-icon icon="fas fa-solid fa-user" />
 							<span> &nbsp마이페이지 </span>
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/login" class="navbar-icon menu__item">
+						<router-link to="/login" class="navbar-icon menu-item">
 							<fa-icon icon="fas fa-solid fa-right-from-bracket" />
 							<span v-on:click="logout">&nbsp로그아웃</span>
 						</router-link>

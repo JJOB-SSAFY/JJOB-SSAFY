@@ -69,38 +69,40 @@
 					<b-button @Click="updateCard">정보변경</b-button>
 				</div>
 			</div>
-			<div class="div-myinfo-update-second font-LINE-Rg">
-				<div class="div-myinfo-update-password font-LINE-Rg">
+			<div class="temp1">
+				<div class="div-myinfo-update-second font-LINE-Rg">
 					<div class="temp-1">
-						<div>
-							<div class="first-detail">
-								<p class="info-title">현재 비밀번호</p>
-								<input
-									type="password"
-									v-model="password.current"
-									class="info-content"
-								/>
-							</div>
-							<div class="first-detail">
-								<p class="info-title">변경할 비밀번호</p>
-								<input
-									type="password"
-									v-model="password.change"
-									class="info-content"
-								/>
-							</div>
-							<div class="first-detail">
-								<p class="info-title">변경할 비밀번호 확인</p>
-								<input
-									type="password"
-									v-model="password.changeCk"
-									class="info-content"
-								/>
+						<div class="div-myinfo-update-password font-LINE-Rg">
+							<div>
+								<div class="first-detail">
+									<p class="info-title">현재 비밀번호</p>
+									<input
+										type="password"
+										v-model="password.current"
+										class="info-content"
+									/>
+								</div>
+								<div class="first-detail">
+									<p class="info-title">변경할 비밀번호</p>
+									<input
+										type="password"
+										v-model="password.change"
+										class="info-content"
+									/>
+								</div>
+								<div class="first-detail">
+									<p class="info-title">변경할 비밀번호 확인</p>
+									<input
+										type="password"
+										v-model="password.changeCk"
+										class="info-content"
+									/>
+								</div>
 							</div>
 						</div>
-						<div>
-							<button @Click="changePwd">비밀번호변경</button>
-						</div>
+					</div>
+					<div>
+						<button @Click="changePwd">비밀번호변경</button>
 					</div>
 				</div>
 			</div>
