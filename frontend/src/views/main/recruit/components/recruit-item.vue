@@ -1,22 +1,41 @@
 <template>
 	<div id="items">
 		<div class="card">
-			<h5 class="card-header">회사이름 {{ info.recruitTitle }}</h5>
-			<div class="leftbox">
-				<div class="card-body">
-					<h6>경력여부 {{ info.workType }}</h6>
-				</div>
-				<div class="card-body">
-					<h5 class="card-title">담당업무 {{ info.department }}</h5>
-					<p class="card-text">요구역량 {{ info.requirement }}</p>
-				</div>
+			<div>
+				<h4 class="card-header" @click="clickDetail(info.recruitId)">
+					<b>SAMSUNG {{ info.recruitTitle }}</b>
+					&nbsp;
+					<h6>(경력여부 : {{ info.work }})</h6>
+				</h4>
 			</div>
-			<div class="rightbox">
-				<div class="card-body">
-					<p>지원마감일 {{ info.recruitEndDate }}</p>
-					<button class="btn btn-primary" @click="clickDetail(info.recruitId)">
-						상세
-					</button>
+
+			<div class="boxContainer">
+				<div class="leftbox">
+					<div class="card-body">
+						<h5>
+							<b>풀스택 웹 엔지니어 {{ info.workType }}</b>
+						</h5>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">
+							풀스택 웹서비스 개발자 {{ info.department }}
+						</h5>
+						<p class="card-text">
+							AngularJS, Spring 사용에 능숙하신분 {{ info.requirement }}
+						</p>
+					</div>
+				</div>
+				<div class="rightbox">
+					<div class="card-body">
+						<p>지원마감일 &nbsp;&nbsp;~ {{ info.recruitEndDate }}</p>
+						<br /><br />
+						<button
+							class="btn btn-primary"
+							@click="clickDetail(info.recruitId)"
+						>
+							상세
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -24,10 +43,8 @@
 </template>
 
 <script>
-// import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { Store, storeKey } from 'vuex';
 
 export default {
 	name: 'recruitItemView',
@@ -35,14 +52,10 @@ export default {
 		info: Object,
 	},
 	setup() {
-		// const store = useStore();
 		const router = useRouter();
 		const store = useStore();
 
 		const clickDetail = function (id) {
-			// const detail_id = store.getters['recruit/getRecruitList'];
-			// console.log(detail_id);
-			// store.dispatch('recruit/getId');
 			localStorage.setItem('page', id);
 
 			router.push({
@@ -61,5 +74,21 @@ export default {
 <style>
 #items {
 	margin: 15px;
+}
+.boxContainer {
+	display: flex;
+}
+.card-header {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	cursor: pointer;
+}
+.leftbox {
+	width: 100%;
+}
+.rightbox {
+	width: 100%;
+	text-align: right;
 }
 </style>
