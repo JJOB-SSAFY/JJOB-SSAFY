@@ -48,12 +48,20 @@ public class MyInfoServiceImpl implements MyInfoService {
 
     @Override
     @Transactional
-    public void changePwd(String password, Member member) {
+    public String changePwd(String change, String current, Member member) {
+        System.out.println("222");
         Optional<Member> memberOptional = memberRepository.findById(member.getId());
 
         if (memberOptional.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
 
-        memberOptional.get().changePassword(new BCryptPasswordEncoder().encode(password));
+        if (new BCryptPasswordEncoder().matches(current, memberOptional.get().getPassword())) {
+            System.out.println("111");
+            memberOptional.get().changePassword(new BCryptPasswordEncoder().encode(change));
+            return "Success";
+        }else{
+            return "Fail";
+        }
+
     }
 
     @Override
