@@ -1,5 +1,6 @@
 .div-mycard {
-  width: 1000px;
+  max-width: 1050px;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
   border-radius: 20px;
@@ -15,6 +16,7 @@
   background-position-y: -50px;
   background-image: url(@/assets/images/city.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
 
   height: 100px;
   border-radius: 20px 20px 0 0;
@@ -23,7 +25,7 @@
 .div-mycard .mycard-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
   margin-top: -60px;
   margin-left: 20px;
   padding: 20px
@@ -38,11 +40,13 @@
 .div-profile {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-width: 30%;
 }
 
 .div-profile .img-container {
   background-color: white;
+  width: 300px;
   border-radius: 25% 35% / 35% 40%;
 }
 
@@ -62,8 +66,15 @@
 }
 
 /* 정보 창*/
-.div-info {
-  min-width: 200px;
+.line-clamp {
+  font-size: 17px;
+  width: 90%;
+  word-break: break-all;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .div-info-first .info-title,
@@ -85,12 +96,15 @@
 
 
 .div-info-first {
-  margin-left: 30px;
-  min-width: 200px;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  min-width: 170px;
 }
 
 .div-info-second {
-  min-width: 200px;
+  margin-left: 30px;
+  padding-bottom: 35px;
+  min-width: 220px;
 }
 
 

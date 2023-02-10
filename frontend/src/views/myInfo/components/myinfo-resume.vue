@@ -1,30 +1,49 @@
 <template>
-	<div>state</div>
+	<div class="div-resume">
+		<div
+			v-for="(resume, index) in getResumeList.state"
+			:key="resume.resumeId"
+			class="resume-container"
+		>
+			<div class="resume-id font-LINE-Bd">이력서 {{ index + 1 }}</div>
+
+			<div class="resume-title font-LINE-Rg">{{ resume.resumeTitle }}</div>
+			<button @click="showDetailResume(resume.resumeId)" class="resume-view-bt">
+				보기
+			</button>
+		</div>
+	</div>
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { reactive, toRaw } from 'vue';
+import { reactive, toRaw, computed } from 'vue';
 
 export default {
 	name: 'MyinfoResume',
 	setup() {
 		const store = useStore();
 
-		const state = reactive({
-			resumeList: {},
+		const getResumeList = reactive({
+			state: {},
 		});
-		const getResumeList = store.getters['auth/getResumeList'];
-		state.resumeList = toRaw(getResumeList);
+		const resumeList = store.getters['auth/getResumeList'];
+		getResumeList.state = toRaw(resumeList);
+		// const getResumeList = computed(() => {
+		// 	return store.getters['auth/getResumeList'];
+		// });
+		// resumeList.state = toRaw(getResumeList);
 
-		// console.log(temp);
+		// console.log('12341242314');
 
 		// const getList = store.getters['resume/getList'];
 
 		// resumeList.state = toRaw(getList);
-		console.log('asdfasfsadfadsfasd');
-		console.log(state.resumeList);
-		return { store, state };
+		// console.log(getResumeList);
+		const showDetailResume = e => {
+			console.log(e);
+		};
+		return { store, getResumeList, showDetailResume };
 	},
 };
 </script>

@@ -5,10 +5,12 @@
 		<div class="div-three-tab mt-50">
 			<b-tabs content-class="mt-3" class="font-LINE-Bd" align="center">
 				<b-tab title="지원현황" active>
-					<div>지원자 현황~~~</div>
+					<div>지원자 황~</div>
 				</b-tab>
 				<b-tab title="이력서관리">
-					<div><myinfo-resume /></div>
+					<div>
+						<myinfo-resume />
+					</div>
 				</b-tab>
 				<b-tab title="내정보변경">
 					<div>
@@ -24,6 +26,7 @@
 import MyinfoCard from './components/myInfo-card.vue';
 import MyinfoResume from './components/myInfo-resume.vue';
 import MyinfoUpdate from './components/myinfo-update.vue';
+
 export default {
 	components: {
 		MyinfoCard,

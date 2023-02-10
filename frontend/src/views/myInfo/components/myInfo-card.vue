@@ -8,7 +8,7 @@
 				</div>
 				<p class="profile-name">{{ myInfo.state.name }}</p>
 			</div>
-			<div class="div-info-first pt-20 font-LINE-Rg">
+			<div class="div-info-first font-LINE-Rg">
 				<div class="first-detail info-phone">
 					<p class="info-title">휴대폰</p>
 					<p class="info-content">{{ myInfo.state.phone }}</p>
@@ -27,7 +27,7 @@
 				</div>
 			</div>
 
-			<div class="div-info-second pt-20 font-LINE-Rg">
+			<div class="div-info-second font-LINE-Rg">
 				<div class="second-detail info-skill">
 					<p class="info-title">Skills</p>
 					<p class="info-content">{{ myInfo.state.skills }}</p>
@@ -40,7 +40,9 @@
 
 				<div class="second-detail info-introduce">
 					<p class="info-title">한줄 자기소개</p>
-					<p class="info-content">{{ myInfo.state.introduce }}</p>
+					<div class="line-clamp">
+						introduce1introduce1introduce1introduce1introduce1introduce1introduce1introduce1introoduce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1intrododuce1introduce1
+					</div>
 				</div>
 			</div>
 		</div>

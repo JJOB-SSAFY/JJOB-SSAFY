@@ -1181,7 +1181,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .resume-container {
 	width: 90%;
 	margin: 50px auto 150px;

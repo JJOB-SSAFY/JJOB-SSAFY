@@ -1,5 +1,7 @@
-@import url('./mypage-card.css');
-@import url('./mypage-myinfo.css');
+@import url('./mypage/mypage-card.css');
+@import url('./mypage/mypage-myinfo.css');
+@import url('./mypage/mypage-resume.css');
+
 
 .div-three-tab {}
 
@@ -24,4 +26,18 @@
 .nav-fill .nav-item .nav-link,
 .nav-justified .nav-item .nav-link {
   width: 90%;
+}
+
+@media screen and (max-width:1060px) {
+  .div-mycard {
+    opacity: 0;
+    visibility: hidden;
+    height: 0px;
+    transition: 0.5s;
+
+  }
+
+  .div-three-tab {
+    transition: 1s;
+  }
 }
