@@ -82,11 +82,15 @@ const router = createRouter({
 					component: interviewView,
 				},
 				{
-					name: 'openVidu',
-					path: '/openvidu/:participant/:session/:companyId/:companyName',
-					component: openviduView,
+					name: 'resumeCreate',
+					path: '/resume/create',
+					component: resumeCreateView,
 				},
-
+				{
+					name: 'resumeDetail',
+					path: '/resume/detail/:resumeId',
+					component: resumeDetailView,
+				},
 				{
 					name: 'myInfo',
 					path: '/myInfo',
@@ -95,14 +99,9 @@ const router = createRouter({
 			],
 		},
 		{
-			name: 'resumeCreate',
-			path: '/resume/create',
-			component: resumeCreateView,
-		},
-		{
-			name: 'resumeDetail',
-			path: '/resume/detail/:resumeId',
-			component: resumeDetailView,
+			name: 'openVidu',
+			path: '/openvidu/:title/:participant/:session/:companyId/:companyName',
+			component: openviduView,
 		},
 		{
 			name: 'test',

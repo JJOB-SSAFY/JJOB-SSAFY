@@ -1,19 +1,44 @@
 <template>
-	<div id="main-container" class="container">
-		<div id="join" v-if="!session">
-			<div id="join-dialog" class="jumbotron vertical-center">
-				<h1>Join a video session</h1>
+	<div id="main-container" class="container" style="overflow: hidden">
+		<div id="join" v-if="!session" class="openvidu-join-form">
+			<div class="mb-60 openvidu-join-header">
+				<div class="d-flex align-items-center" style="margin-left: 7%">
+					<router-link to="/main">
+						<img
+							src="@/assets/images/logo/logo-removebg.png"
+							alt=""
+							height="91"
+							width="132"
+							class="mt-50"
+						/>
+					</router-link>
+					<h1 class="font-LINE-Bd mt-100 mb-40">정보 확인</h1>
+				</div>
+				<hr />
+			</div>
+			<div id="join-dialog" class="jumbotron vertical-center mt-250">
 				<div class="form-group">
 					<p>
-						<label>이름</label>
+						<label style="font-size: 32px; margin: 20px 0">방 이름</label>
+						<input
+							v-model="title"
+							class="form-control"
+							type="text"
+							required
+							style="font-size: 18px; margin-bottom: 20px"
+						/>
+					</p>
+					<p>
+						<label style="font-size: 32px; margin: 20px 0">이름</label>
 						<input
 							v-model="myUserName"
 							class="form-control"
 							type="text"
 							required
+							style="font-size: 18px"
 						/>
 					</p>
-					<p>
+					<p hidden>
 						<label>방 번호</label>
 						<input
 							v-model="mySessionId"
@@ -22,49 +47,55 @@
 							required
 						/>
 					</p>
-					<p class="text-center">
-						<button class="btn btn-lg btn-success" @click="joinSession()">
-							입장하기
-						</button>
-						<button
-							class="btn btn-lg btn-secondary"
-							@click="backToInterviewView()"
-						>
-							돌아가기
-						</button>
-					</p>
 				</div>
+			</div>
+			<div class="openvidu-join-footer">
+				<p class="text-center mt-40 d-flex justify-content-end">
+					<button class="btn btn-lg btn-primary me-3" @click="joinSession()">
+						입장하기
+					</button>
+					<button
+						class="btn btn-lg btn-secondary"
+						@click="backToInterviewView()"
+					>
+						돌아가기
+					</button>
+				</p>
 			</div>
 		</div>
 
-		<div id="session" v-if="session">
-			<div id="session-header">
-				<h1 id="session-title">{{ mySessionId }}</h1>
-				<!-- Button trigger modal -->
-				<button
-					type="button"
-					class="btn btn-primary"
-					data-bs-toggle="modal"
-					data-bs-target="#exampleModal"
-				>
-					leaveSession
-				</button>
-			</div>
-			<div id="flex-container" style="display: flex">
-				<div id="main-video" class="col-md-6">
-					<user-video :stream-manager="mainStreamManager" />
+		<div class="mt-50">
+			<div id="session" v-if="session">
+				<div id="session-header" class="mb-30">
+					<h1 id="session-title">{{ title }}</h1>
+					<!-- Button trigger modal -->
 				</div>
-				<div id="video-container" class="col-md-6">
-					<!--<user-video
-                  :stream-manager="publisher"
-                  @click="updateMainVideoStreamManager(publisher)"
-               />-->
-					<user-video
-						v-for="sub in subscribers"
-						:key="sub.stream.connection.connectionId"
-						:stream-manager="sub"
-						@click="updateMainVideoStreamManager(sub)"
-					/>
+				<div id="flex-container" style="display: flex">
+					<div id="main-video" class="col-md-6">
+						<user-video :stream-manager="mainStreamManager" />
+					</div>
+					<div id="video-container" class="col-md-6">
+						<!--<user-video
+										:stream-manager="publisher"
+										@click="updateMainVideoStreamManager(publisher)"
+								 />-->
+						<user-video
+							v-for="sub in subscribers"
+							:key="sub.stream.connection.connectionId"
+							:stream-manager="sub"
+							@click="updateMainVideoStreamManager(sub)"
+						/>
+					</div>
+				</div>
+				<div class="openvidu-room-footer">
+					<button
+						type="button"
+						class="leave-session-btn"
+						data-bs-toggle="modal"
+						data-bs-target="#exampleModal"
+					>
+						나가기
+					</button>
 				</div>
 			</div>
 		</div>
@@ -146,6 +177,7 @@ export default {
 			subscribers: [],
 
 			// Join form
+			title: this.$route.params.title,
 			mySessionId: this.$route.params.session,
 			myUserName: this.$route.params.participant,
 			companyId: this.$route.params.companyId,
@@ -315,4 +347,61 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.openvidu-join-form {
+	width: 80%;
+	margin: auto;
+}
+
+.openvidu-join-header {
+	position: fixed;
+	width: 100%;
+	/* height: 80px; */
+	/* background: white; */
+	/* bottom: 0; */
+	top: 0;
+	right: 0;
+	/* display: flex; */
+	/* justify-content: right; */
+	align-items: center;
+	border-top: 1px lightgray solid;
+}
+
+.openvidu-join-footer {
+	position: fixed;
+	width: 100%;
+	height: 100px;
+	background: white;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	border-top: 1px lightgray solid;
+	padding-right: 130px;
+	padding-bottom: 40px;
+}
+
+.openvidu-room-footer {
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	border-top: 1px lightgray solid;
+	background-color: black;
+}
+
+.leave-session-btn {
+	width: 100px;
+	height: 40px;
+	background: red;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	margin-right: 130px;
+}
+</style>
