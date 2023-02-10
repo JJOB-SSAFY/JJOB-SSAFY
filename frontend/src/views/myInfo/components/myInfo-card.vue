@@ -11,36 +11,36 @@
 			<div class="div-info-first font-LINE-Rg">
 				<div class="first-detail info-phone">
 					<p class="info-title">휴대폰</p>
-					<p class="info-content">{{ myInfo.state.phone }}</p>
+					<div class="info-content">{{ myInfo.state.phone }}</div>
 				</div>
 				<div class="first-detail info-email">
 					<p class="info-title">이메일</p>
-					<p class="info-content">{{ myInfo.state.email }}</p>
+					<div class="info-content">{{ myInfo.state.email }}</div>
 				</div>
 				<div class="first-detail info-github">
 					<p class="info-title">Github</p>
-					<p class="info-content">{{ myInfo.state.github }}</p>
+					<div class="info-content">{{ myInfo.state.github }}</div>
 				</div>
 				<div class="first-detail info-blog">
 					<p class="info-title">Blog</p>
-					<p class="info-content">{{ myInfo.state.blog }}</p>
+					<div class="info-content">{{ myInfo.state.blog }}</div>
 				</div>
 			</div>
 
 			<div class="div-info-second font-LINE-Rg">
 				<div class="second-detail info-skill">
 					<p class="info-title">Skills</p>
-					<p class="info-content">{{ myInfo.state.skills }}</p>
+					<div class="info-content">{{ myInfo.state.skills }}</div>
 				</div>
 
 				<div class="second-detail info-preferredJob">
 					<p class="info-title">선호 직무</p>
-					<p class="info-content">{{ myInfo.state.preferredJob }}</p>
+					<div class="info-content">{{ myInfo.state.preferredJob }}</div>
 				</div>
 
 				<div class="second-detail info-introduce">
 					<p class="info-title">한줄 자기소개</p>
-					<div class="line-clamp">
+					<div class="line-clamp-introduce">
 						{{ myInfo.state.introduce }}
 					</div>
 				</div>

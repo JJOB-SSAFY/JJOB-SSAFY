@@ -31,10 +31,7 @@
   padding: 20px
 }
 
-.first-detail,
-.second-detail {
-  padding: 5px;
-}
+
 
 /* profile */
 .div-profile {
@@ -66,7 +63,7 @@
 }
 
 /* 정보 창*/
-.line-clamp {
+.line-clamp-introduce {
   font-size: 17px;
   width: 90%;
   word-break: break-all;
@@ -75,6 +72,38 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.line-clamp {
+  font-size: 17px;
+  width: 90%;
+  word-break: break-all;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+
+.div-info-first {
+  padding-left: 30px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+
+  min-width: 200px;
+}
+
+.div-info-second {
+  margin-left: 30px;
+  padding-bottom: 35px;
+  min-width: 220px;
+}
+
+.first-detail,
+.second-detail {
+  padding: 2px;
 }
 
 .div-info-first .info-title,
@@ -86,37 +115,9 @@
 
 .div-info-first .info-content,
 .div-info-second .info-content {
+  min-height: 30px;
   font-size: 17px;
   margin-left: 2px;
-}
-
-
-/* 첫번째 정보 */
-
-
-
-.div-info-first {
-  padding-left: 30px;
-  margin-bottom: 30px;
-  min-width: 170px;
-}
-
-.div-info-second {
-  margin-left: 30px;
-  padding-bottom: 35px;
-  min-width: 220px;
-}
-
-
-/* 두번째 정보 */
-.div-info .first-detail p {
-  word-wrap: break-word;
-}
-
-
-
-/* 두번째 정보 */
-.div-info .second-detail p {
   word-wrap: break-word;
 }
 
