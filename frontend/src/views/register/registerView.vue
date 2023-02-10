@@ -6,10 +6,12 @@
 		<div class="div-register">
 			<div class="register-container">
 				<div class="register-title">
-					<h1 class="font-LINE-Bd mt-100">회원등록 <br />JJOB SSAFY입니다</h1>
+					<h1 class="font-LINE-Bd mt-100 margin-auto">
+						회원등록 <br />JJOB SSAFY입니다
+					</h1>
 				</div>
 				<div class="register-form mt-110">
-					<form @submit.prevent="register" id="register">
+					<div class="register-user">
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="email"
@@ -51,7 +53,9 @@
 							placeholder="전화번호을 입력해주세요"
 							v-model="info.phone"
 						/>
-						<p>역활?</p>
+					</div>
+
+					<div class="register-company">
 						<label for="checkBox"
 							><input
 								class="input-checkbox"
@@ -63,49 +67,46 @@
 							/>기업 회원 등록</label
 						>
 
-						<div>
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								placeholder="기업 이름"
-								v-model="companyInfo.companyName"
-								:disabled="info.role != 'company'"
-							/>
-							<br />
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								placeholder="기업 주소"
-								v-model="companyInfo.companyAddress"
-								:disabled="info.role != 'company'"
-							/>
-							<br />
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								placeholder="기업 설명"
-								v-model="companyInfo.companyDesc"
-								:disabled="info.role != 'company'"
-							/>
-							<br />
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								placeholder="사원수"
-								v-model="companyInfo.employeeCnt"
-								:disabled="info.role != 'company'"
-							/>
-							<br />
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								placeholder="기업 홈페이지"
-								v-model="companyInfo.companyUrl"
-								:disabled="info.role != 'company'"
-							/>
-							<br />
-						</div>
-
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 이름"
+							v-model="companyInfo.companyName"
+							:disabled="info.role != 'company'"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 주소"
+							v-model="companyInfo.companyAddress"
+							:disabled="info.role != 'company'"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 설명"
+							v-model="companyInfo.companyDesc"
+							:disabled="info.role != 'company'"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="사원수"
+							v-model="companyInfo.employeeCnt"
+							:disabled="info.role != 'company'"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 홈페이지"
+							v-model="companyInfo.companyUrl"
+							:disabled="info.role != 'company'"
+						/>
+						<br />
 						<div class="div-button">
 							<b-button
 								type="button"
@@ -116,7 +117,7 @@
 								등록
 							</b-button>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
