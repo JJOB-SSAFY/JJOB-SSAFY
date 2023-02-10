@@ -79,11 +79,6 @@ export default createRouter({
 					component: interviewView,
 				},
 				{
-					name: 'openVidu',
-					path: '/openvidu/:participant/:session/:companyId/:companyName',
-					component: openviduView,
-				},
-				{
 					name: 'resumeCreate',
 					path: '/resume/create',
 					component: resumeCreateView,
@@ -100,7 +95,11 @@ export default createRouter({
 				},
 			],
 		},
-
+		{
+			name: 'openVidu',
+			path: '/openvidu/:title/:participant/:session/:companyId/:companyName',
+			component: openviduView,
+		},
 		{
 			name: 'test',
 			path: '/test',

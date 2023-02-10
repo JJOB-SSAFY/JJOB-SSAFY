@@ -1,12 +1,19 @@
 <template>
 	<!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto"> -->
 	<div class="container">
-		<ul class="infinite-list justify-content-evenly row" style="overflow: auto">
+		<div class="mb-60">
+			<h1 class="font-LINE-Bd mt-100 mb-40">나의 면접 리스트</h1>
+			<hr />
+		</div>
+		<ul
+			class="infinite-list justify-content-left row gx-5"
+			style="overflow: auto"
+		>
 			<li
 				class="infinite-list-item col-4"
 				v-for="info in state.interviewList"
 				:key="info.conferenceId"
-				style="margin-bottom: 50px"
+				style="margin-bottom: 100px"
 			>
 				<interview-item :info="info" />
 			</li>
@@ -27,19 +34,16 @@ export default {
 
 	setup() {
 		const state = reactive({
-			// count: 12,
 			interviewList: null,
 		});
 
-		const load = function () {
-			// state.count += 4;
-		};
+		// const load = function () {};
 		const interviewAPI = new interviewSevice();
 		interviewAPI.getInterviewList().then(data => {
 			state.interviewList = data;
 		});
 
-		return { state, load };
+		return { state };
 	},
 };
 </script>
