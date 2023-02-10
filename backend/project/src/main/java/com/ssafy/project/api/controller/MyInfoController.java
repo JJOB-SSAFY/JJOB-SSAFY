@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,8 +40,12 @@ public class MyInfoController {
 //        logger.info(userDetails.getMember().getEmail());
 //        logger.info(map.get("password"));
 //        logger.info(new BCryptPasswordEncoder().encode(map.get("password")));
-        myInfoService.changePwd(map.get("password"),userDetails.getMember());
-        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
+        System.out.println(map.get("change")+"change");
+        System.out.println(map.get("current")+"current");
+        System.out.println(userDetails);
+
+        String status=myInfoService.changePwd(map.get("change"),map.get("current"),userDetails.getMember());
+        return new ResponseEntity<>(new BaseResponseBody(status, 200), HttpStatus.OK);
     }
 
     //내 정보 수정
