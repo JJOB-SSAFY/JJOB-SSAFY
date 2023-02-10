@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="jobDetailBox">
+		<div>
 			<div class="jobDetailCon">
 				<div class="jobDetailRel">
 					<div class="jobContent">
@@ -75,9 +75,18 @@
 										<div><b>모집분야</b> : {{ detailList.department }}</div>
 									</div>
 									<hr />
-									<button type="button" class="btn btn-primary">
-										지원하기
-									</button>
+									<div class="buttonBox">
+										<router-link to="/myinfo">
+											<button type="button" class="btn btn-primary">
+												지원하기
+											</button>
+										</router-link>
+										<router-link to="/recruit">
+											<button type="button" class="btn btn-primary">
+												목록으로
+											</button>
+										</router-link>
+									</div>
 								</div>
 							</aside>
 						</div>
@@ -129,8 +138,6 @@ export default {
 				detailList.salary = response.data.salary;
 				detailList.work = response.data.work;
 				detailList.workType = response.data.workType;
-
-				console.log(toRaw(detailList));
 			})
 			.catch(err => {
 				console.log(err);
@@ -185,10 +192,6 @@ export default {
 	top: 5%;
 }
 .sideBox {
-	/* position: sticky;
-	top: 5%; */
-	/* width: 300px;
-	height: 200px; */
 	margin-top: 10px;
 	padding: 10%;
 	background-color: #ccc;
@@ -196,11 +199,11 @@ export default {
 	border-radius: 15px;
 	box-shadow: 3px 3px 3px 3px #999;
 }
-/* .sideBoxContent {
-	display: flex;
-	justify-content: flex-start;
-} */
 .sideBoxContentItem {
 	margin-right: 5px;
+}
+.buttonBox {
+	display: flex;
+	justify-content: space-around;
 }
 </style>

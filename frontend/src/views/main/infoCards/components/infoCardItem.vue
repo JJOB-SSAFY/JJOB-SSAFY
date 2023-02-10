@@ -1,26 +1,51 @@
 <template>
-	<a href="#">
-		<div class="card">
-			<h5 class="card-header">이름 {{ info.name }}</h5>
-			<div class="card-body">
-				<img :src="info.imageUrl" />
-				<h5 class="card-title">휴대폰</h5>
-				<p class="card-text">{{ info.phone }}</p>
-				<h5 class="card-title">이메일</h5>
-				<p class="card-text">{{ info.email }}</p>
-				<h5 class="card-title">Github</h5>
-				<p class="card-text">{{ info.github }}</p>
-				<h5 class="card-title">블로그</h5>
-				<p class="card-text">{{ info.blog }}</p>
-				<h5 class="card-title">기술 스택</h5>
-				<p class="card-text">{{ info.skills }}</p>
-				<h5 class="card-title">선호 직무</h5>
-				<p class="card-text">{{ info.preferredJob }}</p>
-				<h5 class="card-title">한줄 자기소개</h5>
-				<p class="card-text">{{ info.introduce }}</p>
+	<div>
+		<div>
+			<div>
+				<div>
+					<img :src="info.imageUrl" />
+				</div>
+				<p>{{ info.name }}</p>
+			</div>
+			<div>
+				<div>
+					<p>휴대폰</p>
+					<p>{{ info.phone }}</p>
+				</div>
+				<div>
+					<p>이메일</p>
+					<p>{{ info.email }}</p>
+				</div>
+				<div>
+					<p>Github</p>
+					<p>{{ info.github }}</p>
+				</div>
+				<div>
+					<p>Blog</p>
+					<p>{{ info.blog }}</p>
+				</div>
+			</div>
+
+			<div>
+				<div>
+					<p>Skills</p>
+					<p>{{ info.skills }}</p>
+				</div>
+
+				<div>
+					<p>선호 직무</p>
+					<p>{{ info.preferredJob }}</p>
+				</div>
+
+				<div>
+					<p>한줄 자기소개</p>
+					<div>
+						{{ info.introduce }}
+					</div>
+				</div>
 			</div>
 		</div>
-	</a>
+	</div>
 </template>
 
 <script>
@@ -35,7 +60,10 @@ export default {
 </script>
 
 <style scoped>
-.card-text {
-	color: black;
+.card-info-title {
+	background-color: red;
+}
+.card-info-content {
+	background-color: blue;
 }
 </style>

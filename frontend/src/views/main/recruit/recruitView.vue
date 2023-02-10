@@ -1,20 +1,35 @@
 <template>
 	<div style="width: 80%; margin: auto">
 		<div class="div-search">
-			<form class="recruit-search-form" @submit.prevent="searchInfo">
-				<input
-					class="form-control review-search-input"
-					type="text"
-					v-model.lazy="condition.form.location"
-					placeholder="지역"
-				/>
-				<input
-					class="form-control review-search-input"
-					type="text"
-					v-model.lazy="condition.form.department"
-					placeholder="직무"
-				/>
-				<button>검색</button>
+			<form class="recruit-search-form" @submit.prevent>
+				<div class="div-search-department">
+					<input
+						class="form-control review-search-input"
+						type="text"
+						v-model.lazy="condition.form.location"
+						placeholder="지역"
+					/>
+				</div>
+				<div class="div-search-department">
+					<input
+						class="form-control review-search-input"
+						type="text"
+						v-model.lazy="condition.form.department"
+						placeholder="직무"
+					/>
+					<button
+						type="button"
+						@click="searchInfo"
+						style="font-size: 20px; position: absolute; top: 6px; right: 10px"
+					>
+						<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+					</button>
+				</div>
+				<!-- <div>
+					<button type="button" style="font-size: 20px">
+						<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+					</button>
+				</div> -->
 			</form>
 		</div>
 
@@ -31,6 +46,9 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+	<div style="position: fixed; bottom: 5px; right: 5px">
+		<a href=".div-search">TOP</a>
 	</div>
 </template>
 
@@ -75,9 +93,6 @@ export default {
 
 <style scoped>
 .div-search {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	position: relative;
 	top: 20px;
 }
@@ -91,9 +106,8 @@ export default {
 
 .recruit-search-form {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	width: 30%;
-	height: 45px;
 }
 
 .recruit-search-input {
@@ -101,9 +115,18 @@ export default {
 	box-sizing: border-box;
 	margin: auto;
 	height: 100%;
+	border: 10px solid black;
 }
 
 .recruit-list {
 	display: block;
+}
+.div-search-department {
+	position: relative;
+	display: flex;
+	width: 30%;
+	height: 45px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 </style>
