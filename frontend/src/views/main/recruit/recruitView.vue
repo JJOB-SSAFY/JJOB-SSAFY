@@ -2,19 +2,25 @@
 	<div style="width: 80%; margin: auto">
 		<div class="div-search">
 			<form class="recruit-search-form" @submit.prevent="searchInfo">
-				<input
-					class="form-control review-search-input"
-					type="text"
-					v-model.lazy="condition.form.location"
-					placeholder="지역"
-				/>
-				<input
-					class="form-control review-search-input"
-					type="text"
-					v-model.lazy="condition.form.department"
-					placeholder="직무"
-				/>
-				<button>검색</button>
+				<div>
+					<input
+						class="form-control review-search-input"
+						type="text"
+						v-model.lazy="condition.form.location"
+						placeholder="지역"
+					/>
+				</div>
+				<div class="div-search-department">
+					<input
+						class="form-control review-search-input"
+						type="text"
+						v-model.lazy="condition.form.department"
+						placeholder="직무"
+					/>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary">검색</button>
+				</div>
 			</form>
 		</div>
 
@@ -31,6 +37,9 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+	<div style="position: fixed; bottom: 5px; right: 5px">
+		<a href=".div-search">TOP</a>
 	</div>
 </template>
 
@@ -49,6 +58,8 @@ export default {
 	setup() {
 		const store = useStore();
 		const all = onMounted(() => store.getters['recruit/getRecruitList']);
+
+		console.log(store.getters['recruit/getRecruitList']);
 
 		const condition = reactive({
 			form: {
@@ -75,9 +86,9 @@ export default {
 
 <style scoped>
 .div-search {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	/* display: flex;
+	justify-content: space-around;
+	align-items: center; */
 	position: relative;
 	top: 20px;
 }
@@ -91,8 +102,8 @@ export default {
 
 .recruit-search-form {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	width: 30%;
 	height: 45px;
 }
 
@@ -105,5 +116,9 @@ export default {
 
 .recruit-list {
 	display: block;
+}
+.div-search-department {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 </style>
