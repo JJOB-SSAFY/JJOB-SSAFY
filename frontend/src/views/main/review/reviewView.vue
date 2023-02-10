@@ -13,6 +13,13 @@
 					ref="inputCompanyName"
 					@keyup.enter="searchReview"
 				/>
+				<button
+					type="button"
+					@click="searchReview"
+					style="font-size: 20px; position: absolute; right: 20px"
+				>
+					<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+				</button>
 			</form>
 		</div>
 
@@ -117,6 +124,7 @@ export default {
 	align-items: center;
 	width: 30%;
 	height: 45px;
+	position: relative;
 }
 
 .review-search-input {
