@@ -62,16 +62,4 @@ export default {
 #items {
 	margin: 15px;
 }
-/* .recruit-item-container {
-	background-color: white;
-	margin: 10px;
-	border-radius: 10px;
-	height: 100px;
-	padding: 10px;
-}
-
-.item-right {
-	display: flex;
-	align-items: right;
-} */
 </style>
