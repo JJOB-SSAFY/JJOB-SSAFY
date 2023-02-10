@@ -346,7 +346,7 @@
 
 <script>
 import axios from 'axios';
-import { url } from '../../../api/http';
+import resumeService from '../../../api/resumeService';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -356,6 +356,7 @@ export default {
 
 	data() {
 		return {
+			resumeService: null,
 			uniItems: [
 				{ period: 'uniperiod1', name: 'uniname1', major: 'unimajor1' },
 				{ period: 'uniperiod2', name: 'uniname2', major: 'unimajor2' },
@@ -556,6 +557,9 @@ export default {
 			github: null,
 			blog: null,
 		};
+	},
+	created() {
+		this.resumeService = new resumeService();
 	},
 
 	methods: {
@@ -1160,15 +1164,9 @@ export default {
 					content: coverLetterContent3,
 				});
 			}
-
-			axios({
-				method: 'POST',
-				url: url + '/resume',
-				headers: {
-					Authorization: localStorage.getItem('jjob.s.token'),
-				},
-				data: resumeInfo,
-			}).then(res => {});
+			this.resumeService.register(resumeInfo).then(data => {
+				console.log(data);
+			});
 		},
 
 		save() {
