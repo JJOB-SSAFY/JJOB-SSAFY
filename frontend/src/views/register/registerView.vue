@@ -1,8 +1,5 @@
 <template>
 	<div class="login-section">
-		<!-- <div class="div-illustration">
-			<img src="../../assets/images/logo/logo-removebg.png" alt="logo" />
-		</div> -->
 		<div class="div-register">
 			<div class="register-container">
 				<div class="register-title">
@@ -10,30 +7,29 @@
 						회원등록 <br />JJOB SSAFY입니다
 					</h1>
 				</div>
-				<div class="register-form mt-110">
+				<div class="register-form mt-80">
 					<div class="register-user">
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="email"
-							placeholder="이메일을 입력해주세요"
+							placeholder="이메일"
 							v-model="info.email"
 						/>
 						<br />
 						<div v-if="!invalidEmail" style="color: red">
 							&nbsp 이미 등록된 이메일 입니다.
 						</div>
-						<br />
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="password"
-							placeholder="비밀번호를 입력해주세요"
+							placeholder="비밀번호"
 							v-model="info.password"
 						/>
 						<br />
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="password"
-							placeholder="비밀번호를 입력해주세요"
+							placeholder="비밀번호 확인"
 							v-model="info.passwordCk"
 						/>
 						<br />
@@ -43,68 +39,15 @@
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
-							placeholder="이름을 입력해주세요"
+							placeholder="이름"
 							v-model="info.name"
 						/>
 						<br />
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
-							placeholder="전화번호을 입력해주세요"
-							v-model="info.phone"
-						/>
-					</div>
-
-					<div class="register-company">
-						<label for="checkBox"
-							><input
-								class="input-checkbox"
-								type="checkbox"
-								v-model="info.role"
-								true-value="company"
-								false-value="user"
-								id="checkBox"
-							/>기업 회원 등록</label
-						>
-
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 이름"
-							v-model="companyInfo.companyName"
-							:disabled="info.role != 'company'"
-						/>
-						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 주소"
-							v-model="companyInfo.companyAddress"
-							:disabled="info.role != 'company'"
-						/>
-						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 설명"
-							v-model="companyInfo.companyDesc"
-							:disabled="info.role != 'company'"
-						/>
-						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="사원수"
-							v-model="companyInfo.employeeCnt"
-							:disabled="info.role != 'company'"
-						/>
-						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 홈페이지"
-							v-model="companyInfo.companyUrl"
-							:disabled="info.role != 'company'"
+							placeholder="회사명"
+							v-model="info.companyName"
 						/>
 						<br />
 						<div class="div-button">
@@ -112,9 +55,57 @@
 								type="button"
 								variant="outline-primary"
 								class="div-button font-LINE-Bd"
-								@click="register"
+								@click="registerU"
 							>
-								등록
+								회원등록
+							</b-button>
+						</div>
+					</div>
+
+					<div class="register-company">
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 이름"
+							v-model="companyInfo.companyName"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 주소"
+							v-model="companyInfo.companyAddress"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 설명"
+							v-model="companyInfo.companyDesc"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="사원수"
+							v-model="companyInfo.employeeCnt"
+						/>
+						<br />
+						<input
+							class="register-form-input font-LINE-Rg"
+							type="text"
+							placeholder="기업 홈페이지"
+							v-model="companyInfo.companyUrl"
+						/>
+						<br />
+						<div class="div-button">
+							<b-button
+								type="button"
+								variant="outline-primary"
+								class="div-button font-LINE-Bd"
+								@click="registerC"
+							>
+								회사등록
 							</b-button>
 						</div>
 					</div>
@@ -135,17 +126,17 @@ export default {
 		const emailValidCk = ref(false);
 		const memberService = new MemberService();
 		const companyService = new CompanyService();
-		const companySuccess = ref(false);
 		const invalidEmail = ref(true);
 		const invalidPassowrd = ref(true);
+
 		const info = reactive({
 			email: '',
 			password: '',
 			passwordCk: '',
 			name: '',
-			phone: '',
-			role: 'user',
+			companyName: '',
 		});
+
 		const companyInfo = reactive({
 			companyAddress: '',
 			companyDesc: '',
@@ -158,11 +149,10 @@ export default {
 			email: info.email,
 			password: info.password,
 			name: info.name,
-			phone: info.phone,
-			companyName: '',
+			companyName: info.companyName,
 		});
 
-		const register = async () => {
+		const registerU = async () => {
 			console.log('register');
 			if (
 				info.email == null ||
@@ -170,56 +160,55 @@ export default {
 				info.password == null ||
 				info.password == '' ||
 				info.name == null ||
-				info.name == '' ||
-				info.phone == null ||
-				info.phone == ''
+				info.name == ''
 			) {
 				alert('모든 정보를 입력해주세요');
 				return;
 			}
+
 			userInfo.email = info.email;
 			userInfo.password = info.password;
 			userInfo.name = info.name;
-			userInfo.phone = info.phone;
-			userInfo.companyName = '';
+			userInfo.companyName = info.companyName;
+
 			emailValid(userInfo.email);
+
 			if (!emailValidCk.value) {
 				alert('올바른 이메일 형식을 작성해주세요!');
 				return;
-			} else if (info.role == 'user') {
-				registerUser(userInfo);
-			} else {
-				if (
-					companyInfo.companyAddress == '' ||
-					companyInfo.companyAddress == null ||
-					companyInfo.companyDesc == '' ||
-					companyInfo.companyDesc == null ||
-					companyInfo.companyName == null ||
-					companyInfo.companyName == '' ||
-					companyInfo.companyUrl == null ||
-					companyInfo.companyUrl == '' ||
-					companyInfo.employeeCnt == null ||
-					companyInfo.employeeCnt == ''
-				) {
-					alert('모든 정보를 입력해주세요');
-					return;
-				}
-				await registerCompany(companyInfo);
-				if (companySuccess.value) {
-					companySuccess.value = false;
-					registerUser(userInfo);
-				}
 			}
+
+			registerUser(userInfo);
 			initData();
 			emailValidCk.value = false;
 		};
+
+		const registerC = async () => {
+			if (
+				companyInfo.companyAddress == '' ||
+				companyInfo.companyAddress == null ||
+				companyInfo.companyDesc == '' ||
+				companyInfo.companyDesc == null ||
+				companyInfo.companyName == null ||
+				companyInfo.companyName == '' ||
+				companyInfo.companyUrl == null ||
+				companyInfo.companyUrl == '' ||
+				companyInfo.employeeCnt == null ||
+				companyInfo.employeeCnt == ''
+			) {
+				alert('모든 정보를 입력해주세요');
+				return;
+			}
+
+			await registerCompany(companyInfo);
+			initData();
+		};
+
 		const registerCompany = async function (param) {
 			await companyService
 				.registerCompany(param)
 				.then(data => {
-					alert(userInfo.companyName + ' 기업 등록 성공');
-					console.log(userInfo.companyName);
-					companySuccess.value = true;
+					alert(param.companyName + ' 기업 등록 성공');
 				})
 				.catch(err => {
 					console.log(err);
@@ -227,9 +216,8 @@ export default {
 					return;
 				});
 		};
+
 		const registerUser = param => {
-			userInfo.companyName = companyInfo.companyName;
-			console.log(userInfo.companyName);
 			memberService
 				.registerUser(param)
 				.then(data => {
@@ -241,25 +229,25 @@ export default {
 					console.log(err);
 				});
 		};
+
 		const initData = () => {
 			info.email =
 				info.password =
 				info.passwordCk =
 				info.name =
-				info.phone =
+				info.companyName =
 				userInfo.companyName =
 				userInfo.email =
 				userInfo.name =
 				userInfo.password =
-				userInfo.phone =
 				companyInfo.companyAddress =
 				companyInfo.companyDesc =
 				companyInfo.companyName =
 				companyInfo.companyUrl =
 				companyInfo.employeeCnt =
 					'';
-			info.role = 'user';
 		};
+
 		const emailCk = param => {
 			memberService
 				.emailCheck(param)
@@ -276,6 +264,7 @@ export default {
 					}
 				});
 		};
+
 		const emailValid = param => {
 			var expert = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 			if (expert.test(param)) {
@@ -286,6 +275,7 @@ export default {
 				console.log('유효성 실패');
 			}
 		};
+
 		watch(
 			() => info.email,
 			function () {
@@ -293,6 +283,7 @@ export default {
 				emailCk(info.email);
 			},
 		);
+
 		//비밀번호 확인
 		watch(
 			() => info.passwordCk,
@@ -309,6 +300,7 @@ export default {
 				}
 			},
 		);
+
 		watch(
 			() => info.password,
 			function () {
@@ -321,16 +313,10 @@ export default {
 				}
 			},
 		);
-		watch(
-			() => info.role,
-			function () {
-				if (info.role == 'user') {
-					companyInfo.companyName = '';
-				}
-			},
-		);
+
 		return {
-			register,
+			registerU,
+			registerC,
 			invalidEmail,
 			info,
 			emailCk,
@@ -339,7 +325,6 @@ export default {
 			companyInfo,
 			registerCompany,
 			registerUser,
-			companySuccess,
 		};
 	},
 };
