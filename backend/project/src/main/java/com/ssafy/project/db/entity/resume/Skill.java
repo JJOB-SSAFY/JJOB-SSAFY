@@ -17,13 +17,10 @@ public class Skill {
     @Column(name = "skill_id")
     private Long id;
 
-    @Column(nullable = false)
     private String skillName;
 
-    @Column(nullable = false)
     private String skillLevel;
 
-    @Column(nullable = false)
     private String detail;
 
     @ManyToOne(fetch = FetchType.LAZY)

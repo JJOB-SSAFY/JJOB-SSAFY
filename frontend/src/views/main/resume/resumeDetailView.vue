@@ -338,8 +338,8 @@
 			</div>
 		</div>
 		<div class="resume-write-footer">
-			<button class="resume-save-impl-btn" @click="saveImpl">임시저장</button>
-			<button class="resume-save-btn" @click="save">저장하기</button>
+			<button class="resume-save-impl-btn" @click="updateImpl">임시저장</button>
+			<button class="resume-save-btn" @click="update">저장하기</button>
 		</div>
 	</div>
 </template>
@@ -347,12 +347,10 @@
 <script>
 import axios from 'axios';
 import { url } from '../../../api/http';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
+import { toRaw } from 'vue';
 
 export default {
-	name: 'resumeCreateView',
+	name: 'resumeDetailView',
 
 	data() {
 		return {
@@ -555,11 +553,169 @@ export default {
 			portfolio: null,
 			github: null,
 			blog: null,
+
+			resumeId: this.$route.params.resumeId,
+			resumeInfo: null,
+			universityDtoList: [],
 		};
 	},
 
+	created() {
+		axios({
+			method: 'GET',
+			url: url + '/resume/' + this.resumeId,
+			headers: {
+				Authorization: localStorage.getItem('jjob.s.token'),
+			},
+		}).then(res => {
+			this.resumeInfo = res.data;
+			this.phone = res.data.phone;
+			this.email = res.data.email;
+			this.portfolio = res.data.portfolio;
+			this.github = res.data.github;
+			this.blog = res.data.blog;
+			this.resumeTitle = res.data.resumeTitle;
+			this.myName = res.data.name;
+
+			const resumeInfo = res.data;
+
+			for (let i = 0; i < resumeInfo.universityDtoList.length; i++) {
+				document.getElementById(`uniperiod${i + 1}`).value =
+					res.data.universityDtoList[i].universityPeriod;
+
+				document.getElementById(`uniname${i + 1}`).value =
+					res.data.universityDtoList[i].universityName;
+
+				document.getElementById(`unimajor${i + 1}`).value =
+					res.data.universityDtoList[i].major;
+			}
+
+			for (let i = 0; i < resumeInfo.educationDtoList.length; i++) {
+				document.getElementById(`eduname${i + 1}`).value =
+					res.data.educationDtoList[i].educationName;
+
+				document.getElementById(`eduperiod${i + 1}`).value =
+					res.data.educationDtoList[i].educationPeriod;
+
+				document.getElementById(`educontent${i + 1}`).value =
+					res.data.educationDtoList[i].educationContent;
+
+				document.getElementById(`eduagency${i + 1}`).value =
+					res.data.educationDtoList[i].educationInstitution;
+			}
+
+			for (let i = 0; i < resumeInfo.activityDtoList.length; i++) {
+				document.getElementById(`actname${i + 1}`).value =
+					res.data.activityDtoList[i].activityName;
+
+				document.getElementById(`actperiod${i + 1}`).value =
+					res.data.activityDtoList[i].activityPeriod;
+
+				document.getElementById(`actcontent${i + 1}`).value =
+					res.data.activityDtoList[i].activityContent;
+
+				document.getElementById(`actagency${i + 1}`).value =
+					res.data.activityDtoList[i].activityInstitution;
+			}
+
+			for (let i = 0; i < resumeInfo.careerDtoList.length; i++) {
+				document.getElementById(`careername${i + 1}`).value =
+					res.data.careerDtoList[i].companyName;
+
+				document.getElementById(`careerperiod${i + 1}`).value =
+					res.data.careerDtoList[i].careerPeriod;
+
+				document.getElementById(`careerwork${i + 1}`).value =
+					res.data.careerDtoList[i].careerContent;
+			}
+
+			for (let i = 0; i < resumeInfo.awardDtoList.length; i++) {
+				document.getElementById(`awardname${i + 1}`).value =
+					res.data.awardDtoList[i].awardName;
+
+				document.getElementById(`awarddate${i + 1}`).value =
+					res.data.awardDtoList[i].awardDate;
+
+				document.getElementById(`awardagency${i + 1}`).value =
+					res.data.awardDtoList[i].awardInstitution;
+			}
+
+			for (let i = 0; i < resumeInfo.certificateDtoList.length; i++) {
+				document.getElementById(`certificatename${i + 1}`).value =
+					res.data.certificateDtoList[i].certificateName;
+
+				document.getElementById(`certificatedate${i + 1}`).value =
+					res.data.certificateDtoList[i].certificateDate;
+
+				document.getElementById(`certificateagency${i + 1}`).value =
+					res.data.certificateDtoList[i].certificateInstitution;
+			}
+
+			for (let i = 0; i < resumeInfo.languageAbilityDtoList.length; i++) {
+				document.getElementById(`language${i + 1}`).value =
+					res.data.languageAbilityDtoList[i].language;
+
+				document.getElementById(`languagename${i + 1}`).value =
+					res.data.languageAbilityDtoList[i].testName;
+
+				document.getElementById(`languagegrade${i + 1}`).value =
+					res.data.languageAbilityDtoList[i].grade;
+
+				document.getElementById(`languagedate${i + 1}`).value =
+					res.data.languageAbilityDtoList[i].testDate;
+			}
+
+			for (let i = 0; i < resumeInfo.skillDtoList.length; i++) {
+				document.getElementById(`skillname${i + 1}`).value =
+					res.data.skillDtoList[i].skillName;
+
+				document.getElementById(`skilllevel${i + 1}`).value =
+					res.data.skillDtoList[i].skillLevel;
+
+				document.getElementById(`skilldetail${i + 1}`).value =
+					res.data.skillDtoList[i].detail;
+			}
+
+			for (let i = 0; i < resumeInfo.projectExpDtoList.length; i++) {
+				document.getElementById(`projectname${i + 1}`).value =
+					res.data.projectExpDtoList[i].projectName;
+
+				document.getElementById(`projectperiod${i + 1}`).value =
+					res.data.projectExpDtoList[i].projectPeriod;
+
+				document.getElementById(`projectuserCount${i + 1}`).value =
+					res.data.projectExpDtoList[i].memberCnt;
+
+				document.getElementById(`projectoutline${i + 1}`).value =
+					res.data.projectExpDtoList[i].summary;
+
+				document.getElementById(`projectdevEnv${i + 1}`).value =
+					res.data.projectExpDtoList[i].techEnv;
+
+				document.getElementById(`projectrole${i + 1}`).value =
+					res.data.projectExpDtoList[i].position;
+
+				document.getElementById(`projectfunction${i + 1}`).value =
+					res.data.projectExpDtoList[i].function;
+
+				document.getElementById(`projectresult${i + 1}`).value =
+					res.data.projectExpDtoList[i].result;
+
+				document.getElementById(`projectlink${i + 1}`).value =
+					res.data.projectExpDtoList[i].link;
+			}
+
+			for (let i = 0; i < resumeInfo.coverLetterDtoList.length; i++) {
+				document.getElementById(`coverLetterTitle${i + 1}`).value =
+					res.data.coverLetterDtoList[i].title;
+
+				document.getElementById(`coverLetterContent${i + 1}`).value =
+					res.data.coverLetterDtoList[i].content;
+			}
+		});
+	},
 	methods: {
-		saveImpl() {
+		updateImpl() {
 			const name = this.myName;
 			const resumeTitle = this.resumeTitle;
 			const phone = this.phone;
@@ -1162,8 +1318,8 @@ export default {
 			}
 
 			axios({
-				method: 'POST',
-				url: url + '/resume',
+				method: 'PATCH',
+				url: url + '/resume/' + this.resumeId,
 				headers: {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
@@ -1171,8 +1327,8 @@ export default {
 			}).then(res => {});
 		},
 
-		save() {
-			this.saveImpl();
+		update() {
+			this.updateImpl();
 			this.$router.push({
 				name: 'myInfo',
 			});
@@ -1181,132 +1337,4 @@ export default {
 };
 </script>
 
-<style>
-.resume-container {
-	width: 90%;
-	margin: 50px auto 150px;
-	display: flex;
-	border: 2px black solid;
-	border-radius: 10px;
-}
-
-.left-container {
-	width: 30%;
-	background-color: #aad6ff;
-	padding: 0 50px;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
-
-.left-fix {
-	position: sticky;
-	top: 20px;
-	margin-bottom: 150px;
-	box-sizing: border-box;
-}
-
-.left-container label {
-	font-size: 15px;
-	font-weight: bold;
-}
-
-.resume-profile-image {
-	width: 75%;
-	aspect-ratio: 1/1;
-	margin: 50px auto 25px;
-	border: 10px white solid;
-	border-radius: 40%;
-}
-
-.right-container {
-	width: 70%;
-	background-color: white;
-	padding: 60px 20px 20px 20px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
-.right-container h4 {
-	font-weight: bold;
-	margin: 10px;
-}
-
-.title-input-box {
-	margin-bottom: 40px;
-}
-
-.resume-box {
-	padding: 20px;
-}
-
-.resume-box table {
-	margin-bottom: 40px;
-}
-
-table.type09 {
-	width: 100%;
-	border-collapse: collapse;
-	text-align: left;
-	line-height: 1.5;
-}
-
-table.type09 thead th {
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	color: #369;
-	border-bottom: 3px solid #036;
-}
-
-table.type09 tbody th {
-	width: 150px;
-	padding: 10px;
-	font-weight: bold;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-}
-
-table.type09 td {
-	width: 350px;
-	padding: 10px;
-	vertical-align: top;
-	border-bottom: 1px solid #ccc;
-}
-
-table.type09 td input {
-	border: none;
-}
-
-.resume-write-footer {
-	position: fixed;
-	width: 100%;
-	height: 80px;
-	background: white;
-	bottom: 0;
-	display: flex;
-	justify-content: right;
-	align-items: center;
-	border-top: 1px lightgray solid;
-}
-
-.resume-save-impl-btn {
-	width: 200px;
-	height: 40px;
-	border: 1px dodgerblue solid;
-	border-radius: 20px;
-	background: white;
-	font-weight: 900;
-	margin-right: 50px;
-}
-
-.resume-save-btn {
-	width: 200px;
-	height: 40px;
-	border: 1px dodgerblue solid;
-	border-radius: 20px;
-	background: dodgerblue;
-	color: white;
-	font-weight: 900;
-	margin-right: 100px;
-}
-</style>
+<style></style>

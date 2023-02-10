@@ -14,6 +14,7 @@ import myInfoView from '@/views/myInfo/myInfoView.vue';
 import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
 import resumeCreateView from '@/views/main/resume/resumeCreateView.vue';
+import resumeDetailView from '@/views/main/resume/resumeDetailView.vue';
 import test from '@/views/test.vue';
 export default createRouter({
 	history: createWebHistory(),
@@ -86,6 +87,11 @@ export default createRouter({
 					name: 'resumeCreate',
 					path: '/resume/create',
 					component: resumeCreateView,
+				},
+				{
+					name: 'resumeDetail',
+					path: '/resume/detail/:resumeId',
+					component: resumeDetailView,
 				},
 				{
 					name: 'myInfo',
