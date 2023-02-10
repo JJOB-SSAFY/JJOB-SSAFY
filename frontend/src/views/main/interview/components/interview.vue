@@ -6,26 +6,28 @@
 			alt="..."
 		/>
 		<div class="card-body">
-			<h5 class="card-title">{{ info.title }}</h5>
+			<h4 class="card-title">{{ info.title }}</h4>
 			<p class="card-text">
 				시작시간 : {{ startTime }} <br />
 				종료시간 : {{ endTime }}
 			</p>
-			<button
-				@click="
-					clickConference(info.conferenceId, info.companyId, info.companyName)
-				"
-				style="
-					margin: 10px 0 auto;
-					padding: 5px;
-					width: 100%;
-					background-color: white;
-					border: 2px solid black;
-					border-radius: 5px;
-				"
-			>
-				입장하기
-			</button>
+			<div class="div-button" style="margin-top: 0">
+				<b-button
+					type="button"
+					variant="outline-primary"
+					class="div-button font-LINE-Bd w-100"
+					@click="
+						clickConference(
+							info.title,
+							info.conferenceId,
+							info.companyId,
+							info.companyName,
+						)
+					"
+				>
+					입장하기
+				</b-button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -61,13 +63,14 @@ export default {
 
 		const store = useStore();
 
-		const clickConference = function (id, companyId, companyName) {
+		const clickConference = function (title, id, companyId, companyName) {
 			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
 			const name = store.getters['auth/getName'];
 
 			router.push({
 				name: 'openVidu',
 				params: {
+					title: title,
 					participant: name,
 					session: id,
 					companyId: companyId,
