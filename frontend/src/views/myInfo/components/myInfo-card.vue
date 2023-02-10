@@ -15,27 +15,29 @@
 				</div>
 				<div class="first-detail info-email">
 					<p class="info-title">이메일</p>
-					<div class="info-content">{{ myInfo.state.email }}</div>
+					<div class="info-content line-clamp">{{ myInfo.state.email }}</div>
 				</div>
 				<div class="first-detail info-github">
 					<p class="info-title">Github</p>
-					<div class="info-content">{{ myInfo.state.github }}</div>
+					<div class="info-content line-clamp">{{ myInfo.state.github }}</div>
 				</div>
 				<div class="first-detail info-blog">
 					<p class="info-title">Blog</p>
-					<div class="info-content">{{ myInfo.state.blog }}</div>
+					<div class="info-content line-clamp">{{ myInfo.state.blog }}</div>
 				</div>
 			</div>
 
 			<div class="div-info-second font-LINE-Rg">
 				<div class="second-detail info-skill">
 					<p class="info-title">Skills</p>
-					<div class="info-content">{{ myInfo.state.skills }}</div>
+					<div class="info-content line-clamp">{{ myInfo.state.skills }}</div>
 				</div>
 
 				<div class="second-detail info-preferredJob">
 					<p class="info-title">선호 직무</p>
-					<div class="info-content">{{ myInfo.state.preferredJob }}</div>
+					<div class="info-content line-clamp">
+						{{ myInfo.state.preferredJob }}
+					</div>
 				</div>
 
 				<div class="second-detail info-introduce">
