@@ -12,7 +12,9 @@
 				보기
 			</button>
 		</div>
-		<button @click="addResume" class="resume-create-btn">+</button>
+		<button @click="addResume" class="resume-create-btn">
+			<fa-icon icon="fas fa-solid fa-plus"></fa-icon>
+		</button>
 	</div>
 </template>
 
@@ -20,8 +22,7 @@
 import { useStore } from 'vuex';
 import { reactive, toRaw, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { url } from '../../../api/http';
-import axios from 'axios';
+import resumeService from '../../../api/resumeService';
 
 export default {
 	name: 'MyinfoResume',
@@ -35,18 +36,9 @@ export default {
 		});
 		// const resumeList = store.getters['auth/getResumeList'];
 		// getResumeList.state = toRaw(resumeList);
-
-		axios({
-			method: 'GET',
-			url: url + '/resume',
-			headers: {
-				Authorization: localStorage.getItem('jjob.s.token'),
-			},
-			data: {
-				companyName: '',
-			},
-		}).then(res => {
-			getResumeList.state = toRaw(res.data);
+		const resService = new resumeService();
+		resService.getResumeList().then(data => {
+			getResumeList.state = data;
 		});
 
 		// const getResumeList = computed(() => {
