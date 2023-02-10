@@ -68,6 +68,10 @@
   transition: 0.3s;
 }
 
+.screen_big {
+  display: none;
+}
+
 
 @media screen and (max-width:1060px) {
   .navbar {
@@ -83,6 +87,10 @@
     margin: 0px;
     width: 100%;
 
+  }
+
+  .hamburger-menu {
+    display: none;
   }
 
   .navbar-menu li {
