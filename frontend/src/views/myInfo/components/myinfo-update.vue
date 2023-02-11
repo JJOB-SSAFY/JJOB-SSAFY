@@ -4,68 +4,54 @@
 			<div class="myinfo-section">
 				<div class="div-myinfo-update-top font-LINE-Rg">
 					<div class="div-myinfo-update-left font-LINE-Rg">
-						<div class="div-item info-phone">
-							<p class="info-title">휴대폰</p>
-							<input
-								v-model="myInfo.state.phone"
-								class="info-content effect-1"
-							/>
+						<div class="div-item-left info-phone">
+							<p class="info-title font-LINE-Bd">휴대폰</p>
+							<input v-model="myInfo.state.phone" class="info-content" />
 						</div>
-						<div class="div-item info-email">
-							<p class="info-title">이메일</p>
+						<div class="div-item-left info-email">
+							<p class="info-title font-LINE-Bd">이메일</p>
 							<input
 								disabled
 								v-model="myInfo.state.email"
-								class="info-content effect-1"
+								class="info-content"
 							/>
 						</div>
-						<div class="div-item info-github">
-							<p class="info-title">Github</p>
-							<input
-								v-model="myInfo.state.github"
-								class="info-content effect-1"
-							/>
+						<div class="div-item-left info-github">
+							<p class="info-title font-LINE-Bd">Github</p>
+							<input v-model="myInfo.state.github" class="info-content" />
 						</div>
-						<div class="div-item info-blog">
-							<p class="info-title">Blog</p>
-							<input
-								v-model="myInfo.state.blog"
-								class="info-content effect-1"
-							/>
+						<div class="div-item-left info-blog">
+							<p class="info-title font-LINE-Bd">Blog</p>
+							<input v-model="myInfo.state.blog" class="info-content" />
 						</div>
 					</div>
 
 					<div class="div-myinfo-update-right font-LINE-Rg">
-						<div class="div-item info-skill">
-							<p class="info-title">Skills</p>
-							<input
-								v-model="myInfo.state.skills"
-								class="info-content effect-1"
-							/>
+						<div class="div-item-right info-skill">
+							<p class="info-title font-LINE-Bd">Skills</p>
+							<input v-model="myInfo.state.skills" class="info-content" />
 						</div>
 
-						<div class="div-item info-preferredJob">
-							<p class="info-title">선호 직무</p>
-							<input
-								v-model="myInfo.state.preferredJob"
-								class="info-content effect-1"
-							/>
+						<div class="div-item-right info-preferredJob">
+							<p class="info-title font-LINE-Bd">선호 직무</p>
+							<input v-model="myInfo.state.preferredJob" class="info-content" />
 						</div>
 
-						<div class="div-item info-introduce">
-							<p class="info-title">한줄 자기소개</p>
+						<div class="div-item-right info-introduce">
+							<p class="info-title font-LINE-Bd">한줄 자기소개</p>
 							<input
 								v-model="myInfo.state.introduce"
-								class="line-clamp-introduce effect-1"
+								class="line-clamp-introduce"
 							/>
 						</div>
-						<div class="info-image">
-							<p class="info-title">이미지 선택</p>
+						<div class="div-item-right">
+							<p class="info-title font-LINE-Bd">이미지 선택</p>
 							<input
 								type="file"
 								ref="file"
 								placeholder="사진"
 								@change="imgUpload"
+								class="info-content-img"
 							/>
 						</div>
 					</div>
@@ -98,28 +84,34 @@
 				<div class="div-password-top font-LINE-Rg">
 					<div class="div-password-update font-LINE-Rg">
 						<div>
-							<div class="div-item">
-								<p class="info-title">현재 비밀번호</p>
+							<div class="p-div-item">
+								<p class="p-info-title font-LINE-Bd font-LINE-Bd">
+									현재 비밀번호
+								</p>
 								<input
 									type="password"
 									v-model="password.current"
-									class="info-content"
+									class="p-info-content"
 								/>
 							</div>
-							<div class="div-item">
-								<p class="info-title">변경할 비밀번호</p>
+							<div class="p-div-item">
+								<p class="p-info-title font-LINE-Bd font-LINE-Bd">
+									변경할 비밀번호
+								</p>
 								<input
 									type="password"
 									v-model="password.change"
-									class="info-content"
+									class="p-info-content"
 								/>
 							</div>
-							<div class="div-item">
-								<p class="info-title">변경할 비밀번호 확인</p>
+							<div class="p-div-item">
+								<p class="p-info-title font-LINE-Bd font-LINE-Bd">
+									변경할 비밀번호 확인
+								</p>
 								<input
-									type="password"
+									type="p-password"
 									v-model="password.changeCk"
-									class="info-content"
+									class="p-info-content"
 								/>
 							</div>
 						</div>
