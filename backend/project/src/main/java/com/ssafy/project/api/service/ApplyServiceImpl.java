@@ -16,11 +16,8 @@ import com.ssafy.project.db.repository.RecruitRepository;
 import com.ssafy.project.db.repository.resume.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -125,13 +122,29 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     @Transactional
-    public ApplyStatusRes updateApplyStatus(Long recruitId, Long memberId, ApplyRequestDto requestDto) {
-        return null;
+    public void updateApplyStatus(Long applyId,ApplyRequestDto requestDto) {
+        Optional<ApplyStatus> applyStatus = applyStatusRepository.findById(applyId);
+        if(applyStatus.isEmpty()) throw  new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION);
+
+        applyStatus.get().updateApplyStatus(requestDto);
+
+
     }
 
     @Override
     @Transactional
-    public void deleteApply(Long recruitId) {
+    public void deleteApplyStatus(Long applyId) {
+        Optional<ApplyStatus> applyStatus = applyStatusRepository.findById(applyId);
+        if(applyStatus.isEmpty()) throw  new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION);
+
+        //연관된 자소서 가져오고 삭제해준다
+        Optional<Resume> resume = resumeRepository.findById(applyStatus.get().getResume().getId());
+
+        //자소서와 관련된 연관 객체들도 전부 삭제해준다.
+        deleteRelatedData(applyStatus.get().getResume().getId());
+        resumeRepository.deleteById(applyStatus.get().getResume().getId());
+
+        applyStatusRepository.deleteById(applyId);
 
     }
 
@@ -141,6 +154,19 @@ public class ApplyServiceImpl implements ApplyService {
         List<ApplyStatus> list = applyStatusRepository.findAllByRecruitId(recruitId);
         return list.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
 
+    }
+
+    private void deleteRelatedData(Long resumeId) {
+        activityRepository.deleteAllByResumeId(resumeId);
+        awardRepository.deleteAllByResumeId(resumeId);
+        careerRepository.deleteAllByResumeId(resumeId);
+        certificateRepository.deleteAllByResumeId(resumeId);
+        coverLetterRepository.deleteAllByResumeId(resumeId);
+        educationRepository.deleteAllByResumeId(resumeId);
+        languageAbilityRepository.deleteAllByResumeId(resumeId);
+        projectExpRepository.deleteAllByResumeId(resumeId);
+        skillRepository.deleteAllByResumeId(resumeId);
+        universityRepository.deleteAllByResumeId(resumeId);
     }
 
 

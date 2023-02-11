@@ -48,6 +48,12 @@ public class ApplyStatus {
                 .build();
     }
 
+    public void updateApplyStatus(ApplyRequestDto requestDto){
+        this.status = requestDto.getStatus();
+        this.step = requestDto.getStep();
+    }
+
+
 
 
 }
