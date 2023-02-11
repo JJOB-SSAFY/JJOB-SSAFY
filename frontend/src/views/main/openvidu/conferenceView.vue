@@ -78,8 +78,6 @@
 								/>
 								<h1 id="session-title">{{ title }}</h1>
 							</div>
-							<!-- Button trigger modal -->
-							<!-- <hr /> -->
 						</div>
 						<div id="flex-container" class="mt-170" style="display: flex">
 							<div id="main-video" class="col-md-6">
