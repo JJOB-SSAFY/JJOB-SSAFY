@@ -23,10 +23,11 @@ public class RecruitResponseListDto {
     private String requirement;
 
     private LocalDate recruitEndDate;
+    private String companyName;
 
     @QueryProjection
     public RecruitResponseListDto(Long recruitId, String recruitTitle, String department, String workType,
-                                  String work, String requirement, LocalDate recruitEndDate) {
+                                  String work, String requirement, LocalDate recruitEndDate, String companyName) {
         this.recruitId = recruitId;
         this.recruitTitle = recruitTitle;
         this.department = department;
@@ -34,5 +35,6 @@ public class RecruitResponseListDto {
         this.work = work;
         this.requirement = requirement;
         this.recruitEndDate = recruitEndDate;
+        this.companyName = companyName;
     }
 }

@@ -30,7 +30,8 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom {
                         recruit.workType,
                         recruit.work,
                         recruit.requirement,
-                        recruit.recruitEndDate
+                        recruit.recruitEndDate,
+                        recruit.company.companyName
                 ))
                 .from(recruit)
                 .where(locationEq(condition.getLocation()), departmentEq(condition.getDepartment()))

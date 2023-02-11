@@ -8,6 +8,7 @@ export const auth = {
 		user: null,
 		role: null,
 		name: null,
+		companyId: null,
 		resumeList: null,
 		token: {
 			accessToken: jwt.getToken(),
@@ -37,6 +38,9 @@ export const auth = {
 		},
 		getName: function (state) {
 			return state.name;
+		},
+		getCompanyId: function (state) {
+			return state.companyId;
 		},
 	},
 	actions: {
@@ -123,6 +127,7 @@ export const auth = {
 		SET_USER(state, data) {
 			state.role = data.role;
 			state.name = data.name;
+			state.companyId = data.companyId;
 		},
 		SET_RESUME_LIST(state, list) {
 			state.resumeList = list;
