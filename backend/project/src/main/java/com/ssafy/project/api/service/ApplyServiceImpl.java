@@ -1,6 +1,7 @@
 package com.ssafy.project.api.service;
 
 import com.ssafy.project.api.request.ApplyRequestDto;
+import com.ssafy.project.api.response.ApplyCompRes;
 import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -46,6 +48,7 @@ public class ApplyServiceImpl implements ApplyService {
     private final RecruitRepository recruitRepository;
 
     @Override
+    @Transactional
     public void createApply(Long recruitId, Long resumeId, Long memberId, ApplyRequestDto requestDto) {
 
         Optional<Member> member = memberRepository.findById(memberId);
@@ -102,7 +105,6 @@ public class ApplyServiceImpl implements ApplyService {
         List<ProjectExp> cpProjectExpList = projectExpList.stream().map((o)-> new ProjectExp(o, cpResume)).collect(Collectors.toList());
         projectExpRepository.saveAll(cpProjectExpList);
 
-        //Resume
 
 
         //Skill
@@ -122,17 +124,24 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
+    @Transactional
     public ApplyStatusRes updateApplyStatus(Long recruitId, Long memberId, ApplyRequestDto requestDto) {
         return null;
     }
 
     @Override
+    @Transactional
     public void deleteApply(Long recruitId) {
 
     }
 
     @Override
-    public List<ApplyStatusRes> getApply(Long memberId) {
-        return null;
+    @Transactional(readOnly = true)
+    public List<ApplyCompRes> getApplyList(Long recruitId) {
+        List<ApplyStatus> list = applyStatusRepository.findAllByRecruitId(recruitId);
+        return list.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
+
     }
+
+
 }
