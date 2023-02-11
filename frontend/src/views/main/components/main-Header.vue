@@ -23,7 +23,7 @@
 				:class="`navbar-icons screen_big ${role === 'USER' ? '' : 'five'}`"
 				ref="icons"
 			>
-				<li v-if="role === 'ADMIN'">
+				<li v-if="role === 'COMPANY'">
 					<router-link to="/recruit/create" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-building" />
 						<span> &nbsp공고등록 </span>
@@ -59,7 +59,7 @@
 					ref="icons"
 				>
 					<li class="mt-50"></li>
-					<li v-if="role === 'ADMIN'">
+					<li v-if="role === 'COMPANY'">
 						<router-link
 							to="/recruit/create"
 							class="navbar-icon menu-item mt-30"

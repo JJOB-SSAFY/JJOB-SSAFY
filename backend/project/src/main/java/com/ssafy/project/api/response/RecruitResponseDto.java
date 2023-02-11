@@ -31,6 +31,7 @@ public class RecruitResponseDto {
     private String department;
 
     private String imgUrl;
+    private String recruitContent;
 
     public static RecruitResponseDto of(Recruit recruit) {
         return RecruitResponseDto.builder()
@@ -44,6 +45,7 @@ public class RecruitResponseDto {
                 .career(recruit.getCareer())
                 .department(recruit.getDepartment())
                 .imgUrl(recruit.getImgUrl())
+                .recruitContent(recruit.getRecruitContent())
                 .build();
     }
 

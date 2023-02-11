@@ -49,26 +49,12 @@
 							v-model="info.location"
 						/>
 						<br />
-						<!-- <input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="이미지"
-							v-model="info.imgUrl"
-						/> -->
-						<!-- <input
-							type="file"
-							ref="file"
-							placeholder="사진"
-							@change="imgUpload"
-						/> -->
 						<div class="filebox">
-							<input
-								class="upload-name"
-								value="첨부파일"
-								placeholder="첨부파일"
-							/>
-							<label for="file">파일찾기</label>
-							<input type="file" id="file" />
+							<input class="upload-name shadow" value="첨부파일" />
+							<div class="file-btn">
+								<label for="file">파일찾기</label>
+								<input type="file" id="file" :onchange="setFileName" />
+							</div>
 						</div>
 						<br />
 					</div>
@@ -134,13 +120,17 @@
 </template>
 
 <script>
-import { watch } from 'vue';
 import { reactive, ref } from 'vue';
+import axios from 'axios';
+import { url } from '../../../api/http';
+import { useStore } from 'vuex';
 
 export default {
 	name: 'recruitCreateView',
 
 	setup() {
+		const store = useStore();
+
 		const info = reactive({
 			recruitTitle: '',
 			eduRequirement: '',
@@ -157,9 +147,82 @@ export default {
 			requirement: '',
 		});
 
-		const register = function () {};
+		const recruitInfo = reactive({
+			recruitTitle: info.recruitTitle,
+			eduRequirement: info.eduRequirement,
+			workType: info.workType,
+			career: info.career,
+			salary: info.salary,
+			location: info.location,
+			imgUrl: info.imgUrl,
+			recruitContent: info.recruitContent,
+			recruitStartDate: info.recruitStartDate,
+			recruitEndDate: info.recruitEndDate,
+			department: info.department,
+			work: info.work,
+			requirement: info.requirement,
+		});
 
-		return { info, register };
+		const register = async () => {
+			recruitInfo.recruitTitle = info.recruitTitle;
+			recruitInfo.eduRequirement = info.eduRequirement;
+			recruitInfo.workType = info.workType;
+			recruitInfo.career = info.career;
+			recruitInfo.salary = info.salary;
+			recruitInfo.location = info.location;
+			recruitInfo.imgUrl = info.imgUrl;
+			recruitInfo.recruitContent = info.recruitContent;
+			recruitInfo.recruitStartDate = info.recruitStartDate;
+			recruitInfo.recruitEndDate = info.recruitEndDate;
+			recruitInfo.department = info.department;
+			recruitInfo.work = info.work;
+			recruitInfo.requirement = info.requirement;
+
+			const companyId = ref(store.getters['auth/getCompanyId']);
+
+			axios({
+				method: 'POST',
+				url: url + '/recruit/' + companyId.value,
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: recruitInfo,
+			}).then(res => {
+				console.log(res);
+			});
+		};
+
+		const initData = () => {
+			info.recruitTitle =
+				info.eduRequirement =
+				info.workType =
+				info.career =
+				info.salary =
+				info.location =
+				info.imgUrl =
+				info.recruitContent =
+				info.recruitStartDate =
+				info.recruitEndDate =
+				info.department =
+				info.work =
+				info.requirement =
+				recruitInfo.recruitTitle =
+				recruitInfo.eduRequirement =
+				recruitInfo.workType =
+				recruitInfo.career =
+				recruitInfo.salary =
+				recruitInfo.location =
+				recruitInfo.imgUrl =
+				recruitInfo.recruitContent =
+				recruitInfo.recruitStartDate =
+				recruitInfo.recruitEndDate =
+				recruitInfo.department =
+				recruitInfo.work =
+				recruitInfo.requirement =
+					'';
+		};
+
+		return { info, recruitInfo, register };
 	},
 };
 </script>
@@ -188,13 +251,18 @@ export default {
 	padding-left: 10px;
 	height: 50px;
 }
+.filebox {
+	margin-top: 40px;
+}
+
 .filebox .upload-name {
-	display: inline-block;
+	/* display: inline-block; */
 	height: 40px;
 	padding: 0 10px;
 	vertical-align: middle;
 	border: 1px solid #dddddd;
-	width: 78%;
+	width: 85%;
+	margin-left: 9px;
 	color: #999999;
 }
 
@@ -216,5 +284,11 @@ export default {
 	padding: 0;
 	overflow: hidden;
 	border: 0;
+}
+
+.file-btn {
+	margin-top: 10px;
+	margin-right: 80px;
+	text-align: right;
 }
 </style>
