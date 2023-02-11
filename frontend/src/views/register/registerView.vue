@@ -351,6 +351,8 @@ export default {
 .div-button {
 	width: 500px;
 	padding-left: 10px;
+
+	margin-top: 20px;
 }
 .input-checkbox {
 }
