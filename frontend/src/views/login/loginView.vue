@@ -5,7 +5,9 @@
 		</div>
 		<div class="div-login">
 			<div class="login-container">
-				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
+				<h1 class="login-title font-LINE-Bd mt-100">
+					안녕하세요 <br />JJOB SSAFY입니다
+				</h1>
 				<div class="login-form mt-110">
 					<form @submit.prevent>
 						<input
@@ -33,15 +35,32 @@
 							</div>
 						</div>
 						<div class="div-button">
-							<button @click="Login" @keyup.enter="Login" class="font-LINE-Bd">
+							<button
+								id="login-bt"
+								@click="Login"
+								@keyup.enter="Login"
+								class="btnLightBlue btnFade font-LINE-Bd"
+							>
 								로그인
 							</button>
-							<button type="button" id="login-kakao-btn" @click="kakaoLogin">
-								카카오
-							</button>
-							<button type="button" id="login-google-btn" @click="googleLogin">
-								구글
-							</button>
+							<p
+								class="mt-80 font-LINE-Rg"
+								style="border-width: 1px 0; border-style: solid"
+							>
+								소셜계정으로 로그인하기
+							</p>
+							<div class="div-social font-LINE-Rg mt-10">
+								<button
+									type="button"
+									id="login-kakao-bt"
+									@click="kakaoLogin"
+								></button>
+								<button
+									type="button"
+									id="login-google-bt"
+									@click="googleLogin"
+								></button>
+							</div>
 						</div>
 					</form>
 				</div>
