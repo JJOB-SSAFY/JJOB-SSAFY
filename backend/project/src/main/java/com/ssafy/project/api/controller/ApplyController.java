@@ -35,6 +35,16 @@ public class ApplyController {
         return new ResponseEntity<>(applyService.getApplyList(recruit_id), HttpStatus.OK);
     }
 
+    @PatchMapping("/{apply_id}")
+    ResponseEntity<BaseResponseBody> updateApplyStatus(@PathVariable Long apply_id, @RequestBody ApplyRequestDto requestDto){
+        applyService.updateApplyStatus(apply_id, requestDto);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+    }
 
+    @DeleteMapping("/{apply_id}")
+    ResponseEntity<BaseResponseBody> deleteApplyStatus(@PathVariable Long apply_id){
+        applyService.deleteApplyStatus(apply_id);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
+    }
 
 }
