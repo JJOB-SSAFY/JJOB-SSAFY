@@ -1,10 +1,10 @@
 <template>
-	<div class="div-mycard">
+	<div class="infoCards">
 		<div class="cover-backgroud"></div>
 		<div class="mycard-container">
 			<div class="div-profile font-LINE-Bd">
 				<div class="img-container">
-					<img class="profile-img" :src="info.imgUrl" />
+					<img class="profile-img" :src="info.imageUrl" />
 				</div>
 				<p class="profile-name">{{ info.name }}</p>
 			</div>
