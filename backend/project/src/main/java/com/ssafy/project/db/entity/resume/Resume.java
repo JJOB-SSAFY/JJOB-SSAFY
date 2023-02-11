@@ -19,6 +19,7 @@ public class Resume {
     @Column(name = "resume_id")
     private Long id;
 
+
     @Column(nullable = false)
     private String resumeTitle;
 
@@ -38,9 +39,10 @@ public class Resume {
     @JoinColumn(name = "member_id")
     private Member member;
 
+
+
     public static Resume of(Member member, ResumeRequestDto requestDto) {
         return Resume.builder()
-                .subTitle(requestDto.getSubTitle())
                 .member(member)
                 .resumeTitle(requestDto.getResumeTitle())
                 .name(requestDto.getName())
@@ -55,7 +57,6 @@ public class Resume {
 
     public void updateResume(ResumeRequestDto requestDto){
         this.resumeTitle = requestDto.getResumeTitle();
-        this.subTitle = requestDto.getSubTitle();
         this.name = requestDto.getName();
         this.blog = requestDto.getBlog();
         this.phone = requestDto.getPhone();
@@ -67,7 +68,6 @@ public class Resume {
 
     public Resume(Resume resume) {
         this.resumeTitle = resume.getResumeTitle();
-        this.subTitle = resume.getSubTitle();
         this.name = resume.getName();
         this.blog = resume.getBlog();
         this.phone = resume.getPhone();
@@ -75,7 +75,6 @@ public class Resume {
         this.email = resume.getEmail();
         this.github = resume.getGithub();
         this.isApplied = true;
-        this.company = resume.getCompany();
         this.member = resume.getMember();
     }
 
