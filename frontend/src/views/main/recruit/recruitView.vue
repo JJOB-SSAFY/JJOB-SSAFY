@@ -1,12 +1,13 @@
 <template>
 	<div style="width: 80%; margin: auto">
 		<div class="div-search">
-			<form class="recruit-search-form" @submit.prevent>
+			<form class="recruit-search-form" @submit.prevent="searchList">
 				<div class="div-search-department">
 					<input
 						class="form-control review-search-input"
 						type="text"
 						v-model.lazy="condition.form.location"
+						@keyup.enter="searchInfo"
 						placeholder="지역"
 					/>
 				</div>
@@ -15,6 +16,7 @@
 						class="form-control review-search-input"
 						type="text"
 						v-model.lazy="condition.form.department"
+						@keyup.enter="searchInfo"
 						placeholder="직무"
 					/>
 					<button
@@ -47,9 +49,6 @@
 			</div>
 		</div>
 	</div>
-	<div style="position: fixed; bottom: 5px; right: 5px">
-		<a href=".div-search">TOP</a>
-	</div>
 </template>
 
 <script>
@@ -66,7 +65,7 @@ export default {
 	},
 	setup() {
 		const store = useStore();
-		const all = onMounted(() => store.getters['recruit/getRecruitList']);
+		// const all = onMounted(() => store.getters['recruit/getRecruitList']);
 
 		const condition = reactive({
 			form: {
@@ -82,11 +81,12 @@ export default {
 			});
 		};
 
-		const searchList = computed(() => {
-			return store.getters['recruit/getRecruitList'];
-		});
-
-		return { all, condition, searchList, searchInfo };
+		return { condition, searchInfo };
+	},
+	computed: {
+		searchList() {
+			return this.$store.getters['recruit/getRecruitList'];
+		},
 	},
 };
 </script>
