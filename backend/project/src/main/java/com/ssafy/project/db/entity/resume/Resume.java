@@ -19,6 +19,7 @@ public class Resume {
     @Column(name = "resume_id")
     private Long id;
 
+
     @Column(nullable = false)
     private String resumeTitle;
 
@@ -37,6 +38,8 @@ public class Resume {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+
 
     public static Resume of(Member member, ResumeRequestDto requestDto) {
         return Resume.builder()

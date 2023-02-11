@@ -227,7 +227,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .register-form .register-form-input {
 	width: 500px;
 	height: 50px;

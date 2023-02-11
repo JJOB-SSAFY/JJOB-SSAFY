@@ -95,6 +95,10 @@
   right: 0 !important;
 }
 
+.hamburger-menu {
+  padding-right: 47px;
+}
+
 .menu-btn {
   position: relative;
   top: 42px;
@@ -173,6 +177,15 @@
 
   }
 
+  .screen_big {
+    visibility: visible;
+  }
+
+  .li-empty {
+    display: none;
+    visibility: hidden;
+  }
+
   .hamburger-menu {
     display: none;
   }
@@ -213,7 +226,6 @@
     display: flex;
     -webkit-animation: fiveMenuSlideDown 1.3s forwards;
     animation: fiveMenuSlideDown 1.3s forwards;
-
   }
 
 

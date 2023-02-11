@@ -5,7 +5,9 @@
 		</div>
 		<div class="div-login">
 			<div class="login-container">
-				<h1 class="font-LINE-Bd mt-100">안녕하세요 <br />JJOB SSAFY입니다</h1>
+				<h1 class="login-title font-LINE-Bd mt-100">
+					안녕하세요 <br />JJOB SSAFY입니다
+				</h1>
 				<div class="login-form mt-110">
 					<form @submit.prevent>
 						<input
@@ -25,7 +27,12 @@
 						/>
 						<div class="div-sub-option">
 							<div class="remember-form font-LINE-Rg">
-								<input type="checkbox" />
+								<input
+									type="checkbox"
+									v-model="emailSave"
+									true-value="true"
+									fasle-value="false"
+								/>
 								<span class="font-LINE-Rg">기억하기</span>
 							</div>
 							<div class="forget-password font-LINE-Rg">
@@ -33,15 +40,32 @@
 							</div>
 						</div>
 						<div class="div-button">
-							<button @click="Login" @keyup.enter="Login" class="font-LINE-Bd">
+							<button
+								id="login-bt"
+								@click="Login"
+								@keyup.enter="Login"
+								class="btnLightBlue btnFade font-LINE-Bd"
+							>
 								로그인
 							</button>
-							<button type="button" id="login-kakao-btn" @click="kakaoLogin">
-								카카오
-							</button>
-							<button type="button" id="login-google-btn" @click="googleLogin">
-								구글
-							</button>
+							<p
+								class="mt-80 font-LINE-Rg"
+								style="border-width: 1px 0; border-style: solid"
+							>
+								소셜계정으로 로그인하기
+							</p>
+							<div class="div-social font-LINE-Rg mt-10">
+								<button
+									type="button"
+									id="login-kakao-bt"
+									@click="kakaoLogin"
+								></button>
+								<button
+									type="button"
+									id="login-google-bt"
+									@click="googleLogin"
+								></button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -53,18 +77,19 @@
 <script>
 import { ref, reactive } from 'vue';
 import { useStore } from 'vuex';
+import { useCookies } from 'vue3-cookies';
 
 export default {
 	name: 'loginView',
 	setup() {
 		const store = useStore();
-
+		const emailSave = ref('false');
 		const inputEmail = ref();
 		const inputPassword = ref();
-
+		const { cookies } = useCookies();
 		const loginState = reactive({
 			form: {
-				email: '',
+				email: cookies.get('emailCookie'),
 				password: '',
 			},
 		});
@@ -85,6 +110,12 @@ export default {
 				password: loginState.form.password,
 			};
 			store.dispatch('auth/login', loginInfo);
+			if (emailSave.value == 'true') {
+				console.log('1111111쿠기 저장');
+				cookies.set('emailCookie', loginState.form.email);
+			} else {
+				cookies.set('emailCookie', '');
+			}
 		};
 		const kakaoLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/kakao';
@@ -114,6 +145,8 @@ export default {
 			googleLogin,
 			inputEmail,
 			inputPassword,
+			emailSave,
+			cookies,
 		};
 	},
 };

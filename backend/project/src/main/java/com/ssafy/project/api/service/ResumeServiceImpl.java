@@ -98,6 +98,11 @@ public class ResumeServiceImpl implements ResumeService {
         languageAbilityRepository.saveAll(languageAbilityList);
 
 
+        //projectExp
+        List<ProjectExpRequestDto> projectExpRequestDtoList = requestDto.getProjectExpDtoList();
+        List<ProjectExp> projectExpList = projectExpRequestDtoList.stream().map((o)-> new ProjectExp(resume, o)).collect(toList());
+        projectExpRepository.saveAll(projectExpList);
+
 
 
         //skill
