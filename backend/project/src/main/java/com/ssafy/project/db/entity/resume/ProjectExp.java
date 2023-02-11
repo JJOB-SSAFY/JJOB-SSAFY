@@ -73,4 +73,17 @@ public class ProjectExp {
         this.link = requestDto.getLink();
     }
 
+    public ProjectExp(ProjectExp projectExp, Resume resume) {
+        this.projectName = projectExp.getProjectName();
+        this.projectPeriod = projectExp.getProjectPeriod();
+        this.memberCnt = projectExp.getMemberCnt();
+        this.summary = projectExp.getSummary();
+        this.techEnv = projectExp.getTechEnv();
+        this.position = projectExp.getPosition();
+        this.function = projectExp.getFunction();
+        this.result = projectExp.getResult();
+        this.link = projectExp.getLink();
+        this.resume = resume;
+    }
+
 }

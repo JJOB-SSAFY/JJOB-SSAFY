@@ -43,4 +43,10 @@ public class University {
         this.major = requestDto.getMajor();
     }
 
+    public University(University university, Resume resume) {
+        this.universityPeriod = university.getUniversityPeriod();
+        this.universityName = university.getUniversityName();
+        this.major = university.getMajor();
+        this.resume = resume;
+    }
 }

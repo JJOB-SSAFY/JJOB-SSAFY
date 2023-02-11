@@ -43,5 +43,11 @@ public class Award {
         this.awardInstitution = requestDto.getAwardInstitution();
     }
 
+    public Award(Award award, Resume resume) {
+        this.awardName = award.getAwardName();
+        this.awardDate = award.getAwardDate();
+        this.awardInstitution = award.getAwardInstitution();
+        this.resume = resume;
+    }
 
 }

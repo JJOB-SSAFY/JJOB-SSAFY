@@ -37,7 +37,7 @@ public class Resume {
     private String portfolio;
 
     private String email;
-
+    private Boolean isApplied;
     private String github;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -49,6 +49,7 @@ public class Resume {
 
     public static Resume of(Member member, Company company, ResumeRequestDto requestDto) {
         return Resume.builder()
+                .subTitle(requestDto.getSubTitle())
                 .member(member)
                 .company(company)
                 .resumeTitle(requestDto.getResumeTitle())
@@ -58,17 +59,34 @@ public class Resume {
                 .portfolio(requestDto.getPortfolio())
                 .email(requestDto.getEmail())
                 .github(requestDto.getGithub())
+                .isApplied(requestDto.getIsApplied())
                 .build();
     }
 
     public void updateResume(ResumeRequestDto requestDto){
         this.resumeTitle = requestDto.getResumeTitle();
+        this.subTitle = requestDto.getSubTitle();
         this.name = requestDto.getName();
         this.blog = requestDto.getBlog();
         this.phone = requestDto.getPhone();
         this.portfolio = requestDto.getPortfolio();
         this.email = requestDto.getEmail();
         this.github = requestDto.getGithub();
+        this.isApplied = requestDto.getIsApplied();
+    }
+
+    public Resume(Resume resume) {
+        this.resumeTitle = resume.getResumeTitle();
+        this.subTitle = resume.getSubTitle();
+        this.name = resume.getName();
+        this.blog = resume.getBlog();
+        this.phone = resume.getPhone();
+        this.portfolio = resume.getPortfolio();
+        this.email = resume.getEmail();
+        this.github = resume.getGithub();
+        this.isApplied = true;
+        this.company = resume.getCompany();
+        this.member = resume.getMember();
     }
 
 }

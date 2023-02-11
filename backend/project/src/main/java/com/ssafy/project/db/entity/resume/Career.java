@@ -43,4 +43,11 @@ public class Career {
         this.careerContent = requestDto.getCareerContent();
     }
 
+    public Career(Career career, Resume resume) {
+        this.companyName = career.getCompanyName();
+        this.careerPeriod = career.getCareerPeriod();
+        this.careerContent = career.getCareerContent();
+        this.resume = resume;
+    }
+
 }

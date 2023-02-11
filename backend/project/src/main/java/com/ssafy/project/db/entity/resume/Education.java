@@ -48,4 +48,12 @@ public class Education {
         this.educationInstitution = requestDto.getEducationInstitution();
     }
 
+    public Education(Education education, Resume resume) {
+        this.educationName = education.getEducationName();
+        this.educationPeriod = education.getEducationPeriod();
+        this.educationContent = education.getEducationContent();
+        this.educationInstitution = education.getEducationInstitution();
+        this.resume = resume;
+    }
+
 }
