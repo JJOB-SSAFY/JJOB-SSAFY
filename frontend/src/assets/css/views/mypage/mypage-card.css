@@ -43,15 +43,16 @@
 
 .div-profile .img-container {
   background-color: white;
-  width: 300px;
+  width: 290px;
+  height: 290px;
   border-radius: 25% 35% / 35% 40%;
 }
 
 .div-profile .profile-img {
   padding: 10px;
   border: 1px solid white;
-  width: 300px;
-  height: 300px;
+  width: 290px;
+  height: 290px;
   border-radius: 25% 35% / 35% 40%;
   overflow: hidden;
 
