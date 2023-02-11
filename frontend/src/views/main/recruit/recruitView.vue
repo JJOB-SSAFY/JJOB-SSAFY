@@ -54,9 +54,8 @@
 
 <script>
 import recruitItemView from './components/recruit-item.vue';
-import { ref, reactive, onMounted, computed } from 'vue';
+import { reactive, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
-import axios from 'axios';
 
 export default {
 	name: 'recruitView',
