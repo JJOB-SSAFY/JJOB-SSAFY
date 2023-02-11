@@ -40,4 +40,11 @@ public class Skill {
         this.detail = requestDto.getDetail();
     }
 
+    public Skill(Skill skill, Resume resume) {
+        this.skillName = skill.getSkillName();
+        this.skillLevel = skill.getSkillLevel();
+        this.detail = skill.getDetail();
+        this.resume = resume;
+    }
+
 }

@@ -26,6 +26,7 @@ public class ResumeResponseDto {
     private String email;
 
     private String github;
+    private Boolean isApplied;
 
     private List<UniversityResponseDto> universityDtoList = new ArrayList<>();
 
@@ -72,6 +73,7 @@ public class ResumeResponseDto {
                 .skillDtoList(skillResponseDtoList)
                 .projectExpDtoList(projectExpDtoList)
                 .coverLetterDtoList(coverLetterDtoList)
+                .isApplied(dto.getIsApplied())
                 .build();
     }
 

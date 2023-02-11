@@ -44,4 +44,12 @@ public class LanguageAbility {
         this.testDate = requestDto.getTestDate();
     }
 
+    public LanguageAbility(LanguageAbility languageAbility, Resume resume) {
+        this.language = languageAbility.getLanguage();
+        this.testName = languageAbility.getTestName();
+        this.grade = languageAbility.getGrade();
+        this.testDate = languageAbility.getTestDate();
+        this.resume = resume;
+    }
+
 }
