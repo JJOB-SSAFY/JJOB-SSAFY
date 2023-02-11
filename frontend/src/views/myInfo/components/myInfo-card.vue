@@ -69,6 +69,7 @@ export default {
 		watch(
 			() => store.getters['auth/getUserInfo'],
 			function () {
+				console.log('aa');
 				// getMyInfo = store.getters[]
 			},
 		);
