@@ -1,22 +1,19 @@
 .login-section {
   width: 100%;
   height: 100%;
+  display: flex;
 }
+
 
 .div-illustration {
   position: relative;
-  height: 100vh;
-  max-width: 800px;
+  min-height: 100vh;
+  max-width: 60%;
   background: url("../../images/logo-background.jpg") no-repeat center center scroll;
   background-size: cover;
   float: left;
-  -webkit-animation: bgslide 2.3s forwards;
-  animation: bgslide 2.3s forwards;
-}
-
-.div-illustration img {
-  width: 248px;
-  height: auto;
+  -webkit-animation: bgslide 1.8s forwards;
+  animation: bgslide 1.8s forwards;
 }
 
 @-webkit-keyframes bgslide {
@@ -28,7 +25,7 @@
 
   to {
     left: 0;
-    width: 800px;
+    width: 1000px;
     opacity: 1;
   }
 }
@@ -47,28 +44,34 @@
   }
 }
 
-.div-login {
-  height: auto;
-  float: left;
-  padding: 0px 50px 0px 50px;
-  width: calc(100% - 800px);
+.div-illustration img {
+  width: 248px;
+  min-height: fit-content;
 }
 
-.div-login login-container {
-  max-width: 400px;
+.div-login {
+  min-height: 100vh;
+  margin: 0 auto;
+  float: left;
+  padding: 0px 50px 0px 50px;
+  width: calc(100% - 60%);
+}
+
+.div-login .login-container {
   margin: 0 auto;
   position: relative;
 }
 
 .div-login .login-container h1 {
-  font-size: 38px;
+  font-size: 230%;
+  text-align: center;
 }
 
-.div-login .login-container .login-form form {
+.login-form form {
   display: grid;
 }
 
-.div-login .login-container .login-form form input {
+.login-form form input {
   font-size: 18px;
   background: rgba(241, 241, 241, 0.87);
   margin-top: 12px;
@@ -78,57 +81,58 @@
   padding: 5px 20px;
 }
 
-.div-login .login-container .login-form form button {
-  background: -webkit-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
-  background: -o-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
-  background: linear-gradient(-20deg, #f794a4 0%, #fdd6bd 100%);
-  border: none;
-  width: 240px;
+.div-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.div-button>p {
+  padding: 10px
+}
+
+.div-social {
+  display: flex;
+}
+
+
+#login-bt {
+  font-size: 20px;
+}
+
+
+#login-bt {
+  width: 100%;
   height: 50px;
-  text-transform: uppercase;
   color: white;
-  border-radius: 10px;
-  position: relative;
-  margin-left: auto;
-  top: 20px;
-  bottom: 70px;
-  z-index: 2;
-  font-size: 25px;
+
 }
 
-.div-login .login-container .login-form form button:hover::after {
-  opacity: 1;
+#login-kakao-bt {
+  background-image: url('../../images/logo/kakao-logo.png');
+  width: 40px;
+  height: 40px;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 5px;
 }
 
-.div-login .login-container .login-form form button::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  border-radius: 10px;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  -webkit-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-  right: 0;
-  bottom: 0;
-  background: -webkit-gradient(linear, left bottom, left top, from(#fa7087), to(#fdb68a));
-  background: -webkit-linear-gradient(110deg, #fa7087 0%, #fdb68a 100%);
-  background: -o-linear-gradient(110deg, #fa7087 0%, #fdb68a 100%);
-  background: linear-gradient(-20deg, #fa7087 0%, #fdb68a 100%);
+#login-google-bt {
+  width: 40px;
+  height: 40px;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('../../images/logo/btn_google_light_normal_ios.svg');
+  margin-left: 5px;
 }
 
-.div-login .login-container .div-sub-option {
+.div-sub-option {
   margin: 15px 5px;
   display: flex;
   justify-content: flex-start;
 }
-
-/* .div-login .login-container .remember-form {
-  position: relative;
-  margin-left: 5px;
-} */
 
 .div-login .login-container .remember-form input[type=checkbox] {
   height: auto;
@@ -139,24 +143,29 @@
   font-size: 16px;
 }
 
-.div-login .login-container .forget-password {
+.forget-password {
   margin-top: 9px;
   margin-left: auto;
 }
 
-.div-login .login-container .forget-password a {
+.forget-password a {
   font-size: 16px;
 }
 
+
+
 @media only screen and (min-width: 1024px) and (max-width: 1400px) {
   .div-illustration {
-    width: 52%;
+    width: 60%;
+    min-height: 120vh;
     -webkit-animation: none;
     animation: none;
   }
 
   .div-login {
-    width: 48%;
+
+    min-height: 100vh;
+    width: calc(100%-60%);
   }
 }
 
@@ -192,7 +201,7 @@
     background-size: cover;
     -webkit-animation: slideIn 0.8s ease-in-out forwards;
     animation: slideIn 0.8s ease-in-out forwards;
-    width: 100%;
+    min-width: 100%;
     height: 190px;
     text-align: center;
   }
@@ -218,42 +227,42 @@
     float: none;
   }
 
-  .div-login .login-container h1 {
+  .div-login .login-container f {
     font-size: 25px;
     margin-top: 40px;
   }
 
-  .div-login .login-container .login-form {
+  .login-form {
     margin-top: 90px;
   }
 
-  .div-login .login-container .login-form form input {
+  .login-form form input {
     height: 45px;
   }
 
-  .div-login .login-container .login-form form button {
+  #login-bt button {
     height: 45px;
     margin-top: 5px;
   }
 
-  .div-login .login-container .div-sub-option {
+  .div-sub-option {
     margin: 15px 5px;
     display: flex;
     justify-content: flex-start;
   }
 
 
-  .div-login .login-container .login-form .remember-form span {
+  .remember-form span {
     font-size: 16px;
     margin-top: 22px;
     top: inherit;
   }
 
-  .div-login .login-container .forget-password a {
+  .forget-password a {
     font-size: 16px;
   }
 
-  .div-login .login-container .forget-password a::after {
+  .forget-password a::after {
     content: "";
     position: absolute;
     height: 2px;
@@ -271,7 +280,7 @@
     right: 0;
   }
 
-  .div-login .login-container .forget-pass a:hover::after {
+  .forget-pass a:hover::after {
     opacity: 1;
   }
 
@@ -302,6 +311,10 @@
     }
   }
 
+  .login-section {
+    display: block;
+  }
+
   .div-illustration {
     margin: auto;
     float: none;
@@ -310,7 +323,7 @@
     -webkit-animation: slideIn 0.8s ease-in-out forwards;
     animation: slideIn 0.8s ease-in-out forwards;
     width: 100%;
-    height: 190px;
+    min-height: 30vh;
     text-align: center;
   }
 
@@ -326,6 +339,7 @@
     float: none;
     margin: 0 auto;
     width: 100%;
+    height: 100vh;
   }
 
   .div-login .login-container {
@@ -333,12 +347,6 @@
     animation: slideIn 0.8s ease-in-out forwards;
     width: 100%;
     float: none;
-  }
-
-  .div-login .login-container h1 {
-    text-align: center;
-    font-size: 25px;
-    margin-top: 50px;
   }
 
   .div-login .login-container .login-form {

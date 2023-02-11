@@ -173,6 +173,10 @@
 
   }
 
+  .screen_big {
+    visibility: visible;
+  }
+
   .hamburger-menu {
     display: none;
   }

@@ -14,7 +14,7 @@
 
 .cover-backgroud {
   background-position-y: -50px;
-  background-image: url(@/assets/images/city.jpg);
+  background-image: url(@/assets/images/mycard-bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 
