@@ -28,7 +28,7 @@
   width: 90%;
 }
 
-@media screen and (max-width:1060px) {
+@media screen and (max-width:1024px) {
   .div-mycard {
     opacity: 0;
     visibility: hidden;
