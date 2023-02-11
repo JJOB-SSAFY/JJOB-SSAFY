@@ -3,6 +3,7 @@ package com.ssafy.project.db.entity.resume;
 import com.ssafy.project.api.request.resume.ActivityRequestDto;
 import com.ssafy.project.api.request.resume.ResumeRequestDto;
 import lombok.*;
+import org.checkerframework.checker.units.qual.A;
 
 import javax.persistence.*;
 
@@ -43,6 +44,14 @@ public class Activity {
         this.activityPeriod = requestDto.getActivityPeriod();
         this.activityInstitution = requestDto.getActivityInstitution();
         this.activityContent = requestDto.getActivityContent();
+    }
+
+    public Activity(Activity activity, Resume resume) {
+        this.activityName = activity.getActivityName();
+        this.activityPeriod = activity.getActivityPeriod();
+        this.activityInstitution = activity.getActivityInstitution();
+        this.activityContent = activity.getActivityContent();
+        this.resume = resume;
     }
 
 

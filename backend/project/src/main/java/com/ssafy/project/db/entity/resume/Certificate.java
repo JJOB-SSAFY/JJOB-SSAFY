@@ -41,4 +41,11 @@ public class Certificate {
         this.certificateInstitution = requestDto.getCertificateInstitution();
     }
 
+    public Certificate(Certificate certificate, Resume resume) {
+        this.certificateName = certificate.getCertificateName();
+        this.certificateDate = certificate.getCertificateDate();
+        this.certificateInstitution = certificate.getCertificateInstitution();
+        this.resume = resume;
+    }
+
 }

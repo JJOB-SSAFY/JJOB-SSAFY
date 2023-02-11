@@ -36,4 +36,10 @@ public class CoverLetter {
         this.content = requestDto.getContent();
     }
 
+    public CoverLetter(CoverLetter coverLetter, Resume resume) {
+        this.title = coverLetter.getTitle();
+        this.content = coverLetter.getContent();
+        this.resume = resume;
+    }
+
 }

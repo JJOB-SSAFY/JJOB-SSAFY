@@ -12,6 +12,8 @@ public class ResumeRequestDto {
 
     private String resumeTitle;
 
+    private String subTitle;
+
     private String name;
 
     private String blog;
@@ -23,6 +25,8 @@ public class ResumeRequestDto {
     private String email;
 
     private String github;
+
+    private Boolean isApplied;
 
     private List<UniversityRequestDto> universityDtoList = new ArrayList<>();
 
