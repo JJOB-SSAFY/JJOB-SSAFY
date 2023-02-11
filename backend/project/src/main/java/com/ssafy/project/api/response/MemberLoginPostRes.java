@@ -18,12 +18,23 @@ public class MemberLoginPostRes {
     private String accessToken;
     private String name;
     private String role;
+    private Long companyId;
+
+    public static MemberLoginPostRes from(String accessToken, String name, String role, Long companyId) {
+        return MemberLoginPostRes.builder()
+                .accessToken(accessToken)
+                .name(name)
+                .role(role)
+                .companyId(companyId)
+                .build();
+    }
 
     public static MemberLoginPostRes from(String accessToken, String name, String role) {
         return MemberLoginPostRes.builder()
                 .accessToken(accessToken)
                 .name(name)
                 .role(role)
+                .companyId(0L)
                 .build();
     }
 
