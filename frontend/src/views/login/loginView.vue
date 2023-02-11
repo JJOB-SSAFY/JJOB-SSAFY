@@ -27,7 +27,12 @@
 						/>
 						<div class="div-sub-option">
 							<div class="remember-form font-LINE-Rg">
-								<input type="checkbox" />
+								<input
+									type="checkbox"
+									v-model="emailSave"
+									true-value="true"
+									fasle-value="false"
+								/>
 								<span class="font-LINE-Rg">기억하기</span>
 							</div>
 							<div class="forget-password font-LINE-Rg">
@@ -72,18 +77,19 @@
 <script>
 import { ref, reactive } from 'vue';
 import { useStore } from 'vuex';
+import { useCookies } from 'vue3-cookies';
 
 export default {
 	name: 'loginView',
 	setup() {
 		const store = useStore();
-
+		const emailSave = ref('false');
 		const inputEmail = ref();
 		const inputPassword = ref();
-
+		const { cookies } = useCookies();
 		const loginState = reactive({
 			form: {
-				email: '',
+				email: cookies.get('emailCookie'),
 				password: '',
 			},
 		});
@@ -104,6 +110,12 @@ export default {
 				password: loginState.form.password,
 			};
 			store.dispatch('auth/login', loginInfo);
+			if (emailSave.value == 'true') {
+				console.log('1111111쿠기 저장');
+				cookies.set('emailCookie', loginState.form.email);
+			} else {
+				cookies.set('emailCookie', '');
+			}
 		};
 		const kakaoLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/kakao';
@@ -133,6 +145,8 @@ export default {
 			googleLogin,
 			inputEmail,
 			inputPassword,
+			emailSave,
+			cookies,
 		};
 	},
 };
