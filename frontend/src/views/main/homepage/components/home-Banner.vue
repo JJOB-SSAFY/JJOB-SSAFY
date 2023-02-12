@@ -1,5 +1,5 @@
 <template>
-	<div class="banner-container">
+	<div>
 		<div
 			id="carouselExampleControls"
 			class="carousel slide"
