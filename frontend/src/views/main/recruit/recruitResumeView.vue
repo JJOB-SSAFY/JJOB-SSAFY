@@ -7,8 +7,14 @@
 		>
 			<div class="resume-id font-LINE-Bd">{{ index + 1 }}</div>
 
-			<div class="resume-title font-LINE-Rg">{{ apply.memberName   }}, {{ apply.recruitTitle }}, {{ apply.resumeTitle }}</div>
-			<button @click="showDetailResume(apply.recruitTitle)" class="resume-view-bt">
+			<div class="resume-title font-LINE-Rg">
+				{{ apply.memberName }}, {{ apply.recruitTitle }},
+				{{ apply.resumeTitle }}
+			</div>
+			<button
+				@click="showDetailResume(apply.recruitTitle)"
+				class="resume-view-bt"
+			>
 				보기
 			</button>
 		</div>

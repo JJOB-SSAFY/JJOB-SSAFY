@@ -51,7 +51,6 @@ public class MemberServiceImpl implements MemberService {
             member.addMemberRole(USER);
             member.addMemberRole(COMPANY);
         } else {
-            member.addCompany(new Company());
             member.addMemberRole(USER);
         }
 
