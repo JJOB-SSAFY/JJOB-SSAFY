@@ -162,17 +162,6 @@
   overflow: hidden;
 }
 
-.div-item .line-clamp {
-  font-size: 17px;
-  width: 90%;
-  word-break: break-all;
-  white-space: normal;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 /* 왼쪽 내 비밀번호 변경 */
 .password-section {
   min-width: 280px;

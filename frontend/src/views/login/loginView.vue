@@ -8,7 +8,7 @@
 				<h1 class="login-title font-LINE-Bd mt-100">
 					안녕하세요 <br />JJOB SSAFY입니다
 				</h1>
-				<div class="login-form mt-110">
+				<div class="login-form mt-55">
 					<form @submit.prevent>
 						<input
 							class="font-LINE-Rg"
