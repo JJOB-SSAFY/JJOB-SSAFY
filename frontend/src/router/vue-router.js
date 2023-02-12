@@ -10,6 +10,7 @@ import recruitView from '@/views/main/recruit/recruitView.vue';
 import recruitDetailView from '@/views/main/recruit/recruitDetailView.vue';
 import recruitCreateView from '@/views/main/recruit/recruitCreateView.vue';
 import recruitResumeView from '@/views/main/recruit/recruitResumeView.vue';
+import recruitResumeDetailView from '@/views/main/recruit/recruitResumeDetailView.vue';
 import reviewView from '@/views/main/review/reviewView.vue';
 import reviewWriteView from '@/views/main/review/reviewWriteView.vue';
 import myInfoView from '@/views/myInfo/myInfoView.vue';
@@ -93,6 +94,11 @@ const router = createRouter({
 					component: myInfoView,
 				},
 			],
+		},
+		{
+			name: 'recruitResumeDetail',
+			path: '/recruit/resume/detail/:resumeId',
+			component: recruitResumeDetailView,
 		},
 		{
 			name: 'reviewWrite',
