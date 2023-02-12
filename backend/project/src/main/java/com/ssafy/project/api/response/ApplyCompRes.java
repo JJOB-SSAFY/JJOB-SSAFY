@@ -15,6 +15,8 @@ public class ApplyCompRes {
     private String step;
     private Long  resumeId;
     private String recruitTitle;
+    private String resumeTitle;
+    private String memberName;
 
    public ApplyCompRes(ApplyStatus applyStatus){
        this.companyName = applyStatus.getRecruit().getCompany().getCompanyName();
@@ -22,5 +24,7 @@ public class ApplyCompRes {
        this.step = applyStatus.getStep();
        this.recruitTitle = applyStatus.getRecruit().getRecruitTitle();
        this.resumeId = applyStatus.getResume().getId();
+       this.resumeTitle = applyStatus.getResume().getResumeTitle();
+       this.memberName = applyStatus.getMember().getName();
    }
 }

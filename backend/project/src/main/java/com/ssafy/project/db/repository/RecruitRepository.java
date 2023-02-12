@@ -11,4 +11,6 @@ public interface RecruitRepository extends JpaRepository<Recruit, Long>, Recruit
     List<Recruit> findAllByOrderByRecruitEndDateDesc(Pageable pageable);
 
     List<Recruit> findAllByOrderByRecruitStartDate(Pageable pageable);
+
+    List<Recruit> findAllByCompanyId(Long companyId);
 }
