@@ -12,4 +12,7 @@ export default class myInfoService {
 	async changePwd(param) {
 		return await http.patch(`myinfo/pwd`, param, config);
 	}
+	async getMyRecruit() {
+		return await http.get(`myinfo/apply`, config).then(data => data.data);
+	}
 }

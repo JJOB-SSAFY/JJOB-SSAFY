@@ -83,6 +83,7 @@ export default {
 	name: 'loginView',
 	setup() {
 		const store = useStore();
+		const emailValidCk = ref(false);
 		const emailSave = ref('false');
 		const inputEmail = ref();
 		const inputPassword = ref();
@@ -93,7 +94,16 @@ export default {
 				password: '',
 			},
 		});
-
+		const emailValid = param => {
+			var expert = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+			if (expert.test(param)) {
+				emailValidCk.value = true;
+				console.log('true');
+			} else {
+				emailValidCk.value = false;
+				console.log('false');
+			}
+		};
 		const Login = () => {
 			if (!loginState.form.email) {
 				alert('아이디를 입력해주세요');
@@ -104,18 +114,23 @@ export default {
 				inputPassword.value.focus();
 				return;
 			}
-
+			// tlwkrwrkwkr
+			emailValid(loginState.form.email);
+			if (!emailValidCk.value) {
+				alert('이메일 형식에 맞게 입력해주세요!');
+				return;
+			}
 			const loginInfo = {
 				email: loginState.form.email,
 				password: loginState.form.password,
 			};
-			store.dispatch('auth/login', loginInfo);
-			if (emailSave.value == 'true') {
-				console.log('1111111쿠기 저장');
-				cookies.set('emailCookie', loginState.form.email);
-			} else {
-				cookies.set('emailCookie', '');
-			}
+			store.dispatch('auth/login', loginInfo).then(() => {
+				if (emailSave.value == 'true') {
+					cookies.set('emailCookie', loginState.form.email);
+				} else {
+					cookies.set('emailCookie', '');
+				}
+			});
 		};
 		const kakaoLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/kakao';
