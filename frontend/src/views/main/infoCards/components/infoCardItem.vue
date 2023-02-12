@@ -1,49 +1,51 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <template>
 	<div class="infoCards">
-		<div class="cover-backgroud"></div>
-		<div class="mycard-container">
-			<div class="div-profile font-LINE-Bd">
-				<div class="img-container">
-					<img class="profile-img" :src="info.imageUrl" />
+		<div class="infoCards-container">
+			<div class="info-front font-LINE-Rg">
+				<div class="div-info-profile font-LINE-Bd">
+					<div class="img-container">
+						<img class="profile-img" :src="info.imageUrl" />
+					</div>
+					<p class="profile-name">{{ info.name }}</p>
 				</div>
-				<p class="profile-name">{{ info.name }}</p>
-			</div>
-			<div class="div-info-first font-LINE-Rg">
-				<div class="first-detail info-phone">
-					<p class="info-title">휴대폰</p>
-					<div class="info-content">{{ info.phone }}</div>
-				</div>
-				<div class="first-detail info-email">
-					<p class="info-title">이메일</p>
-					<div class="info-content line-clamp">{{ info.email }}</div>
-				</div>
-				<div class="first-detail info-github">
-					<p class="info-title">Github</p>
-					<div class="info-content line-clamp">{{ info.github }}</div>
-				</div>
-				<div class="first-detail info-blog">
-					<p class="info-title">Blog</p>
-					<div class="info-content line-clamp">{{ info.blog }}</div>
-				</div>
-			</div>
+				<div class="div-front font-LINE-Rg">
+					<div class="front-item info-skill">
+						<img src="@/assets/images/icon/skills.png" width="19" height="19" />
+						<p>&nbsp {{ info.skills }}</p>
+					</div>
 
-			<div class="div-info-second font-LINE-Rg">
-				<div class="second-detail info-skill">
-					<p class="info-title">Skills</p>
-					<div class="info-content line-clamp">{{ info.skills }}</div>
-				</div>
-
-				<div class="second-detail info-preferredJob">
-					<p class="info-title">선호 직무</p>
-					<div class="info-content line-clamp">
-						{{ info.preferredJob }}
+					<div class="front-item info-preferredJob">
+						<img src="@/assets/images/icon/job.png" width="19" height="19" />
+						<p>&nbsp {{ info.preferredJob }}</p>
+					</div>
+					<div class="front-item info-introduce">
+						<fa-icon icon="fas fa-solid fa-star" />
+						<p>&nbsp&nbsp {{ info.introduce }}</p>
 					</div>
 				</div>
-
-				<div class="second-detail info-introduce">
-					<p class="info-title">한줄 자기소개</p>
-					<div class="line-clamp-introduce">
-						{{ info.introduce }}
+			</div>
+			<div class="info-back font-LINE-Rg">
+				<div class="div-back">
+					<div class="back-item info-phone">
+						<fa-icon icon="fas fa-solid fa-phone" />
+						<p>&nbsp&nbsp {{ info.phone }}</p>
+					</div>
+					<div class="back-item info-email">
+						<fa-icon icon="fas fa-solid fa-envelope" /> &nbsp
+						<p>&nbsp&nbsp {{ info.email }}</p>
+					</div>
+					<div class="back-item info-github">
+						<img
+							src="@/assets/images/logo/github/github-mark.png"
+							width="19"
+							height="19"
+						/>
+						<p>&nbsp {{ info.github }}</p>
+					</div>
+					<div class="back-item info-blog">
+						<img src="@/assets/images/icon/blog.png" width="19" height="19" />
+						<p>&nbsp {{ info.blog }}</p>
 					</div>
 				</div>
 			</div>
