@@ -43,6 +43,12 @@
 						<span> &nbsp공고등록 </span>
 					</router-link>
 				</li>
+				<li v-if="role === 'COMPANY'">
+					<router-link to="/recruit/resume" class="navbar-icon">
+						<fa-icon icon="fas fa-solid fa-scroll" />
+						<span> &nbsp지원자이력서 </span>
+					</router-link>
+				</li>
 				<li v-if="role === 'ADMIN'">
 					<router-link to="/register" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user-plus" />
@@ -79,6 +85,12 @@
 						<router-link to="/recruit/create" class="navbar-icon menu-item">
 							<fa-icon icon="fas fa-solid fa-building" />
 							<span> &nbsp공고등록 </span>
+						</router-link>
+					</li>
+					<li v-if="role === 'COMPANY'">
+						<router-link to="/recruit/resume" class="navbar-icon menu-item">
+							<fa-icon icon="fas fa-solid fa-scroll" />
+							<span> &nbsp지원자이력서 </span>
 						</router-link>
 					</li>
 					<li v-if="role === 'ADMIN'">
