@@ -3,7 +3,7 @@
 		<div class="card">
 			<div>
 				<h4 class="card-header" @click="clickDetail(info.recruitId)">
-					<b>SAMSUNG {{ info.recruitTitle }}</b>
+					<b>SAMSUNG {{ info.companyName }}</b>
 					&nbsp;
 					<h6>(경력여부 : {{ info.work }})</h6>
 				</h4>
