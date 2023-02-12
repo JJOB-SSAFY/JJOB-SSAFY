@@ -83,12 +83,6 @@ const router = createRouter({
 					component: reviewView,
 				},
 				{
-					name: 'reviewWrite',
-					path: '/reviewWrite/:companyId/:companyName',
-					component: reviewWriteView,
-				},
-
-				{
 					name: 'interview',
 					path: '/interview',
 					component: interviewView,
@@ -99,6 +93,11 @@ const router = createRouter({
 					component: myInfoView,
 				},
 			],
+		},
+		{
+			name: 'reviewWrite',
+			path: '/reviewWrite/:companyId/:companyName',
+			component: reviewWriteView,
 		},
 		{
 			name: 'resumeCreate',
