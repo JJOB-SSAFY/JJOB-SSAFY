@@ -168,3 +168,46 @@ a:hover {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* hr */
+.hr-main {
+  background-color: black;
+  padding: 0;
+  height: 2px;
+  margin: 5px 180px 5px 180px;
+  border: none;
+}
+
+
+/* banner 배너*/
+
+.banner-container {
+  display: flex;
+  height: 170px;
+  width: 100%;
+  background-color: white;
+  margin: 0px auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.banner-letter1 {
+  font-size: 30px;
+  font-family: "LINE-Bd";
+}
+
+.banner-letter2 {
+  font-family: "LINE-Rg";
+}
+
+@media screen and (max-width:1024px) {
+  .hr-main {
+    background-color: black;
+    padding: 0;
+    height: 2px;
+    margin: 5px 100px 5px 100px;
+    border: none;
+  }
+}
