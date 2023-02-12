@@ -138,19 +138,6 @@ export default {
 	margin-right: 10px;
 }
 
-.banner-container {
-	position: relative;
-	height: 6rem;
-	overflow: hidden;
-	overflow-x: hidden;
-	overflow-y: hidden;
-	border-radius: 0.75rem;
-	border-top-left-radius: 0.75rem;
-	border-top-right-radius: 0.75rem;
-	border-bottom-right-radius: 0.75rem;
-	border-bottom-left-radius: 0.75rem;
-}
-
 .bg-image {
 	height: 100%;
 	/* opacity: .1; */
