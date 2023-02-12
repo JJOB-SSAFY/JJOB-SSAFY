@@ -104,14 +104,17 @@ a:hover {
 
 /* Button 모음 */
 .btnBlueGreen {
+  border-radius: 12px;
   background: #00AE68;
 }
 
 .btnLightBlue {
+  border-radius: 12px;
   background: var(--primary-color-1);
 }
 
 .btnOrange {
+  border-radius: 12px;
   background: #FFAA40;
 }
 
