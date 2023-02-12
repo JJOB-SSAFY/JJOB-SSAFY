@@ -9,4 +9,6 @@ import java.util.List;
 public interface RecruitRepository extends JpaRepository<Recruit, Long>, RecruitRepositoryCustom {
 
     List<Recruit> findAllByOrderByRecruitEndDateDesc(Pageable pageable);
+
+    List<Recruit> findAllByOrderByRecruitStartDate(Pageable pageable);
 }
