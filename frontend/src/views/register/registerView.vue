@@ -9,46 +9,68 @@
 				</div>
 				<div class="register-form mt-80">
 					<div class="register-user">
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="email"
-							placeholder="이메일"
-							v-model="info.email"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="info.email"
+								required
+							/>
+							<span class="bar"></span>
+							<label>이메일</label>
+						</div>
 						<br />
 						<div v-if="!invalidEmail" style="color: red">
 							&nbsp 이미 등록된 이메일 입니다.
 						</div>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="password"
-							placeholder="비밀번호"
-							v-model="info.password"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="password"
+								v-model="info.password"
+								required
+							/>
+							<span class="bar"></span>
+							<label>비밀번호</label>
+						</div>
 						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="password"
-							placeholder="비밀번호 확인"
-							v-model="info.passwordCk"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="password"
+								v-model="info.passwordCk"
+								required
+							/>
+							<span class="bar"></span>
+							<label>비밀번호 확인</label>
+						</div>
 						<br />
 						<div v-if="!invalidPassowrd" style="color: red">
 							비밀번호를 다시 확인해 주세요.
+							<br />
 						</div>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="이름"
-							v-model="info.name"
-						/>
+
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="info.name"
+								required
+							/>
+							<span class="bar"></span>
+							<label>이름</label>
+						</div>
 						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="회사명"
-							v-model="info.companyName"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="info.companyName"
+								required
+							/>
+							<span class="bar"></span>
+							<label>기업 이름</label>
+						</div>
 						<br />
 						<div class="div-button">
 							<b-button
@@ -63,40 +85,60 @@
 					</div>
 
 					<div class="register-company">
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 이름"
-							v-model="companyInfo.companyName"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="companyInfo.companyName"
+								required
+							/>
+							<span class="bar"></span>
+							<label>기업 이름</label>
+						</div>
 						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 주소"
-							v-model="companyInfo.companyAddress"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="companyInfo.companyAddress"
+								required
+							/>
+							<span class="bar"></span>
+							<label>기업 주소</label>
+						</div>
 						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 설명"
-							v-model="companyInfo.companyDesc"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="companyInfo.companyDesc"
+								required
+							/>
+							<span class="bar"></span>
+							<label>기업 설명</label>
+						</div>
 						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="사원수"
-							v-model="companyInfo.employeeCnt"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="companyInfo.employeeCnt"
+								required
+							/>
+							<span class="bar"></span>
+							<label>기업 설명</label>
+						</div>
 						<br />
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="기업 홈페이지"
-							v-model="companyInfo.companyUrl"
-						/>
+						<div class="group">
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								v-model="companyInfo.companyUrl"
+								required
+							/>
+							<span class="bar"></span>
+							<label>기업 홈페이지</label>
+						</div>
 						<br />
 						<div class="div-button">
 							<b-button
@@ -163,6 +205,10 @@ export default {
 				info.name == ''
 			) {
 				alert('모든 정보를 입력해주세요');
+				return;
+			}
+			if (!invalidPassowrd.value) {
+				alert('비밀번호가 일치하지 않습니다.');
 				return;
 			}
 
@@ -330,7 +376,7 @@ export default {
 };
 </script>
 <style scoped>
-.register-form .register-form-input {
+/* .register-form .register-form-input {
 	width: 500px;
 	height: 50px;
 	font-size: 20px;
@@ -347,13 +393,84 @@ export default {
 }
 .register-form .register-form-input:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
+}*/
 .div-button {
-	width: 500px;
+	width: 100px;
 	padding-left: 10px;
 
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .input-checkbox {
+}
+.register-company {
+	padding-left: 220px;
+}
+/*input ========================================*/
+.group {
+	position: relative;
+}
+input {
+	font-size: 18px;
+	padding: 10px 10px 10px 5px;
+	display: block;
+	width: 350px;
+	border: none;
+	border-bottom: 1px solid #757575;
+}
+input:focus {
+	outline: none;
+}
+
+/* LABEL ======================================= */
+label {
+	color: #999;
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px;
+	transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label,
+input:valid ~ label {
+	top: -20px;
+	font-size: 14px;
+	color: #5264ae;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+	position: relative;
+	display: block;
+	width: 300px;
+}
+.bar:before,
+.bar:after {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: #5264ae;
+	transition: 0.2s ease all;
+	-moz-transition: 0.2s ease all;
+	-webkit-transition: 0.2s ease all;
+}
+.bar:before {
+	left: 50%;
+}
+.bar:after {
+	right: 50%;
+}
+
+/* active state */
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+	width: 50%;
 }
 </style>

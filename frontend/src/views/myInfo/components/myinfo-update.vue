@@ -88,7 +88,7 @@
 					<button
 						id="update-myinfo"
 						class="font-LINE-Rg btnFade btnBlueGreen btnLightBlue"
-						@Click="updateCard"
+						@click="updateCard"
 					>
 						정보변경
 					</button>
@@ -129,7 +129,7 @@
 					<button
 						id="update-myinfo-password"
 						class="font-LINE-Rg btnFade btnBlueGreen btnLightBlue"
-						@Click="changePwd"
+						@click="changePwd"
 					>
 						비밀번호변경
 					</button>

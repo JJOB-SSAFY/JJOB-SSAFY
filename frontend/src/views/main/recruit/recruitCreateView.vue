@@ -7,6 +7,7 @@
 				</div>
 				<div class="register-form mt-80">
 					<div class="register-user">
+						<p>공고 이름</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -14,6 +15,7 @@
 							v-model="info.recruitTitle"
 						/>
 						<br />
+						<p>학력</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -21,6 +23,7 @@
 							v-model="info.eduRequirement"
 						/>
 						<br />
+						<p>근무 형태(정규직, 계약직)</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -28,6 +31,7 @@
 							v-model="info.workType"
 						/>
 						<br />
+						<p>경력</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -35,6 +39,7 @@
 							v-model="info.career"
 						/>
 						<br />
+						<p>급여</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -42,6 +47,7 @@
 							v-model="info.salary"
 						/>
 						<br />
+						<p>근무지역</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -49,17 +55,19 @@
 							v-model="info.location"
 						/>
 						<br />
+						<p>이미지</p>
 						<div class="filebox">
-							<input class="upload-name shadow" value="첨부파일" />
+							<input class="upload-name shadow" v-model="fileName" />
 							<div class="file-btn">
 								<label for="file">파일찾기</label>
-								<input type="file" id="file" :onchange="setFileName" />
+								<input type="file" id="file" @change="imgUpload" />
 							</div>
 						</div>
 						<br />
 					</div>
 
 					<div class="register-company">
+						<p>공고내용</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -67,20 +75,24 @@
 							v-model="info.recruitContent"
 						/>
 						<br />
+						<p>시작 날짜</p>
 						<input
 							class="register-form-input font-LINE-Rg"
-							type="text"
+							type="date"
 							placeholder="시작 날짜"
 							v-model="info.recruitStartDate"
 						/>
 						<br />
+
+						<p>마감 날짜</p>
 						<input
 							class="register-form-input font-LINE-Rg"
-							type="text"
+							type="date"
 							placeholder="마감 날짜"
 							v-model="info.recruitEndDate"
 						/>
 						<br />
+						<p>부서</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -88,6 +100,7 @@
 							v-model="info.department"
 						/>
 						<br />
+						<p>담당업무</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -95,6 +108,7 @@
 							v-model="info.work"
 						/>
 						<br />
+						<p>요구 역량</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
@@ -124,13 +138,25 @@ import { reactive, ref } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
 import { useStore } from 'vuex';
-
+import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../../api/firebase';
 export default {
 	name: 'recruitCreateView',
-
 	setup() {
+		const fileName = ref('첨부파일');
 		const store = useStore();
-
+		const imgUpload = async e => {
+			fileName.value = e.target.files[0].name;
+			const uploaded_file = await uploadBytes(
+				fref(storage, `images/${e.target.files[0].name}`),
+				e.target.files[0],
+			);
+			console.log(uploaded_file);
+			const file_url = await getDownloadURL(uploaded_file.ref);
+			console.log(file_url);
+			info.imgUrl = file_url;
+			console.log(info.imgUrl);
+		};
 		const info = reactive({
 			recruitTitle: '',
 			eduRequirement: '',
@@ -141,7 +167,9 @@ export default {
 			imgUrl: '',
 			recruitContent: '',
 			recruitStartDate: '',
+			recruitStartTime: '',
 			recruitEndDate: '',
+			recruitEndTime: '',
 			department: '',
 			work: '',
 			requirement: '',
@@ -187,9 +215,14 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: recruitInfo,
-			}).then(res => {
-				console.log(res);
-			});
+			})
+				.then(res => {
+					console.log(res);
+				})
+				.then(() => {
+					alert('채용공고 등록 성공');
+					initData();
+				});
 		};
 
 		const initData = () => {
@@ -222,7 +255,7 @@ export default {
 					'';
 		};
 
-		return { info, recruitInfo, register };
+		return { info, recruitInfo, register, imgUpload, fileName };
 	},
 };
 </script>
@@ -235,11 +268,11 @@ export default {
 	border-left-width: 0;
 	border-right-width: 0;
 	border-top-width: 0;
-	border-bottom-width: 1;
+	border-bottom-width: 0;
 	padding-left: 10px;
 	display: block;
 	margin: 40px 79px 0 10px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	box-shadow: 10px 5px 5px #f2f0eb;
 }
 .register-title {
 }
@@ -290,5 +323,10 @@ export default {
 	margin-top: 10px;
 	margin-right: 80px;
 	text-align: right;
+}
+.register-form p {
+	margin-left: 10px;
+	margin-bottom: -32px;
+	margin-top: 8px;
 }
 </style>
