@@ -5,7 +5,9 @@
 		<div class="div-three-tab mt-50">
 			<b-tabs content-class="mt-3" class="font-LINE-Bd" align="center">
 				<b-tab title="지원현황" active>
-					<div>지원자 황~</div>
+					<div>
+						<myinfo-recruit />
+					</div>
 				</b-tab>
 				<b-tab title="이력서관리">
 					<div>
@@ -26,12 +28,13 @@
 import MyinfoCard from './components/myInfo-card.vue';
 import MyinfoResume from './components/myInfo-resume.vue';
 import MyinfoUpdate from './components/myinfo-update.vue';
-
+import MyinfoRecruit from './components/myinfo-recruit.vue';
 export default {
 	components: {
 		MyinfoCard,
 		MyinfoResume,
 		MyinfoUpdate,
+		MyinfoRecruit,
 	},
 	setup() {},
 };
