@@ -205,6 +205,21 @@ a:hover {
   font-family: "LINE-Rg";
 }
 
+.slide-fade-enter-from {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.4s ease;
+}
+
 @media screen and (max-width:1024px) {
   .hr-main {
     background-color: black;

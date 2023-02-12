@@ -4,7 +4,7 @@
 	</header>
 	<hr class="hr-main" />
 	<section>
-		<router-view />
+		<transition name="slide-fade" mode="out-in"> <router-view /> </transition>
 	</section>
 </template>
 
