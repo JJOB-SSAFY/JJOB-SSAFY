@@ -2,7 +2,7 @@
 	<div style="width: 80%; margin: auto">
 		<!-- <h1 style="margin: 50px 20px 25px">면접 리뷰</h1> -->
 
-		<!-- 여기 태환이가 만드라고 한 배너 카드? 구현 -->
+		<!--  배너 카드 구현 -->
 		<div class="banner-container">
 			<div class="bg-image" style=""></div>
 			<div class="banner-letter">
@@ -164,7 +164,9 @@ export default {
 	background-position: 0 100%;
     background-position-x: 0px;
     background-position-y: 100%;
-	background-image:url(../../../assets/images/bg4.png);
+	background-image:url(../../../assets/images/bg5.png);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .banner-letter{
