@@ -338,8 +338,15 @@
 			</div>
 		</div>
 		<div class="resume-write-footer">
-			<button class="resume-save-impl-btn" @click="updateImpl">임시저장</button>
-			<button class="resume-save-btn" @click="update">저장하기</button>
+			<div class="btn-box-left">
+				<button class="back-btn" @click="goToMyPage">나가기</button>
+			</div>
+			<div class="btn-box-right">
+				<button class="resume-save-impl-btn" @click="updateImpl">
+					임시저장
+				</button>
+				<button class="resume-save-btn" @click="update">저장하기</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -562,154 +569,162 @@ export default {
 	created() {
 		this.resumeService = new resumeService();
 
-		this.resumeService.getResume().then(res => {
-			this.resumeInfo = res.data;
-			this.phone = res.data.phone;
-			this.email = res.data.email;
-			this.portfolio = res.data.portfolio;
-			this.github = res.data.github;
-			this.blog = res.data.blog;
-			this.resumeTitle = res.data.resumeTitle;
-			this.myName = res.data.name;
+		this.resumeService.getResume('1').then(res => {
+			this.resumeInfo = res;
+			this.phone = res.phone;
+			this.email = res.email;
+			this.portfolio = res.portfolio;
+			this.github = res.github;
+			this.blog = res.blog;
+			this.resumeTitle = res.resumeTitle;
+			this.myName = res.name;
 
-			const resumeInfo = res.data;
+			const resumeInfo = res;
+
+			console.log(resumeInfo);
 
 			for (let i = 0; i < resumeInfo.universityDtoList.length; i++) {
 				document.getElementById(`uniperiod${i + 1}`).value =
-					res.data.universityDtoList[i].universityPeriod;
+					res.universityDtoList[i].universityPeriod;
 
 				document.getElementById(`uniname${i + 1}`).value =
-					res.data.universityDtoList[i].universityName;
+					res.universityDtoList[i].universityName;
 
 				document.getElementById(`unimajor${i + 1}`).value =
-					res.data.universityDtoList[i].major;
+					res.universityDtoList[i].major;
 			}
 
 			for (let i = 0; i < resumeInfo.educationDtoList.length; i++) {
 				document.getElementById(`eduname${i + 1}`).value =
-					res.data.educationDtoList[i].educationName;
+					res.educationDtoList[i].educationName;
 
 				document.getElementById(`eduperiod${i + 1}`).value =
-					res.data.educationDtoList[i].educationPeriod;
+					res.educationDtoList[i].educationPeriod;
 
 				document.getElementById(`educontent${i + 1}`).value =
-					res.data.educationDtoList[i].educationContent;
+					res.educationDtoList[i].educationContent;
 
 				document.getElementById(`eduagency${i + 1}`).value =
-					res.data.educationDtoList[i].educationInstitution;
+					res.educationDtoList[i].educationInstitution;
 			}
 
 			for (let i = 0; i < resumeInfo.activityDtoList.length; i++) {
 				document.getElementById(`actname${i + 1}`).value =
-					res.data.activityDtoList[i].activityName;
+					res.activityDtoList[i].activityName;
 
 				document.getElementById(`actperiod${i + 1}`).value =
-					res.data.activityDtoList[i].activityPeriod;
+					res.activityDtoList[i].activityPeriod;
 
 				document.getElementById(`actcontent${i + 1}`).value =
-					res.data.activityDtoList[i].activityContent;
+					res.activityDtoList[i].activityContent;
 
 				document.getElementById(`actagency${i + 1}`).value =
-					res.data.activityDtoList[i].activityInstitution;
+					res.activityDtoList[i].activityInstitution;
 			}
 
 			for (let i = 0; i < resumeInfo.careerDtoList.length; i++) {
 				document.getElementById(`careername${i + 1}`).value =
-					res.data.careerDtoList[i].companyName;
+					res.careerDtoList[i].companyName;
 
 				document.getElementById(`careerperiod${i + 1}`).value =
-					res.data.careerDtoList[i].careerPeriod;
+					res.careerDtoList[i].careerPeriod;
 
 				document.getElementById(`careerwork${i + 1}`).value =
-					res.data.careerDtoList[i].careerContent;
+					res.careerDtoList[i].careerContent;
 			}
 
 			for (let i = 0; i < resumeInfo.awardDtoList.length; i++) {
 				document.getElementById(`awardname${i + 1}`).value =
-					res.data.awardDtoList[i].awardName;
+					res.awardDtoList[i].awardName;
 
 				document.getElementById(`awarddate${i + 1}`).value =
-					res.data.awardDtoList[i].awardDate;
+					res.awardDtoList[i].awardDate;
 
 				document.getElementById(`awardagency${i + 1}`).value =
-					res.data.awardDtoList[i].awardInstitution;
+					res.awardDtoList[i].awardInstitution;
 			}
 
 			for (let i = 0; i < resumeInfo.certificateDtoList.length; i++) {
 				document.getElementById(`certificatename${i + 1}`).value =
-					res.data.certificateDtoList[i].certificateName;
+					res.certificateDtoList[i].certificateName;
 
 				document.getElementById(`certificatedate${i + 1}`).value =
-					res.data.certificateDtoList[i].certificateDate;
+					res.certificateDtoList[i].certificateDate;
 
 				document.getElementById(`certificateagency${i + 1}`).value =
-					res.data.certificateDtoList[i].certificateInstitution;
+					res.certificateDtoList[i].certificateInstitution;
 			}
 
 			for (let i = 0; i < resumeInfo.languageAbilityDtoList.length; i++) {
 				document.getElementById(`language${i + 1}`).value =
-					res.data.languageAbilityDtoList[i].language;
+					res.languageAbilityDtoList[i].language;
 
 				document.getElementById(`languagename${i + 1}`).value =
-					res.data.languageAbilityDtoList[i].testName;
+					res.languageAbilityDtoList[i].testName;
 
 				document.getElementById(`languagegrade${i + 1}`).value =
-					res.data.languageAbilityDtoList[i].grade;
+					res.languageAbilityDtoList[i].grade;
 
 				document.getElementById(`languagedate${i + 1}`).value =
-					res.data.languageAbilityDtoList[i].testDate;
+					res.languageAbilityDtoList[i].testDate;
 			}
 
 			for (let i = 0; i < resumeInfo.skillDtoList.length; i++) {
 				document.getElementById(`skillname${i + 1}`).value =
-					res.data.skillDtoList[i].skillName;
+					res.skillDtoList[i].skillName;
 
 				document.getElementById(`skilllevel${i + 1}`).value =
-					res.data.skillDtoList[i].skillLevel;
+					res.skillDtoList[i].skillLevel;
 
 				document.getElementById(`skilldetail${i + 1}`).value =
-					res.data.skillDtoList[i].detail;
+					res.skillDtoList[i].detail;
 			}
 
 			for (let i = 0; i < resumeInfo.projectExpDtoList.length; i++) {
 				document.getElementById(`projectname${i + 1}`).value =
-					res.data.projectExpDtoList[i].projectName;
+					res.projectExpDtoList[i].projectName;
 
 				document.getElementById(`projectperiod${i + 1}`).value =
-					res.data.projectExpDtoList[i].projectPeriod;
+					res.projectExpDtoList[i].projectPeriod;
 
 				document.getElementById(`projectuserCount${i + 1}`).value =
-					res.data.projectExpDtoList[i].memberCnt;
+					res.projectExpDtoList[i].memberCnt;
 
 				document.getElementById(`projectoutline${i + 1}`).value =
-					res.data.projectExpDtoList[i].summary;
+					res.projectExpDtoList[i].summary;
 
 				document.getElementById(`projectdevEnv${i + 1}`).value =
-					res.data.projectExpDtoList[i].techEnv;
+					res.projectExpDtoList[i].techEnv;
 
 				document.getElementById(`projectrole${i + 1}`).value =
-					res.data.projectExpDtoList[i].position;
+					res.projectExpDtoList[i].position;
 
 				document.getElementById(`projectfunction${i + 1}`).value =
-					res.data.projectExpDtoList[i].function;
+					res.projectExpDtoList[i].function;
 
 				document.getElementById(`projectresult${i + 1}`).value =
-					res.data.projectExpDtoList[i].result;
+					res.projectExpDtoList[i].result;
 
 				document.getElementById(`projectlink${i + 1}`).value =
-					res.data.projectExpDtoList[i].link;
+					res.projectExpDtoList[i].link;
 			}
 
 			for (let i = 0; i < resumeInfo.coverLetterDtoList.length; i++) {
 				document.getElementById(`coverLetterTitle${i + 1}`).value =
-					res.data.coverLetterDtoList[i].title;
+					res.coverLetterDtoList[i].title;
 
 				document.getElementById(`coverLetterContent${i + 1}`).value =
-					res.data.coverLetterDtoList[i].content;
+					res.coverLetterDtoList[i].content;
 			}
 		});
 	},
 	methods: {
+		goToMyPage() {
+			this.$router.push({
+				name: 'myInfo',
+			});
+		},
+
 		updateImpl() {
 			const name = this.myName;
 			const resumeTitle = this.resumeTitle;
@@ -1427,9 +1442,23 @@ table.type09 td input {
 	background: white;
 	bottom: 0;
 	display: flex;
-	justify-content: right;
+	justify-content: space-between;
 	align-items: center;
 	border-top: 1px lightgray solid;
+}
+
+.btn-box-right {
+	display: flex;
+}
+
+.back-btn {
+	width: 200px;
+	height: 40px;
+	border-radius: 20px;
+	background: gray;
+	color: white;
+	font-weight: 900;
+	margin-left: 50%;
 }
 
 .resume-save-impl-btn {
@@ -1439,7 +1468,7 @@ table.type09 td input {
 	border-radius: 20px;
 	background: white;
 	font-weight: 900;
-	margin-right: 50px;
+	margin-right: 25px;
 }
 
 .resume-save-btn {

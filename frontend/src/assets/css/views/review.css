@@ -1,0 +1,34 @@
+.review-section {
+  width: 80%;
+  margin: auto;
+}
+
+.review-container {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  padding: 40px 10px 10px 10px;
+  box-sizing: border-box;
+}
+
+.review-container-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 20px;
+}
+
+.review-search-form {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: 45px;
+  position: relative;
+}
+
+.review-search-input {
+  padding: 5px;
+  box-sizing: border-box;
+  margin: auto;
+  height: 100%;
+}

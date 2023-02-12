@@ -1,63 +1,84 @@
 <template>
-	<div class="review-write-container">
-		<h1>{{ companyName }} 면접 리뷰</h1>
-		<form @submit.prevent="saveReview(companyId)">
-			<div class="mb-3">
-				<label for="interview-title" class="form-label">제목</label>
-				<input
-					id="interview-title"
-					class="form-control"
-					v-model.lazy.trim="interviewState.form.title"
-					ref="interviewTitle"
-				/>
+	<div style="padding-bottom: 100px">
+		<div class="review-write-container">
+			<h1>{{ companyName }} 면접 리뷰</h1>
+			<form>
+				<div class="mb-3">
+					<label for="interview-title" class="form-label">제목</label>
+					<input
+						id="interview-title"
+						class="form-control"
+						v-model.lazy.trim="interviewState.form.title"
+						ref="interviewTitle"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="interview-review" class="form-label">면접 리뷰</label>
+					<textarea
+						id="interview-review"
+						class="form-control"
+						v-model.lazy.trim="interviewState.form.review"
+						ref="interviewReview"
+						rows="3"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="interview-question" class="form-label">면접 질문</label>
+					<textarea
+						id="interview-question"
+						class="form-control"
+						v-model.lazy.trim="interviewState.form.question"
+						ref="interviewQuestion"
+						rows="5"
+					/>
+				</div>
+				<div class="mb-3">
+					<label for="interview-answer" class="form-label">면접 답변</label>
+					<textarea
+						id="interview-answer"
+						class="form-control"
+						v-model.lazy.trim="interviewState.form.answer"
+						ref="interviewAnswer"
+						rows="5"
+					/>
+				</div>
+				<!-- <button
+					type="button"
+					@click="saveReview(companyId)"
+					@keyup.enter="saveReview(companyId)"
+					style="
+						margin-top: 40px;
+						padding: 5px;
+						width: 100%;
+						background-color: white;
+						border: 2px solid black;
+						border-radius: 5px;
+						height: 50px;
+					"
+				>
+					작성하기
+				</button> -->
+			</form>
+			<div class="review-create-footer">
+				<p class="text-center mt-40 d-flex justify-content-end">
+					<button
+						class="btn btn-lg btn-primary me-3"
+						type="button"
+						@click="saveReview(companyId)"
+						@keyup.enter="saveReview(companyId)"
+					>
+						작성하기
+					</button>
+					<button
+						type="button"
+						class="btn btn-lg btn-secondary"
+						@click="backToReviewView()"
+					>
+						나가기
+					</button>
+				</p>
 			</div>
-			<div class="mb-3">
-				<label for="interview-review" class="form-label">면접 리뷰</label>
-				<textarea
-					id="interview-review"
-					class="form-control"
-					v-model.lazy.trim="interviewState.form.review"
-					ref="interviewReview"
-					rows="3"
-				/>
-			</div>
-			<div class="mb-3">
-				<label for="interview-question" class="form-label">면접 질문</label>
-				<textarea
-					id="interview-question"
-					class="form-control"
-					v-model.lazy.trim="interviewState.form.question"
-					ref="interviewQuestion"
-					rows="5"
-				/>
-			</div>
-			<div class="mb-3">
-				<label for="interview-answer" class="form-label">면접 답변</label>
-				<textarea
-					id="interview-answer"
-					class="form-control"
-					v-model.lazy.trim="interviewState.form.answer"
-					ref="interviewAnswer"
-					rows="5"
-				/>
-			</div>
-			<button
-				type="button"
-				@click="saveReview(companyId)"
-				@keyup.enter="saveReview(companyId)"
-				style="
-					margin-top: 40px;
-					padding: 5px;
-					width: 100%;
-					background-color: white;
-					border: 2px solid black;
-					border-radius: 5px;
-					height: 50px;
-				"
-			>
-				작성하기
-			</button>
-		</form>
+		</div>
 	</div>
 </template>
 
@@ -134,6 +155,12 @@ export default {
 			});
 		};
 
+		const backToReviewView = () => {
+			router.push({
+				name: 'review',
+			});
+		};
+
 		return {
 			interviewState,
 			interviewTitle,
@@ -141,6 +168,7 @@ export default {
 			interviewQuestion,
 			interviewAnswer,
 			saveReview,
+			backToReviewView,
 		};
 	},
 };
@@ -157,5 +185,20 @@ export default {
 
 .review-write-container h1 {
 	margin-bottom: 50px;
+}
+
+.review-create-footer {
+	position: fixed;
+	width: 100%;
+	height: 100px;
+	background: white;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	border-top: 1px lightgray solid;
+	padding-right: 130px;
+	padding-bottom: 40px;
 }
 </style>

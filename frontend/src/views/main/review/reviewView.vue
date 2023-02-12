@@ -1,17 +1,11 @@
 <template>
-	<div style="width: 80%; margin: auto">
-		<!-- <h1 style="margin: 50px 20px 25px">면접 리뷰</h1> -->
+	<div class="banner-container">
+		<span class="banner-letter1">Review</span>
+		<p class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</p>
+	</div>
 
-		<!--  배너 카드 구현 -->
-		<div class="banner-container">
-			<div class="bg-image" style=""></div>
-			<div class="banner-letter">
-				<span class="banner-letter1">Review</span>
-				<aside class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</aside>
-			</div>
-		</div>
-
-
+	<hr class="hr-main" />
+	<div class="review-section">
 		<div class="review-container-header">
 			<!-- <h2>기업 면접 리뷰</h2> -->
 			<form class="review-search-form" @submit.prevent>
@@ -33,7 +27,7 @@
 				</button>
 			</form>
 		</div>
-<!-- 이 위는 검색창 -->
+		<!-- 이 위는 검색창 -->
 		<div class="review-container">
 			<div>
 				<ul class="row">
@@ -114,6 +108,7 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style>
 .review-container {
 	background-color: whitesmoke;
@@ -199,3 +194,6 @@ export default {
 
 
 </style>
+=======
+<style></style>
+>>>>>>> e380a9213151c7e9c273a24d3ef892010d745263

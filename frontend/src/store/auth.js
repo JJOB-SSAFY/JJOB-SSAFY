@@ -62,6 +62,7 @@ export const auth = {
 				})
 				.then(() => vueRouter.push({ name: 'home' }))
 				.catch(err => {
+					alert('이메일 비밀번호를 확인해주세요');
 					commit('ERROR_HANDLE', err);
 				});
 		},

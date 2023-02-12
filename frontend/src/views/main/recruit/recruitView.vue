@@ -1,4 +1,10 @@
 <template>
+	<div class="banner-container">
+		<span class="banner-letter1">Recruit</span>
+		<p class="banner-letter2">채용공고를 볼 수 있는 곳입니다.</p>
+	</div>
+
+	<hr class="hr-main" />
 	<div style="width: 80%; margin: auto">
 		<!--  배너 카드 구현 -->
 		<div class="banner-container">
@@ -74,6 +80,9 @@ export default {
 		const store = useStore();
 		// const all = onMounted(() => store.getters['recruit/getRecruitList']);
 
+		const getRecruitList = reactive({
+			state: '',
+		});
 		const condition = reactive({
 			form: {
 				location: '',

@@ -1,5 +1,9 @@
 <template>
-	<!-- <ul class="infinite-list" v-infinite-scroll="load" style="overflow: auto"> -->
+	<div class="banner-container">
+		<span class="banner-letter1">Interview</span>
+		<p class="banner-letter2">예정된 면접을 볼 수 있는 곳입니다.</p>
+	</div>
+	<hr class="hr-main" />
 	<div class="container">
 		<div class="mb-60">
 			<h1 class="font-LINE-Bd mt-100 mb-40">나의 면접 리스트</h1>
