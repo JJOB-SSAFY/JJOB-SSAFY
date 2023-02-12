@@ -15,6 +15,7 @@
 							id="phoneInput"
 							placeholder="010-0000-0000"
 							v-model="resume.resumeInfo.phone"
+							readonly
 						/>
 					</div>
 					<div class="mb-3">
@@ -24,6 +25,7 @@
 							id="emailInput"
 							placeholder="email@example.com"
 							v-model="resume.resumeInfo.email"
+							readonly
 						/>
 					</div>
 					<div class="mb-3">
@@ -32,6 +34,7 @@
 							class="form-control"
 							id="portfolioInput"
 							v-model="resume.resumeInfo.portfolio"
+							readonly
 						/>
 					</div>
 					<div class="mb-3">
@@ -40,6 +43,7 @@
 							class="form-control"
 							id="githubInput"
 							v-model="resume.resumeInfo.github"
+							readonly
 						/>
 					</div>
 					<div class="mb-3">
@@ -48,6 +52,7 @@
 							class="form-control"
 							id="blogInput"
 							v-model="resume.resumeInfo.blog"
+							readonly
 						/>
 					</div>
 				</div>
@@ -59,6 +64,7 @@
 						placeholder="이력서 제목(필수)"
 						style="font-size: 48px; font-weight: bold; border: none"
 						v-model.trim="resume.resumeInfo.resumeTitle"
+						readonly
 					/>
 					<input
 						class="form-control"
@@ -71,6 +77,7 @@
 							margin-left: 5px;
 						"
 						v-model.trim="resume.resumeInfo.name"
+						readonly
 					/>
 				</div>
 				<hr style="margin-bottom: 50px" />
@@ -91,13 +98,21 @@
 						>
 							<tr>
 								<td>
-									<input class="form-control" v-model="item.universityPeriod" />
+									<input
+										class="form-control"
+										v-model="item.universityPeriod"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.universityName" />
+									<input
+										class="form-control"
+										v-model="item.universityName"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.major" />
+									<input class="form-control" v-model="item.major" readonly />
 								</td>
 							</tr>
 						</tbody>
@@ -121,18 +136,31 @@
 						>
 							<tr>
 								<td>
-									<input class="form-control" v-model="item.educationName" />
+									<input
+										class="form-control"
+										v-model="item.educationName"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.educationPeriod" />
+									<input
+										class="form-control"
+										v-model="item.educationPeriod"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.educationContent" />
+									<input
+										class="form-control"
+										v-model="item.educationContent"
+										readonly
+									/>
 								</td>
 								<td>
 									<input
 										class="form-control"
 										v-model="item.educationInstitution"
+										readonly
 									/>
 								</td>
 							</tr>
@@ -157,18 +185,31 @@
 						>
 							<tr>
 								<td>
-									<input class="form-control" v-model="item.activityName" />
+									<input
+										class="form-control"
+										v-model="item.activityName"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.activityPeriod" />
+									<input
+										class="form-control"
+										v-model="item.activityPeriod"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.activityContent" />
+									<input
+										class="form-control"
+										v-model="item.activityContent"
+										readonly
+									/>
 								</td>
 								<td>
 									<input
 										class="form-control"
 										v-model="item.activityInstitution"
+										readonly
 									/>
 								</td>
 							</tr>
@@ -192,13 +233,25 @@
 						>
 							<tr>
 								<td>
-									<input class="form-control" v-model="item.companyName" />
+									<input
+										class="form-control"
+										v-model="item.companyName"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.careerPeriod" />
+									<input
+										class="form-control"
+										v-model="item.careerPeriod"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.careerContent" />
+									<input
+										class="form-control"
+										v-model="item.careerContent"
+										readonly
+									/>
 								</td>
 							</tr>
 						</tbody>
@@ -220,10 +273,26 @@
 							:key="i"
 						>
 							<tr>
-								<td><input class="form-control" v-model="item.awardName" /></td>
-								<td><input class="form-control" v-model="item.awardDate" /></td>
 								<td>
-									<input class="form-control" v-model="item.awardInstitution" />
+									<input
+										class="form-control"
+										v-model="item.awardName"
+										readonly
+									/>
+								</td>
+								<td>
+									<input
+										class="form-control"
+										v-model="item.awardDate"
+										readonly
+									/>
+								</td>
+								<td>
+									<input
+										class="form-control"
+										v-model="item.awardInstitution"
+										readonly
+									/>
 								</td>
 							</tr>
 						</tbody>
@@ -246,15 +315,24 @@
 						>
 							<tr>
 								<td>
-									<input class="form-control" v-model="item.certificateName" />
+									<input
+										class="form-control"
+										v-model="item.certificateName"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.certificateDate" />
+									<input
+										class="form-control"
+										v-model="item.certificateDate"
+										readonly
+									/>
 								</td>
 								<td>
 									<input
 										class="form-control"
 										v-model="item.certificateInstitution"
+										readonly
 									/>
 								</td>
 							</tr>
@@ -278,10 +356,30 @@
 							:key="i"
 						>
 							<tr>
-								<td><input class="form-control" v-model="item.language" /></td>
-								<td><input class="form-control" v-model="item.testName" /></td>
-								<td><input class="form-control" v-model="item.grade" /></td>
-								<td><input class="form-control" v-model="item.testDate" /></td>
+								<td>
+									<input
+										class="form-control"
+										v-model="item.language"
+										readonly
+									/>
+								</td>
+								<td>
+									<input
+										class="form-control"
+										v-model="item.testName"
+										readonly
+									/>
+								</td>
+								<td>
+									<input class="form-control" v-model="item.grade" readonly />
+								</td>
+								<td>
+									<input
+										class="form-control"
+										v-model="item.testDate"
+										readonly
+									/>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -305,11 +403,23 @@
 							:key="i"
 						>
 							<tr>
-								<td><input class="form-control" v-model="item.skillName" /></td>
 								<td>
-									<input class="form-control" v-model="item.skillLevel" />
+									<input
+										class="form-control"
+										v-model="item.skillName"
+										readonly
+									/>
 								</td>
-								<td><input class="form-control" v-model="item.detail" /></td>
+								<td>
+									<input
+										class="form-control"
+										v-model="item.skillLevel"
+										readonly
+									/>
+								</td>
+								<td>
+									<input class="form-control" v-model="item.detail" readonly />
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -332,50 +442,88 @@
 								<tr>
 									<th scope="row">프로젝트 명</th>
 									<td>
-										<input class="form-control" v-model="item.projectName" />
+										<input
+											class="form-control"
+											v-model="item.projectName"
+											readonly
+										/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">기 간</th>
 									<td>
-										<input class="form-control" v-model="item.projectPeriod" />
+										<input
+											class="form-control"
+											v-model="item.projectPeriod"
+											readonly
+										/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">참여 인원</th>
 									<td>
-										<input class="form-control" v-model="item.memberCnt" />
+										<input
+											class="form-control"
+											v-model="item.memberCnt"
+											readonly
+										/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">개 요</th>
 									<td>
-										<input class="form-control" v-model="item.outsummaryline" />
+										<input
+											class="form-control"
+											v-model="item.summary"
+											readonly
+										/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">기술 환경</th>
-									<td><input class="form-control" v-model="item.techEnv" /></td>
+									<td>
+										<input
+											class="form-control"
+											v-model="item.techEnv"
+											readonly
+										/>
+									</td>
 								</tr>
 								<tr>
 									<th scope="row">담당 역할</th>
 									<td>
-										<input class="form-control" v-model="item.position" />
+										<input
+											class="form-control"
+											v-model="item.position"
+											readonly
+										/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">주요 기능 및 구현 과정</th>
 									<td>
-										<input class="form-control" v-model="item.function" />
+										<input
+											class="form-control"
+											v-model="item.function"
+											readonly
+										/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">성과 및 배운 점</th>
-									<td><input class="form-control" v-model="item.result" /></td>
+									<td>
+										<input
+											class="form-control"
+											v-model="item.result"
+											readonly
+										/>
+									</td>
 								</tr>
 								<tr>
 									<th scope="row">참고 링크</th>
-									<td><input class="form-control" v-model="item.link" /></td>
+									<td>
+										<input class="form-control" v-model="item.link" readonly />
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -396,6 +544,7 @@
 											class="form-control"
 											placeholder="제 목"
 											v-model="item.title"
+											readonly
 										/>
 									</th>
 								</tr>
@@ -407,6 +556,7 @@
 											class="form-control"
 											rows="10"
 											v-model="item.content"
+											readonly
 										/>
 									</td>
 								</tr>
