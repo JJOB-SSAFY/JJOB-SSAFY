@@ -12,7 +12,7 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.cover-backgroud {
+.cover-background {
   background-position-y: -50px;
   background-image: url(@/assets/images/mycard-bg.jpg);
   background-size: cover;
@@ -43,19 +43,17 @@
 
 .div-profile .img-container {
   background-color: white;
-  width: 290px;
-  height: 290px;
+  width: 300px;
   border-radius: 25% 35% / 35% 40%;
 }
 
 .div-profile .profile-img {
   padding: 10px;
   border: 1px solid white;
-  width: 290px;
-  height: 290px;
+  width: 300px;
+  height: 300px;
   border-radius: 25% 35% / 35% 40%;
   overflow: hidden;
-
 }
 
 .div-profile .profile-name {
@@ -90,7 +88,6 @@
 
 .div-info-first {
   padding-left: 30px;
-  margin-bottom: 30px;
   margin-left: 20px;
 
   min-width: 200px;
