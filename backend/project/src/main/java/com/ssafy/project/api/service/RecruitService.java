@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface RecruitService {
 
-    List<MainResponseDto> getRecruitOrderByDate();
+    List<MainResponseDto> getRecruitOrderByEndDate();
+    List<MainResponseDto> getRecruitOrderByStartDate();
 
     void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId);
 

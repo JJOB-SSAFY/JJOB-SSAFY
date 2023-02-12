@@ -10,18 +10,26 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class MainResponseDto {
+    private Long recruitId;
 
     private String companyName;
 
     private String recruitTitle;
+
+    private String location;
+
+    private String recruitImage;
 
     private LocalDate recruitStartDate;
 
     private LocalDate recruitEndDate;
 
     public MainResponseDto(Recruit recruit) {
+        this.recruitId = recruit.getId();
         this.companyName = recruit.getCompany().getCompanyName();
         this.recruitTitle = recruit.getRecruitTitle();
+        this.location = recruit.getLocation();
+        this.recruitImage = recruit.getImgUrl();
         this.recruitStartDate = recruit.getRecruitStartDate();
         this.recruitEndDate = recruit.getRecruitEndDate();
     }

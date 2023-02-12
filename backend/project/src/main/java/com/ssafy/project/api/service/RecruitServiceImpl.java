@@ -37,9 +37,17 @@ public class RecruitServiceImpl implements RecruitService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MainResponseDto> getRecruitOrderByDate() {
+    public List<MainResponseDto> getRecruitOrderByEndDate() {
         PageRequest pageRequest = PageRequest.of(0, 10);
         List<Recruit> recruitList = recruitRepository.findAllByOrderByRecruitEndDateDesc(pageRequest);
+        return recruitList.stream().map(MainResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<MainResponseDto> getRecruitOrderByStartDate() {
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        List<Recruit> recruitList = recruitRepository.findAllByOrderByRecruitStartDate(pageRequest);
         return recruitList.stream().map(MainResponseDto::new).collect(Collectors.toList());
     }
 

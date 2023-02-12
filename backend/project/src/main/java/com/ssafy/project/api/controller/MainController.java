@@ -16,10 +16,15 @@ public class MainController {
 
     private final RecruitService recruitService;
 
-    @GetMapping("")
-    public ResponseEntity<List<MainResponseDto>> index() {
+    @GetMapping("/deadline")
+    public ResponseEntity<List<MainResponseDto>> indexDeadline() {
 
-        return new ResponseEntity<>(recruitService.getRecruitOrderByDate(), HttpStatus.OK);
+        return new ResponseEntity<>(recruitService.getRecruitOrderByEndDate(), HttpStatus.OK);
     }
 
+    @GetMapping("/latest")
+    public ResponseEntity<List<MainResponseDto>> indexLatest() {
+
+        return new ResponseEntity<>(recruitService.getRecruitOrderByStartDate(), HttpStatus.OK);
+    }
 }
