@@ -1,6 +1,6 @@
 <template>
 	<div class="div-mycard">
-		<div class="cover-backgroud"></div>
+		<div class="cover-background"></div>
 		<div class="mycard-container">
 			<div class="div-profile font-LINE-Bd">
 				<div class="img-container">

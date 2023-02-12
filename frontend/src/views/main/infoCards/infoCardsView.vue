@@ -1,11 +1,12 @@
 <template>
-	<div>
-		<div></div>
-		<!-- card list 불러오기 -->
-		<div>
-			<div v-for="info in cardList.card" :key="info.card">
-				<infoCardItem :info="info" />
-			</div>
+	<div class="div-infoCards-view">
+		<div
+			v-for="info in cardList.card"
+			:key="info.card"
+			class="div-infocard-item"
+		>
+			<div class="infoCards-cover-background"></div>
+			<infoCardItem :info="info" />
 		</div>
 	</div>
 </template>
