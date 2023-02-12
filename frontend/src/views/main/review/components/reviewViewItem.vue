@@ -34,7 +34,7 @@
 							aria-label="Close"
 						></button>
 					</div>
-					<h2 class="mt-3 ms-3">info.title</h2>
+					<h2 class="mt-3 ms-3">{{info.title}}</h2>
 					<div class="modal-body">{{ info.name }}</div>
 					<h5 class="ms-3">면접 리뷰</h5>
 					<div class="modal-body">{{ info.content }}</div>

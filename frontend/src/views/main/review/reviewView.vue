@@ -1,6 +1,17 @@
 <template>
 	<div style="width: 80%; margin: auto">
-		<h1 style="margin: 50px 20px 25px">면접 리뷰</h1>
+		<!-- <h1 style="margin: 50px 20px 25px">면접 리뷰</h1> -->
+
+		<!-- 여기 태환이가 만드라고 한 배너 카드? 구현 -->
+		<div class="banner-container">
+			<div class="bg-image" style=""></div>
+			<div class="banner-letter">
+				<span class="banner-letter1">Review</span>
+				<aside class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</aside>
+			</div>
+		</div>
+
+
 		<div class="review-container-header">
 			<!-- <h2>기업 면접 리뷰</h2> -->
 			<form class="review-search-form" @submit.prevent>
@@ -22,7 +33,7 @@
 				</button>
 			</form>
 		</div>
-
+<!-- 이 위는 검색창 -->
 		<div class="review-container">
 			<div>
 				<ul class="row">
@@ -133,4 +144,56 @@ export default {
 	margin: auto;
 	height: 100%;
 }
+
+.banner-container{
+	position: relative;
+	height: 6rem;
+	overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+	border-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.bg-image{
+	height: 100%;
+	/* opacity: .1; */
+	background-position: 0 100%;
+    background-position-x: 0px;
+    background-position-y: 100%;
+	background-image:url(../../../assets/images/bg4.png);
+}
+
+.banner-letter{
+	position: absolute;
+	top: 0;
+	display: flex;
+	height: 100%;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	padding-left: 1.5rem;
+    padding-right: 1.5rem;
+	padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+.banner-letter1{
+	width: 100%;
+	font-size: 2rem;
+    line-height: 1.5rem;
+	font-weight: 600;
+}
+.banner-letter2{
+	width: 100%;
+	font-size: 1rem;
+    line-height: 1rem;
+	font-weight: 400;
+	display: block;
+	margin-top: 18px;
+}
+
+
 </style>
