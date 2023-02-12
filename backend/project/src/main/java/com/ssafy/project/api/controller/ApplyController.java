@@ -30,9 +30,10 @@ public class ApplyController {
     }
 
 
-    @GetMapping("/{recruit_id}")
-    ResponseEntity<List<ApplyCompRes>> getApplyList(@PathVariable Long recruit_id){
-        return new ResponseEntity<>(applyService.getApplyList(recruit_id), HttpStatus.OK);
+    @GetMapping("/{company_id}")
+    ResponseEntity<List<ApplyCompRes>> getApplyList(@PathVariable Long company_id){
+        System.out.println("lllllllllllllllllllllllllllll");
+        return new ResponseEntity<>(applyService.getApplyList(company_id), HttpStatus.OK);
     }
 
     @PatchMapping("/{apply_id}")

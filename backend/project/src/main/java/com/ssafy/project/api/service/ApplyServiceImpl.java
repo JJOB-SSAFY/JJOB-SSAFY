@@ -6,6 +6,7 @@ import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.ApplyStatus;
+import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.Recruit;
 import com.ssafy.project.db.entity.resume.*;
@@ -150,9 +151,24 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ApplyCompRes> getApplyList(Long recruitId) {
-        List<ApplyStatus> list = applyStatusRepository.findAllByRecruitId(recruitId);
-        return list.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
+    public List<ApplyCompRes> getApplyList(Long companyId) {
+        Optional<Company> company = companyRepository.findById(companyId);
+        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+
+        List<Recruit> recruitList = recruitRepository.findAllByCompanyId(companyId);
+        List<ApplyStatus> joinedList = null;
+        if(recruitList.size()!=0){
+            joinedList = applyStatusRepository.findAllByRecruitId(recruitList.get(0).getId());
+        }
+        if(recruitList.size()>1){
+            for(int i=1; i< recruitList.size(); i++){
+                List<ApplyStatus> list = applyStatusRepository.findAllByRecruitId(recruitList.get(i).getId());
+                joinedList.addAll(list);
+            }
+        }
+
+
+        return joinedList.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
 
     }
 
