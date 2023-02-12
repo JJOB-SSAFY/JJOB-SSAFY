@@ -104,8 +104,7 @@
 					<button
 						type="button"
 						class="leave-session-btn"
-						data-bs-toggle="modal"
-						data-bs-target="#exampleModal"
+						@click="dialog = true"
 					>
 						나가기
 					</button>
@@ -113,8 +112,36 @@
 			</div>
 		</div>
 
+		<v-dialog v-model="dialog" width="auto"
+			><v-card style="border-radius: 10px">
+				<v-card-title
+					class="text-h5"
+					style="background-color: red; padding-left: 50px"
+				>
+					리뷰작성해주세요
+				</v-card-title>
+				<v-card-text>
+					싸피 후배들을 위해 후기를 써주세요. <br />지금 리뷰를 작성하면 500
+					마일리지를 받습니다.</v-card-text
+				>
+				>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn
+						color="green-darken-1"
+						variant="text"
+						@click="goToInterviewView"
+					>
+						싫어
+					</v-btn>
+					<v-btn color="green-darken-1" variant="text" @click="goToReviewView">
+						좋아
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 		<!-- Modal -->
-		<div
+		<!-- <div
 			class="modal fade"
 			id="exampleModal"
 			tabindex="-1"
@@ -156,7 +183,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -166,7 +193,7 @@ import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
 import { useRouter } from 'vue-router';
 import { url } from '../../../api/http';
-
+import { ref } from 'vue';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const APPLICATION_SERVER_URL = url;
@@ -182,6 +209,8 @@ export default {
 
 	data() {
 		return {
+			//Modal
+			dialog: false,
 			// OpenVidu objects
 			OV: undefined,
 			session: undefined,
