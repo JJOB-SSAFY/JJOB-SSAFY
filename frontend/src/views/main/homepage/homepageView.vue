@@ -5,18 +5,30 @@
 		<h2 style="font-weight: bold; text-align: center; margin: 60px 0 20px">
 			최근 올라온 공고
 		</h2>
-		<h6
-			style="
-				font-weight: bold;
-				text-align: center;
-				color: grey;
-				cursor: pointer;
-			"
-			@click="goToRecruitView"
-		>
-			전체 공고 보기
-		</h6>
-		<div class="latest-reqruit-container">
+		<div class="scroll-box">
+			<fa-icon
+				@click="scrollLatestLeft"
+				icon="far fa-regular fa-circle-left"
+				style="font-size: 32px"
+			/>
+			<h6
+				style="
+					font-weight: bold;
+					text-align: center;
+					color: grey;
+					cursor: pointer;
+				"
+				@click="goToRecruitView"
+			>
+				전체 공고 보기
+			</h6>
+			<fa-icon
+				@click="scrollLatestRight"
+				icon="far fa-regular fa-circle-right"
+				style="font-size: 32px"
+			/>
+		</div>
+		<div class="latest-recruit-container" id="latest-recruit-container">
 			<div
 				v-for="recruit in recruitList.recruitLatestList"
 				:key="recruit.recruitId"
@@ -44,21 +56,34 @@
 				</div>
 			</div>
 		</div>
+		<hr />
 		<h2 style="font-weight: bold; text-align: center; margin: 60px 0 20px">
 			마감 임박 공고
 		</h2>
-		<h6
-			style="
-				font-weight: bold;
-				text-align: center;
-				color: grey;
-				cursor: pointer;
-			"
-			@click="goToRecruitView"
-		>
-			전체 공고 보기
-		</h6>
-		<div class="end-reqruit-container">
+		<div class="scroll-box">
+			<fa-icon
+				@click="scrollDeadLineLeft"
+				icon="far fa-regular fa-circle-left"
+				style="font-size: 32px"
+			/>
+			<h6
+				style="
+					font-weight: bold;
+					text-align: center;
+					color: grey;
+					cursor: pointer;
+				"
+				@click="goToRecruitView"
+			>
+				전체 공고 보기
+			</h6>
+			<fa-icon
+				@click="scrollDeadLineRight"
+				icon="far fa-regular fa-circle-right"
+				style="font-size: 32px"
+			/>
+		</div>
+		<div class="end-recruit-container" id="deadline-recruit-container">
 			<div
 				v-for="recruit in recruitList.recruitDeadlineList"
 				:key="recruit.recruitId"
@@ -146,6 +171,34 @@ export default {
 			});
 		};
 
+		const scrollLatestLeft = () => {
+			const width = document.getElementById(
+				'latest-recruit-container',
+			).clientWidth;
+			document.getElementById('latest-recruit-container').scrollLeft -= width;
+		};
+
+		const scrollLatestRight = () => {
+			const width = document.getElementById(
+				'latest-recruit-container',
+			).clientWidth;
+			document.getElementById('latest-recruit-container').scrollLeft += width;
+		};
+
+		const scrollDeadLineLeft = () => {
+			const width = document.getElementById(
+				'deadline-recruit-container',
+			).clientWidth;
+			document.getElementById('deadline-recruit-container').scrollLeft -= width;
+		};
+
+		const scrollDeadLineRight = () => {
+			const width = document.getElementById(
+				'deadline-recruit-container',
+			).clientWidth;
+			document.getElementById('deadline-recruit-container').scrollLeft += width;
+		};
+
 		const type = VueCookies.get('type');
 
 		if (type === 'social') {
@@ -167,32 +220,64 @@ export default {
 			VueCookies.remove('role');
 		}
 
-		return { recruitList, goToRecruitView, goToRecruitDetailView };
+		return {
+			recruitList,
+			goToRecruitView,
+			goToRecruitDetailView,
+			scrollLatestLeft,
+			scrollLatestRight,
+			scrollDeadLineLeft,
+			scrollDeadLineRight,
+		};
 	},
 };
 </script>
 
 <style>
-.latest-reqruit-container {
+.latest-recruit-container {
 	display: flex;
 	overflow: scroll;
 	-ms-overflow-style: none; /* 인터넷 익스플로러 */
 	scrollbar-width: none; /* 파이어폭스 */
+	scroll-behavior: smooth;
 }
 
-.latest-reqruit-container::-webkit-scrollbar {
+.latest-recruit-container::-webkit-scrollbar {
 	display: none;
 }
 
-.end-reqruit-container {
+.latest-recruit-container > div:first-child {
+	margin-left: -10px;
+}
+
+.latest-recruit-container > div:last-child {
+	margin-right: -20px;
+}
+
+.end-recruit-container {
 	display: flex;
 	overflow: scroll;
 	-ms-overflow-style: none; /* 인터넷 익스플로러 */
 	scrollbar-width: none; /* 파이어폭스 */
+	scroll-behavior: smooth;
 }
 
-.end-reqruit-container::-webkit-scrollbar {
+.end-recruit-container::-webkit-scrollbar {
 	display: none;
+}
+
+.end-recruit-container > div:first-child {
+	margin-left: -10px;
+}
+
+.end-recruit-container > div:last-child {
+	margin-right: -10px;
+}
+
+.scroll-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .card-container {
