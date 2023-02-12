@@ -117,13 +117,6 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-.hr-main {
-  background-color: black;
-  padding: 0;
-  height: 2px;
-  margin: 5px 80px 50px 80px
-}
-
 audio,
 video,
 canvas {

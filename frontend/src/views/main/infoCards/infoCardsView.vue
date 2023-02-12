@@ -1,4 +1,9 @@
 <template>
+	<div class="banner-container font-LINE-Rg">
+		<span class="banner-letter1">Applicant Information</span>
+		<p class="banner-letter2">지원자 정보를 볼 수 있는 곳입니다.</p>
+	</div>
+	<hr class="hr-main" />
 	<div class="div-infoCards-view">
 		<div
 			v-for="info in cardList.card"

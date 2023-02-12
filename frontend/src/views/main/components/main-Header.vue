@@ -138,10 +138,10 @@ export default {
 				name: '리뷰',
 				href: '/review',
 			},
-			{
-				name: '설명회',
-				href: '/present',
-			},
+			// {
+			// 	name: '설명회',
+			// 	href: '/present',
+			// },
 			{
 				name: '면접',
 				href: '/interview',
