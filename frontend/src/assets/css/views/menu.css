@@ -9,7 +9,7 @@
 
 .navbar-logo {
   font-size: 24px;
-  margin: 0px 70px 0px 20px;
+  margin: 0px 0px 0px 20px;
 }
 
 .navbar-menu {
@@ -96,7 +96,7 @@
 }
 
 .hamburger-menu {
-  padding-right: 47px;
+  padding-right: 25px;
 }
 
 .menu-btn {
@@ -162,7 +162,7 @@
 }
 
 
-@media screen and (max-width:1060px) {
+@media screen and (max-width:1024px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;

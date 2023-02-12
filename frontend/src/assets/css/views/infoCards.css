@@ -1,3 +1,25 @@
+.cards-banner-container {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  background-image: url(/src/assets/images/temp.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0px auto;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cards-banner-letter1 {
+  width: 100%;
+  font-size: 30px;
+  font-family: "LINE-Bd";
+}
+
+.cards-banner-letter2 {
+  font-family: "LINE-Rg";
+}
+
 .infoCards-cover-background {
   background-position-y: -50px;
   background-image: url(@/assets/images/temp.jpg);
