@@ -13,7 +13,6 @@
 						<input
 							class="form-control"
 							id="phoneInput"
-							placeholder="010-0000-0000"
 							v-model="resume.resumeInfo.phone"
 							readonly
 						/>
@@ -23,7 +22,6 @@
 						<input
 							class="form-control"
 							id="emailInput"
-							placeholder="email@example.com"
 							v-model="resume.resumeInfo.email"
 							readonly
 						/>
@@ -61,14 +59,12 @@
 				<div class="title-input-box">
 					<input
 						class="form-control title-input"
-						placeholder="이력서 제목(필수)"
 						style="font-size: 48px; font-weight: bold; border: none"
 						v-model.trim="resume.resumeInfo.resumeTitle"
 						readonly
 					/>
 					<input
 						class="form-control"
-						placeholder="이 름(필수)"
 						style="
 							font-size: 24px;
 							font-weight: bold;
@@ -571,8 +567,77 @@
 				<button class="back-btn" @click="goToRecruitResume">나가기</button>
 			</div>
 			<div class="btn-box-right">
-				<button class="pass-btn" @click="pass">합격</button>
-				<button class="nonpass-btn" @click="nonpass">불합격</button>
+				<v-row justify="center">
+					<v-dialog v-model="dialog1" persistent width="auto">
+						<template v-slot:activator="{ props }">
+							<v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
+						</template>
+						<v-card>
+							<v-card-title class="text-h5">
+								Use Google's location service?
+							</v-card-title>
+							<v-card-text
+								>Let Google help apps determine location. This means sending
+								anonymous location data to Google, even when no apps are
+								running.11111111</v-card-text
+							>
+							<v-card-actions>
+								<v-spacer></v-spacer>
+								<v-btn
+									color="green-darken-1"
+									variant="text"
+									@click="dialog1 = false"
+								>
+									Disagree
+								</v-btn>
+								<v-btn
+									color="green-darken-1"
+									variant="text"
+									@click="dialog1 = false"
+								>
+									Agree
+								</v-btn>
+							</v-card-actions>
+						</v-card>
+					</v-dialog>
+				</v-row>
+				<v-row justify="center">
+					<v-dialog v-model="dialog2" persistent width="auto">
+						<template v-slot:activator="{ props }">
+							<v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
+						</template>
+						<v-card>
+							<v-card-title class="text-h5">
+								Use Google's location service?
+							</v-card-title>
+							<v-card-text
+								>Let Google help apps determine location. This means sending
+								anonymous location data to Google, even when no apps are
+								running.22222222222</v-card-text
+							>
+							<v-card-actions>
+								<v-spacer></v-spacer>
+								<v-btn
+									color="green-darken-1"
+									variant="text"
+									@click="dialog2 = false"
+								>
+									Disagree
+								</v-btn>
+								<v-btn
+									color="green-darken-1"
+									variant="text"
+									@click="dialog2 = false"
+								>
+									Agree
+								</v-btn>
+							</v-card-actions>
+						</v-card>
+					</v-dialog>
+				</v-row>
+
+				<!-- <button class="pass-btn" @click="pass">합격</button>
+				<button class="nonpass-btn" @click="nonpass">불합격</button> -->
 			</div>
 		</div>
 	</div>
@@ -586,6 +651,13 @@ import { url } from '../../../api/http';
 
 export default {
 	name: 'recruitResumeDetailView',
+
+	data() {
+		return {
+			dialog1: false,
+			dialog2: false,
+		};
+	},
 
 	setup() {
 		const route = useRoute();
@@ -773,6 +845,8 @@ table.type09 td input {
 
 .btn-box-right {
 	display: flex;
+	align-items: center;
+	width: 30%;
 }
 
 .pass-btn {
