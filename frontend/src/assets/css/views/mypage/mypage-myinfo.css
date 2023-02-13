@@ -14,7 +14,7 @@
   justify-content: center;
   align-items: center;
   /* margin-top: 30px; */
-  padding: 20px;
+  padding: 0px 30px 30px 30px;
   width: 100%;
 }
 
@@ -53,14 +53,16 @@
 
 
 #update-myinfo {
+  width: 40%;
+  color: black;
   font-size: 20px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 10px;
   margin-top: 10px;
   padding: 6px;
-  border: 1px solid var(--primary-color-black);
   border-radius: 5px;
+  border: 1px solid var(--primary-color-black);
 }
 
 .info-visible {
@@ -205,6 +207,8 @@
 }
 
 #update-myinfo-password {
+  width: 80%;
+  color: black;
   font-size: 20px;
   margin-left: auto;
   margin-right: auto;
