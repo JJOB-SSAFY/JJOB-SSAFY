@@ -1,12 +1,17 @@
 <template>
 	<div class="">
+		<div class="banner-container">
+		<span class="banner-letter1">지원자 이력서</span>
+		<!-- <p class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</p> -->
+	</div>
+
+
 		<div class="container">
-			<h2>지원자 이력서</h2>
 			<ul class="responsive-table">
 				<li class="table-header">
 					<div class="col col-1">지원자</div>
 					<div class="col col-1">지원 공고</div>
-					<div class="col col-1">스킬셋</div>
+					<div class="col col-1">보유기술</div>
 					<div class="col col-1">자기소개서</div>
 					<div class="col col-1"></div>
 				</li>
@@ -24,7 +29,7 @@
 						{{ apply.resumeTitle }}
 					</div>
 					<div class="col col-1" data-label="resumeTitle">
-						<button  @click="showDetailResume(apply.resumeId)">
+						<button  @click="showDetailResume(apply.resumeId, apply.applyId)">
 							보기
 						</button>
 					</div>
@@ -58,11 +63,12 @@ export default {
 		appService.getApplyResumeList(companyId).then(data => {
 			getApplyResumeList.state = data;
 		});
-		const showDetailResume = e => {
+		const showDetailResume = (e,k) => {
 			router.push({
 				name: 'recruitResumeDetail',
 				params: {
 					resumeId: e,
+					applyId:k,
 				},
 			});
 		};
