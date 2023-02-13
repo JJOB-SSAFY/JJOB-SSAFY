@@ -1,18 +1,19 @@
 <template>
 	<div class="div-resume">
 		<div
-			v-for="(apply) in getApplyResumeList.state"
+			v-for="apply in getApplyResumeList.state"
 			:key="apply.applyStatusId"
 			class="resume-container"
 		>
 			<div class="resume-id font-LINE-Bd">{{ apply.companyName }}</div>
 			<div class="">{{ apply.recruitTitle }}</div>
-			<div class="resume-title font-LINE-Rg">{{ apply.memberName   }},{{ apply.resumeTitle }}</div>
+			<div class="resume-title font-LINE-Rg">
+				{{ apply.memberName }},{{ apply.resumeTitle }}
+			</div>
 			<button @click="showDetailResume(apply.resumeId)" class="resume-view-bt">
 				보기
 			</button>
 		</div>
-		
 	</div>
 </template>
 
