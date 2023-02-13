@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRaw } from 'vue';
+import { ref, reactive, toRaw, watch } from 'vue';
 import { useStore } from 'vuex';
 import MyinfoService from '../../../api/myinfoService';
 import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -165,6 +165,7 @@ export default {
 		});
 		const getMyInfo = store.getters['auth/getUserInfo'];
 		myInfo.state = toRaw(getMyInfo);
+
 		const updateCard = () => {
 			const param = {
 				blog: myInfo.state.blog,
@@ -178,7 +179,10 @@ export default {
 			};
 			myinfoService
 				.updateCard(param)
-				.then(alert('정보 변경 성공'))
+				.then(() => {
+					alert('정보 변경 성공');
+					store.commit('auth/SET_USER_INFO', myInfo.state);
+				})
 				.catch(err => console.log(err));
 		};
 
@@ -214,6 +218,7 @@ export default {
 				})
 				.catch(console.log('err'));
 		};
+
 		return {
 			myInfo,
 			password,

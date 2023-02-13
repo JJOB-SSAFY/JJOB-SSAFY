@@ -30,6 +30,8 @@
 					</div>
 				</li>
 			</ul>
+
+
 		</div>
 	</div>
 </template>
@@ -64,11 +66,11 @@ export default {
 				},
 			});
 		};
-
 		return { store, getApplyResumeList, showDetailResume };
 	},
 };
 </script>
+
 
 <style scoped>
 .container {
@@ -131,3 +133,4 @@ export default {
 	}
 }
 </style>
+
