@@ -28,6 +28,7 @@ public class ConferenceController {
                                                              @RequestBody ConferenceRequestDto conReq,
                                                              @PathVariable Long companyId) {
         logger.info(conReq.getCallEndTime().toString());
+        System.out.println(conReq.getMemberEmail());
         conferenceService.createConference(conReq, userDetails.getMember().getId(), companyId);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }

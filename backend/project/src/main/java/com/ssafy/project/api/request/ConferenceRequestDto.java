@@ -26,6 +26,6 @@ public class ConferenceRequestDto {
 
     private String conferenceCategory;
 
-    private List<Map<String,String>> memberEmail;
+    private List<String> memberEmail;
 
 }
