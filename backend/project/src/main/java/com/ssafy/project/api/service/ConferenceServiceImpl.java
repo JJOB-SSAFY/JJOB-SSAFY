@@ -50,16 +50,15 @@ public class ConferenceServiceImpl implements ConferenceService {
 
         conferenceRepository.save(conference);
 
-        List<Map<String,String>> emailList = requestDto.getMemberEmail();
+        List<String> emailList = requestDto.getMemberEmail();
 
         // 면접대상 이메일로 조회
         saveInterviewParticipant(emailList, conference);
 
     }
 
-    private void saveInterviewParticipant(List<Map<String, String>> emailList, Conference conference) {
-        for (Map<String, String> stringStringMap : emailList) {
-            String email = stringStringMap.get("email");
+    private void saveInterviewParticipant(List<String> emailList, Conference conference) {
+        for (String email : emailList) {
             Optional<Member> memberEmail = memberRepository.findByEmail(email);
 
             if (memberEmail.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);

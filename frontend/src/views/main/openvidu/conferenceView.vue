@@ -67,38 +67,31 @@
 		<div class="mt-50">
 			<div id="session" v-if="session">
 				<div class="openvidu-room-container">
-					<div class="openvidu-room-left">
-						<div id="session-header" class="mb-30">
-							<div class="openvidu-room-header">
-								<img
-									src="@/assets/images/logo/logo-removebg.png"
-									alt=""
-									height="91"
-									width="132"
-								/>
-								<h1 id="session-title">{{ title }}</h1>
-							</div>
-						</div>
-						<div id="flex-container" class="mt-170" style="display: flex">
-							<div id="main-video" class="col-md-6">
-								<user-video :stream-manager="mainStreamManager" />
-							</div>
-							<div id="video-container" class="row">
-								<!--<user-video
-												:stream-manager="publisher"
-												@click="updateMainVideoStreamManager(publisher)"
-										 />-->
-								<user-video
-									v-for="sub in subscribers"
-									:key="sub.stream.connection.connectionId"
-									:stream-manager="sub"
-									@click="updateMainVideoStreamManager(sub)"
-									class="col-6"
-								/>
-							</div>
+					<div id="session-header" class="mb-30">
+						<div class="openvidu-room-header">
+							<img
+								src="@/assets/images/logo/logo-removebg.png"
+								alt=""
+								height="91"
+								width="132"
+							/>
+							<h1 id="session-title">{{ title }}</h1>
 						</div>
 					</div>
-					<div class="openvidu-room-right"></div>
+					<div id="flex-container" class="mt-170" style="display: flex">
+						<div id="main-video" class="col-md-6" style="margin-right: 12px">
+							<user-video :stream-manager="mainStreamManager" />
+						</div>
+						<div id="video-container" class="row">
+							<user-video
+								v-for="sub in subscribers"
+								:key="sub.stream.connection.connectionId"
+								:stream-manager="sub"
+								@click="updateMainVideoStreamManager(sub)"
+								class="col-6"
+							/>
+						</div>
+					</div>
 				</div>
 				<div class="openvidu-room-footer">
 					<button
@@ -451,14 +444,6 @@ export default {
 
 .openvidu-room-container {
 	display: flex;
-}
-
-.openvidu-room-left {
-	width: 80%;
-}
-
-.openvidu-room-right {
-	width: 20%;
 }
 
 .leave-session-btn {
