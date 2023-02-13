@@ -1,7 +1,7 @@
 <template>
 	<div class="banner-container font-LINE-Rg">
-		<span class="banner-letter1">Applicant Information</span>
-		<p class="banner-letter2">지원자 정보를 볼 수 있는 곳입니다.</p>
+		<span class="banner-letter1">Register</span>
+		<p class="banner-letter2">회원을 등록할 수 있는 곳입니다.</p>
 	</div>
 	<hr class="hr-main2" />
 	<div class="register-form mt-80">
