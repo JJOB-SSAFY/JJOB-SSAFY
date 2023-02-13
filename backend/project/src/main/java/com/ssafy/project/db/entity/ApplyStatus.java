@@ -1,5 +1,6 @@
 package com.ssafy.project.db.entity;
 
+import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.db.entity.resume.Resume;
@@ -26,6 +27,10 @@ public class ApplyStatus {
     @Column(nullable = false)
     private String status;
 
+    private String reason;
+
+    private String feedback;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -48,12 +53,14 @@ public class ApplyStatus {
                 .build();
     }
 
-    public void updateApplyStatus(ApplyRequestDto requestDto){
+    public void updateApplyStatus(ApplyRequestDto requestDto) {
         this.status = requestDto.getStatus();
         this.step = requestDto.getStep();
     }
 
-
-
+    public void updateReason(ApplyFailRequestDto requestDto) {
+        this.reason = requestDto.getReason();
+        this.feedback = requestDto.getFeedback();
+    }
 
 }

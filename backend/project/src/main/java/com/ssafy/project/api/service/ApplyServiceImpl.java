@@ -1,5 +1,6 @@
 package com.ssafy.project.api.service;
 
+import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyCompRes;
 import com.ssafy.project.api.response.ApplyStatusRes;
@@ -170,6 +171,14 @@ public class ApplyServiceImpl implements ApplyService {
 
         return joinedList.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
 
+    }
+
+    @Override
+    @Transactional
+    public void updateApplyFailStatus(Long applyId, ApplyFailRequestDto requestDto) {
+        ApplyStatus applyStatus = applyStatusRepository.findById(applyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION));
+        applyStatus.updateReason(requestDto);
     }
 
     private void deleteRelatedData(Long resumeId) {
