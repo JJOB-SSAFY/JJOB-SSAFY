@@ -28,6 +28,7 @@ public class ResumeResponseDto {
     private String github;
     private Boolean isApplied;
 
+    private String imageUrl;
     private List<UniversityResponseDto> universityDtoList = new ArrayList<>();
 
     private List<EducationResponseDto> educationDtoList = new ArrayList<>();
@@ -53,7 +54,8 @@ public class ResumeResponseDto {
                                        List<CareerResponseDto> careerDtoList, List<CertificateResponseDto> certificateDtoList,
                                        List<CoverLetterResponseDto> coverLetterDtoList, List<EducationResponseDto> educationDtoList,
                                        List<LanguageAbilityResponseDto> languageAbilityDtoList, List<ProjectExpResponseDto> projectExpDtoList,
-                                       List<SkillResponseDto> skillResponseDtoList, List<UniversityResponseDto> universityDtoList
+                                       List<SkillResponseDto> skillResponseDtoList, List<UniversityResponseDto> universityDtoList,
+                                       String imageUrl
                                        ){
         return ResumeResponseDto.builder()
                 .resumeTitle(dto.getResumeTitle())
@@ -74,6 +76,7 @@ public class ResumeResponseDto {
                 .projectExpDtoList(projectExpDtoList)
                 .coverLetterDtoList(coverLetterDtoList)
                 .isApplied(dto.getIsApplied())
+                .imageUrl(imageUrl)
                 .build();
     }
 

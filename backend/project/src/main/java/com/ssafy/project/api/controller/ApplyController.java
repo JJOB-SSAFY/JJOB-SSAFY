@@ -25,14 +25,12 @@ public class ApplyController {
                                                         @PathVariable Long resume_id, @RequestBody ApplyRequestDto requestDto){
 
         applyService.createApply(recruit_id, resume_id, userDetails.getMember().getId(), requestDto);
-
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
 
     @GetMapping("/{company_id}")
     ResponseEntity<List<ApplyCompRes>> getApplyList(@PathVariable Long company_id){
-        System.out.println("lllllllllllllllllllllllllllll");
         return new ResponseEntity<>(applyService.getApplyList(company_id), HttpStatus.OK);
     }
 

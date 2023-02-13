@@ -650,7 +650,7 @@ import axios from 'axios';
 import { url } from '../../../api/http';
 
 export default {
-	name: 'recruitResumeDetailView',
+	name: 'recruitResumeDetail',
 
 	data() {
 		return {
