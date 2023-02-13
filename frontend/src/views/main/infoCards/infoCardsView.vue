@@ -4,32 +4,37 @@
 		<p class="banner-letter2">지원자 정보를 볼 수 있는 곳입니다.</p>
 	</div>
 	<hr class="hr-main" />
-	<form class="card-search-form" @submit.prevent>
-		<input
-			id="card-search-skill"
-			class="form-control card-search-input"
-			type="text"
-			placeholder="보유 기술"
-			v-model.lazy.trim="searchForm.form.skills"
-			ref="inputSkill"
-			@keyup.enter="searchCard"
-		/>
-		<button type="button" @click="searchCard">
-			<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-		</button>
-
-		<input
-			id="card-search-skill"
-			class="form-control card-search-input font-LINE-Rg"
-			type="text"
-			placeholder="선호 직무"
-			v-model.lazy.trim="searchForm.form.preferredJob"
-			ref="inputPreffer"
-			@keyup.enter="searchCard"
-		/>
-		<button type="button" @click="searchCard">
-			<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-		</button>
+	<form class="card-search-form mt-50" @submit.prevent>
+		<div class="div-search-skill">
+			<img src="@/assets/images/icon/skills.png" width="19" height="19" />
+			<input
+				id="card-search-skill"
+				class="form-control card-search-input"
+				type="text"
+				placeholder="보유 기술"
+				v-model.lazy.trim="searchForm.form.skills"
+				ref="inputSkill"
+				@keyup.enter="searchCard"
+			/>
+			<button type="button" @click="searchCard">
+				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+			</button>
+		</div>
+		<div class="div-search-job">
+			<img src="@/assets/images/icon/job.png" width="19" height="19" />
+			<input
+				id="card-search-job"
+				class="form-control card-search-input font-LINE-Rg"
+				type="text"
+				placeholder="선호 직무"
+				v-model.lazy.trim="searchForm.form.preferredJob"
+				ref="inputJob"
+				@keyup.enter="searchCard"
+			/>
+			<button type="button" @click="searchCard">
+				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+			</button>
+		</div>
 	</form>
 	<div class="div-infoCards-view">
 		<div
@@ -86,18 +91,12 @@ export default {
 </script>
 
 <style scoped>
-.card-list {
+.card-search-form {
 	display: flex;
-	border: 1px solid black;
-	width: auto;
+	justify-content: center;
 }
-
-.card-list-items {
-	display: block;
-	width: auto;
-	/* border: 1px solid black; */
-}
-.card-list-container {
-	display: auto;
+.div-search-skill,
+.div-search-job {
+	display: flex;
 }
 </style>
