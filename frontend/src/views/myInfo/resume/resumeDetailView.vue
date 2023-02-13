@@ -569,7 +569,9 @@ export default {
 	created() {
 		this.resumeService = new resumeService();
 
-		this.resumeService.getResume('1').then(res => {
+		const resumeId = this.resumeId;
+
+		this.resumeService.getResume(resumeId).then(res => {
 			this.resumeInfo = res;
 			this.phone = res.phone;
 			this.email = res.email;

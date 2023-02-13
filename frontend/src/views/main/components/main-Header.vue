@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <template>
 	<div style="position: fixed; bottom: 35px; right: 35px; font-size: 35px">
 		<a href="javascript:window.scrollTo(0,0);"
@@ -33,7 +34,7 @@
 				<li>
 					<router-link to="/myInfo" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user" />
-						<span> &nbsp마이페이지 </span>
+						<span> &nbsp 마이페이지 </span>
 					</router-link>
 				</li>
 
