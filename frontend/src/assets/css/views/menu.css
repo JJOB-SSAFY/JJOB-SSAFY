@@ -229,6 +229,10 @@
     animation: fiveMenuSlideDown 1.3s forwards;
   }
 
+  #up-btn{
+    opacity: 0;
+    visibility: none;
+  }
 
   @-webkit-keyframes menuSlideDown {
     from {
