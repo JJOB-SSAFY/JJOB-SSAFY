@@ -137,13 +137,4 @@ export default {
 	margin-left: 10px;
 	margin-right: 10px;
 }
-
-.bg-image {
-	height: 100%;
-	/* opacity: .1; */
-	background-position: 0 100%;
-	background-position-x: 0px;
-	background-position-y: 100%;
-	background-image: url(../../../assets/images/bg2.png);
-}
 </style>
