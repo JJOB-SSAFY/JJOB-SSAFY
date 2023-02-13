@@ -156,11 +156,19 @@ public class ApplyServiceImpl implements ApplyService {
         List<Recruit> recruitList = recruitRepository.findAllByCompanyId(companyId);
         for(int i=0; i<recruitList.size(); i++){
             Recruit recruit = recruitList.get(i);
-            ApplyStatus applyStatus = applyStatusRepository.findByRecruitId(recruit.getId());
-            Resume resume = applyStatus.getResume();
-            Optional<Card> card = cardRepository.findById(resume.getMember().getCard().getId());
-            ApplyCompRes applyCompRes = new ApplyCompRes(applyStatus, card.get());
-            list.add(applyCompRes);
+            List<ApplyStatus> applyStatus = applyStatusRepository.findAllByRecruitId(recruit.getId());
+            for(int j=0; j<applyStatus.size(); j++){
+                Resume resume = applyStatus.get(j).getResume();
+                Card card = resume.getMember().getCard();
+                String skills = null;
+                if(card == null)    skills = "보유기술 없음";
+                Optional<Card> card1 = cardRepository.findById(card.getId());
+
+                if(card1.isPresent()) skills = card1.get().getSkills();
+                ApplyCompRes applyCompRes = new ApplyCompRes(applyStatus.get(j), skills);
+                list.add(applyCompRes);
+            }
+
         }
         return list;
     }
