@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplyRequestDto {
-    private String status;
-    private String step;
+public class ApplyFailRequestDto {
+
+    private String reason;
+    private String feedback;
 }
