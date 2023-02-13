@@ -1,9 +1,9 @@
 <template>
-	<div class="div-myinfo mt-100">
+	<div class="div-myinfo mt-50">
 		<myinfo-card />
 		<!-- <hr class="hr-div" /> -->
-		<div class="div-three-tab mt-50">
-			<b-tabs content-class="mt-3" class="font-LINE-Bd" align="center">
+		<div class="div-three-tab mt-50 pb-20">
+			<b-tabs class="font-LINE-Bd" align="center">
 				<b-tab title="지원현황" active>
 					<div>
 						<myinfo-recruit />

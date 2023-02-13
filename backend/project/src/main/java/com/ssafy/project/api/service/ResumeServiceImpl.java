@@ -4,13 +4,16 @@ import com.ssafy.project.api.request.resume.*;
 import com.ssafy.project.api.response.resume.*;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
+import com.ssafy.project.db.entity.Card;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.resume.*;
+import com.ssafy.project.db.repository.CardRepository;
 import com.ssafy.project.db.repository.CompanyRepository;
 import com.ssafy.project.db.repository.MemberRepository;
 import com.ssafy.project.db.repository.resume.*;
 import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.nullness.Opt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +40,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final ProjectExpRepository projectExpRepository;
     private final SkillRepository skillRepository;
     private final UniversityRepository universityRepository;
+    private final CardRepository cardRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -243,12 +247,14 @@ public class ResumeServiceImpl implements ResumeService {
         List<University> universityList = universityRepository.findAllByResumeId(resumeId);
         List<UniversityResponseDto> universityResponseDtoList = universityList.stream().map(UniversityResponseDto::new).collect(toList());
 
+        Optional<Card> card = cardRepository.findById(resume.get().getMember().getCard().getId());
+
         return ResumeResponseDto.of(resume.get(), activityResponseDtoList,
                 awardResponseDtoList, careerResponseDtoList,
                 certificateResponseDtoList, coverLetterResponseDtoList,
                 educationResponseDtoList, languageAbilityResponseDtoList,
                 projectExpResponseDtoList, skillResponseDtoList,
-                universityResponseDtoList);
+                universityResponseDtoList, card.get().getImageUrl());
 
     }
 

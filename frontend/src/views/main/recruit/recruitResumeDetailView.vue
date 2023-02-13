@@ -662,13 +662,16 @@
 									:items="reasons"
 									label="사유"
 								></v-select>
-								<v-textarea label="피드백"></v-textarea>
+								<v-textarea
+									label="피드백"
+									v-model="selectReason.feedback"
+								></v-textarea>
 								<v-card-actions>
 									<v-spacer></v-spacer>
 									<v-btn
 										color="green-darken-1"
 										variant="text"
-										@click="modalInfo.dialog2 = false"
+										@click="saveFailReason"
 									>
 										저장하기
 									</v-btn>
@@ -700,7 +703,7 @@ import { url } from '../../../api/http';
 import { useStore } from 'vuex';
 
 export default {
-	name: 'recruitResumeDetailView',
+	name: 'recruitResumeDetail',
 
 	setup() {
 		const route = useRoute();
@@ -726,6 +729,7 @@ export default {
 
 		const selectReason = reactive({
 			reason: '',
+			feedback: '',
 		});
 
 		const resume = reactive({
@@ -738,13 +742,37 @@ export default {
 			});
 		};
 
+		const saveFailReason = () => {
+			const applyId = route.params.applyId;
+
+			const config = {
+				reason: selectReason.reason,
+				feedback: selectReason.feedback,
+			};
+
+			axios({
+				method: 'PATCH',
+				url: url + '/apply/fail/' + applyId,
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: config,
+			}).then(res => {
+				modalInfo.dialog2 = false;
+				router.push({
+					name: 'recruitResume',
+				});
+				console.log(res);
+			});
+		};
+
 		const createInterview = () => {
 			createRoom();
 			updateApplyStatus();
 			modalInfo.dialog1 = false;
 
 			router.push({
-				name: 'interview',
+				name: 'recruitResume',
 			});
 		};
 
@@ -763,7 +791,9 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: config,
-			}).then(res => {});
+			}).then(res => {
+				console.log(res);
+			});
 		};
 
 		const createRoom = () => {
@@ -817,6 +847,7 @@ export default {
 			reasons,
 			selectReason,
 			goToRecruitResume,
+			saveFailReason,
 			createInterview,
 			updateApplyStatus,
 			createRoom,

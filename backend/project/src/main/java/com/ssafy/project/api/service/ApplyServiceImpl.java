@@ -1,24 +1,21 @@
 package com.ssafy.project.api.service;
 
+import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyCompRes;
 import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
-import com.ssafy.project.db.entity.ApplyStatus;
-import com.ssafy.project.db.entity.Company;
-import com.ssafy.project.db.entity.Member;
-import com.ssafy.project.db.entity.Recruit;
+import com.ssafy.project.db.entity.*;
 import com.ssafy.project.db.entity.resume.*;
-import com.ssafy.project.db.repository.ApplyStatusRepository;
-import com.ssafy.project.db.repository.CompanyRepository;
-import com.ssafy.project.db.repository.MemberRepository;
-import com.ssafy.project.db.repository.RecruitRepository;
+import com.ssafy.project.db.repository.*;
 import com.ssafy.project.db.repository.resume.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,7 +39,7 @@ public class ApplyServiceImpl implements ApplyService {
     private final ProjectExpRepository projectExpRepository;
     private final SkillRepository skillRepository;
     private final UniversityRepository universityRepository;
-
+    private final CardRepository cardRepository;
     private final RecruitRepository recruitRepository;
 
     @Override
@@ -155,21 +152,25 @@ public class ApplyServiceImpl implements ApplyService {
         Optional<Company> company = companyRepository.findById(companyId);
         if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
 
+        List<ApplyCompRes> list = new ArrayList<>();
         List<Recruit> recruitList = recruitRepository.findAllByCompanyId(companyId);
-        List<ApplyStatus> joinedList = null;
-        if(recruitList.size()!=0){
-            joinedList = applyStatusRepository.findAllByRecruitId(recruitList.get(0).getId());
+        for(int i=0; i<recruitList.size(); i++){
+            Recruit recruit = recruitList.get(i);
+            ApplyStatus applyStatus = applyStatusRepository.findByRecruitId(recruit.getId());
+            Resume resume = applyStatus.getResume();
+            Optional<Card> card = cardRepository.findById(resume.getMember().getCard().getId());
+            ApplyCompRes applyCompRes = new ApplyCompRes(applyStatus, card.get());
+            list.add(applyCompRes);
         }
-        if(recruitList.size()>1){
-            for(int i=1; i< recruitList.size(); i++){
-                List<ApplyStatus> list = applyStatusRepository.findAllByRecruitId(recruitList.get(i).getId());
-                joinedList.addAll(list);
-            }
-        }
+        return list;
+    }
 
-
-        return joinedList.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
-
+    @Override
+    @Transactional
+    public void updateApplyFailStatus(Long applyId, ApplyFailRequestDto requestDto) {
+        ApplyStatus applyStatus = applyStatusRepository.findById(applyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION));
+        applyStatus.updateReason(requestDto);
     }
 
     private void deleteRelatedData(Long resumeId) {

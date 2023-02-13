@@ -1,5 +1,6 @@
 package com.ssafy.project.api.service;
 
+import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyCompRes;
 import com.ssafy.project.api.response.ApplyStatusRes;
@@ -12,6 +13,5 @@ public interface ApplyService {
     void updateApplyStatus(Long applyId, ApplyRequestDto requestDto);
     void deleteApplyStatus(Long applyId);
     List<ApplyCompRes> getApplyList(Long companyId);
-
-
+    void updateApplyFailStatus(Long applyId, ApplyFailRequestDto requestDto);
 }
