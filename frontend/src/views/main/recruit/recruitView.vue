@@ -1,7 +1,7 @@
 <template>
 	<div class="banner-container">
 		<span class="banner-letter1">Recruit</span>
-		<p class="banner-letter2">채용공고를 볼 수 있는 곳입니다.</p>
+		<p class="banner-letter2">채용공고 리스트를 확인하는 곳입니다.</p>
 	</div>
 
 	<hr class="hr-main" />
@@ -12,18 +12,20 @@
 					<input
 						class="form-control review-search-input"
 						type="text"
-						v-model.lazy="condition.form.location"
+						v-model.lazy="condition.location"
 						@keyup.enter="searchInfo"
 						placeholder="지역"
+						v-on:focusout="searchInfo"
 					/>
 				</div>
 				<div class="div-search-department">
 					<input
 						class="form-control review-search-input"
 						type="text"
-						v-model.lazy="condition.form.department"
+						v-model.lazy="condition.department"
 						@keyup.enter="searchInfo"
 						placeholder="직무"
+						v-on:focusout="searchInfo"
 					/>
 					<button
 						type="button"
@@ -46,7 +48,7 @@
 				<ul class="recruit-list">
 					<li
 						class="recruit-list-item"
-						v-for="info in searchList"
+						v-for="info in searchList.recruit"
 						:key="info.list"
 					>
 						<recruitItemView :info="info" />
@@ -59,42 +61,41 @@
 
 <script>
 import recruitItemView from './components/recruit-item.vue';
-import { reactive, onMounted, computed } from 'vue';
+import { reactive, onMounted, computed, toRaw, watch } from 'vue';
 import { useStore } from 'vuex';
-
+import RecruitService from '../../../api/recruitService';
 export default {
 	name: 'recruitView',
-
 	components: {
 		recruitItemView,
 	},
 	setup() {
+		const recruitService = new RecruitService();
 		const store = useStore();
 		// const all = onMounted(() => store.getters['recruit/getRecruitList']);
-
-		const getRecruitList = reactive({
-			state: '',
+		const searchList = reactive({
+			recruit: '',
 		});
+
 		const condition = reactive({
-			form: {
-				location: '',
-				department: '',
-			},
+			location: '',
+			department: '',
 		});
 
-		const searchInfo = function () {
-			store.dispatch('recruit/getList', {
-				location: condition.form.location,
-				department: condition.form.department,
-			});
+		const searchInfo = async function () {
+			// store
+			// 	.dispatch('recruit/getList', {
+			// 		location: condition.form.location,
+			// 		department: condition.form.department,
+			// 	})
+			// 	.then((searchList.recruit = store.getters['recruit/getRecruitList']));
+			recruitService
+				.getRecruitList(toRaw(condition))
+				.then(data => (searchList.recruit = data));
 		};
+		searchInfo();
 
-		return { condition, searchInfo };
-	},
-	computed: {
-		searchList() {
-			return this.$store.getters['recruit/getRecruitList'];
-		},
+		return { condition, searchInfo, searchList };
 	},
 };
 </script>
@@ -136,14 +137,5 @@ export default {
 	height: 45px;
 	margin-left: 10px;
 	margin-right: 10px;
-}
-
-.bg-image {
-	height: 100%;
-	/* opacity: .1; */
-	background-position: 0 100%;
-	background-position-x: 0px;
-	background-position-y: 100%;
-	background-image: url(../../../assets/images/bg2.png);
 }
 </style>

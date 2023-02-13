@@ -6,17 +6,17 @@
 	<hr class="hr-main" />
 	<form class="card-search-form mt-50" @submit.prevent>
 		<div class="div-search-skill">
-			<img src="@/assets/images/icon/skills.png" width="19" height="19" />
+			<img src="@/assets/images/icon/skill.png" width="19" height="19" />
 			<input
 				id="card-search-skill"
-				class="form-control card-search-input"
+				class="form-control card-search-input font-LINE-Rg"
 				type="text"
 				placeholder="보유 기술"
 				v-model.lazy.trim="searchForm.form.skills"
 				ref="inputSkill"
 				@keyup.enter="searchCard"
 			/>
-			<button type="button" @click="searchCard">
+			<button type="button" @click="search">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
 			</button>
 		</div>
@@ -31,7 +31,7 @@
 				ref="inputJob"
 				@keyup.enter="searchCard"
 			/>
-			<button type="button" @click="searchCard">
+			<button type="button" @click="search">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
 			</button>
 		</div>
@@ -78,13 +78,12 @@ export default {
 			},
 		});
 
-		// const search = () => {
-		// 	searchCardList.card = cardList
-		// }
+		const search = () => {};
 		return {
 			cardList,
 			searchForm,
 			searchCardList,
+			search,
 		};
 	},
 };
@@ -98,5 +97,24 @@ export default {
 .div-search-skill,
 .div-search-job {
 	display: flex;
+	align-items: center;
+	margin: 0px 5px 20px 5px;
+}
+
+.div-search-skill > img,
+.div-search-job > img {
+	position: absolute;
+	margin-left: 5px;
+}
+
+.div-search-skill > input,
+.div-search-job > input {
+	padding: 0px 30px;
+	height: 40px;
+}
+
+.div-search-job > button,
+.div-search-skill > button {
+	margin-left: -20px;
 }
 </style>

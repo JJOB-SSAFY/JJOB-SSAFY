@@ -1,5 +1,6 @@
 package com.ssafy.project.api.service;
 
+import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyCompRes;
 import com.ssafy.project.api.response.ApplyStatusRes;
@@ -162,22 +163,14 @@ public class ApplyServiceImpl implements ApplyService {
             list.add(applyCompRes);
         }
         return list;
+    }
 
-//        List<Recruit> recruitList = recruitRepository.findAllByCompanyId(companyId);
-//        List<ApplyStatus> joinedList = null;
-//        if(recruitList.size()!=0){
-//            joinedList = applyStatusRepository.findAllByRecruitId(recruitList.get(0).getId());
-//        }
-//        if(recruitList.size()>1){
-//            for(int i=1; i< recruitList.size(); i++){
-//                List<ApplyStatus> list = applyStatusRepository.findAllByRecruitId(recruitList.get(i).getId());
-//                joinedList.addAll(list);
-//            }
-//        }
-//
-//
-//        return joinedList.stream().map((o)-> new ApplyCompRes(o)).collect(Collectors.toList());
-
+    @Override
+    @Transactional
+    public void updateApplyFailStatus(Long applyId, ApplyFailRequestDto requestDto) {
+        ApplyStatus applyStatus = applyStatusRepository.findById(applyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION));
+        applyStatus.updateReason(requestDto);
     }
 
     private void deleteRelatedData(Long resumeId) {

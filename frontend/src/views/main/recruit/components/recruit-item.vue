@@ -3,9 +3,11 @@
 		<div class="card">
 			<div>
 				<h4 class="card-header" @click="clickDetail(info.recruitId)">
-					<b>SAMSUNG {{ info.companyName }}</b>
+					<b>{{ info.companyName }}</b>
 					&nbsp;
 					<h6>(경력여부 : {{ info.work }})</h6>
+					&nbsp;
+					<h6>(지역 : {{ info.location }})</h6>
 				</h4>
 			</div>
 
@@ -13,15 +15,17 @@
 				<div class="leftbox">
 					<div class="card-body">
 						<h5>
-							<b>풀스택 웹 엔지니어 {{ info.workType }}</b>
+							<b>공고타이틀 : {{ info.recruitTitle }}</b>
 						</h5>
 					</div>
 					<div class="card-body">
 						<h5 class="card-title">
-							풀스택 웹서비스 개발자 {{ info.department }}
+							담당업무 :
+							{{ info.work }}
 						</h5>
 						<p class="card-text">
-							AngularJS, Spring 사용에 능숙하신분 {{ info.requirement }}
+							요구역량 :
+							{{ info.requirement }}
 						</p>
 					</div>
 				</div>
@@ -71,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #items {
 	margin: 15px;
 }
