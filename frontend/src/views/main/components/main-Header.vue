@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <template>
 	<div style="position: fixed; bottom: 35px; right: 35px; font-size: 35px">
 		<a href="javascript:window.scrollTo(0,0);"
