@@ -36,6 +36,6 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
     }
 
     private BooleanExpression companyEq(String companyName) {
-        return hasText(companyName) ? company.companyName.eq(companyName) : null;
+        return hasText(companyName) ? company.companyName.contains(companyName) : null;
     }
 }

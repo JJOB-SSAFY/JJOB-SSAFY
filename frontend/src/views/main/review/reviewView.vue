@@ -15,6 +15,7 @@
 					type="text"
 					placeholder="회사명"
 					v-model.lazy.trim="reviewSearchCond.form.companyName"
+					v-on:focusout="searchReview"
 					ref="inputCompanyName"
 					@keyup.enter="searchReview"
 				/>
@@ -46,9 +47,8 @@
 
 <script>
 import { ref, reactive } from 'vue';
-import axios from 'axios';
-import { url } from '../../../api/http';
 import ReviewViewItem from './components/reviewViewItem.vue';
+import reviewAPI from '../../../api/reviewService';
 
 export default {
 	name: 'reviewView',
@@ -62,7 +62,7 @@ export default {
 			interviewReviewList: null,
 		});
 
-		const inputCompanyName = ref();
+		const inputCompanyName = ref('');
 
 		const reviewSearchCond = reactive({
 			form: {
@@ -70,36 +70,16 @@ export default {
 			},
 		});
 
-		axios({
-			method: 'POST',
-			url: url + '/review/list',
-			headers: {
-				Authorization: localStorage.getItem('jjob.s.token'),
-			},
-			data: {
-				companyName: '',
-			},
-		}).then(res => {
-			console.log(res.data);
-			state.interviewReviewList = res.data;
+		const reviewService = new reviewAPI();
+
+		reviewService.getList(inputCompanyName.value).then(res => {
+			state.interviewReviewList = res;
 		});
 
 		const searchReview = function () {
-			const companyName = reviewSearchCond.form.companyName;
-			console.log(companyName);
-
-			axios({
-				method: 'POST',
-				url: url + '/review/list',
-				headers: {
-					Authorization: localStorage.getItem('jjob.s.token'),
-				},
-				data: {
-					companyName: companyName,
-				},
-			}).then(res => {
-				console.log(res.data);
-				state.interviewReviewList = res.data;
+			reviewService.getList(reviewSearchCond.form).then(res => {
+				console.log(res);
+				state.interviewReviewList = res;
 			});
 		};
 

@@ -13,7 +13,6 @@
 						<input
 							class="form-control"
 							id="phoneInput"
-							placeholder="010-0000-0000"
 							v-model="resume.resumeInfo.phone"
 							readonly
 						/>
@@ -23,7 +22,6 @@
 						<input
 							class="form-control"
 							id="emailInput"
-							placeholder="email@example.com"
 							v-model="resume.resumeInfo.email"
 							readonly
 						/>
@@ -61,14 +59,12 @@
 				<div class="title-input-box">
 					<input
 						class="form-control title-input"
-						placeholder="이력서 제목(필수)"
 						style="font-size: 48px; font-weight: bold; border: none"
 						v-model.trim="resume.resumeInfo.resumeTitle"
 						readonly
 					/>
 					<input
 						class="form-control"
-						placeholder="이 름(필수)"
 						style="
 							font-size: 24px;
 							font-weight: bold;
@@ -571,26 +567,173 @@
 				<button class="back-btn" @click="goToRecruitResume">나가기</button>
 			</div>
 			<div class="btn-box-right">
-				<button class="pass-btn" @click="pass">합격</button>
-				<button class="nonpass-btn" @click="nonpass">불합격</button>
+				<div>
+					<v-row justify="center">
+						<v-dialog v-model="modalInfo.dialog1" persistent width="auto">
+							<template v-slot:activator="{ props }">
+								<v-btn class="pass-btn" color="green" v-bind="props">
+									합격
+								</v-btn>
+							</template>
+							<v-card style="padding: 20px">
+								<v-card-title class="text-h5" style="width: 600px">
+									면접방 생성
+								</v-card-title>
+								<br />
+								<!-- <v-card-text
+									>Let Google help apps determine location. This means sending
+									anonymous location data to Google, even when no apps are
+									running.11111111</v-card-text
+								> -->
+								<form @submit.prevent="submit">
+									<v-text-field
+										:counter="20"
+										label="방 이름"
+										v-model="interviewInfo.title"
+									></v-text-field>
+									<v-text-field
+										label="면접 참여자 이메일"
+										v-model="interviewInfo.participants"
+									></v-text-field>
+									<div class="interview-date-box">
+										<div class="interview-date me-4">
+											<label for="interview-date"> 면접 날짜 :&nbsp; </label>
+											<input
+												id="interview-date"
+												type="date"
+												v-model="interviewInfo.date"
+											/>
+										</div>
+										<div class="start-time me-4">
+											<label for="start-time"> 시작 시간 :&nbsp; </label>
+											<input
+												id="start-time"
+												type="time"
+												v-model="interviewInfo.starttime"
+											/>
+										</div>
+										<div class="end-time">
+											<label for="end-time"> 종료 시간 :&nbsp; </label
+											><input
+												id="end-time"
+												type="time"
+												v-model="interviewInfo.endtime"
+											/>
+										</div>
+									</div>
+								</form>
+								<br />
+								<v-card-actions>
+									<v-spacer></v-spacer>
+									<v-btn
+										color="green-darken-1"
+										variant="text"
+										@click="createInterview"
+									>
+										생성하기
+									</v-btn>
+									<v-btn
+										color="green-darken-1"
+										variant="text"
+										@click="modalInfo.dialog1 = false"
+									>
+										돌아가기
+									</v-btn>
+								</v-card-actions>
+							</v-card>
+						</v-dialog>
+					</v-row>
+				</div>
+				<div>
+					<v-row justify="center">
+						<v-dialog v-model="modalInfo.dialog2" persistent width="auto">
+							<template v-slot:activator="{ props }">
+								<v-btn class="nonpass-btn" color="red" v-bind="props">
+									불합격
+								</v-btn>
+							</template>
+							<v-card style="padding: 20px">
+								<v-card-title class="text-h5" style="width: 600px">
+									불합격 사유
+								</v-card-title>
+								<br />
+								<v-select
+									v-model="selectReason.reason"
+									:items="reasons"
+									label="사유"
+								></v-select>
+								<v-textarea label="피드백"></v-textarea>
+								<v-card-actions>
+									<v-spacer></v-spacer>
+									<v-btn
+										color="green-darken-1"
+										variant="text"
+										@click="modalInfo.dialog2 = false"
+									>
+										저장하기
+									</v-btn>
+									<v-btn
+										color="green-darken-1"
+										variant="text"
+										@click="modalInfo.dialog2 = false"
+									>
+										돌아가기
+									</v-btn>
+								</v-card-actions>
+							</v-card>
+						</v-dialog>
+					</v-row>
+				</div>
+
+				<!-- <button class="pass-btn" @click="pass">합격</button>
+				<button class="nonpass-btn" @click="nonpass">불합격</button> -->
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 import { url } from '../../../api/http';
+import { useStore } from 'vuex';
 
 export default {
 	name: 'recruitResumeDetailView',
+
+	// data() {
+	// 	return {
+	// 		dialog1: false,
+	// 		dialog2: false,
+	// 	};
+	// },
 
 	setup() {
 		const route = useRoute();
 
 		const router = useRouter();
+
+		const store = useStore();
+
+		const modalInfo = reactive({
+			dialog1: false,
+			dialog2: false,
+		});
+
+		const interviewInfo = reactive({
+			title: '',
+			participants: '',
+			date: '',
+			starttime: '',
+			endtime: '',
+		});
+
+		const reasons = ref(['내용 부족', '기술 스택 부적합']);
+
+		const selectReason = reactive({
+			reason: '',
+		});
 
 		const resume = reactive({
 			resumeInfo: '',
@@ -599,6 +742,43 @@ export default {
 		const goToRecruitResume = () => {
 			router.push({
 				name: 'recruitResume',
+			});
+		};
+
+		const createInterview = () => {
+			createRoom();
+			// console.log(interviewInfo.participants);
+			modalInfo.dialog1 = false;
+		};
+
+		const createRoom = () => {
+			const companyId = store.getters['auth/getCompanyId'];
+
+			const title = interviewInfo.title;
+			const participants = interviewInfo.participants;
+			const date = interviewInfo.date;
+			const starttime = interviewInfo.starttime;
+			const endtime = interviewInfo.endtime;
+
+			let participantList = participants.split(',').map(item => item.trim());
+
+			const config = {
+				conferenceTitle: title,
+				callEndTime: date + 'T' + endtime + ':00',
+				callStartTime: date + 'T' + starttime + ':00',
+				conferenceCategory: 'INTERVIEW',
+				memberEmail: participantList,
+			};
+
+			axios({
+				method: 'POST',
+				url: url + '/conference/' + companyId,
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: config,
+			}).then(res => {
+				console.log(res);
 			});
 		};
 
@@ -615,7 +795,16 @@ export default {
 			});
 		});
 
-		return { resume, goToRecruitResume };
+		return {
+			resume,
+			modalInfo,
+			interviewInfo,
+			reasons,
+			selectReason,
+			goToRecruitResume,
+			createInterview,
+			createRoom,
+		};
 	},
 };
 </script>
@@ -763,7 +952,7 @@ table.type09 td input {
 
 .back-btn {
 	width: 200px;
-	height: 40px;
+	height: 35px;
 	border-radius: 20px;
 	background: gray;
 	color: white;
@@ -773,25 +962,24 @@ table.type09 td input {
 
 .btn-box-right {
 	display: flex;
+	align-items: center;
+	margin-right: 100px;
 }
 
 .pass-btn {
 	width: 200px;
-	height: 40px;
 	border-radius: 20px;
-	background: lightgreen;
-	color: white;
 	font-weight: 900;
-	margin-right: 25px;
+	margin-right: 50px;
 }
 
 .nonpass-btn {
 	width: 200px;
-	height: 40px;
 	border-radius: 20px;
-	background: lightcoral;
-	color: white;
 	font-weight: 900;
-	margin-right: 100px;
+}
+
+.interview-date-box {
+	display: flex;
 }
 </style>

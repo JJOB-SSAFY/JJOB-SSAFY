@@ -12,18 +12,20 @@
 					<input
 						class="form-control review-search-input"
 						type="text"
-						v-model.lazy="condition.form.location"
+						v-model.lazy="condition.location"
 						@keyup.enter="searchInfo"
 						placeholder="지역"
+						v-on:focusout="searchInfo"
 					/>
 				</div>
 				<div class="div-search-department">
 					<input
 						class="form-control review-search-input"
 						type="text"
-						v-model.lazy="condition.form.department"
+						v-model.lazy="condition.department"
 						@keyup.enter="searchInfo"
 						placeholder="직무"
+						v-on:focusout="searchInfo"
 					/>
 					<button
 						type="button"
@@ -46,7 +48,7 @@
 				<ul class="recruit-list">
 					<li
 						class="recruit-list-item"
-						v-for="info in searchList"
+						v-for="info in searchList.recruit"
 						:key="info.list"
 					>
 						<recruitItemView :info="info" />
@@ -59,40 +61,41 @@
 
 <script>
 import recruitItemView from './components/recruit-item.vue';
-import { ref, reactive, onMounted, computed } from 'vue';
+import { reactive, onMounted, computed, toRaw, watch } from 'vue';
 import { useStore } from 'vuex';
-import axios from 'axios';
-
+import RecruitService from '../../../api/recruitService';
 export default {
 	name: 'recruitView',
-
 	components: {
 		recruitItemView,
 	},
 	setup() {
+		const recruitService = new RecruitService();
 		const store = useStore();
 		// const all = onMounted(() => store.getters['recruit/getRecruitList']);
-
-		const condition = reactive({
-			form: {
-				location: '',
-				department: '',
-			},
+		const searchList = reactive({
+			recruit: '',
 		});
 
-		const searchInfo = function () {
-			store.dispatch('recruit/getList', {
-				location: condition.form.location,
-				department: condition.form.department,
-			});
-		};
+		const condition = reactive({
+			location: '',
+			department: '',
+		});
 
-		return { condition, searchInfo };
-	},
-	computed: {
-		searchList() {
-			return this.$store.getters['recruit/getRecruitList'];
-		},
+		const searchInfo = async function () {
+			// store
+			// 	.dispatch('recruit/getList', {
+			// 		location: condition.form.location,
+			// 		department: condition.form.department,
+			// 	})
+			// 	.then((searchList.recruit = store.getters['recruit/getRecruitList']));
+			recruitService
+				.getRecruitList(toRaw(condition))
+				.then(data => (searchList.recruit = data));
+		};
+		searchInfo();
+
+		return { condition, searchInfo, searchList };
 	},
 };
 </script>

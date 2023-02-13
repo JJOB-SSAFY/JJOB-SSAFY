@@ -67,45 +67,37 @@
 		<div class="mt-50">
 			<div id="session" v-if="session">
 				<div class="openvidu-room-container">
-					<div class="openvidu-room-left">
-						<div id="session-header" class="mb-30">
-							<div class="openvidu-room-header">
-								<img
-									src="@/assets/images/logo/logo-removebg.png"
-									alt=""
-									height="91"
-									width="132"
-								/>
-								<h1 id="session-title">{{ title }}</h1>
-							</div>
-						</div>
-						<div id="flex-container" class="mt-170" style="display: flex">
-							<div id="main-video" class="col-md-6">
-								<user-video :stream-manager="mainStreamManager" />
-							</div>
-							<div id="video-container" class="row">
-								<!--<user-video
-												:stream-manager="publisher"
-												@click="updateMainVideoStreamManager(publisher)"
-										 />-->
-								<user-video
-									v-for="sub in subscribers"
-									:key="sub.stream.connection.connectionId"
-									:stream-manager="sub"
-									@click="updateMainVideoStreamManager(sub)"
-									class="col-6"
-								/>
-							</div>
+					<div id="session-header" class="mb-30">
+						<div class="openvidu-room-header">
+							<img
+								src="@/assets/images/logo/logo-removebg.png"
+								alt=""
+								height="91"
+								width="132"
+							/>
+							<h1 id="session-title">{{ title }}</h1>
 						</div>
 					</div>
-					<div class="openvidu-room-right"></div>
+					<div id="flex-container" class="mt-170" style="display: flex">
+						<div id="main-video" class="col-md-6" style="margin-right: 12px">
+							<user-video :stream-manager="mainStreamManager" />
+						</div>
+						<div id="video-container" class="row">
+							<user-video
+								v-for="sub in subscribers"
+								:key="sub.stream.connection.connectionId"
+								:stream-manager="sub"
+								@click="updateMainVideoStreamManager(sub)"
+								class="col-6"
+							/>
+						</div>
+					</div>
 				</div>
 				<div class="openvidu-room-footer">
 					<button
 						type="button"
 						class="leave-session-btn"
-						data-bs-toggle="modal"
-						data-bs-target="#exampleModal"
+						@click="dialog = true"
 					>
 						나가기
 					</button>
@@ -113,8 +105,36 @@
 			</div>
 		</div>
 
+		<v-dialog v-model="dialog" width="auto"
+			><v-card style="border-radius: 10px">
+				<v-card-title
+					class="text-h5"
+					style="background-color: red; padding-left: 50px"
+				>
+					리뷰작성해주세요
+				</v-card-title>
+				<v-card-text>
+					싸피 후배들을 위해 후기를 써주세요. <br />지금 리뷰를 작성하면 500
+					마일리지를 받습니다.</v-card-text
+				>
+				>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn
+						color="green-darken-1"
+						variant="text"
+						@click="goToInterviewView"
+					>
+						싫어
+					</v-btn>
+					<v-btn color="green-darken-1" variant="text" @click="goToReviewView">
+						좋아
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 		<!-- Modal -->
-		<div
+		<!-- <div
 			class="modal fade"
 			id="exampleModal"
 			tabindex="-1"
@@ -156,7 +176,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -166,7 +186,7 @@ import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
 import { useRouter } from 'vue-router';
 import { url } from '../../../api/http';
-
+import { ref } from 'vue';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const APPLICATION_SERVER_URL = url;
@@ -182,6 +202,8 @@ export default {
 
 	data() {
 		return {
+			//Modal
+			dialog: false,
 			// OpenVidu objects
 			OV: undefined,
 			session: undefined,
@@ -422,14 +444,6 @@ export default {
 
 .openvidu-room-container {
 	display: flex;
-}
-
-.openvidu-room-left {
-	width: 80%;
-}
-
-.openvidu-room-right {
-	width: 20%;
 }
 
 .leave-session-btn {
