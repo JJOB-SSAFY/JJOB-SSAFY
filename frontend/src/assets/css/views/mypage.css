@@ -5,8 +5,12 @@
 
 .div-three-tab {}
 
+.tab-content {
+  margin-top: -20px;
+}
+
 .nav-tabs {
-  margin: 0px 100px;
+  margin: 0px 100px 50px 100px;
 }
 
 .nav-tabs .nav-link {
