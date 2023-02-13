@@ -67,14 +67,28 @@
 					</div>
 
 					<div class="register-company">
-						<p>공고내용</p>
+						<span>공고내용area</span><br />
+						<p>
+							<textarea
+								name="contenArea"
+								id="contenArea"
+								cols="70"
+								rows="10"
+								style="border: 1px solid"
+								placeholder="자유형식으로 기재해주세요"
+								v-model="info.recruitContent"
+							></textarea>
+						</p>
+						<br />
+
+						<!-- <p>공고내용</p>
 						<input
 							class="register-form-input font-LINE-Rg"
 							type="text"
 							placeholder="공고내용"
 							v-model="info.recruitContent"
 						/>
-						<br />
+						<br /> -->
 						<p>시작 날짜</p>
 						<input
 							class="register-form-input font-LINE-Rg"

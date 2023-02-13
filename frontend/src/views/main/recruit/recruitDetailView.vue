@@ -57,9 +57,12 @@
 						</div>
 						<hr /> -->
 						<div class="contentBox">
-							<section class="imgBox">
-								<!-- {{ detailList.imgUrl }} -->
-								<div id="carouselExampleIndicators" class="carousel slide">
+							<section class="contentLeft">
+								<div class="imgBox"></div>
+								<hr />
+								{{ detailList.imgUrl }}
+								<!-- <div id="carouselExampleIndicators" class="carousel slide">
+									<div>{{ detailList.imgUrl }}</div>
 									<div class="carousel-indicators">
 										<button
 											type="button"
@@ -129,7 +132,7 @@
 										></span>
 										<span class="visually-hidden">Next</span>
 									</button>
-								</div>
+								</div> -->
 								<br />
 								<div>
 									<span
@@ -152,17 +155,11 @@
 									<span>#{{ detailList.work }}</span>
 								</div>
 								<hr />
-								<div class="contentArea">
+								<div class="contentArea" style="white-space: pre-wrap">
 									{{ detailList.recruitContent }}
-									{{ detailList.companyName }}
-									{{ detailList.recruitTitle }}
-									{{ detailList.career }}
-									{{ detailList.department }}
-									{{ detailList.eduRequirement }}
 								</div>
-								<!-- <img src="../../../assets/images/lion.jpg" alt="..." /> -->
 							</section>
-							<aside class="sideBar">
+							<aside class="contentRight">
 								<div class="sideBox">
 									<div class="sideBoxContent">
 										<div class="sideBoxContentItem">
@@ -174,14 +171,14 @@
 										<div><b>모집분야</b> : {{ detailList.department }}</div>
 									</div>
 									<hr />
-									<div class="buttonBox">
+									<div class="sideButton">
 										<router-link to="/myinfo">
-											<button type="button" class="btn btn-primary">
+											<button type="button" class="btnLightBlue btnFade">
 												지원하기
 											</button>
 										</router-link>
 										<router-link to="/recruit">
-											<button type="button" class="btn btn-primary">
+											<button type="button" class="btnLightBlue btnFade">
 												목록으로
 											</button>
 										</router-link>
@@ -191,9 +188,13 @@
 						</div>
 
 						<div class="sideBox-two">
-							<div class="secondButtonBox">
-								<button type="button" class="secondButton">지원하기</button>
-								<button type="button" class="secondButton">목록으로</button>
+							<div class="sideButton-two">
+								<button type="button" class="btnLightBlue-two btnFade">
+									지원하기
+								</button>
+								<button type="button" class="btnLightBlue-two btnFade">
+									목록으로
+								</button>
 							</div>
 						</div>
 					</div>
@@ -227,6 +228,10 @@ export default {
 			work: null,
 			workType: null,
 			recruitContent: null,
+			requirement: null,
+		});
+		const oneUrl = reactive({
+			onUrl: detailList.imgUrl,
 		});
 
 		axios({
@@ -234,6 +239,7 @@ export default {
 			url: url + '/recruit/detail/' + recruitId,
 		})
 			.then(response => {
+				// console.log(onUrl);
 				console.log(response.data);
 				detailList.career = response.data.career;
 				detailList.companyName = response.data.companyName;
@@ -246,11 +252,12 @@ export default {
 				detailList.work = response.data.work;
 				detailList.workType = response.data.workType;
 				detailList.recruitContent = response.data.recruitContent;
+				detailList.requirement = response.data.requirement;
 			})
 			.catch(err => {
 				console.log(err);
 			});
-		return { detailList };
+		return { oneUrl, detailList };
 	},
 };
 </script>
@@ -260,29 +267,24 @@ hr {
 	border: 2px dashed pink;
 }
 .jobDetailCon {
-	/* width: 90%; */
-	/* border: 1px solid black; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-right: 5%;
+	/* padding-right: 3%; */
 }
 .jobDetailRel {
-	margin-left: 5%;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-
+	margin: 0 10%;
+	/* margin-left: 10%;
+	margin-right: 10%; */
 	width: 90%;
-	/* background-color: whitesmoke; */
-	/* border-radius: 10px; */
 	padding: 10px 10px 10px 10px;
 	box-sizing: border-box;
 }
-.jobContent {
+/* .jobContent {
 	padding-left: 3%;
 	padding-right: 5%;
-}
-.contentBoxTitle {
+} */
+/* .contentBoxTitle {
 	display: flex;
 	justify-content: space-between;
 }
@@ -291,24 +293,34 @@ hr {
 }
 .jobcontentDescription_left {
 	margin-right: 45%;
-}
+} */
 .contentBox {
 	display: flex;
+	margin: auto;
+	padding: auto;
+	justify-content: center;
+	/* text-align: center; */
 }
-.imgBox {
+.contentLeft {
 	width: 65%;
-	margin-right: 5%;
+	/* margin-right: 10%; */
 }
 @media screen and (max-width: 1000px) {
-	.imgBox {
+	.contentLeft {
 		width: 100%;
-		margin-left: 7%;
-		margin-right: 5%;
+		/* margin-left: 7%;
+		margin-right: 5%; */
 	}
 }
+.imgBox {
+	/* border-bottom: 1px dashed pink; */
+	background-image: url(onUrl);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 350px;
+}
 .detailComent span {
-	/* border: 1px solid; */
-
 	margin-right: 2%;
 	padding: 5px;
 	border-radius: 15px;
@@ -316,14 +328,21 @@ hr {
 	text-align: center;
 	align-items: center;
 }
-.sideBar {
+.contentArea {
+	/* border: 1px solid; */
+	background-color: #f3f5f8;
+	border-radius: 15px;
+	padding: 3%;
+}
+.contentRight {
 	width: 300px;
 	height: 250px;
 	position: sticky;
 	top: 5%;
+	margin-left: 10%;
 }
 @media screen and (max-width: 1000px) {
-	.sideBar {
+	.contentRight {
 		display: none;
 	}
 }
@@ -335,19 +354,17 @@ hr {
 	border-radius: 1px;
 	box-shadow: 1px 1px 1px 1px rgb(190, 188, 188);
 }
-.secondButton {
-	background-color: rgb(116, 116, 248);
-	width: 45%;
-	height: 30px;
-	border-radius: 15px;
-	/* background-color: rgba(239, 231, 231, 0.4); */
-
-	/* filter: opacity(100%); */
+.sideBoxContentItem {
+	margin-right: 5px;
 }
-@media screen and (min-width: 1000px) {
-	.sideBox-two {
-		display: none;
-	}
+.sideButton {
+	display: flex;
+	justify-content: space-around;
+}
+.btnLightBlue {
+	width: 100px;
+	height: 30px;
+	border-radius: 30px;
 }
 .sideBox-two {
 	position: fixed;
@@ -356,25 +373,25 @@ hr {
 	height: 50px;
 	width: 80%;
 	background-color: rgba(255, 255, 255, 0.7);
-	/* filter: blur(1.5px);
-	border-top-right-radius: 30px;
-	border-top-left-radius: 30px; */
 }
-.secondButtonBox {
+@media screen and (min-width: 1000px) {
+	.sideBox-two {
+		display: none;
+	}
+}
+.sideButton-two {
 	display: flex;
 	justify-content: space-evenly;
 	margin-top: 5px;
 	margin-bottom: 3%;
 }
-.sideBoxContentItem {
-	margin-right: 5px;
+.btnLightBlue-two {
+	background-color: #13aaff;
+	width: 45%;
+	height: 30px;
+	border-radius: 15px;
 }
-.buttonBox {
-	display: flex;
-	justify-content: space-around;
-}
-.carousel-iitem {
-	background-image: url('../../../assets/images/lion.jpg');
-	background-size: cover;
+.btnFade.btnLightBlue-two:hover {
+	background: #1487c9;
 }
 </style>
