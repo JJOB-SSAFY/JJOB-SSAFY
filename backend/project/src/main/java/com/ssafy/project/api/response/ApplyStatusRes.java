@@ -15,11 +15,15 @@ public class ApplyStatusRes {
     private String status;
     private String step;
     private String recruitTitle;
+    private String reason;
+    private String feedback;
 
     public ApplyStatusRes(ApplyStatus applyStatus) {
         this.companyName = applyStatus.getRecruit().getCompany().getCompanyName();
         this.status = applyStatus.getStatus();
         this.step = applyStatus.getStep();
         this.recruitTitle = applyStatus.getRecruit().getRecruitTitle();
+        this.reason = applyStatus.getReason();
+        this.feedback = applyStatus.getFeedback();
     }
 }
