@@ -32,7 +32,6 @@ public class ApplyController {
 
     @GetMapping("/{company_id}")
     ResponseEntity<List<ApplyCompRes>> getApplyList(@PathVariable Long company_id){
-        System.out.println("lllllllllllllllllllllllllllll");
         return new ResponseEntity<>(applyService.getApplyList(company_id), HttpStatus.OK);
     }
 

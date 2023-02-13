@@ -78,7 +78,7 @@
 							<h1 id="session-title">{{ title }}</h1>
 						</div>
 					</div>
-					<div id="flex-container" class="mt-170" style="display: flex">
+					<div id="flex-container" class="mt-170 w-100" style="display: flex">
 						<div id="main-video" class="col-md-6" style="margin-right: 12px">
 							<user-video :stream-manager="mainStreamManager" />
 						</div>

@@ -97,7 +97,7 @@ const router = createRouter({
 		},
 		{
 			name: 'recruitResumeDetail',
-			path: '/recruit/resume/detail/:resumeId',
+			path: '/recruit/resume/detail/:resumeId/:applyId',
 			component: recruitResumeDetailView,
 		},
 		{
