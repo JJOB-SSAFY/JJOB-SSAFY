@@ -1,202 +1,96 @@
 <template>
 	<div>
-		<div>
-			<div class="jobDetailCon">
-				<div class="jobDetailRel">
-					<div class="jobContent">
-						<!-- <div class="contentBoxTitle">
-							<div>
-								<h4>
-									<b>{{ detailList.companyName }}</b>
-								</h4>
+		<div class="bottom-btn-div">
+			<button id="bot-bt-apply" type="button" class="btnLightBlue btnFade">
+				지원하기
+			</button>
+			<button
+				id="bot-bt-list"
+				type="button"
+				class="btnLightBlue btnFade"
+				@click="clickToList"
+			>
+				목록으로
+			</button>
+		</div>
+		<div class="job-detail-con">
+			<div class="job-detail-rel">
+				<div class="job-content">
+					<div class="content-box">
+						<section class="content-left">
+							<div class="img-box">
+								<img :src="detailList.imgUrl" />
 							</div>
+							<hr class="detail-hr" />
 							<div>
-								<router-link to="/recruit">
-									<button type="button" class="btn btn-primary">
+								<span
+									><h5>
+										<b>회사이름 : {{ detailList.companyName }}</b>
+									</h5></span
+								><br />
+								<span id="content-left-title"
+									><h6>
+										<b>공고 타이틀 : {{ detailList.recruitTitle }}</b>
+									</h6></span
+								>
+								<hr class="detail-hr" />
+								<span id="content-left-title"
+									><h6>
+										<b>Location : {{ detailList.location }}</b>
+									</h6></span
+								><br />
+							</div>
+							<div class="detail-coment">
+								<span>#{{ detailList.eduRequirement }}</span>
+								<span>#{{ detailList.workType }}</span>
+								<span>#{{ detailList.career }}</span>
+								<span>#{{ detailList.work }}</span>
+							</div>
+							<hr class="detail-hr" />
+							<div class="content-area" style="white-space: pre-wrap">
+								{{ detailList.recruitContent }}
+							</div>
+						</section>
+						<aside class="content-right">
+							<div class="side-box">
+								<div class="side-box-content">
+									<div class="side-box-content-item">
+										<h5>
+											<b>{{ detailList.companyName }}</b>
+										</h5>
+										<div>
+											<b>( {{ detailList.location }} )</b>
+										</div>
+									</div>
+									<div class="side-box-content-item-two">
+										<div>
+											<b>{{ detailList.recruitTitle }}</b>
+										</div>
+										<div>
+											<b>모집분야 : {{ detailList.work }}</b>
+										</div>
+									</div>
+								</div>
+								<hr class="detail-hr" />
+								<div class="side-button">
+									<button
+										id="apply-bt"
+										type="button"
+										class="btnLightBlue btnFade"
+									>
+										지원하기
+									</button>
+									<button
+										id="list-bt"
+										type="button"
+										class="btnLightBlue btnFade"
+										@click="clickToList"
+									>
 										목록으로
 									</button>
-								</router-link>
-							</div>
-						</div>
-						<hr />
-						<div class="contentBoxData">
-							<div class="jobcontentDescription_left">
-								<h5><b>학력</b></h5>
-								<h6>
-									{{ detailList.eduRequirement }}
-								</h6>
-								<br />
-								<h5><b>근무형태</b></h5>
-								<h6>
-									{{ detailList.workType }}
-								</h6>
-								<br />
-								<h5><b>경력</b></h5>
-								<h6>
-									{{ detailList.career }}
-								</h6>
-								<br />
-							</div>
-							<div class="jobcontentDescription_right">
-								<h5><b>급여</b></h5>
-								<h6>
-									{{ detailList.salary }}
-								</h6>
-								<br />
-								<h5><b>근무지역</b></h5>
-								<h6>
-									{{ detailList.department }}
-								</h6>
-								<br />
-								<h5><b>모집분야</b></h5>
-								<h6>
-									{{ detailList.work }}
-								</h6>
-								<br />
-							</div>
-						</div>
-						<hr /> -->
-						<div class="contentBox">
-							<section class="contentLeft">
-								<div class="imgBox"></div>
-								<hr />
-								{{ detailList.imgUrl }}
-								<!-- <div id="carouselExampleIndicators" class="carousel slide">
-									<div>{{ detailList.imgUrl }}</div>
-									<div class="carousel-indicators">
-										<button
-											type="button"
-											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide-to="0"
-											class="active"
-											aria-current="true"
-											aria-label="Slide 1"
-										></button>
-										<button
-											type="button"
-											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide-to="1"
-											aria-label="Slide 2"
-										></button>
-										<button
-											type="button"
-											data-bs-target="#carouselExampleIndicators"
-											data-bs-slide-to="2"
-											aria-label="Slide 3"
-										></button>
-									</div>
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<img
-												src="../../../assets/images/가로.jpg"
-												class="d-block w-100"
-												alt="..."
-											/>
-										</div>
-										<div class="carousel-item">
-											<img
-												src="../../../assets/images/가로.jpg"
-												class="d-block w-100"
-												alt="..."
-											/>
-										</div>
-										<div class="carousel-item">
-											<img
-												src="../../../assets/images/가로.jpg"
-												alt="..."
-												class="d-block w-100"
-											/>
-										</div>
-									</div>
-									<button
-										class="carousel-control-prev"
-										type="button"
-										data-bs-target="#carouselExampleIndicators"
-										data-bs-slide="prev"
-									>
-										<span
-											class="carousel-control-prev-icon"
-											aria-hidden="true"
-										></span>
-										<span class="visually-hidden">Previous</span>
-									</button>
-									<button
-										class="carousel-control-next"
-										type="button"
-										data-bs-target="#carouselExampleIndicators"
-										data-bs-slide="next"
-									>
-										<span
-											class="carousel-control-next-icon"
-											aria-hidden="true"
-										></span>
-										<span class="visually-hidden">Next</span>
-									</button>
-								</div> -->
-								<br />
-								<div>
-									<span
-										><h5>
-											<b>회사이름 : {{ detailList.companyName }}</b>
-										</h5></span
-									><br />
-									<span
-										><h6>공고 타이틀 : {{ detailList.recruitTitle }}</h6></span
-									>
-									<hr />
-									<span
-										><h6>Location : {{ detailList.location }}</h6></span
-									><br />
 								</div>
-								<div class="detailComent">
-									<span>#{{ detailList.eduRequirement }}</span>
-									<span>#{{ detailList.workType }}</span>
-									<span>#{{ detailList.career }}</span>
-									<span>#{{ detailList.work }}</span>
-								</div>
-								<hr />
-								<div class="contentArea" style="white-space: pre-wrap">
-									{{ detailList.recruitContent }}
-								</div>
-							</section>
-							<aside class="contentRight">
-								<div class="sideBox">
-									<div class="sideBoxContent">
-										<div class="sideBoxContentItem">
-											<h5>
-												<b>{{ detailList.companyName }}</b>
-											</h5>
-										</div>
-										<br />
-										<div><b>모집분야</b> : {{ detailList.department }}</div>
-									</div>
-									<hr />
-									<div class="sideButton">
-										<router-link to="/myinfo">
-											<button type="button" class="btnLightBlue btnFade">
-												지원하기
-											</button>
-										</router-link>
-										<router-link to="/recruit">
-											<button type="button" class="btnLightBlue btnFade">
-												목록으로
-											</button>
-										</router-link>
-									</div>
-								</div>
-							</aside>
-						</div>
-
-						<div class="sideBox-two">
-							<div class="sideButton-two">
-								<button type="button" class="btnLightBlue-two btnFade">
-									지원하기
-								</button>
-								<button type="button" class="btnLightBlue-two btnFade">
-									목록으로
-								</button>
 							</div>
-						</div>
+						</aside>
 					</div>
 				</div>
 			</div>
@@ -205,15 +99,16 @@
 </template>
 
 <script>
-import { reactive, ref, computed, toRaw } from 'vue';
+import { reactive } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
-import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 export default {
 	name: 'recruitDetailView',
 
 	setup() {
+		const router = useRouter();
 		const recruitId = localStorage.getItem('page');
 		// console.log(recruitId);
 		const detailList = reactive({
@@ -233,7 +128,6 @@ export default {
 		const oneUrl = reactive({
 			onUrl: detailList.imgUrl,
 		});
-
 		axios({
 			method: 'GET',
 			url: url + '/recruit/detail/' + recruitId,
@@ -257,141 +151,157 @@ export default {
 			.catch(err => {
 				console.log(err);
 			});
-		return { oneUrl, detailList };
+
+		const clickToList = () => {
+			router.push({ name: 'recruit' });
+		};
+		return { oneUrl, detailList, clickToList };
 	},
 };
 </script>
 
 <style scoped>
-hr {
-	border: 2px dashed pink;
+.detail-hr {
+	border: 1px solid black;
 }
-.jobDetailCon {
+.job-detail-con {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* padding-right: 3%; */
 }
-.jobDetailRel {
+.job-detail-rel {
 	margin: 0 10%;
-	/* margin-left: 10%;
-	margin-right: 10%; */
 	width: 90%;
 	padding: 10px 10px 10px 10px;
 	box-sizing: border-box;
 }
-/* .jobContent {
-	padding-left: 3%;
-	padding-right: 5%;
-} */
-/* .contentBoxTitle {
+.content-box {
 	display: flex;
-	justify-content: space-between;
-}
-.contentBoxData {
-	display: flex;
-}
-.jobcontentDescription_left {
-	margin-right: 45%;
-} */
-.contentBox {
-	display: flex;
-	margin: auto;
+	margin: 0px 0px 90px 10px;
+	/* margin-bottom: 90px;
+	margin-left: 10px; */
 	padding: auto;
 	justify-content: center;
 	/* text-align: center; */
 }
-.contentLeft {
-	width: 65%;
-	/* margin-right: 10%; */
+.content-left {
+	width: 100%;
 }
-@media screen and (max-width: 1000px) {
-	.contentLeft {
-		width: 100%;
-		/* margin-left: 7%;
-		margin-right: 5%; */
-	}
-}
-.imgBox {
-	/* border-bottom: 1px dashed pink; */
-	background-image: url(onUrl);
-	background-repeat: no-repeat;
-	background-size: cover;
+
+.img-box > img {
 	width: 100%;
 	height: 350px;
+	object-fit: fill;
 }
-.detailComent span {
+#content-left-title {
+	/* color: var(--vt-c-divider-light-2); */
+	/* color: var(--vt-c-text-light-2); */
+}
+.detail-coment span {
 	margin-right: 2%;
 	padding: 5px;
 	border-radius: 15px;
 	background-color: #f3f5f8;
 	text-align: center;
 	align-items: center;
+	color: var(--vt-c-divider-light-2);
 }
-.contentArea {
-	/* border: 1px solid; */
-	background-color: #f3f5f8;
+.content-area {
+	/* background-color: #f3f5f8; */
+	background-color: #e4f4ec;
 	border-radius: 15px;
 	padding: 3%;
+	color: var(--vt-c-divider-light-2);
+	line-height: 1.75;
 }
-.contentRight {
-	width: 300px;
-	height: 250px;
+.content-right {
+	width: 45%;
+	height: 50%;
 	position: sticky;
-	top: 5%;
-	margin-left: 10%;
+	top: 2%;
+	margin-left: 2%;
+	opacity: 1;
+	transition: all 0.3s;
+	/* border: 1px solid; */
 }
-@media screen and (max-width: 1000px) {
-	.contentRight {
-		display: none;
-	}
-}
-.sideBox {
-	margin-top: 10px;
-	padding: 10%;
-	background-color: #f3f5f8;
-	text-align: center;
-	border-radius: 1px;
-	box-shadow: 1px 1px 1px 1px rgb(190, 188, 188);
-}
-.sideBoxContentItem {
-	margin-right: 5px;
-}
-.sideButton {
+.side-box-content-item {
 	display: flex;
+	margin-bottom: 10%;
+	/* color: var(--vt-c-divider-light-1); */
+}
+.side-box-content-item-two {
+	color: var(--vt-c-divider-light-2);
+	line-height: 2;
+}
+.side-button {
+	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
 }
+#list-bt {
+	color: #13aaff;
+	background-color: white;
+	margin: 3px 0px;
+	width: 100%;
+	border: 1px solid var(--primary-color-1);
+}
+#apply-bt {
+	margin: 3px 0px;
+	width: 100%;
+	color: white;
+}
+
+#bot-bt-apply {
+	margin: 0px 10px;
+	width: 40%;
+	height: 40%;
+	color: white;
+}
+#bot-bt-list {
+	margin: 0px 10px;
+	color: #13aaff;
+	background-color: white;
+	width: 40%;
+	height: 40%;
+	border: 1px solid var(--primary-color-1);
+}
+.side-box {
+	height: 100%;
+	padding: 5%;
+	background-color: #ffffff;
+	/* text-align: center; */
+	border-radius: 1px;
+	border: 1px solid var(--primary-color-border-grey);
+}
+
 .btnLightBlue {
 	width: 100px;
 	height: 30px;
 	border-radius: 30px;
 }
-.sideBox-two {
+.bottom-btn-div {
 	position: fixed;
-	bottom: 0%;
-	left: 10%;
-	height: 50px;
-	width: 80%;
-	background-color: rgba(255, 255, 255, 0.7);
-}
-@media screen and (min-width: 1000px) {
-	.sideBox-two {
-		display: none;
-	}
-}
-.sideButton-two {
 	display: flex;
-	justify-content: space-evenly;
-	margin-top: 5px;
-	margin-bottom: 3%;
+	align-items: center;
+	bottom: 0%;
+	height: 90px;
+	width: 100%;
+	background: linear-gradient(white, #949494);
+
+	opacity: 0;
+	transition: all 0.5s;
+	display: flex;
+	justify-content: center;
 }
-.btnLightBlue-two {
-	background-color: #13aaff;
-	width: 45%;
-	height: 30px;
-	border-radius: 15px;
-}
-.btnFade.btnLightBlue-two:hover {
-	background: #1487c9;
+
+@media screen and (max-width: 1024px) {
+	.content-right {
+		opacity: 0;
+		transition: all 0.2s;
+		width: 0px;
+	}
+	.bottom-btn-div {
+		opacity: 1;
+	}
 }
 </style>
