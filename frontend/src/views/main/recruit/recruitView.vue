@@ -1,7 +1,7 @@
 <template>
 	<div class="banner-container">
 		<span class="banner-letter1">Recruit</span>
-		<p class="banner-letter2">채용공고를 볼 수 있는 곳입니다.</p>
+		<p class="banner-letter2">채용공고 리스트를 확인하는 곳입니다.</p>
 	</div>
 
 	<hr class="hr-main" />
