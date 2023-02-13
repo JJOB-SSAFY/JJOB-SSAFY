@@ -743,32 +743,20 @@ export default {
 		};
 
 		const saveFailReason = () => {
-			const applyId = route.params.applyId;
+			updateApplyStatus(selectReason.reason, selectReason.feedback, '불합격');
 
-			const config = {
-				reason: selectReason.reason,
-				feedback: selectReason.feedback,
-			};
-
-			axios({
-				method: 'PATCH',
-				url: url + '/apply/fail/' + applyId,
-				headers: {
-					Authorization: localStorage.getItem('jjob.s.token'),
-				},
-				data: config,
-			}).then(res => {
-				modalInfo.dialog2 = false;
-				router.push({
-					name: 'recruitResume',
-				});
-				console.log(res);
+			router.push({
+				name: 'recruitResume',
 			});
 		};
 
 		const createInterview = () => {
 			createRoom();
-			updateApplyStatus();
+			updateApplyStatus(
+				interviewInfo.title,
+				interviewInfo.date + 'T' + interviewInfo.starttime + ':00',
+				'합격',
+			);
 			modalInfo.dialog1 = false;
 
 			router.push({
@@ -776,12 +764,15 @@ export default {
 			});
 		};
 
-		const updateApplyStatus = () => {
+		const updateApplyStatus = (title, content, result) => {
 			const applyId = route.params.applyId;
 
 			const config = {
-				status: '합격',
+				status: '결과보기',
 				step: '서류전형',
+				title: title,
+				content: content,
+				result: result,
 			};
 
 			axios({
