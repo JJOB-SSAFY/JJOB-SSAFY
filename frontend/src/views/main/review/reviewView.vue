@@ -4,7 +4,7 @@
 		<p class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</p>
 	</div>
 
-	<hr class="hr-main" />
+	<hr class="hr-main2" />
 	<div class="review-section">
 		<div class="review-container-header">
 			<!-- <h2>기업 면접 리뷰</h2> -->

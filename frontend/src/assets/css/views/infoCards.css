@@ -147,3 +147,32 @@
   position: relative;
   align-items: center;
 }
+
+.card-search-form {
+  display: flex;
+  justify-content: center;
+}
+
+.div-search-skill,
+.div-search-job {
+  display: flex;
+  align-items: center;
+  margin: 0px 5px 20px 5px;
+}
+
+.div-search-skill>img,
+.div-search-job>img {
+  position: absolute;
+  margin-left: 5px;
+}
+
+.div-search-skill>input,
+.div-search-job>input {
+  padding: 0px 30px;
+  height: 40px;
+}
+
+.div-search-job>button,
+.div-search-skill>button {
+  margin-left: -20px;
+}
