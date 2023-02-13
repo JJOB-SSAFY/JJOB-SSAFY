@@ -702,13 +702,6 @@ import { useStore } from 'vuex';
 export default {
 	name: 'recruitResumeDetailView',
 
-	// data() {
-	// 	return {
-	// 		dialog1: false,
-	// 		dialog2: false,
-	// 	};
-	// },
-
 	setup() {
 		const route = useRoute();
 
@@ -747,8 +740,30 @@ export default {
 
 		const createInterview = () => {
 			createRoom();
-			// console.log(interviewInfo.participants);
+			updateApplyStatus();
 			modalInfo.dialog1 = false;
+
+			router.push({
+				name: 'interview',
+			});
+		};
+
+		const updateApplyStatus = () => {
+			const applyId = route.params.applyId;
+
+			const config = {
+				status: '합격',
+				step: '서류전형',
+			};
+
+			axios({
+				method: 'PATCH',
+				url: url + '/apply/' + applyId,
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: config,
+			}).then(res => {});
 		};
 
 		const createRoom = () => {
@@ -803,6 +818,7 @@ export default {
 			selectReason,
 			goToRecruitResume,
 			createInterview,
+			updateApplyStatus,
 			createRoom,
 		};
 	},
