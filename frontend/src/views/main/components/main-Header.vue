@@ -33,26 +33,31 @@
 				<li>
 					<router-link to="/myInfo" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user" />
-						<span> &nbsp마이페이지 </span>
-					</router-link>
-				</li>
-
-				<li v-if="role === 'COMPANY'">
-					<router-link to="/recruit/create" class="navbar-icon">
-						<fa-icon icon="fas fa-solid fa-building" />
-						<span> &nbsp공고등록 </span>
+						<span> &nbsp; 마이페이지 </span>
 					</router-link>
 				</li>
 				<li v-if="role === 'ADMIN'">
 					<router-link to="/register" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-user-plus" />
-						<span> &nbsp회원등록 </span>
+						<span> &nbsp; 회원등록 </span>
+					</router-link>
+				</li>
+				<li v-if="role === 'COMPANY'">
+					<router-link to="/recruit/create" class="navbar-icon">
+						<fa-icon icon="fas fa-solid fa-building" />
+						<span> &nbsp; 공고등록 </span>
+					</router-link>
+				</li>
+				<li v-if="role === 'COMPANY'">
+					<router-link to="/recruit/resume" class="navbar-icon">
+						<fa-icon icon="fas fa-solid fa-building" />
+						<span> &nbsp; 지원자이력서 </span>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/login" class="navbar-icon">
 						<fa-icon icon="fas fa-solid fa-right-from-bracket" />
-						<span v-on:click="logout">&nbsp로그아웃</span>
+						<span v-on:click="logout">&nbsp; 로그아웃</span>
 					</router-link>
 				</li>
 
@@ -71,26 +76,34 @@
 					<li>
 						<router-link to="/myInfo" class="navbar-icon menu-item">
 							<fa-icon icon="fas fa-solid fa-user" />
-							<span> &nbsp마이페이지 </span>
+							<span> &nbsp; 마이페이지 </span>
+						</router-link>
+					</li>
+
+					<li v-if="role === 'ADMIN'">
+						<router-link to="/register" class="navbar-icon menu-item">
+							<fa-icon icon="fas fa-solid fa-user-plus" />
+							<span> &nbsp; 회원등록 </span>
 						</router-link>
 					</li>
 
 					<li v-if="role === 'COMPANY'">
 						<router-link to="/recruit/create" class="navbar-icon menu-item">
 							<fa-icon icon="fas fa-solid fa-building" />
-							<span> &nbsp공고등록 </span>
+							<span> &nbsp; 공고등록 </span>
 						</router-link>
 					</li>
-					<li v-if="role === 'ADMIN'">
-						<router-link to="/register" class="navbar-icon menu-item">
-							<fa-icon icon="fas fa-solid fa-user-plus" />
-							<span> &nbsp회원등록 </span>
+
+					<li v-if="role === 'COMPANY'">
+						<router-link to="/recruit/resume" class="navbar-icon menu-item">
+							<fa-icon icon="fas fa-solid fa-building" />
+							<span> &nbsp; 지원자이력서 </span>
 						</router-link>
 					</li>
 					<li>
 						<router-link to="/login" class="navbar-icon menu-item">
 							<fa-icon icon="fas fa-solid fa-right-from-bracket" />
-							<span v-on:click="logout">&nbsp로그아웃</span>
+							<span v-on:click="logout">&nbsp; 로그아웃</span>
 						</router-link>
 					</li>
 				</ul>
