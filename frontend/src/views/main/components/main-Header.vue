@@ -1,10 +1,12 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-	<div style="position: fixed; bottom: 35px; right: 35px; font-size: 35px">
-		<a href="javascript:window.scrollTo(0,0);"
+	<!-- <div
+		style="position: fixed; bottom: 35px; right: 35px; font-size: 35px z-index: 99;"
+	> -->
+	<!-- <a href="javascript:window.scrollTo(0,0);"
 			><fa-icon icon="fas fa-solid fa-chevron-up"
 		/></a>
-	</div>
+	</div> -->
 	<div>
 		<nav class="navbar">
 			<div class="navbar-logo">

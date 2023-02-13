@@ -73,10 +73,13 @@
   flex-wrap: nowrap;
   align-items: center;
   font-weight: normal;
+  padding-bottom: 50px;
+
 }
 
 body {
   min-height: 100vh;
+  padding: 0px 0px 50px 0px;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
