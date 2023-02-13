@@ -1,6 +1,5 @@
 package com.ssafy.project.api.controller;
 
-import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyCompRes;
 import com.ssafy.project.api.response.BaseResponseBody;
@@ -28,13 +27,13 @@ public class ApplyController {
                                                         @RequestBody ApplyRequestDto requestDto) {
 
         applyService.createApply(recruit_id, resume_id, userDetails.getMember().getId(), requestDto);
-
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
 
     @GetMapping("/{company_id}")
     ResponseEntity<List<ApplyCompRes>> getApplyList(@PathVariable Long company_id) {
+        System.out.println("========================================");
         return new ResponseEntity<>(applyService.getApplyList(company_id), HttpStatus.OK);
     }
 
@@ -42,13 +41,6 @@ public class ApplyController {
     ResponseEntity<BaseResponseBody> updateApplyStatus(@PathVariable Long apply_id,
                                                        @RequestBody ApplyRequestDto requestDto) {
         applyService.updateApplyStatus(apply_id, requestDto);
-        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
-    }
-
-    @PatchMapping("/fail/{apply_id}")
-    public ResponseEntity<BaseResponseBody> updateApplyFailStatus(@PathVariable Long apply_id,
-                                                                  @RequestBody ApplyFailRequestDto requestDto) {
-        applyService.updateApplyFailStatus(apply_id, requestDto);
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 

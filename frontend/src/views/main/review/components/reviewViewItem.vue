@@ -13,6 +13,7 @@
 			<v-card>
 				<v-card-title>면접 리뷰</v-card-title>
 				<hr />
+
 				<v-card-title>{{ info.title }}</v-card-title>
 				<v-card-subtitle>{{ info.name }}</v-card-subtitle>
 				<hr />

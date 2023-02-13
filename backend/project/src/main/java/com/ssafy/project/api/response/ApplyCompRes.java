@@ -1,6 +1,7 @@
 package com.ssafy.project.api.response;
 
 import com.ssafy.project.db.entity.ApplyStatus;
+import com.ssafy.project.db.entity.Card;
 import lombok.*;
 
 @Getter
@@ -10,6 +11,7 @@ import lombok.*;
 @Builder
 public class ApplyCompRes {
 
+    private Long applyId;
     private String companyName;
     private String status;
     private String step;
@@ -17,8 +19,9 @@ public class ApplyCompRes {
     private String recruitTitle;
     private String resumeTitle;
     private String memberName;
+    private String skills;
 
-   public ApplyCompRes(ApplyStatus applyStatus){
+   public ApplyCompRes(ApplyStatus applyStatus, String skills){
        this.companyName = applyStatus.getRecruit().getCompany().getCompanyName();
        this.status = applyStatus.getStatus();
        this.step = applyStatus.getStep();
@@ -26,5 +29,7 @@ public class ApplyCompRes {
        this.resumeId = applyStatus.getResume().getId();
        this.resumeTitle = applyStatus.getResume().getResumeTitle();
        this.memberName = applyStatus.getMember().getName();
+       this.skills = skills;
+       this.applyId = applyStatus.getId();
    }
 }
