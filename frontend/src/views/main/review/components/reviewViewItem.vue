@@ -8,6 +8,9 @@
 			<p style="color: gray">
 				{{ info.name }}
 			</p>
+			<div>
+				<img :src="info.companyLogo" />
+			</div>
 		</div>
 		<v-dialog v-model="dialog" width="auto">
 			<v-card>

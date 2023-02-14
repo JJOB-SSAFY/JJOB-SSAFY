@@ -27,7 +27,9 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
                         review.title,
                         review.content,
                         review.question,
-                        review.answer)
+                        review.answer,
+                        review.company.companyLogo
+                        )
                 )
                 .from(review)
                 .join(review.company, company)
