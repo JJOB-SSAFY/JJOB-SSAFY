@@ -5,6 +5,21 @@
 	</div>
 	<hr class="hr-main2" />
 	<form class="card-search-form mt-50" @submit.prevent>
+		<div class="div-search-name">
+			<img src="@/assets/images/icon/name-icon.png" width="19" height="19" />
+			<input
+				id="card-search-name"
+				class="form-control card-search-input font-LINE-Rg"
+				type="text"
+				placeholder="이름"
+				v-model.lazy.trim="searchForm.form.name"
+				ref="inputName"
+				@keyup.enter="searchCard"
+			/>
+			<button type="button" @click="search">
+				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+			</button>
+		</div>
 		<div class="div-search-skill">
 			<img src="@/assets/images/icon/skill.png" width="19" height="19" />
 			<input
@@ -29,21 +44,6 @@
 				placeholder="선호 직무"
 				v-model.lazy.trim="searchForm.form.preferredJob"
 				ref="inputJob"
-				@keyup.enter="searchCard"
-			/>
-			<button type="button" @click="search">
-				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-			</button>
-		</div>
-		<div class="div-search-name">
-			<img src="@/assets/images/icon/name-icon.png" width="19" height="19" />
-			<input
-				id="card-search-name"
-				class="form-control card-search-input font-LINE-Rg"
-				type="text"
-				placeholder="선호 직무"
-				v-model.lazy.trim="searchForm.form.name"
-				ref="inputName"
 				@keyup.enter="searchCard"
 			/>
 			<button type="button" @click="search">
