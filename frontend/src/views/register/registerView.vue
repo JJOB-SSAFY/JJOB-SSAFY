@@ -14,7 +14,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>이메일</label>
+				<label class="label-title">이메일</label>
 			</div>
 			<br />
 			<div v-if="!invalidEmail" style="color: red">
@@ -28,7 +28,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>비밀번호</label>
+				<label class="label-title">비밀번호</label>
 			</div>
 			<br />
 			<div class="group">
@@ -39,7 +39,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>비밀번호 확인</label>
+				<label class="label-title">비밀번호 확인</label>
 			</div>
 			<br />
 			<div v-if="!invalidPassowrd" style="color: red">
@@ -55,7 +55,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>이름</label>
+				<label class="label-title">이름</label>
 			</div>
 			<br />
 			<div class="group">
@@ -66,7 +66,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>기업 이름</label>
+				<label class="label-title">기업 이름</label>
 			</div>
 			<br />
 			<div class="div-button">
@@ -90,7 +90,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>기업 이름</label>
+				<label class="label-title">기업 이름</label>
 			</div>
 			<br />
 			<div class="group">
@@ -101,7 +101,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>기업 주소</label>
+				<label class="label-title">기업 주소</label>
 			</div>
 			<br />
 			<div class="group">
@@ -112,7 +112,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>기업 설명</label>
+				<label class="label-title">기업 설명</label>
 			</div>
 			<br />
 			<div class="group">
@@ -123,7 +123,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>기업 설명</label>
+				<label class="label-title">사원 수</label>
 			</div>
 			<br />
 			<div class="group">
@@ -134,7 +134,15 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label>기업 홈페이지</label>
+				<label class="label-title">기업 홈페이지</label>
+			</div>
+			<label class="label-title mt-5">기업 로고(필수입력 X)</label>
+			<div class="filebox">
+				<input type="text" class="upload-name shadow" v-model="fileName" />
+				<div class="file-btn">
+					<label for="file">로고 찾기</label>
+					<input type="file" id="file" @change="imgUpload" />
+				</div>
 			</div>
 			<br />
 			<div class="div-button">
