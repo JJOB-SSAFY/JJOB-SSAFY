@@ -2,11 +2,10 @@
 	<div class="">
 		<div class="banner-container">
 		<span class="banner-letter1">지원자 이력서</span>
-		<!-- <p class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</p> -->
 	</div>
 
 
-		<div class="container">
+		<div class="container-recruit">
 			<ul class="responsive-table">
 				<li class="table-header">
 					<div class="col col-1">지원자</div>
@@ -20,23 +19,25 @@
 					:key="apply.applyStatusId"
 					class="table-row"
 				>
-					<div class="col col-1" data-label="name">{{ apply.memberName }}</div>
-					<div class="col col-1" data-label="recruitTitle">
+					<div class="col col-2" data-label="name">{{ apply.memberName }}</div>
+					<div class="col col-2" data-label="recruitTitle">
 						{{ apply.recruitTitle }}
 					</div>
-					<div class="col col-1" data-label="skills">{{ apply.skills }}</div>
-					<div class="col col-1" data-label="resumeTitle">
+					<div class="col col-2" data-label="skills">{{ apply.skills }}</div>
+					<div class="col col-2" data-label="resumeTitle">
 						{{ apply.resumeTitle }}
 					</div>
-					<div class="col col-1" data-label="resumeTitle">
-						<button  @click="showDetailResume(apply.resumeId, apply.applyId)">
-							보기
-						</button>
+					<div class="col col-2" data-label="resumeTitle">
+						<v-btn
+							variant="outlined"
+							color="primary"
+							@click="showDetailResume(apply.resumeId, apply.applyId)"
+						>
+							열람하기
+						</v-btn>
 					</div>
 				</li>
 			</ul>
-
-
 		</div>
 	</div>
 </template>
@@ -79,64 +80,5 @@ export default {
 
 
 <style scoped>
-.container {
-	max-width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.responsive-table li {
-	border-radius: 3px;
-	padding: 25px 30px;
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 25px;
-}
-.responsive-table .table-header {
-	background-color: #95a5a6;
-	font-size: 14px;
-	text-transform: uppercase;
-	letter-spacing: 0.03em;
-}
-.responsive-table .table-row {
-	background-color: #fff;
-	box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
-}
-.responsive-table .col-1 {
-	flex-basis: 20%;
-}
-.responsive-table .col-2 {
-	flex-basis: 40%;
-}
-.responsive-table .col-3 {
-	flex-basis: 25%;
-}
-.responsive-table .col-4 {
-	flex-basis: 25%;
-}
-@media all and (max-width: 1024px) {
-	.responsive-table .table-header {
-		display: none;
-	}
-	.responsive-table li {
-		display: block;
-	}
-	.responsive-table .col {
-		flex-basis: 100%;
-	}
-	.responsive-table .col {
-		display: flex;
-		padding: 10px 0;
-	}
-	.responsive-table .col:before {
-		color: #6c7a89;
-		padding-right: 10px;
-		content: attr(data-label);
-		flex-basis: 50%;
-		text-align: right;
-	}
-}
 </style>
 
