@@ -39,7 +39,7 @@
 
 						<div class="div-item-right info-introduce">
 							<p class="info-title font-LINE-Bd">한줄 자기소개</p>
-							<input
+							<textarea
 								v-model="myInfo.state.introduce"
 								class="line-clamp-introduce"
 							/>
@@ -59,7 +59,7 @@
 				<div class="div-myinfo-update-bottom font-LINE-Rg">
 					<div class="info-visible">
 						<span for="checkBox">
-							지원자 정보에 카드를 보여주실건가요?
+							기업에 내 정보를 보여주실건가요?
 							<input
 								class="input-checkbox"
 								type="checkbox"
