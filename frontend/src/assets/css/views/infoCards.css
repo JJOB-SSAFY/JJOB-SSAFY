@@ -43,7 +43,7 @@
 .div-infocard-item {
   background-color: rgba(240, 248, 255, 0.54);
   margin: 10px;
-  min-width: 30%;
+  width: 30%;
   border-radius: 20px;
 
 }
@@ -79,15 +79,15 @@
 
 .div-info-profile .img-container {
   background-color: white;
-  width: 120px;
+  width: 110px;
   border-radius: 25% 35% / 35% 40%;
 }
 
 .div-info-profile .profile-img {
   padding: 5px;
   border: 1px solid white;
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 25% 35% / 35% 40%;
   overflow: hidden;
 }
@@ -112,7 +112,7 @@
 }
 
 .front-item>p {
-  font-size: 13px;
+  font-size: 11px;
   max-width: 220px;
   word-break: break-all;
   white-space: normal;
@@ -129,7 +129,7 @@
 
 .back-itme>p {
   font-size: 13px;
-  max-width: 220px;
+  max-width: 200px;
   word-break: break-all;
   white-space: normal;
   display: -webkit-box;
@@ -175,4 +175,21 @@
 .div-search-job>button,
 .div-search-skill>button {
   margin-left: -20px;
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .div-infocard-item {
+    width: 45%;
+  }
+
+  .infoCards {
+    padding: 0px 0px 0px 10px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .div-infocard-item {
+    width: 80%;
+  }
 }
