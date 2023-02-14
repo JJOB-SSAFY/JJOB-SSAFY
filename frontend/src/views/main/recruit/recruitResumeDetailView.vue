@@ -828,6 +828,18 @@ export default {
 				},
 			}).then(res => {
 				resume.resumeInfo = res.data;
+
+				if (res.data.isOpened === false) {
+					axios({
+						method: 'PATCH',
+						url: url + '/resume/change/status/' + resumeId,
+						headers: {
+							Authorization: localStorage.getItem('jjob.s.token'),
+						},
+					}).then(res => {
+						console.log(res);
+					});
+				}
 			});
 		});
 

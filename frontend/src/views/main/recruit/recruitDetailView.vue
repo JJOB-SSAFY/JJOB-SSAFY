@@ -204,7 +204,7 @@ export default {
 
 		axios({
 			method: 'GET',
-			url: url + '/resume',
+			url: url + '/resume/isapplied',
 			headers: {
 				Authorization: localStorage.getItem('jjob.s.token'),
 			},

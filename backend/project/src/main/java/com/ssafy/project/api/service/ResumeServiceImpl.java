@@ -4,10 +4,12 @@ import com.ssafy.project.api.request.resume.*;
 import com.ssafy.project.api.response.resume.*;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
+import com.ssafy.project.db.entity.ApplyStatus;
 import com.ssafy.project.db.entity.Card;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.resume.*;
+import com.ssafy.project.db.repository.ApplyStatusRepository;
 import com.ssafy.project.db.repository.CardRepository;
 import com.ssafy.project.db.repository.CompanyRepository;
 import com.ssafy.project.db.repository.MemberRepository;
@@ -29,7 +31,6 @@ public class ResumeServiceImpl implements ResumeService {
 
     private final ResumeRepository resumeRepository;
     private final MemberRepository memberRepository;
-    private final CompanyRepository companyRepository;
     private final ActivityRepository activityRepository;
     private final AwardRepository awardRepository;
     private final CareerRepository careerRepository;
@@ -42,10 +43,12 @@ public class ResumeServiceImpl implements ResumeService {
     private final UniversityRepository universityRepository;
     private final CardRepository cardRepository;
 
+    private final ApplyStatusRepository applyStatusRepository;
+
     @Override
     @Transactional(readOnly = true)
-    public List<ResumeListResponseDto> getResumeList(String email) {
-        List<Resume> list = resumeRepository.findAllByMemberEmail(email);
+    public List<ResumeListResponseDto> getResumeList(Long memberId) {
+        List<Resume> list = resumeRepository.findAllByMemberId(memberId);
 
         return list.stream().map(ResumeListResponseDto::new).collect(toList());
     }
@@ -256,6 +259,28 @@ public class ResumeServiceImpl implements ResumeService {
                 projectExpResponseDtoList, skillResponseDtoList,
                 universityResponseDtoList, card.get().getImageUrl());
 
+    }
+
+    @Override
+    @Transactional
+    public void changeApplyStatus(Long applyId) {
+        Resume resume = resumeRepository.findById(applyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.RESUME_NOT_EXIST_EXCEPTION));
+
+        resume.updateStatus();
+
+        ApplyStatus applyStatus = applyStatusRepository.findByResumeId(resume.getId())
+                .orElseThrow(() -> new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION));
+
+        applyStatus.updateStatus();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ResumeListResponseDto> getIsAppliedResumeList(Long memberId) {
+        List<Resume> list = resumeRepository.findAllByMemberIdAndIsApplied(memberId, false);
+
+        return list.stream().map(ResumeListResponseDto::new).collect(toList());
     }
 
     private void deleteRelatedData(Long resumeId) {
