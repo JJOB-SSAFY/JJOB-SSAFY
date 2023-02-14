@@ -3,13 +3,16 @@
 		<div
 			v-for="(resume, index) in getResumeList.state"
 			:key="resume.resumeId"
-			class="resume-container"
+			class="resume resume-container"
 		>
 			<div class="resume-id font-LINE-Bd">{{ index + 1 }}</div>
 
 			<div class="resume-title font-LINE-Rg">{{ resume.resumeTitle }}</div>
 			<button @click="showDetailResume(resume.resumeId)" class="resume-view-bt">
 				보기
+			</button>
+			<button @click="deleteResume" class="resume-delete-bt">
+				<fa-icon icon="fas fa-solid fa-x"></fa-icon>
 			</button>
 		</div>
 		<button @click="addResume" class="resume-create-btn">
@@ -56,7 +59,9 @@ export default {
 				name: 'resumeCreate',
 			});
 		};
-		return { store, getResumeList, showDetailResume, addResume };
+
+		const deleteResume = () => {};
+		return { store, getResumeList, showDetailResume, addResume, deleteResume };
 	},
 };
 </script>

@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.resume-container {
+.div-resume>div {
   width: 70%;
   min-height: 70px;
   display: flex;
@@ -35,7 +35,8 @@
   font-size: 25px;
 }
 
-.resume-container button {
+.resume-view-bt,
+.resume-delete-bt {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,14 +45,21 @@
   min-width: 70px;
   color: var(--primary-color-black);
   background-color: #eeeeee;
-  border-radius: 0 12px 12px 0;
 }
 
 
-.resume-container button:hover {
+.resume-view-bt:hover,
+.resume-delete-bt:hover {
   color: #13a9ff9c;
   transform: scale(1.04);
   transition: 0.3s;
+}
+
+.resume-delete-bt {
+  border-left: 2px solid white;
+  color: rgb(254, 39, 39);
+  border-radius: 0px 12px 12px 0px;
+
 }
 
 .resume-create-btn {

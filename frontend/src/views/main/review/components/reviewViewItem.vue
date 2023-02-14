@@ -21,24 +21,47 @@
 			</div>
 		</div>
 		<v-dialog v-model="dialog" width="auto">
-			<v-card>
-				<v-card-title>면접 리뷰</v-card-title>
-				<hr />
+			<v-card class="font-LINE-Rg">
+				<v-card-title class="font-LINE-Bd">
+					<img src="@/assets/images/icon/QnA.png" width="19" height="19" />{{
+						info.companyName
+					}}
+					면접 리뷰</v-card-title
+				>
+				<p />
 
-				<v-card-title>{{ info.title }}</v-card-title>
-				<v-card-subtitle>{{ info.name }}</v-card-subtitle>
-				<hr />
-				<v-card-title>면접 리뷰</v-card-title>
-				<v-card-text>{{ info.content }}</v-card-text>
-				<v-card-title>면접 질문</v-card-title>
-				<v-card-text>{{ info.question }}</v-card-text>
-				<v-card-title>면접 답변</v-card-title>
-				<v-card-text>{{ info.answer }}</v-card-text>
+				<v-card-title class="font-LINE-Bd">{{ info.title }}</v-card-title>
+				<v-card-subtitle style="color: #000000"
+					>작성자 : {{ info.name }}</v-card-subtitle
+				>
+				<hr style="margin: 10px 10px" />
+				<v-card-title class="font-LINE-Bd">면접 후기</v-card-title>
+				<v-card-text style="padding: 0px 24px">
+					<fa-icon icon="fas fa-solid fa-magnifying-" />{{
+						info.content
+					}}</v-card-text
+				>
+				<v-card-title class="font-LINE-Bd mt-2">면접 질문</v-card-title>
+				<v-card-text style="padding: 0px 24px">{{ info.question }}</v-card-text>
+				<v-card-title class="font-LINE-Bd mt-2">면접 답변</v-card-title>
+				<v-card-text style="padding: 0px 24px">{{ info.answer }}</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn color="green-darken-1" variant="text" @click="dialog = false">
+					<button
+						class="btnLightBlue btnFade font-LINE-Bd"
+						style="
+							width: 100px;
+							height: 30px;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						"
+						color="green-darken-1"
+						variant="text"
+						@click="dialog = false"
+					>
 						나가기
-					</v-btn>
+					</button>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -75,6 +98,6 @@ export default {
 	padding: 10px;
 }
 .v-card {
-	width: 900px;
+	width: 700px;
 }
 </style>
