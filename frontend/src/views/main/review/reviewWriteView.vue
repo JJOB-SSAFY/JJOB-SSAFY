@@ -1,6 +1,6 @@
 <template>
 	<div style="padding-bottom: 100px">
-		<div class="review-write-container">
+		<div class="review-write-container shadow">
 			<h1>{{ companyName }} 면접 리뷰</h1>
 			<form>
 				<div class="mb-3">
@@ -16,7 +16,7 @@
 					<label for="interview-review" class="form-label">면접 리뷰</label>
 					<textarea
 						id="interview-review"
-						class="form-control"
+						class="form-control resize-ban"
 						v-model.lazy.trim="interviewState.form.review"
 						ref="interviewReview"
 						rows="3"
@@ -26,7 +26,7 @@
 					<label for="interview-question" class="form-label">면접 질문</label>
 					<textarea
 						id="interview-question"
-						class="form-control"
+						class="form-control resize-ban"
 						v-model.lazy.trim="interviewState.form.question"
 						ref="interviewQuestion"
 						rows="5"
@@ -36,7 +36,7 @@
 					<label for="interview-answer" class="form-label">면접 답변</label>
 					<textarea
 						id="interview-answer"
-						class="form-control"
+						class="form-control resize-ban"
 						v-model.lazy.trim="interviewState.form.answer"
 						ref="interviewAnswer"
 						rows="5"
@@ -200,5 +200,9 @@ export default {
 	border-top: 1px lightgray solid;
 	padding-right: 130px;
 	padding-bottom: 40px;
+}
+
+.resize-ban {
+	resize: none;
 }
 </style>
