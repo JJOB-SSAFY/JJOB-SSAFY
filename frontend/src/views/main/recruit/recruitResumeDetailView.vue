@@ -577,60 +577,19 @@
 							</template>
 							<v-card style="padding: 20px">
 								<v-card-title class="text-h5" style="width: 600px">
-									면접방 생성
+									최종 확인
 								</v-card-title>
 								<br />
-								<!-- <v-card-text
-									>Let Google help apps determine location. This means sending
-									anonymous location data to Google, even when no apps are
-									running.11111111</v-card-text
-								> -->
-								<form @submit.prevent="submit">
-									<v-text-field
-										:counter="20"
-										label="방 이름"
-										v-model="interviewInfo.title"
-									></v-text-field>
-									<v-text-field
-										label="면접 참여자 이메일"
-										v-model="interviewInfo.participants"
-									></v-text-field>
-									<div class="interview-date-box">
-										<div class="interview-date me-4">
-											<label for="interview-date"> 면접 날짜 :&nbsp; </label>
-											<input
-												id="interview-date"
-												type="date"
-												v-model="interviewInfo.date"
-											/>
-										</div>
-										<div class="start-time me-4">
-											<label for="start-time"> 시작 시간 :&nbsp; </label>
-											<input
-												id="start-time"
-												type="time"
-												v-model="interviewInfo.starttime"
-											/>
-										</div>
-										<div class="end-time">
-											<label for="end-time"> 종료 시간 :&nbsp; </label
-											><input
-												id="end-time"
-												type="time"
-												v-model="interviewInfo.endtime"
-											/>
-										</div>
-									</div>
-								</form>
+								<h5 style="margin-left: 10px">정말로 합격시키겠습니까?</h5>
 								<br />
 								<v-card-actions>
 									<v-spacer></v-spacer>
 									<v-btn
 										color="green-darken-1"
 										variant="text"
-										@click="createInterview"
+										@click="resumepass"
 									>
-										생성하기
+										합격
 									</v-btn>
 									<v-btn
 										color="green-darken-1"
@@ -687,9 +646,6 @@
 						</v-dialog>
 					</v-row>
 				</div>
-
-				<!-- <button class="pass-btn" @click="pass">합격</button>
-				<button class="nonpass-btn" @click="nonpass">불합격</button> -->
 			</div>
 		</div>
 	</div>
@@ -717,14 +673,6 @@ export default {
 			dialog2: false,
 		});
 
-		const interviewInfo = reactive({
-			title: '',
-			participants: '',
-			date: '',
-			starttime: '',
-			endtime: '',
-		});
-
 		const reasons = ref(['내용 부족', '기술 스택 부적합']);
 
 		const selectReason = reactive({
@@ -750,13 +698,8 @@ export default {
 			});
 		};
 
-		const createInterview = () => {
-			createRoom();
-			updateApplyStatus(
-				interviewInfo.title,
-				interviewInfo.date + 'T' + interviewInfo.starttime + ':00',
-				'합격',
-			);
+		const resumepass = () => {
+			updateApplyStatus('', '', '합격');
 			modalInfo.dialog1 = false;
 
 			router.push({
@@ -778,37 +721,6 @@ export default {
 			axios({
 				method: 'PATCH',
 				url: url + '/apply/' + applyId,
-				headers: {
-					Authorization: localStorage.getItem('jjob.s.token'),
-				},
-				data: config,
-			}).then(res => {
-				console.log(res);
-			});
-		};
-
-		const createRoom = () => {
-			const companyId = store.getters['auth/getCompanyId'];
-
-			const title = interviewInfo.title;
-			const participants = interviewInfo.participants;
-			const date = interviewInfo.date;
-			const starttime = interviewInfo.starttime;
-			const endtime = interviewInfo.endtime;
-
-			let participantList = participants.split(',').map(item => item.trim());
-
-			const config = {
-				conferenceTitle: title,
-				callEndTime: date + 'T' + endtime + ':00',
-				callStartTime: date + 'T' + starttime + ':00',
-				conferenceCategory: 'INTERVIEW',
-				memberEmail: participantList,
-			};
-
-			axios({
-				method: 'POST',
-				url: url + '/conference/' + companyId,
 				headers: {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
@@ -846,14 +758,12 @@ export default {
 		return {
 			resume,
 			modalInfo,
-			interviewInfo,
 			reasons,
 			selectReason,
 			goToRecruitResume,
 			saveFailReason,
-			createInterview,
+			resumepass,
 			updateApplyStatus,
-			createRoom,
 		};
 	},
 };
@@ -1027,9 +937,5 @@ table.type09 td input {
 	width: 200px;
 	border-radius: 20px;
 	font-weight: 900;
-}
-
-.interview-date-box {
-	display: flex;
 }
 </style>
