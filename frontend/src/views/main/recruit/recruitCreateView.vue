@@ -1,149 +1,147 @@
 <template>
-	<div class="login-section">
-		<div class="div-register">
-			<div class="register-container">
-				<div class="register-title">
-					<h1 class="font-LINE-Bd mt-100 margin-auto">공고등록</h1>
+	<div class="banner-container">
+		<span class="banner-letter1">공고 작성</span>
+		<p class="banner-letter2">채용 공고를 작성해 주세요.</p>
+	</div>
+	<hr class="hr-main2" />
+	<div class="register-container-box">
+		<div class="register-user">
+			<h3>채용공고</h3>
+			<br />
+			<div class="register-user-detail">
+				<h6>*공고 이름</h6>
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					placeholder="공고 이름"
+					v-model="info.recruitTitle"
+				/>
+
+				<div class="register-user-detail">
+					<div class="row">
+						<div class="col">
+							<h6>*근무지역</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="근무지역"
+								v-model="info.location"
+							/>
+						</div>
+						<div class="col">
+							<h6>*근무 형태</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="근무 형태"
+								v-model="info.workType"
+							/>
+						</div>
+					</div>
 				</div>
-				<hr class="hr-main2" />
-				<div class="register-form">
-					<div class="register-user">
-						<p>공고 이름</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="공고 이름"
-							v-model="info.recruitTitle"
-						/>
-						<br />
-						<p>학력</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="학력"
-							v-model="info.eduRequirement"
-						/>
-						<br />
-						<p>근무 형태(정규직, 계약직)</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="근무 형태(정규직, 계약직)"
-							v-model="info.workType"
-						/>
-						<br />
-						<p>경력</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="경력"
-							v-model="info.career"
-						/>
-						<br />
-						<p>급여</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="급여"
-							v-model="info.salary"
-						/>
-						<br />
-						<p>근무지역</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="근무지역"
-							v-model="info.location"
-						/>
-						<br />
-						<p>이미지</p>
-						<div class="filebox">
-							<input class="upload-name shadow" v-model="fileName" />
-							<div class="file-btn">
-								<label for="file">파일찾기</label>
-								<input type="file" id="file" @change="imgUpload" />
-							</div>
+
+				<div class="register-user-detail">
+					<div class="row">
+						<!-- <div class="col">
+								<h6>*채용 기간</h6>
+								<input
+									class="register-form-input font-LINE-Rg"
+									type="date"
+									placeholder="시작 날짜"
+									v-model="info.recruitStartDate"
+								/>
+							</div> -->
+						<div class="col">
+							<h6>*시작 날짜</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="date"
+								placeholder="시작 날짜"
+								v-model="info.recruitStartDate"
+							/>
 						</div>
-						<br />
+						<div class="col">
+							<h6>*종료 날짜</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="date"
+								placeholder="종료 날짜"
+								v-model="info.recruitEndDate"
+							/>
+						</div>
 					</div>
+				</div>
 
-					<div class="register-company">
-						<span>공고내용area</span><br />
-						<p>
-							<textarea
-								name="contenArea"
-								id="contenArea"
-								cols="70"
-								rows="10"
-								style="border: 1px solid"
-								placeholder="자유형식으로 기재해주세요"
-								v-model="info.recruitContent"
-							></textarea>
-						</p>
-						<br />
+				<div class="register-user-detail">
+					<div class="row">
+						<div class="col">
+							<h6>*담당 업무</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="담당 업무"
+								v-model="info.work"
+							/>
+						</div>
+						<div class="col">
+							<h6>*요구역량</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="요구역량"
+								v-model="info.requirement"
+							/>
+						</div>
+						<div class="col">
+							<h6>*부서</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="부서"
+								v-model="info.department"
+							/>
+						</div>
+					</div>
+				</div>
 
-						<!-- <p>공고내용</p>
-						<input
+				<p>*공고 이미지</p>
+				<div class="filebox">
+					<input
+						class="register-form-input font-LINE-Rg"
+						disabled
+						v-model="fileName"
+					/>
+					<div class="file-btn">
+						<!-- <label for="file">파일찾기</label> -->
+						<input type="file" id="file" @change="imgUpload" />
+					</div>
+				</div>
+				<br />
+
+				<div class="div-content-box">
+					<p>*공고내용</p>
+					<p>
+						<textarea
+							name="content-area"
+							id="content-area"
 							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="공고내용"
+							placeholder="자유형식으로 기재해주세요."
+							rows="20"
 							v-model="info.recruitContent"
-						/>
-						<br /> -->
-						<p>시작 날짜</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="date"
-							placeholder="시작 날짜"
-							v-model="info.recruitStartDate"
-						/>
-						<br />
-
-						<p>마감 날짜</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="date"
-							placeholder="마감 날짜"
-							v-model="info.recruitEndDate"
-						/>
-						<br />
-						<p>부서</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="부서"
-							v-model="info.department"
-						/>
-						<br />
-						<p>담당업무</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="담당업무"
-							v-model="info.work"
-						/>
-						<br />
-						<p>요구 역량</p>
-						<input
-							class="register-form-input font-LINE-Rg"
-							type="text"
-							placeholder="요구 역량"
-							v-model="info.requirement"
-						/>
-						<br />
-						<div class="div-button">
-							<b-button
-								type="button"
-								variant="outline-primary"
-								class="div-button font-LINE-Bd"
-								@click="register"
-							>
-								회사등록
-							</b-button>
-						</div>
-					</div>
+						></textarea>
+					</p>
 				</div>
 			</div>
+		</div>
+		<div class="div-button">
+			<b-button
+				type="button"
+				variant="outline-primary"
+				class="div-button font-LINE-Bd"
+				@click="register"
+			>
+				회사등록
+			</b-button>
 		</div>
 	</div>
 </template>
@@ -276,22 +274,49 @@ export default {
 </script>
 
 <style scoped>
-.register-form .register-form-input {
-	width: 500px;
-	height: 50px;
-	font-size: 20px;
-	border-left-width: 0;
-	border-right-width: 0;
-	border-top-width: 0;
-	border-bottom-width: 0;
-	padding-left: 10px;
+.register-container-box {
+	border: 1px solid black;
+	width: 80%;
 	display: block;
-	margin: 40px 79px 0 10px;
-	box-shadow: 10px 5px 5px #f2f0eb;
+	margin: auto;
+	padding-bottom: 25px;
+	justify-content: center;
+	border-radius: 5px;
 }
-.register-title {
+.register-user {
+	width: 100%;
+	padding: 25px;
 }
-.register-form .register-form-input:hover {
+.register-user-detail {
+	margin: 3% 0;
+}
+.register-form-input {
+	width: 100%;
+	font-size: 15px;
+	background-color: aliceblue;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	display: block;
+	padding: 5px;
+	margin-top: 10px;
+	/* margin: 1%; */
+	/* outline: none; */
+	/* box-shadow: 10px 5px 5px #f2f0eb; */
+}
+.file-btn {
+	margin-top: 3px;
+}
+#content-area {
+	width: 100%;
+	border: 1px lightgray solid;
+	border-radius: 5px;
+	resize: none;
+}
+.div-button {
+	margin: auto;
+	width: 97%;
+}
+/* .register-form .register-form-input:hover {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .div-button {
@@ -301,10 +326,10 @@ export default {
 }
 .filebox {
 	margin-top: 40px;
-}
+} */
 
-.filebox .upload-name {
-	/* display: inline-block; */
+/* .filebox .upload-name {
+	display: inline-block;
 	height: 40px;
 	padding: 0 10px;
 	vertical-align: middle;
@@ -312,8 +337,8 @@ export default {
 	width: 85%;
 	margin-left: 9px;
 	color: #999999;
-}
-
+} */
+/* 
 .filebox label {
 	display: inline-block;
 	padding: 10px 20px;
@@ -343,5 +368,5 @@ export default {
 	margin-left: 10px;
 	margin-bottom: -32px;
 	margin-top: 8px;
-}
+} */
 </style>
