@@ -28,6 +28,7 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
                         review.content,
                         review.question,
                         review.answer,
+                        review.company.companyName,
                         review.company.companyLogo
                         )
                 )

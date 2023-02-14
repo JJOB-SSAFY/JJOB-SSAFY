@@ -7,7 +7,7 @@
 
 .review-item {
   width: 20%;
-  padding: 10px;
+  padding: 10px 10px 18px 10px;
   margin: 5px;
   border: 1px solid var(--primary-color-border-grey);
   border-radius: 0% 10% 0% 10%;
