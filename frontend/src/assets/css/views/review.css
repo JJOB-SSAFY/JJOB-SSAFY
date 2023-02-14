@@ -1,34 +1,71 @@
 .review-section {
-  width: 80%;
-  margin: auto;
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.review-container {
-  background-color: whitesmoke;
-  border-radius: 10px;
-  padding: 40px 10px 10px 10px;
-  box-sizing: border-box;
+.review-item {
+  width: 20%;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid var(--primary-color-border-grey);
+  border-radius: 0% 10% 0% 10%;
 }
 
-.review-container-header {
+.review-item-mid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.company-logo {
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  top: 20px;
 }
 
-.review-search-form {
+.company-logo>img {
+  max-width: 70%;
+}
+
+.review-item-title {
+  display: flex;
+  justify-content: center;
+}
+
+.review-item-mid {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-item-title {
+  font-size: 24px;
+}
+
+.review-company-name>p {
+  margin-top: 14px;
+  font-size: 18px;
+
+  border-bottom: 1px solid black;
+}
+
+.review-name>p {
+  padding-top: 4px;
+}
+
+.div-review-bt {
+  display: block;
+  margin: 0px auto;
+  width: 80%;
+  font-size: 18px;
+}
+
+.div-review-bt>button {
   display: flex;
   align-items: center;
-  width: 30%;
-  height: 45px;
-  position: relative;
-}
-
-.review-search-input {
-  padding: 5px;
-  box-sizing: border-box;
-  margin: auto;
-  height: 100%;
+  justify-content: center;
+  width: 100%;
+  margin: 5px;
+  padding-top: 4px;
 }

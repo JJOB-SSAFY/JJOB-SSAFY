@@ -6,6 +6,7 @@
 	<section>
 		<transition name="slide-fade" mode="out-in"> <router-view /> </transition>
 	</section>
+	<footer></footer>
 </template>
 
 <script>
