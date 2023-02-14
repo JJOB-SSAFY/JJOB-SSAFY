@@ -78,9 +78,11 @@
 import { ref, reactive } from 'vue';
 import { useStore } from 'vuex';
 import { useCookies } from 'vue3-cookies';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'loginView',
+
 	setup() {
 		const store = useStore();
 		const emailValidCk = ref(false);
@@ -106,18 +108,30 @@ export default {
 		};
 		const Login = () => {
 			if (!loginState.form.email) {
-				alert('아이디를 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '이메일을 입력해주세요',
+					icon: 'warning',
+				});
 				inputEmail.value.focus();
 				return;
 			} else if (!loginState.form.password) {
-				alert('비밀번호를 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '비밀번호를 입력해주세요',
+					icon: 'warning',
+				});
 				inputPassword.value.focus();
 				return;
 			}
 			// tlwkrwrkwkr
 			emailValid(loginState.form.email);
 			if (!emailValidCk.value) {
-				alert('이메일 형식에 맞게 입력해주세요!');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '이메일 형식에 맞게 입력해주세요',
+					icon: 'warning',
+				});
 				return;
 			}
 			const loginInfo = {

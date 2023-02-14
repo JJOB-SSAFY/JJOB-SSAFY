@@ -189,6 +189,8 @@ import UserVideo from './components/UserVideo.vue';
 import { useRouter } from 'vue-router';
 import { url } from '../../../api/http';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
+
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const APPLICATION_SERVER_URL = url;
@@ -225,7 +227,11 @@ export default {
 	methods: {
 		joinSession() {
 			if (this.subscribers.length >= 5) {
-				alert('입장 가능한 인원이 초과되었습니다.');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '입장 가능한 인원이 초과되었습니다.',
+					icon: 'warning',
+				});
 				return;
 			}
 
