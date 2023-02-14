@@ -11,7 +11,7 @@
 				</div>
 				<div class="div-front font-LINE-Rg">
 					<div class="front-item info-skill">
-						<img src="@/assets/images/icon/skills.png" width="19" height="19" />
+						<img src="@/assets/images/icon/skill.png" width="19" height="19" />
 						<p>&nbsp {{ info.skills }}</p>
 					</div>
 
