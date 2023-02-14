@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecruitSearchCondition {
-
+    private String career;
     private String location;
     private String department;
 }
