@@ -4,11 +4,8 @@
 		<p class="banner-letter2">예정된 면접을 볼 수 있는 곳입니다.</p>
 	</div>
 	<hr class="hr-main2" />
-	<div class="container">
-		<ul
-			class="infinite-list justify-content-left row gx-5"
-			style="overflow: auto"
-		>
+	<div class="interview-container">
+		<ul class="infinite-list justify-content-left row gx-5">
 			<li
 				class="infinite-list-item col-4"
 				v-for="info in state.interviewList"
@@ -47,28 +44,22 @@ export default {
 	},
 };
 </script>
-<style>
+<style scoped>
+.interview-container {
+	display: flex;
+	justify-content: center;
+}
 .infinite-list {
 	padding-left: 0;
 	max-height: calc(100% - 35px);
 }
 
-@media (min-width: 701px) and (max-width: 1269px) {
-	.infinite-list {
-		min-width: 700px;
-	}
-}
-
-@media (min-width: 1270px) {
-	.infinite-list {
-		min-width: 1021px;
-	}
-}
-
 .infinite-list .infinite-list-item {
-	min-width: 335px;
-	max-width: 25%;
+	width: 30%;
 	display: inline-block;
 	cursor: pointer;
+}
+.row {
+	justify-content: center;
 }
 </style>

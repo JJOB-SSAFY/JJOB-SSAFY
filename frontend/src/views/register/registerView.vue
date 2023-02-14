@@ -7,7 +7,6 @@
 	<div class="register-form mt-50 font-">
 		<div class="file-group font-LINE-Rg">
 			<div class="filebox">
-				<!-- <label>기업 로고(필수입력 X)</label> -->
 				<input
 					readonly
 					type="text"

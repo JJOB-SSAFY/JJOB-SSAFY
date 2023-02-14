@@ -6,8 +6,8 @@
 			alt="..."
 		/>
 		<div class="card-body">
-			<h4 class="card-title">{{ info.title }}</h4>
-			<p class="card-text">
+			<h4 class="card-title font-LINE-Bd">{{ info.title }}</h4>
+			<p class="card-text font-LINE-Rg">
 				시작시간 : {{ startTime }} <br />
 				종료시간 : {{ endTime }}
 			</p>
