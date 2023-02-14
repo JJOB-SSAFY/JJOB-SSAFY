@@ -1,10 +1,8 @@
 <template>
 	<div>
-		<div class="review-view-item-container" @click="dialog = true">
+		<div @click="dialog = true">
 			<p style="color: dodgerblue">면접 리뷰</p>
-			<h4>
-				{{ info.title }}
-			</h4>
+			<p>{{ info.title }}</p>
 			<p style="color: gray">
 				{{ info.name }}
 			</p>

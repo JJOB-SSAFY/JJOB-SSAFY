@@ -1,35 +1,33 @@
 <template>
 	<div class="banner-container">
 		<span class="banner-letter1">Review</span>
-		<p class="banner-letter2">다른 사용자들이 작성한 리뷰를 보는 곳 입니다.</p>
+		<p class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</p>
 	</div>
 
 	<hr class="hr-main2" />
 	<div class="review-section">
 		<div class="review-container-header">
 			<!-- <h2>기업 면접 리뷰</h2> -->
-			<form class="review-search-form" @submit.prevent>
-				<input
-					id="review-search-id"
-					class="form-control review-search-input"
-					type="text"
-					placeholder="회사명"
-					v-model.lazy.trim="reviewSearchCond.form.companyName"
-					v-on:focusout="searchReview"
-					ref="inputCompanyName"
-					@keyup.enter="searchReview"
-				/>
-				<button
-					type="button"
-					@click="searchReview"
-					style="font-size: 20px; position: absolute; right: 20px"
-				>
-					<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-				</button>
+			<form class="recruit-search-form mt-50" @submit.prevent>
+				<div class="div-search-location">
+					<img src="@/assets/images/logo/logo.png" width="19" height="19" />
+					<input
+						class="form-control card-search-input font-LINE-Rg"
+						type="text"
+						placeholder="회사명"
+						v-model.lazy.trim="reviewSearchCond.form.companyName"
+						v-on:focusout="searchReview"
+						ref="inputCompanyName"
+						@keyup.enter="searchReview"
+					/>
+					<button type="button" @click="searchReview">
+						<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+					</button>
+				</div>
 			</form>
 		</div>
 		<!-- 이 위는 검색창 -->
-		<div class="review-container">
+		<div>
 			<div>
 				<ul class="row">
 					<li
@@ -46,6 +44,10 @@
 </template>
 
 <script>
+// v-model.lazy.trim="condition.form.location"
+// ref="inputLocation"
+// @keyup.enter="searchRecruit"
+// v-on:focusout="searchRecruit"
 import { ref, reactive } from 'vue';
 import ReviewViewItem from './components/reviewViewItem.vue';
 import reviewAPI from '../../../api/reviewService';
