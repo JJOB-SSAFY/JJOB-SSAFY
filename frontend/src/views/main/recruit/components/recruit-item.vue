@@ -17,7 +17,7 @@
 					{{ info.requirement }}
 				</div>
 				<div class="rec-item-location font-LINE-Rg">
-					{{ info.location }} 서울/강남
+					{{ info.location }}
 				</div>
 				<div class="rec-item-end font-LINE-Rg">
 					{{ info.recruitStartDate }} ~ {{ info.recruitEndDate }}
