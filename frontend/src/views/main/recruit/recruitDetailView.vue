@@ -1,7 +1,12 @@
 <template>
 	<div>
 		<div class="bottom-btn-div">
-			<button id="bot-bt-apply" type="button" class="btnLightBlue btnFade">
+			<button
+				id="bot-bt-apply"
+				type="button"
+				class="btnLightBlue btnFade"
+				@click="doApply"
+			>
 				지원하기
 			</button>
 			<button
@@ -77,6 +82,7 @@
 										id="apply-bt"
 										type="button"
 										class="btnLightBlue btnFade"
+										@click="doApply"
 									>
 										지원하기
 									</button>
@@ -90,6 +96,37 @@
 									</button>
 								</div>
 							</div>
+							<div class="side-box" style="padding: 20px">
+								<h6 style="font-weight: bold; margin-bottom: 20px">
+									이력서 선택
+								</h6>
+								<div class="dropdown">
+									<button
+										class="dropdown-toggle resume-dropdown-btn"
+										type="button"
+										id="dropdownMenuButton1"
+										data-bs-toggle="dropdown"
+										aria-expanded="false"
+									>
+										{{ selectResume.selectedResumeTitle }}
+									</button>
+									<ul
+										class="dropdown-menu w-100"
+										aria-labelledby="dropdownMenuButton1"
+									>
+										<li
+											v-for="resume in resumeList.resume"
+											:key="resume.resumeId"
+										>
+											<a
+												class="dropdown-item non-hover"
+												@click="select(resume.resumeId, resume.resumeTitle)"
+												>{{ resume.resumeTitle }}</a
+											>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</aside>
 					</div>
 				</div>
@@ -99,7 +136,7 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, toRaw } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
 import { useRouter } from 'vue-router';
@@ -109,8 +146,9 @@ export default {
 
 	setup() {
 		const router = useRouter();
+
 		const recruitId = localStorage.getItem('page');
-		// console.log(recruitId);
+
 		const detailList = reactive({
 			career: null,
 			companyName: null,
@@ -125,16 +163,28 @@ export default {
 			recruitContent: null,
 			requirement: null,
 		});
+
+		const selectResume = reactive({
+			selectedResumeId: '',
+			selectedResumeTitle: '',
+		});
+
+		const resumeList = reactive({
+			resume: '',
+		});
+
 		const oneUrl = reactive({
 			onUrl: detailList.imgUrl,
 		});
+
 		axios({
 			method: 'GET',
 			url: url + '/recruit/detail/' + recruitId,
+			headers: {
+				Authorization: localStorage.getItem('jjob.s.token'),
+			},
 		})
 			.then(response => {
-				// console.log(onUrl);
-				console.log(response.data);
 				detailList.career = response.data.career;
 				detailList.companyName = response.data.companyName;
 				detailList.department = response.data.department;
@@ -152,10 +202,62 @@ export default {
 				console.log(err);
 			});
 
+		axios({
+			method: 'GET',
+			url: url + '/resume',
+			headers: {
+				Authorization: localStorage.getItem('jjob.s.token'),
+			},
+		}).then(res => {
+			console.log(res.data);
+			resumeList.resume = res.data;
+		});
+
 		const clickToList = () => {
 			router.push({ name: 'recruit' });
 		};
-		return { oneUrl, detailList, clickToList };
+
+		const select = (id, title) => {
+			selectResume.selectedResumeId = id;
+			selectResume.selectedResumeTitle = title;
+		};
+
+		const doApply = () => {
+			const resumeId = selectResume.selectedResumeId;
+
+			const config = {
+				status: '지원완료',
+				step: '서류전형',
+				title: '',
+				content: '',
+				result: '',
+			};
+
+			axios({
+				method: 'POST',
+				url: url + '/apply/' + recruitId + '/' + resumeId,
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: config,
+			})
+				.then(res => {
+					console.log(res);
+				})
+				.then(() => {
+					alert(detailList.companyName + detailList.recruitTitle + '지원완료');
+				});
+		};
+
+		return {
+			oneUrl,
+			detailList,
+			selectResume,
+			resumeList,
+			clickToList,
+			select,
+			doApply,
+		};
 	},
 };
 </script>
@@ -272,6 +374,7 @@ export default {
 	/* text-align: center; */
 	border-radius: 1px;
 	border: 1px solid var(--primary-color-border-grey);
+	margin-bottom: 20px;
 }
 
 .btnLightBlue {
@@ -292,6 +395,13 @@ export default {
 	transition: all 0.5s;
 	display: flex;
 	justify-content: center;
+}
+
+.resume-dropdown-btn {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 @media screen and (max-width: 1024px) {
