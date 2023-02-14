@@ -9,7 +9,14 @@
 
 			<div class="myapply-title font-LINE-Rg">{{ info.recruitTitle }}</div>
 			<div class="myapply-step font-LINE-Rg">{{ info.step }}</div>
-			<button @click="modalInfo.dialog = true" class="myapply-view-bt">
+			<button
+				v-if="info.status === '결과보기'"
+				@click="modalInfo.dialog = true"
+				class="myapply-view-bt"
+			>
+				{{ info.status }}
+			</button>
+			<button v-else class="myapply-view-bt">
 				{{ info.status }}
 			</button>
 			<div v-if="info.result === '불합격'">
@@ -56,7 +63,7 @@
 					</v-dialog>
 				</v-row>
 			</div>
-			<div v-else>
+			<div v-else-if="info.result === '합격'">
 				<v-row justify="center">
 					<v-dialog v-model="modalInfo.dialog" persistent width="auto">
 						<v-card>
