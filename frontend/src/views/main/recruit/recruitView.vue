@@ -124,7 +124,11 @@ export default {
 		const searchRecruit = async function () {
 			recruitService
 				.getRecruitList(toRaw(condition.form))
-				.then(data => (searchList.recruit = data));
+				.then(data => {
+					searchList.recruit = data.sort(function(a, b){
+						return b.recruitId - a.recruitId;
+					})
+				});
 		};
 		searchRecruit();
 
