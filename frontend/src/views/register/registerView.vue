@@ -17,7 +17,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>이메일</label>
+							<label class="label-title">이메일</label>
 						</div>
 						<br />
 						<div v-if="!invalidEmail" style="color: red">
@@ -31,7 +31,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>비밀번호</label>
+							<label class="label-title">비밀번호</label>
 						</div>
 						<br />
 						<div class="group">
@@ -42,7 +42,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>비밀번호 확인</label>
+							<label class="label-title">비밀번호 확인</label>
 						</div>
 						<br />
 						<div v-if="!invalidPassowrd" style="color: red">
@@ -58,7 +58,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>이름</label>
+							<label class="label-title">이름</label>
 						</div>
 						<br />
 						<div class="group">
@@ -69,7 +69,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>기업 이름</label>
+							<label class="label-title">기업 이름</label>
 						</div>
 						<br />
 						<div class="div-button">
@@ -93,7 +93,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>기업 이름</label>
+							<label class="label-title">기업 이름</label>
 						</div>
 						<br />
 						<div class="group">
@@ -104,7 +104,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>기업 주소</label>
+							<label class="label-title">기업 주소</label>
 						</div>
 						<br />
 						<div class="group">
@@ -115,7 +115,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>기업 설명</label>
+							<label class="label-title">기업 설명</label>
 						</div>
 						<br />
 						<div class="group">
@@ -126,7 +126,7 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>기업 설명</label>
+							<label class="label-title">사원 수</label>
 						</div>
 						<br />
 						<div class="group">
@@ -137,7 +137,20 @@
 								required
 							/>
 							<span class="bar"></span>
-							<label>기업 홈페이지</label>
+							<label class="label-title">기업 홈페이지</label>
+						</div>
+
+						<label class="label-title mt-5">기업 로고(필수입력 X)</label>
+						<div class="filebox">
+							<input
+								type="text"
+								class="upload-name shadow"
+								v-model="fileName"
+							/>
+							<div class="file-btn">
+								<label for="file">로고 찾기</label>
+								<input type="file" id="file" @change="imgUpload" />
+							</div>
 						</div>
 						<br />
 						<div class="div-button">
@@ -162,6 +175,8 @@ import { watch } from 'vue';
 import { reactive, ref } from 'vue';
 import MemberService from '../../api/memberService';
 import CompanyService from '../../api/companyService';
+import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../api/firebase';
 export default {
 	name: 'registerView',
 	setup() {
@@ -170,7 +185,19 @@ export default {
 		const companyService = new CompanyService();
 		const invalidEmail = ref(true);
 		const invalidPassowrd = ref(true);
+		const fileName = ref('첨부파일');
+		const imgUpload = async e => {
+			fileName.value = e.target.files[0].name;
+			const uploaded_file = await uploadBytes(
+				fref(storage, `images/${e.target.files[0].name}`),
+				e.target.files[0],
+			);
+			console.log(uploaded_file);
+			const file_url = await getDownloadURL(uploaded_file.ref);
+			console.log(file_url);
 
+			companyInfo.companyLogo = file_url;
+		};
 		const info = reactive({
 			email: '',
 			password: '',
@@ -185,6 +212,7 @@ export default {
 			companyName: '',
 			companyUrl: '',
 			employeeCnt: '',
+			companyLogo: null,
 		});
 
 		const userInfo = reactive({
@@ -251,6 +279,7 @@ export default {
 		};
 
 		const registerCompany = async function (param) {
+			console.log(param);
 			await companyService
 				.registerCompany(param)
 				.then(data => {
@@ -371,6 +400,8 @@ export default {
 			companyInfo,
 			registerCompany,
 			registerUser,
+			imgUpload,
+			fileName,
 		};
 	},
 };
@@ -422,11 +453,10 @@ input:focus {
 }
 
 /* LABEL ======================================= */
-label {
+label.label-title {
 	color: #999;
 	font-size: 18px;
 	font-weight: normal;
-	position: absolute;
 	pointer-events: none;
 	left: 5px;
 	top: 10px;
@@ -436,8 +466,8 @@ label {
 }
 
 /* active state */
-input:focus ~ label,
-input:valid ~ label {
+input:focus ~ label.label-title,
+input:valid ~ label.label-title {
 	top: -20px;
 	font-size: 14px;
 	color: #5264ae;
@@ -472,5 +502,45 @@ input:valid ~ label {
 input:focus ~ .bar:before,
 input:focus ~ .bar:after {
 	width: 50%;
+}
+.filebox {
+	margin-top: 20px;
+	color: #999;
+	font-size: 18px;
+	font-weight: normal;
+	display: flex;
+}
+
+.filebox .upload-name {
+	/* display: inline-block; */
+	height: 40px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 85%;
+	color: #999999;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 7px 22px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	width: max-content;
+}
+
+.filebox input[type='file'] {
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+.file-btn {
+	margin-right: 80px;
+	text-align: right;
 }
 </style>
