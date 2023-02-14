@@ -1,6 +1,15 @@
 <template>
-	<router-link to="recruit/detail/{{recuritId}}" class="to-recruit-detail">
+	<router-link
+		:to="{
+			name: 'recruitDetail',
+			params: {
+				recruitId: info.recruitId,
+			},
+		}"
+		class="to-recruit-detail"
+	>
 		<div>
+			<div>{{ info.recruitId }}</div>
 			<div class="rec-item-img">
 				<img :src="info.recruitImage" />
 			</div>
@@ -30,13 +39,12 @@
 <script>
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-
+import { ref } from 'vue';
 export default {
 	name: 'recruitItemView',
 	props: {
 		info: Object,
 	},
-	setup() {},
 };
 </script>
 

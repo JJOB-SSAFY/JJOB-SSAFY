@@ -139,15 +139,15 @@
 import { reactive, toRaw } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
-import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 export default {
 	name: 'recruitDetailView',
 
 	setup() {
-		const router = useRouter();
+		const route = useRoute();
 
-		const recruitId = localStorage.getItem('page');
+		const recruitId = route.params.recruitId;
 
 		const detailList = reactive({
 			career: null,
@@ -257,6 +257,7 @@ export default {
 			clickToList,
 			select,
 			doApply,
+			recruitId,
 		};
 	},
 };
