@@ -39,7 +39,7 @@
 					@click="goToRecruitDetailView(recruit.recruitId)"
 				>
 					<img
-						src="../../../assets/images/blackbackground.jpg"
+						:src="recruit.recruitImage"
 						class="card-img-top"
 						alt="..."
 						style="border-radius: 5px"
@@ -90,7 +90,7 @@
 			>
 				<div class="card card-container" style="border: none">
 					<img
-						src="../../../assets/images/blackbackground.jpg"
+						:src="recruit.recruitImage"
 						class="card-img-top"
 						alt="..."
 						style="border-radius: 5px"
