@@ -25,6 +25,7 @@
 							class="form-control"
 							type="text"
 							required
+							readonly
 							style="font-size: 18px; margin-bottom: 20px"
 						/>
 					</p>
@@ -45,6 +46,7 @@
 							class="form-control"
 							type="text"
 							required
+							readonly
 						/>
 					</p>
 				</div>
