@@ -14,7 +14,8 @@
 				placeholder="이름"
 				v-model.lazy.trim="searchForm.form.name"
 				ref="inputName"
-				@keyup.enter="searchCard"
+				@keyup.enter="search"
+				v-on:focusout="search"
 			/>
 			<button type="button" @click="search">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
@@ -29,7 +30,8 @@
 				placeholder="보유 기술"
 				v-model.lazy.trim="searchForm.form.skills"
 				ref="inputSkill"
-				@keyup.enter="searchCard"
+				@keyup.enter="search"
+				v-on:focusout="search"
 			/>
 			<button type="button" @click="search">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
@@ -44,7 +46,8 @@
 				placeholder="선호 직무"
 				v-model.lazy.trim="searchForm.form.preferredJob"
 				ref="inputJob"
-				@keyup.enter="searchCard"
+				@keyup.enter="search"
+				v-on:focusout="search"
 			/>
 			<button type="button" @click="search">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
@@ -68,7 +71,7 @@
 <script>
 import InfoCardService from '../../../api/infoCardService';
 import infoCardItem from './components/infoCardItem.vue';
-import { ref, reactive } from 'vue';
+import { ref, reactive, toRaw } from 'vue';
 export default {
 	namd: 'infoCardView',
 	components: {
@@ -80,7 +83,7 @@ export default {
 			card: '',
 		});
 		const searchCardList = reactive({
-			searchList: null,
+			searchList: '',
 		});
 
 		infoCardService.getCardList().then(data => {
@@ -92,16 +95,26 @@ export default {
 			form: {
 				skills: '',
 				preferredJob: '',
+				name:'',
 			},
 		});
 
-		const search = () => {};
+	
+
+			const search = async function(){
+				infoCardService.
+				getCardList(toRaw(searchForm.form))
+				.then(data => (cardList.card = data));
+			};
+			search();
+				// const search = () => {};
 		return {
 			cardList,
 			searchForm,
 			searchCardList,
 			search,
 		};
+
 	},
 };
 </script>
