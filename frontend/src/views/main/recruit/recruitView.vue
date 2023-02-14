@@ -15,9 +15,10 @@
 				placeholder="신입/경력"
 				v-model.lazy.trim="condition.form.career"
 				ref="inputCareer"
-				@keyup.enter="searchCard"
+				@keyup.enter="searchRecruit"
+				v-on:focusout="searchRecruit"
 			/>
-			<button type="button" @click="search">
+			<button type="button" @click="searchRecruit">
 				<fa-icon icon="fas fa-solid fa-chevron-down" />
 			</button>
 		</div>
@@ -30,9 +31,10 @@
 				placeholder="지역"
 				v-model.lazy.trim="condition.form.location"
 				ref="inputLocation"
-				@keyup.enter="searchCard"
+				@keyup.enter="searchRecruit"
+				v-on:focusout="searchRecruit"
 			/>
-			<button type="button" @click="search">
+			<button type="button" @click="searchRecruit">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
 			</button>
 		</div>
@@ -45,9 +47,10 @@
 				placeholder="직무"
 				v-model.lazy.trim="condition.form.department"
 				ref="inputDepartment"
-				@keyup.enter="searchCard"
+				@keyup.enter="searchRecruit"
+				v-on:focusout="searchRecruit"
 			/>
-			<button type="button" @click="search">
+			<button type="button" @click="searchRecruit">
 				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
 			</button>
 		</div>
@@ -90,14 +93,14 @@ export default {
 			},
 		});
 
-		const searchInfo = async function () {
+		const searchRecruit = async function () {
 			recruitService
 				.getRecruitList(toRaw(condition.form))
 				.then(data => (searchList.recruit = data));
 		};
-		searchInfo();
+		searchRecruit();
 
-		return { condition, searchInfo, searchList };
+		return { condition, searchRecruit, searchList };
 	},
 };
 </script>
