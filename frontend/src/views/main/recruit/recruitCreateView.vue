@@ -9,13 +9,28 @@
 			<h3>채용공고</h3>
 			<br />
 			<div class="register-user-detail">
-				<h6>*공고 이름</h6>
-				<input
-					class="register-form-input font-LINE-Rg"
-					type="text"
-					placeholder="공고 이름"
-					v-model="info.recruitTitle"
-				/>
+				<div class="register-user-detail">
+					<div class="row">
+						<div class="col-8">
+							<h6>*공고 이름</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="공고이름"
+								v-model="info.recruitTitle"
+							/>
+						</div>
+						<div class="col">
+							<h6>*경력여부</h6>
+							<input
+								class="register-form-input font-LINE-Rg"
+								type="text"
+								placeholder="경력여부"
+								v-model="info.career"
+							/>
+						</div>
+					</div>
+				</div>
 
 				<div class="register-user-detail">
 					<div class="row">
@@ -37,6 +52,22 @@
 								v-model="info.workType"
 							/>
 						</div>
+
+						<div class="col">
+							<h6>*근무 형태</h6>
+							<form name="fr">
+								<select name="fruits" onchange="func(this.value)">
+									<option value="">선택하세요</option>
+									<option value="ragular">정규직</option>
+									<option value="contract">계약직</option>
+								</select>
+								<input
+									class="register-form-input font-LINE-Rg"
+									type="text"
+									name="selectFruit"
+								/>
+							</form>
+						</div>
 					</div>
 				</div>
 
@@ -56,7 +87,6 @@
 							<input
 								class="register-form-input font-LINE-Rg"
 								type="date"
-								placeholder="시작 날짜"
 								v-model="info.recruitStartDate"
 							/>
 						</div>
@@ -65,7 +95,6 @@
 							<input
 								class="register-form-input font-LINE-Rg"
 								type="date"
-								placeholder="종료 날짜"
 								v-model="info.recruitEndDate"
 							/>
 						</div>
