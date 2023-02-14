@@ -1,6 +1,7 @@
 import http from '@/api/http';
 import jwt from '@/common/jwt';
 import vueRouter from '../router/vue-router';
+import Swal from 'sweetalert2';
 
 export const auth = {
 	namespaced: true,
@@ -62,7 +63,11 @@ export const auth = {
 				})
 				.then(() => vueRouter.push({ name: 'home' }))
 				.catch(err => {
-					alert('이메일 비밀번호를 확인해주세요');
+					Swal.fire({
+						title: 'OOPS!',
+						text: '이메일 비밀번호를 확인해주세요',
+						icon: 'warning',
+					});
 					commit('ERROR_HANDLE', err);
 				});
 		},
