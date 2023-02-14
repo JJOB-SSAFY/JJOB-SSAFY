@@ -15,7 +15,7 @@ public interface RecruitService {
 
     void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId);
 
-    List<RecruitResponseListDto> getReviewList(RecruitSearchCondition condition);
+    List<RecruitResponseListDto> getRecruitList(RecruitSearchCondition condition);
 
     RecruitResponseDto getRecruitDetail(Long recruitId);
 

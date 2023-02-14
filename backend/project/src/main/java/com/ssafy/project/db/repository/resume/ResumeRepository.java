@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 public interface ResumeRepository extends JpaRepository<Resume, Long> {
-    List<Resume> findAllByMemberEmail(String email);
-
+    List<Resume> findAllByMemberId(Long memberId);
+    List<Resume> findAllByMemberIdAndIsApplied(Long memberId, Boolean isApplied);
     void deleteById(Long resumeId);
 }

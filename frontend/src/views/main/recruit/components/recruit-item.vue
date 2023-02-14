@@ -1,8 +1,17 @@
 <template>
-	<router-link to="recruit/detail/{{recuritId}}" class="to-recruit-detail">
+	<router-link
+		:to="{
+			name: 'recruitDetail',
+			params: {
+				recruitId: info.recruitId,
+			},
+		}"
+		class="to-recruit-detail"
+	>
 		<div>
+			<div>{{ info.recruitId }}</div>
 			<div class="rec-item-img">
-				<img src="../../../../assets/images/logo-background.jpg" />
+				<img :src="info.recruitImage" />
 			</div>
 			<!-- @click="clickDetail(info.recruitId) -->
 			<!-- @click="clickDetail(info.recruitId)" -->
@@ -17,7 +26,7 @@
 					{{ info.requirement }}
 				</div>
 				<div class="rec-item-location font-LINE-Rg">
-					{{ info.location }} 서울/강남
+					{{ info.location }}
 				</div>
 				<div class="rec-item-end font-LINE-Rg">
 					{{ info.recruitStartDate }} ~ {{ info.recruitEndDate }}
@@ -30,13 +39,12 @@
 <script>
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-
+import { ref } from 'vue';
 export default {
 	name: 'recruitItemView',
 	props: {
 		info: Object,
 	},
-	setup() {},
 };
 </script>
 

@@ -14,13 +14,35 @@
 				type="text"
 				placeholder="신입/경력"
 				v-model.lazy.trim="condition.form.career"
-				ref="inputCareer"
-				@keyup.enter="searchRecruit"
-				v-on:focusout="searchRecruit"
+				readonly
 			/>
-			<button type="button" @click="searchRecruit">
-				<fa-icon icon="fas fa-solid fa-chevron-down" />
-			</button>
+			<div class="dropdown" style="position: absolute; right: 5px">
+				<button
+					type="button"
+					id="dropdownMenuButton1"
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+				>
+					<fa-icon icon="fas fa-solid fa-chevron-down" />
+				</button>
+				<ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+					<li>
+						<a class="dropdown-item non-hover" @click="searchByCareer('')"
+							>전체</a
+						>
+					</li>
+					<li>
+						<a class="dropdown-item non-hover" @click="searchByCareer('신입')"
+							>신입</a
+						>
+					</li>
+					<li>
+						<a class="dropdown-item non-hover" @click="searchByCareer('경력')"
+							>경력</a
+						>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div class="div-search-location">
 			<img src="@/assets/images/icon/location.png" width="19" height="19" />
@@ -88,10 +110,16 @@ export default {
 
 		const condition = reactive({
 			form: {
+				career: '',
 				location: '',
 				department: '',
 			},
 		});
+
+		const searchByCareer = career => {
+			condition.form.career = career;
+			searchRecruit();
+		};
 
 		const searchRecruit = async function () {
 			recruitService
@@ -100,7 +128,7 @@ export default {
 		};
 		searchRecruit();
 
-		return { condition, searchRecruit, searchList };
+		return { condition, searchRecruit, searchList, searchByCareer };
 	},
 };
 </script>

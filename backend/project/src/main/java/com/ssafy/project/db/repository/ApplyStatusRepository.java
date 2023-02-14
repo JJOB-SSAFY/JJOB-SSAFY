@@ -15,6 +15,6 @@ public interface ApplyStatusRepository extends JpaRepository<ApplyStatus, Long> 
 
     List<ApplyStatus> findAllByMemberId(Long memberId);
     List<ApplyStatus> findAllByRecruitId(Long recruitId);
-    ApplyStatus findByRecruitId(Long recruitId);
     void deleteAllByRecruitId(Long recruitId);
+    Optional<ApplyStatus> findByResumeId(Long resumeId);
 }

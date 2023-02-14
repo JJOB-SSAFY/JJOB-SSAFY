@@ -26,9 +26,13 @@ public class ResumeResponseDto {
     private String email;
 
     private String github;
+
+    private Boolean isOpened;
+
     private Boolean isApplied;
 
     private String imageUrl;
+
     private List<UniversityResponseDto> universityDtoList = new ArrayList<>();
 
     private List<EducationResponseDto> educationDtoList = new ArrayList<>();
@@ -48,7 +52,6 @@ public class ResumeResponseDto {
     private List<ProjectExpResponseDto> projectExpDtoList = new ArrayList<>();
 
     private List<CoverLetterResponseDto> coverLetterDtoList = new ArrayList<>();
-
 
     public static ResumeResponseDto of(Resume dto, List<ActivityResponseDto> activityDtoList, List<AwardResponseDto> awardDtoList,
                                        List<CareerResponseDto> careerDtoList, List<CertificateResponseDto> certificateDtoList,
@@ -75,10 +78,10 @@ public class ResumeResponseDto {
                 .skillDtoList(skillResponseDtoList)
                 .projectExpDtoList(projectExpDtoList)
                 .coverLetterDtoList(coverLetterDtoList)
+                .isOpened(dto.getIsOpened())
                 .isApplied(dto.getIsApplied())
                 .imageUrl(imageUrl)
                 .build();
     }
-
 
 }

@@ -139,15 +139,15 @@
 import { reactive, toRaw } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 export default {
 	name: 'recruitDetailView',
 
 	setup() {
+		const route = useRoute();
 		const router = useRouter();
-
-		const recruitId = localStorage.getItem('page');
+		const recruitId = route.params.recruitId;
 
 		const detailList = reactive({
 			career: null,
@@ -204,7 +204,7 @@ export default {
 
 		axios({
 			method: 'GET',
-			url: url + '/resume',
+			url: url + '/resume/isapplied',
 			headers: {
 				Authorization: localStorage.getItem('jjob.s.token'),
 			},
@@ -257,6 +257,7 @@ export default {
 			clickToList,
 			select,
 			doApply,
+			recruitId,
 		};
 	},
 };

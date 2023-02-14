@@ -31,6 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional(readOnly = true)
     public List<ReviewResponseListDto> getReviewList(ReviewSearchCondition condition) {
+
         return reviewRepository.searchReview(condition);
     }
 
