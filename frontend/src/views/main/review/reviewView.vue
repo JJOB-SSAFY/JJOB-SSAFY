@@ -5,40 +5,31 @@
 	</div>
 
 	<hr class="hr-main2" />
-	<div class="review-section">
-		<div class="review-container-header">
-			<!-- <h2>기업 면접 리뷰</h2> -->
-			<form class="recruit-search-form mt-50" @submit.prevent>
-				<div class="div-search-location">
-					<img src="@/assets/images/logo/logo.png" width="19" height="19" />
-					<input
-						class="form-control card-search-input font-LINE-Rg"
-						type="text"
-						placeholder="회사명"
-						v-model.lazy.trim="reviewSearchCond.form.companyName"
-						v-on:focusout="searchReview"
-						ref="inputCompanyName"
-						@keyup.enter="searchReview"
-					/>
-					<button type="button" @click="searchReview">
-						<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-					</button>
-				</div>
-			</form>
+	<form class="recruit-search-form mt-50" @submit.prevent>
+		<div class="div-search-location">
+			<img src="@/assets/images/icon/office.png" width="19" height="19" />
+			<input
+				class="form-control card-search-input font-LINE-Rg"
+				type="text"
+				placeholder="회사명"
+				v-model.lazy.trim="reviewSearchCond.form.companyName"
+				v-on:focusout="searchReview"
+				ref="inputCompanyName"
+				@keyup.enter="searchReview"
+			/>
+			<button type="button" @click="searchReview">
+				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+			</button>
 		</div>
+	</form>
+	<div class="review-section">
 		<!-- 이 위는 검색창 -->
-		<div>
-			<div>
-				<ul class="row">
-					<li
-						v-for="info in state.interviewReviewList"
-						:key="info.reviewId"
-						class="col-6"
-					>
-						<review-view-item :info="info" />
-					</li>
-				</ul>
-			</div>
+		<div
+			v-for="info in state.interviewReviewList"
+			:key="info.reviewId"
+			class="review-item"
+		>
+			<review-view-item :info="info" />
 		</div>
 	</div>
 </template>
