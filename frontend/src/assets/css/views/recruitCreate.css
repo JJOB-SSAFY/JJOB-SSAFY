@@ -1,0 +1,39 @@
+.register-recruit-box {
+	border: 1px solid black;
+	width: 80%;
+	display: block;
+	margin: auto;
+	padding-bottom: 25px;
+	justify-content: center;
+	border-radius: 5px;
+}
+.register-recruit {
+	width: 100%;
+	padding: 25px;
+}
+.register-recruit-detail {
+	margin: 3% 0;
+}
+.register-recruit-form-input {
+	width: 100%;
+	font-size: 15px;
+	background-color: aliceblue;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	display: block;
+	padding: 5px;
+	margin-top: 10px;
+}
+.file-btn {
+	margin-top: 3px;
+}
+#content-area {
+	width: 100%;
+	border: 1px lightgray solid;
+	border-radius: 5px;
+	resize: none;
+}
+.div-button {
+	margin: auto;
+	width: 97%;
+}
