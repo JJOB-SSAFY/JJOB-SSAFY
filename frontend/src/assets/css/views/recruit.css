@@ -1,171 +1,97 @@
-.container-recruit {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.responsive-table li {
-  border-radius: 3px;
-  padding: 25px 30px;
+/* Search Button */
+.recruit-search-form {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
+  justify-content: center;
 }
 
-.responsive-table .table-header {
-  background-color: #e9ece9;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  font-family: "LINE-Bd";
+.div-search-career,
+.div-search-location,
+.div-search-department {
+  display: flex;
+  align-items: center;
+  margin: 0px 5px 20px 5px;
 }
 
-.responsive-table .table-row {
-  background-color: #fff;
-  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
-  font-family: "LINE-Rg";
-  font-size: 17px;
+.div-search-career>img,
+.div-search-location>img,
+.div-search-department>img {
+  position: absolute;
+  margin-left: 5px;
 }
 
-.responsive-table .col-1 {
-  flex-basis: 20%;
+.div-search-career>input,
+.div-search-location>input,
+.div-search-department>input {
+  padding: 0px 30px;
+  height: 40px;
 }
 
-.responsive-table .col-2 {
-  flex-basis: 21%;
+.div-search-career>button,
+.div-search-location>button,
+.div-search-department>button {
+  margin-left: -20px;
 }
 
-.responsive-table .col-3 {
-  flex-basis: 25%;
+/* item */
+.to-recruit-detail {
+  color: black;
 }
 
-.responsive-table .col-4 {
-  flex-basis: 25%;
+.to-recruit-detail:hover {
+  transform: scale(1.03);
+  transition: 0.7s;
+  color: rgb(18, 13, 50);
 }
 
-@media all and (max-width: 1024px) {
-  .responsive-table .table-header {
-    display: none;
-  }
+.rec-list {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .responsive-table li {
-    display: block;
-  }
+.rec-list-item {
+  width: 25%;
+  padding: 10px;
+}
 
-  .responsive-table .col {
-    flex-basis: 100%;
-  }
 
-  .responsive-table .col {
-    display: flex;
-    padding: 10px 0;
-  }
+.rec-item-content {
+  padding: 14px 0px;
+}
 
-  .responsive-table .col:before {
-    color: #6c7a89;
-    padding-right: 10px;
-    content: attr(data-label);
-    flex-basis: 50%;
-    text-align: right;
-  }
+.rec-item-content>div {
+  overflow: hidden;
+  word-break: break-word;
+}
 
-  /* Search Button */
-  .recruit-search-form {
-    display: flex;
-    justify-content: center;
-  }
+.rec-item-title {
+  font-size: 18px;
+  max-height: 2.4em;
+  line-height: 1.2;
+  overflow: hidden;
+  word-break: break-word;
+}
 
-  .div-search-career,
-  .div-search-location,
-  .div-search-department {
-    display: flex;
-    align-items: center;
-    margin: 0px 5px 20px 5px;
-  }
+.rec-item-company {
+  margin: 10px 0 0;
+}
 
-  .div-search-career>img,
-  .div-search-location>img,
-  .div-search-department>img {
-    position: absolute;
-    margin-left: 5px;
-  }
+.rec-item-location {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: var(--primary-color-1);
+}
 
-  .div-search-career>input,
-  .div-search-location>input,
-  .div-search-department>input {
-    padding: 0px 30px;
-    height: 40px;
-  }
-
-  .div-search-career>button,
-  .div-search-location>button,
-  .div-search-department>button {
-    margin-left: -20px;
-  }
-
-  /* item */
-  .to-recruit-detail {
-    color: black;
-  }
-
-  .to-recruit-detail:hover {
-    transform: scale(1.03);
-    transition: 0.7s;
-    color: rgb(18, 13, 50);
-  }
-
-  .rec-list {
-    display: flex;
-    flex-wrap: wrap;
-  }
+@media only screen and (max-width: 1024px) {
 
   .rec-list-item {
-    width: 25%;
-    padding: 10px;
+    width: 50%;
   }
+}
 
+@media only screen and (max-width: 512px) {
 
-  .rec-item-content {
-    padding: 14px 0px;
-  }
+  .rec-list-item {
+    width: 100%;
 
-  .rec-item-content>div {
-    overflow: hidden;
-    word-break: break-word;
-  }
-
-  .rec-item-title {
-    font-size: 18px;
-    max-height: 2.4em;
-    line-height: 1.2;
-    overflow: hidden;
-    word-break: break-word;
-  }
-
-  .rec-item-company {
-    margin: 10px 0 0;
-  }
-
-  .rec-item-location {
-    margin: 10px 0 0;
-    font-size: 14px;
-    color: var(--primary-color-1);
-  }
-
-  @media only screen and (max-width: 1024px) {
-
-    .rec-list-item {
-      width: 50%;
-    }
-  }
-
-  @media only screen and (max-width: 512px) {
-
-    .rec-list-item {
-      width: 100%;
-
-    }
   }
 }
