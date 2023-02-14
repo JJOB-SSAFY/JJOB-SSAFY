@@ -20,4 +20,6 @@ public class CompanyRequestDto {
     private int employeeCnt;
 
     private String companyDesc;
+
+    private String companyLogo;
 }
