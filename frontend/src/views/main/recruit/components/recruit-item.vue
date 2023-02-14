@@ -9,7 +9,6 @@
 		class="to-recruit-detail"
 	>
 		<div>
-			<div>{{ info.recruitId }}</div>
 			<div class="rec-item-img">
 				<img :src="info.recruitImage" />
 			</div>
