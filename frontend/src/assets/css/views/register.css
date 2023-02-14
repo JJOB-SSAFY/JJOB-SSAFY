@@ -4,5 +4,161 @@
 
 .register-form {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.register-user,
+.register-company {
+  width: 30%;
+  margin: 0px 50px;
+}
+
+.reg-div-button {
+  display: flex;
+  justify-content: center;
+}
+
+.reg-div-button>button {
+  padding: 10px;
+  width: 50%;
+  color: white;
+  font-size: 21px;
+}
+
+/*input ========================================*/
+.file-group {
+  display: flex;
+  justify-content: center;
+}
+
+.file-group>div {
+
+  width: 50%;
+}
+
+.filebox>input {
+  font-size: 18px;
+}
+
+.filebox>label {
+  font-size: 18px;
+}
+
+.register-div {
+  display: flex;
+  justify-content: center;
+}
+
+.group {
+  position: relative;
+  margin-top: 50px;
+}
+
+.group>input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+.group>input:focus {
+  outline: none;
+}
+
+/* LABEL ======================================= */
+.group>label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+/* active state */
+.group>input:focus~label,
+.group>input:valid~label {
+  top: -20px;
+  font-size: 14px;
+  color: #5264ae;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before,
+.bar:after {
+  content: '';
+  height: 3px;
+  bottom: 0.02px;
+  width: 0;
+  position: absolute;
+  background: var(--primary-color-1);
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%;
+}
+
+/* active state */
+.group>input:focus~.bar:before,
+.group>input:focus~.bar:after {
+  width: 50%;
+}
+
+.filebox {
+  display: flex;
+  justify-content: center;
+}
+
+.filebox .upload-name {
+  display: inline-block;
+  height: 44px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+  width: 60%;
+
+  border-radius: 10px;
+  padding: 0px 15px;
+  color: #999999;
+}
+
+.filebox>label {
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: var(--primary-color-1);
+  cursor: pointer;
+  height: 44px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.filebox>input[type='file'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
 }
