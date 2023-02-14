@@ -127,10 +127,10 @@
 						variant="text"
 						@click="goToInterviewView"
 					>
-						싫어
+						나가기
 					</v-btn>
 					<v-btn color="green-darken-1" variant="text" @click="goToReviewView">
-						좋아
+						리뷰쓰기
 					</v-btn>
 				</v-card-actions>
 			</v-card>
