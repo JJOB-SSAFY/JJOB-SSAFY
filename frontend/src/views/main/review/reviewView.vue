@@ -1,7 +1,7 @@
 <template>
 	<div class="banner-container">
 		<span class="banner-letter1">Review</span>
-		<p class="banner-letter2">면접 후기 정보를 작성하는 곳입니다.</p>
+		<p class="banner-letter2">다른 사용자들이 작성한 리뷰를 보는 곳 입니다.</p>
 	</div>
 
 	<hr class="hr-main2" />
