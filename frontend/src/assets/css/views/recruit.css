@@ -50,6 +50,10 @@
 }
 
 .rec-list-item {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   width: 25%;
   padding: 10px;
 }

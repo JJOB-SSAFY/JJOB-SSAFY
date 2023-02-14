@@ -290,10 +290,12 @@ export default {
 .content-left {
 	width: 100%;
 }
-
+.img-box {
+	display: flex;
+	justify-content: center;
+}
 .img-box > img {
-	width: 100%;
-	height: 350px;
+	width: 70%;
 	object-fit: fill;
 }
 #content-left-title {
