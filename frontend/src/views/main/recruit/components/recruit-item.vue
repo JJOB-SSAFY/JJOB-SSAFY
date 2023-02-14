@@ -1,49 +1,30 @@
 <template>
-	<div id="items">
-		<div class="card">
-			<div>
-				<h4 class="card-header" @click="clickDetail(info.recruitId)">
-					<b>{{ info.companyName }}</b>
-					&nbsp;
-					<h6>(경력여부 : {{ info.work }})</h6>
-					&nbsp;
-					<h6>(지역 : {{ info.location }})</h6>
-				</h4>
+	<router-link to="recruit/detail/{{recuritId}}" class="to-recruit-detail">
+		<div>
+			<div class="rec-item-img">
+				<img src="../../../../assets/images/logo-background.jpg" />
 			</div>
-
-			<div class="boxContainer">
-				<div class="leftbox">
-					<div class="card-body">
-						<h5>
-							<b>공고타이틀 : {{ info.recruitTitle }}</b>
-						</h5>
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">
-							담당업무 :
-							{{ info.work }}
-						</h5>
-						<p class="card-text">
-							요구역량 :
-							{{ info.requirement }}
-						</p>
-					</div>
+			<!-- @click="clickDetail(info.recruitId) -->
+			<!-- @click="clickDetail(info.recruitId)" -->
+			<div class="rec-item-content">
+				<div class="rec-item-title font-LINE-Bd">
+					{{ info.recruitTitle }} [ {{ info.department }} ]
 				</div>
-				<div class="rightbox">
-					<div class="card-body">
-						<p>지원마감일 &nbsp;&nbsp;~ {{ info.recruitEndDate }}</p>
-						<br /><br />
-						<button
-							class="btn btn-primary"
-							@click="clickDetail(info.recruitId)"
-						>
-							상세
-						</button>
-					</div>
+				<div class="rec-item-company font-LINE-Rg">
+					{{ info.companyName }}
+				</div>
+				<div class="rec-item-require font-LINE-Rg">
+					{{ info.requirement }}
+				</div>
+				<div class="rec-item-location font-LINE-Rg">
+					{{ info.location }} 서울/강남
+				</div>
+				<div class="rec-item-end font-LINE-Rg">
+					{{ info.recruitStartDate }} ~ {{ info.recruitEndDate }}
 				</div>
 			</div>
 		</div>
-	</div>
+	</router-link>
 </template>
 
 <script>
@@ -55,44 +36,8 @@ export default {
 	props: {
 		info: Object,
 	},
-	setup() {
-		const router = useRouter();
-		const store = useStore();
-
-		const clickDetail = function (id) {
-			localStorage.setItem('page', id);
-
-			router.push({
-				name: 'recruitDetail',
-				params: {
-					recruitId: id,
-				},
-			});
-		};
-
-		return { clickDetail };
-	},
+	setup() {},
 };
 </script>
 
-<style scoped>
-#items {
-	margin: 15px;
-}
-.boxContainer {
-	display: flex;
-}
-.card-header {
-	display: flex;
-	text-align: center;
-	align-items: center;
-	cursor: pointer;
-}
-.leftbox {
-	width: 100%;
-}
-.rightbox {
-	width: 100%;
-	text-align: right;
-}
-</style>
+<style></style>

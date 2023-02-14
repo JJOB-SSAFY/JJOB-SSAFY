@@ -3,7 +3,7 @@
 		<span class="banner-letter1">Applicant Information</span>
 		<p class="banner-letter2">지원자 정보를 볼 수 있는 곳입니다.</p>
 	</div>
-	<hr class="hr-main" />
+	<hr class="hr-main2" />
 	<form class="card-search-form mt-50" @submit.prevent>
 		<div class="div-search-skill">
 			<img src="@/assets/images/icon/skill.png" width="19" height="19" />
@@ -36,6 +36,8 @@
 			</button>
 		</div>
 	</form>
+
+	<hr class="hr-main" />
 	<div class="div-infoCards-view">
 		<div
 			v-for="info in cardList.card"
@@ -89,32 +91,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.card-search-form {
-	display: flex;
-	justify-content: center;
-}
-.div-search-skill,
-.div-search-job {
-	display: flex;
-	align-items: center;
-	margin: 0px 5px 20px 5px;
-}
-
-.div-search-skill > img,
-.div-search-job > img {
-	position: absolute;
-	margin-left: 5px;
-}
-
-.div-search-skill > input,
-.div-search-job > input {
-	padding: 0px 30px;
-	height: 40px;
-}
-
-.div-search-job > button,
-.div-search-skill > button {
-	margin-left: -20px;
-}
-</style>
+<style scoped></style>

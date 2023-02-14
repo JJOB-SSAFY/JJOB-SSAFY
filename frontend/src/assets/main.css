@@ -12,7 +12,7 @@
 
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-light-2: rgba(84, 84, 84, 0.65);
   --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
 
   --vt-c-text-light-1: var(--vt-c-indigo);
@@ -36,6 +36,8 @@
 
 
   --primary-color-grey: #808080;
+  --primary-color-border-grey: #e1e2e3;
+
   --primary-color-black: #000000;
   --primary-color-black-hover: #282828;
 
@@ -73,10 +75,13 @@
   flex-wrap: nowrap;
   align-items: center;
   font-weight: normal;
+  padding-bottom: 50px;
+
 }
 
 body {
   min-height: 100vh;
+  padding: 0px 0px 50px 0px;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;

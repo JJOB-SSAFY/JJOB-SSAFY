@@ -4,56 +4,64 @@
 		<p class="banner-letter2">채용공고 리스트를 확인하는 곳입니다.</p>
 	</div>
 
-	<hr class="hr-main" />
-	<div style="width: 80%; margin: auto">
-		<div class="div-search">
-			<form class="recruit-search-form" @submit.prevent="searchList">
-				<div class="div-search-department">
-					<input
-						class="form-control review-search-input"
-						type="text"
-						v-model.lazy="condition.location"
-						@keyup.enter="searchInfo"
-						placeholder="지역"
-						v-on:focusout="searchInfo"
-					/>
-				</div>
-				<div class="div-search-department">
-					<input
-						class="form-control review-search-input"
-						type="text"
-						v-model.lazy="condition.department"
-						@keyup.enter="searchInfo"
-						placeholder="직무"
-						v-on:focusout="searchInfo"
-					/>
-					<button
-						type="button"
-						@click="searchInfo"
-						style="font-size: 20px; position: absolute; top: 6px; right: 10px"
-					>
-						<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-					</button>
-				</div>
-				<!-- <div>
-					<button type="button" style="font-size: 20px">
-						<fa-icon icon="fas fa-solid fa-magnifying-glass" />
-					</button>
-				</div> -->
-			</form>
+	<hr class="hr-main2" />
+	<form class="recruit-search-form mt-50" @submit.prevent>
+		<div class="div-search-career">
+			<img src="@/assets/images/icon/newold.png" width="19" height="19" />
+			<input
+				id="recruit-search-career"
+				class="form-control card-search-input font-LINE-Rg"
+				type="text"
+				placeholder="신입/경력"
+				v-model.lazy.trim="condition.form.career"
+				ref="inputCareer"
+				@keyup.enter="searchCard"
+			/>
+			<button type="button" @click="search">
+				<fa-icon icon="fas fa-solid fa-chevron-down" />
+			</button>
 		</div>
-
-		<div class="div-itemList">
-			<div>
-				<ul class="recruit-list">
-					<li
-						class="recruit-list-item"
-						v-for="info in searchList.recruit"
-						:key="info.list"
-					>
-						<recruitItemView :info="info" />
-					</li>
-				</ul>
+		<div class="div-search-location">
+			<img src="@/assets/images/icon/location.png" width="19" height="19" />
+			<input
+				id="recruit-search-location"
+				class="form-control card-search-input font-LINE-Rg"
+				type="text"
+				placeholder="지역"
+				v-model.lazy.trim="condition.form.location"
+				ref="inputLocation"
+				@keyup.enter="searchCard"
+			/>
+			<button type="button" @click="search">
+				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+			</button>
+		</div>
+		<div class="div-search-department">
+			<img src="@/assets/images/icon/department.png" width="19" height="19" />
+			<input
+				id="recruit-search-department"
+				class="form-control card-search-input font-LINE-Rg"
+				type="text"
+				placeholder="직무"
+				v-model.lazy.trim="condition.form.department"
+				ref="inputDepartment"
+				@keyup.enter="searchCard"
+			/>
+			<button type="button" @click="search">
+				<fa-icon icon="fas fa-solid fa-magnifying-glass" />
+			</button>
+		</div>
+	</form>
+	<div>
+		<div>
+			<div class="rec-list">
+				<div
+					class="rec-list-item"
+					v-for="info in searchList.recruit"
+					:key="info.list"
+				>
+					<recruit-item-view :info="info" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -71,26 +79,20 @@ export default {
 	},
 	setup() {
 		const recruitService = new RecruitService();
-		const store = useStore();
-		// const all = onMounted(() => store.getters['recruit/getRecruitList']);
 		const searchList = reactive({
 			recruit: '',
 		});
 
 		const condition = reactive({
-			location: '',
-			department: '',
+			form: {
+				location: '',
+				department: '',
+			},
 		});
 
 		const searchInfo = async function () {
-			// store
-			// 	.dispatch('recruit/getList', {
-			// 		location: condition.form.location,
-			// 		department: condition.form.department,
-			// 	})
-			// 	.then((searchList.recruit = store.getters['recruit/getRecruitList']));
 			recruitService
-				.getRecruitList(toRaw(condition))
+				.getRecruitList(toRaw(condition.form))
 				.then(data => (searchList.recruit = data));
 		};
 		searchInfo();
@@ -100,42 +102,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.div-search {
-	position: relative;
-	top: 20px;
-}
-
-.div-itemList {
-	background-color: whitesmoke;
-	border-radius: 10px;
-	padding: 40px 10px 10px 10px;
-	box-sizing: border-box;
-}
-
-.recruit-search-form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.recruit-search-input {
-	padding: 5px;
-	box-sizing: border-box;
-	margin: auto;
-	height: 100%;
-	border: 10px solid black;
-}
-
-.recruit-list {
-	display: block;
-}
-.div-search-department {
-	position: relative;
-	display: flex;
-	width: 30%;
-	height: 45px;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-</style>
+<style></style>
