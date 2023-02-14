@@ -36,8 +36,12 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom {
                         recruit.recruitStartDate
                 ))
                 .from(recruit)
-                .where(locationEq(condition.getLocation()), departmentEq(condition.getDepartment()))
+                .where(careerEq(condition.getCareer()), locationEq(condition.getLocation()), departmentEq(condition.getDepartment()))
                 .fetch();
+    }
+
+    private BooleanExpression careerEq(String career) {
+        return hasText(career) ? recruit.career.eq(career) : null;
     }
 
     private BooleanExpression locationEq(String location) {
