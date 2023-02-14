@@ -139,14 +139,14 @@
 import { reactive, toRaw } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 export default {
 	name: 'recruitDetailView',
 
 	setup() {
 		const route = useRoute();
-
+		const router = useRouter();
 		const recruitId = route.params.recruitId;
 
 		const detailList = reactive({
