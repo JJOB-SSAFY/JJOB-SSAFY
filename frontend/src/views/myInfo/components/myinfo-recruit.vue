@@ -1,6 +1,5 @@
 <template>
 	<div>
-		{{ recruitList.recruit }}
 		<div
 			v-for="info in recruitList.recruit"
 			:key="info.recruit"

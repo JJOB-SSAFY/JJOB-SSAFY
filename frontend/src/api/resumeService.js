@@ -8,7 +8,7 @@ const config = {
 };
 export default class resumeService {
 	async getResumeList() {
-		return await http.get(`resume`, config).then(data => data.data);
+		return await http.get(`resume/isapplied`, config).then(data => data.data);
 	}
 
 	async getResume(id, params) {

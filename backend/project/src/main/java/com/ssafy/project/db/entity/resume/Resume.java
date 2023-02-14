@@ -19,7 +19,6 @@ public class Resume {
     @Column(name = "resume_id")
     private Long id;
 
-
     @Column(nullable = false)
     private String resumeTitle;
 
@@ -33,13 +32,16 @@ public class Resume {
     private String portfolio;
 
     private String email;
+
+    private Boolean isOpened;
+
     private Boolean isApplied;
+
     private String github;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-
 
     public static Resume of(Member member, ResumeRequestDto requestDto) {
         return Resume.builder()
@@ -51,7 +53,8 @@ public class Resume {
                 .portfolio(requestDto.getPortfolio())
                 .email(requestDto.getEmail())
                 .github(requestDto.getGithub())
-                .isApplied(requestDto.getIsApplied())
+                .isOpened(false)
+                .isApplied(false)
                 .build();
     }
 
@@ -66,6 +69,10 @@ public class Resume {
         this.isApplied = requestDto.getIsApplied();
     }
 
+    public void updateStatus() {
+        this.isOpened = true;
+    }
+
     public Resume(Resume resume) {
         this.resumeTitle = resume.getResumeTitle();
         this.name = resume.getName();
@@ -74,6 +81,7 @@ public class Resume {
         this.portfolio = resume.getPortfolio();
         this.email = resume.getEmail();
         this.github = resume.getGithub();
+        this.isOpened = false;
         this.isApplied = true;
         this.member = resume.getMember();
     }
