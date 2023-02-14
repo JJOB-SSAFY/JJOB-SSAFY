@@ -8,22 +8,22 @@
 			<ul class="responsive-table">
 				<li class="table-header">
 					<div class="col col-1">지원자</div>
-					<div class="col col-1">지원 공고</div>
-					<div class="col col-1">보유기술</div>
+					<div class="col col-2">지원 공고</div>
+					<div class="col col-4">보유기술</div>
 					<div class="col col-1">자기소개서</div>
-					<div class="col col-1"></div>
+					<div class="col col-2"></div>
 				</li>
 				<li
 					v-for="apply in getApplyResumeList.state"
 					:key="apply.applyStatusId"
 					class="table-row"
 				>
-					<div class="col col-2" data-label="name">{{ apply.memberName }}</div>
+					<div class="col col-1" data-label="name">{{ apply.memberName }}</div>
 					<div class="col col-2" data-label="recruitTitle">
 						{{ apply.recruitTitle }}
 					</div>
-					<div class="col col-2" data-label="skills">{{ apply.skills }}</div>
-					<div class="col col-2" data-label="resumeTitle">
+					<div class="col col-4" data-label="skills">{{ apply.skills }}</div>
+					<div class="col col-1" data-label="resumeTitle">
 						{{ apply.resumeTitle
 						}}<fa-icon
 							icon="far fa-solid fa-file"
@@ -35,18 +35,23 @@
 						<v-row justify="center">
 							<v-dialog v-model="modalInfo.dialog" persistent width="auto">
 								<template v-slot:activator="{ props }">
-									<v-btn
-										variant="outlined"
-										color="primary"
+									<button
+										class="btnOrange btnPush"
 										@click="modalInfo.dialog === true"
 										v-bind="props"
-										style="margin-top: 7px; margin-right: 80px"
+										style="
+											margin-top: 7px;
+											margin-right: 50px;
+											border-radius: 12px;
+											height: 40px;
+											width: 70%;
+											display: flex;
+											align-items: center;
+											justify-content: center;
+										"
 									>
 										면접방 생성하기
-									</v-btn>
-									<!-- <v-btn class="pass-btn" color="green" v-bind="props">
-										합격
-									</v-btn> -->
+									</button>
 								</template>
 								<v-card style="padding: 20px">
 									<v-card-title class="text-h5" style="width: 600px">

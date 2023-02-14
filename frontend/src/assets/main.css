@@ -231,6 +231,15 @@ a:hover {
   transition: all 0.4s ease;
 }
 
+
+.dropdown-menu {
+  inset: 0px auto auto -150px !important;
+}
+
+.dropdown-menu>li {
+  text-align: center;
+}
+
 @media screen and (max-width:1024px) {
   .hr-main {
     background-color: black;

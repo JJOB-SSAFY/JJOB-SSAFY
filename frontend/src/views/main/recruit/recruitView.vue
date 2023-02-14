@@ -25,7 +25,7 @@
 				>
 					<fa-icon icon="fas fa-solid fa-chevron-down" />
 				</button>
-				<ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+				<ul class="dropdown-menu w-130" aria-labelledby="dropdownMenuButton1">
 					<li>
 						<a class="dropdown-item non-hover" @click="searchByCareer('')"
 							>전체</a
