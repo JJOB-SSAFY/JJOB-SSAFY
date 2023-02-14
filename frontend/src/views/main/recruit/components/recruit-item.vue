@@ -2,7 +2,7 @@
 	<router-link to="recruit/detail/{{recuritId}}" class="to-recruit-detail">
 		<div>
 			<div class="rec-item-img">
-				<img src="../../../../assets/images/logo-background.jpg" />
+				<img :src="info.recruitImage" />
 			</div>
 			<!-- @click="clickDetail(info.recruitId) -->
 			<!-- @click="clickDetail(info.recruitId)" -->
