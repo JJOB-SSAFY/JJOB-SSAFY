@@ -338,8 +338,11 @@
 			</div>
 		</div>
 		<div class="resume-write-footer">
-			<button class="resume-save-impl-btn" @click="saveImpl">임시저장</button>
-			<button class="resume-save-btn" @click="save">저장하기</button>
+			<button class="resume-return" @click="backward">돌아가기</button>
+			<div class="save-btns">
+				<button class="resume-save-impl-btn" @click="saveImpl">임시저장</button>
+				<button class="resume-save-btn" @click="save">저장하기</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -563,6 +566,15 @@ export default {
 	},
 
 	methods: {
+		backward() {
+			if (confirm('지금 뒤로가면 저장되지 않습니다. 계속하시겠습니까?')) {
+				this.$router.push({
+					name: 'myInfo',
+				});
+			} else {
+				return;
+			}
+		},
 		saveImpl() {
 			const name = this.myName;
 			const resumeTitle = this.resumeTitle;
@@ -1169,6 +1181,11 @@ export default {
 
 		save() {
 			this.saveImpl();
+			if (!this.resumeTitle) {
+				return;
+			} else if (this.myName) {
+				return;
+			}
 			this.$router.push({
 				name: 'myInfo',
 			});
@@ -1280,9 +1297,10 @@ table.type09 td input {
 	background: white;
 	bottom: 0;
 	display: flex;
-	justify-content: right;
+	justify-content: space-between;
 	align-items: center;
 	border-top: 1px lightgray solid;
+	padding: 0px 40px;
 }
 
 .resume-save-impl-btn {
@@ -1292,7 +1310,7 @@ table.type09 td input {
 	border-radius: 20px;
 	background: white;
 	font-weight: 900;
-	margin-right: 50px;
+	margin-right: 20px;
 }
 
 .resume-save-btn {
@@ -1303,6 +1321,16 @@ table.type09 td input {
 	background: dodgerblue;
 	color: white;
 	font-weight: 900;
-	margin-right: 100px;
+}
+.save-btns {
+	display: flex;
+}
+.resume-return {
+	width: 200px;
+	height: 40px;
+	border-radius: 20px;
+	background: rgb(26, 32, 29);
+	color: white;
+	font-weight: 900;
 }
 </style>

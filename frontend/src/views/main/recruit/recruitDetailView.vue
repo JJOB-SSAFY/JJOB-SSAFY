@@ -223,6 +223,10 @@ export default {
 		};
 
 		const doApply = () => {
+			if (!selectResume.selectedResumeId) {
+				alert('선택된 이력서가 없습니다.');
+				return;
+			}
 			const resumeId = selectResume.selectedResumeId;
 
 			const config = {
