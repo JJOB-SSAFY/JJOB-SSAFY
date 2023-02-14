@@ -248,10 +248,6 @@ export default {
 
 .latest-recruit-container > div:first-child {
 	margin-left: -10px;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
 }
 
 .latest-recruit-container > div:last-child {
@@ -272,10 +268,6 @@ export default {
 
 .end-recruit-container > div:first-child {
 	margin-left: -10px;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
 }
 
 .end-recruit-container > div:last-child {
