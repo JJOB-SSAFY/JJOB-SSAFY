@@ -123,7 +123,7 @@
 					required
 				/>
 				<span class="bar"></span>
-				<label class="label-title">사원 수</label>
+				<label class="label-title">사원</label>
 			</div>
 			<br />
 			<div class="group">
@@ -138,7 +138,12 @@
 			</div>
 			<label class="label-title mt-5">기업 로고(필수입력 X)</label>
 			<div class="filebox">
-				<input type="text" class="upload-name shadow" v-model="fileName" />
+				<input
+					type="text"
+					readonly
+					class="upload-name shadow"
+					v-model="fileName"
+				/>
 				<div class="file-btn">
 					<label for="file">로고 찾기</label>
 					<input type="file" id="file" @change="imgUpload" />
