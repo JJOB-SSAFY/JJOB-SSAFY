@@ -61,4 +61,8 @@ public class ApplyStatus {
         this.result = requestDto.getResult();
     }
 
+    public void updateStatus() {
+        this.status = "심사중";
+    }
+
 }

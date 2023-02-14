@@ -23,8 +23,13 @@ public class ResumeController{
     private final ResumeService resumeService;
 
     @GetMapping
-    ResponseEntity<List<ResumeListResponseDto>> getResumeList(@AuthenticationPrincipal SsafyUserDetails userDetails){
-        return new ResponseEntity<>(resumeService.getResumeList(userDetails.getMember().getEmail()), HttpStatus.OK);
+    ResponseEntity<List<ResumeListResponseDto>> getResumeList(@AuthenticationPrincipal SsafyUserDetails userDetails) {
+        return new ResponseEntity<>(resumeService.getResumeList(userDetails.getMember().getId()), HttpStatus.OK);
+    }
+
+    @GetMapping("/isapplied")
+    ResponseEntity<List<ResumeListResponseDto>> getIsAppliedResumeList(@AuthenticationPrincipal SsafyUserDetails userDetails) {
+        return new ResponseEntity<>(resumeService.getIsAppliedResumeList(userDetails.getMember().getId()), HttpStatus.OK);
     }
 
     @PostMapping
@@ -36,13 +41,13 @@ public class ResumeController{
     }
 
     @PatchMapping("/{resume_id}")
-    ResponseEntity<BaseResponseBody> updateResume(@PathVariable Long resume_id, @RequestBody ResumeRequestDto requestDto){
+    ResponseEntity<BaseResponseBody> updateResume(@PathVariable Long resume_id, @RequestBody ResumeRequestDto requestDto) {
         resumeService.updateResume(requestDto, resume_id);
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{resume_id}")
-    ResponseEntity<BaseResponseBody> deleteResume(@PathVariable Long resume_id){
+    ResponseEntity<BaseResponseBody> deleteResume(@PathVariable Long resume_id) {
         resumeService.deleteResume(resume_id);
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
@@ -52,4 +57,9 @@ public class ResumeController{
         return new ResponseEntity<>(resumeService.getResume(resume_id), HttpStatus.OK);
     }
 
+    @PatchMapping("/change/status/{resume_id}")
+    public ResponseEntity<BaseResponseBody> changeApplyStatus(@PathVariable Long resume_id) {
+        resumeService.changeApplyStatus(resume_id);
+        return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.OK);
+    }
 }
