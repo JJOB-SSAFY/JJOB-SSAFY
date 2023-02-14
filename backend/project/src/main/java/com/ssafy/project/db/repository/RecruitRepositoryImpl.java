@@ -37,7 +37,7 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom {
                         recruit.imgUrl
                 ))
                 .from(recruit)
-                .where(locationEq(condition.getLocation()), departmentEq(condition.getDepartment()))
+                .where(locationEq(condition.getLocation()), departmentEq(condition.getDepartment()), careerEq(condition.getCareer()))
                 .fetch();
     }
 
@@ -48,5 +48,8 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom {
         return hasText(department) ? recruit.department.contains(department) : null;
     }
 
+    private BooleanExpression careerEq(String career){
+        return hasText(career) ? recruit.career.contains(career) : null;
+    }
 
 }
