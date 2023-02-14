@@ -18,7 +18,7 @@ import openviduView from '@/views/main/openvidu/conferenceView.vue';
 import interviewView from '@/views/main/interview/interviewView.vue';
 import resumeCreateView from '@/views/myInfo/resume/resumeCreateView.vue';
 import resumeDetailView from '@/views/myInfo/resume/resumeDetailView.vue';
-import test from '@/views/test.vue';
+import fileUploadTest from '@/views/fileUploadTest.vue';
 import jwt from '@/common/jwt';
 
 const router = createRouter({
@@ -121,9 +121,9 @@ const router = createRouter({
 			component: resumeDetailView,
 		},
 		{
-			name: 'test',
-			path: '/test',
-			component: test,
+			name: 'fileUploadTest',
+			path: '/fileUploadTest',
+			component: fileUploadTest,
 		},
 	],
 });
