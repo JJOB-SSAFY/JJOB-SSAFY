@@ -42,10 +42,6 @@
   padding: 10px
 }
 
-.div-myinfo-update-top .div-myinfo-update-left {
-  margin-left: 30px;
-}
-
 .div-myinfo-update-top .div-myinfo-update-right {
   margin-left: 30px;
   align-content: center;
@@ -100,10 +96,11 @@
   width: 80%;
 }
 
+
 .div-item-left>input {
-  font-size: 15px;
+  font-size: 13px;
   margin-left: 2px;
-  width: 80%;
+  width: 100%;
   word-wrap: break-word;
   min-height: 30px;
   border: none;
@@ -127,9 +124,9 @@
 
 
 .div-item-right>input {
-  font-size: 15px;
+  font-size: 13px;
   margin-left: 2px;
-  width: 90%;
+  width: 100%;
   word-wrap: break-word;
   min-height: 30px;
   border: none;
@@ -148,7 +145,7 @@
   background-color: #e4e4e400;
 }
 
-.div-item .line-clamp-introduce {
+.line-clamp-introduce {
   border: none;
   resize: none;
   font-size: 17px;
