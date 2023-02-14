@@ -27,6 +27,11 @@
 				</button>
 				<ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
 					<li>
+						<a class="dropdown-item non-hover" @click="searchByCareer('')"
+							>전체</a
+						>
+					</li>
+					<li>
 						<a class="dropdown-item non-hover" @click="searchByCareer('신입')"
 							>신입</a
 						>
