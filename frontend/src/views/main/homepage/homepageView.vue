@@ -2,7 +2,7 @@
 	<home-banner />
 	<!-- <router-view /> -->
 	<div class="container">
-		<h2 style="font-weight: bold; text-align: center; margin: 60px 0 20px">
+		<h2 class="font-LINE-Bd" style="text-align: center; margin: 60px 0 20px">
 			최근 올라온 공고
 		</h2>
 		<div class="scroll-box">
@@ -12,12 +12,8 @@
 				style="font-size: 32px"
 			/>
 			<h6
-				style="
-					font-weight: bold;
-					text-align: center;
-					color: grey;
-					cursor: pointer;
-				"
+				class="font-LINE-Rg"
+				style="text-align: center; color: grey; cursor: pointer"
 				@click="goToRecruitView"
 			>
 				전체 공고 보기
@@ -45,8 +41,10 @@
 						style="border-radius: 5px"
 					/>
 					<div class="card-body">
-						<h3 class="card-title mb-2">{{ recruit.recruitTitle }}</h3>
-						<h6 class="mb-1" style="font-weight: bold">
+						<h3 class="card-title font-LINE-Bd mb-2">
+							{{ recruit.recruitTitle }}
+						</h3>
+						<h6 class="mb-1 font-LINE-Rg" style="font-weight: bold">
 							{{ recruit.companyName }}
 						</h6>
 						<p class="card-text mb-2" style="color: gray">
@@ -57,7 +55,7 @@
 			</div>
 		</div>
 		<hr />
-		<h2 style="font-weight: bold; text-align: center; margin: 60px 0 20px">
+		<h2 class="font-LINE-Bd" style="text-align: center; margin: 60px 0 20px">
 			마감 임박 공고
 		</h2>
 		<div class="scroll-box">
@@ -96,8 +94,10 @@
 						style="border-radius: 5px"
 					/>
 					<div class="card-body">
-						<h3 class="card-title mb-2">{{ recruit.recruitTitle }}</h3>
-						<h6 class="mb-1" style="font-weight: bold">
+						<h3 class="card-title font-LINE-Bd mb-2">
+							{{ recruit.recruitTitle }}
+						</h3>
+						<h6 class="font-LINE-Rg mb-1" style="font-weight: bold">
 							{{ recruit.companyName }}
 						</h6>
 						<p class="card-text mb-2" style="color: gray">
