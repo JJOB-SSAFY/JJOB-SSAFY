@@ -1,9 +1,7 @@
 package com.ssafy.project.api.service;
 
-import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
 import com.ssafy.project.api.response.ApplyCompRes;
-import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.*;
@@ -173,14 +171,6 @@ public class ApplyServiceImpl implements ApplyService {
         return list;
     }
 
-    @Override
-    @Transactional
-    public void updateApplyFailStatus(Long applyId, ApplyFailRequestDto requestDto) {
-        ApplyStatus applyStatus = applyStatusRepository.findById(applyId)
-                .orElseThrow(() -> new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION));
-        applyStatus.updateReason(requestDto);
-    }
-
     private void deleteRelatedData(Long resumeId) {
         activityRepository.deleteAllByResumeId(resumeId);
         awardRepository.deleteAllByResumeId(resumeId);
@@ -193,6 +183,5 @@ public class ApplyServiceImpl implements ApplyService {
         skillRepository.deleteAllByResumeId(resumeId);
         universityRepository.deleteAllByResumeId(resumeId);
     }
-
 
 }

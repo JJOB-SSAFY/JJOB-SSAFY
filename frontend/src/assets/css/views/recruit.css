@@ -70,4 +70,102 @@
     flex-basis: 50%;
     text-align: right;
   }
+
+  /* Search Button */
+  .recruit-search-form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .div-search-career,
+  .div-search-location,
+  .div-search-department {
+    display: flex;
+    align-items: center;
+    margin: 0px 5px 20px 5px;
+  }
+
+  .div-search-career>img,
+  .div-search-location>img,
+  .div-search-department>img {
+    position: absolute;
+    margin-left: 5px;
+  }
+
+  .div-search-career>input,
+  .div-search-location>input,
+  .div-search-department>input {
+    padding: 0px 30px;
+    height: 40px;
+  }
+
+  .div-search-career>button,
+  .div-search-location>button,
+  .div-search-department>button {
+    margin-left: -20px;
+  }
+
+  /* item */
+  .to-recruit-detail {
+    color: black;
+  }
+
+  .to-recruit-detail:hover {
+    transform: scale(1.03);
+    transition: 0.7s;
+    color: rgb(18, 13, 50);
+  }
+
+  .rec-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .rec-list-item {
+    width: 25%;
+    padding: 10px;
+  }
+
+
+  .rec-item-content {
+    padding: 14px 0px;
+  }
+
+  .rec-item-content>div {
+    overflow: hidden;
+    word-break: break-word;
+  }
+
+  .rec-item-title {
+    font-size: 18px;
+    max-height: 2.4em;
+    line-height: 1.2;
+    overflow: hidden;
+    word-break: break-word;
+  }
+
+  .rec-item-company {
+    margin: 10px 0 0;
+  }
+
+  .rec-item-location {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: var(--primary-color-1);
+  }
+
+  @media only screen and (max-width: 1024px) {
+
+    .rec-list-item {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 512px) {
+
+    .rec-list-item {
+      width: 100%;
+
+    }
+  }
 }

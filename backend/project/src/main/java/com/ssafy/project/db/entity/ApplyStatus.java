@@ -1,8 +1,6 @@
 package com.ssafy.project.db.entity;
 
-import com.ssafy.project.api.request.ApplyFailRequestDto;
 import com.ssafy.project.api.request.ApplyRequestDto;
-import com.ssafy.project.api.response.ApplyStatusRes;
 import com.ssafy.project.db.entity.resume.Resume;
 import lombok.*;
 
@@ -27,9 +25,11 @@ public class ApplyStatus {
     @Column(nullable = false)
     private String status;
 
-    private String reason;
+    private String title;
 
-    private String feedback;
+    private String content;
+
+    private String result;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -56,11 +56,9 @@ public class ApplyStatus {
     public void updateApplyStatus(ApplyRequestDto requestDto) {
         this.status = requestDto.getStatus();
         this.step = requestDto.getStep();
-    }
-
-    public void updateReason(ApplyFailRequestDto requestDto) {
-        this.reason = requestDto.getReason();
-        this.feedback = requestDto.getFeedback();
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.result = requestDto.getResult();
     }
 
 }

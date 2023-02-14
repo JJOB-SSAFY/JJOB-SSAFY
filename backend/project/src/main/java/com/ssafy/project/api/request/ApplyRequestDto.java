@@ -10,4 +10,7 @@ import lombok.NoArgsConstructor;
 public class ApplyRequestDto {
     private String status;
     private String step;
+    private String title;
+    private String content;
+    private String result;
 }

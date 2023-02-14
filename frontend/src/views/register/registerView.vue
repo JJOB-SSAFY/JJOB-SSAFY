@@ -1,157 +1,151 @@
 <template>
-	<div class="login-section">
-		<div class="div-register">
-			<div class="register-container">
-				<div class="register-title">
-					<h1 class="font-LINE-Bd mt-100 margin-auto">
-						회원등록 <br />JJOB SSAFY입니다
-					</h1>
-				</div>
-				<div class="register-form mt-80">
-					<div class="register-user">
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="info.email"
-								required
-							/>
-							<span class="bar"></span>
-							<label>이메일</label>
-						</div>
-						<br />
-						<div v-if="!invalidEmail" style="color: red">
-							&nbsp 이미 등록된 이메일 입니다.
-						</div>
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="password"
-								v-model="info.password"
-								required
-							/>
-							<span class="bar"></span>
-							<label>비밀번호</label>
-						</div>
-						<br />
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="password"
-								v-model="info.passwordCk"
-								required
-							/>
-							<span class="bar"></span>
-							<label>비밀번호 확인</label>
-						</div>
-						<br />
-						<div v-if="!invalidPassowrd" style="color: red">
-							비밀번호를 다시 확인해 주세요.
-							<br />
-						</div>
+	<div class="banner-container font-LINE-Rg">
+		<span class="banner-letter1">Register</span>
+		<p class="banner-letter2">회원을 등록할 수 있는 곳입니다.</p>
+	</div>
+	<hr class="hr-main2" />
+	<div class="register-form mt-80">
+		<div class="register-user">
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="info.email"
+					required
+				/>
+				<span class="bar"></span>
+				<label>이메일</label>
+			</div>
+			<br />
+			<div v-if="!invalidEmail" style="color: red">
+				&nbsp 이미 등록된 이메일 입니다.
+			</div>
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="password"
+					v-model="info.password"
+					required
+				/>
+				<span class="bar"></span>
+				<label>비밀번호</label>
+			</div>
+			<br />
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="password"
+					v-model="info.passwordCk"
+					required
+				/>
+				<span class="bar"></span>
+				<label>비밀번호 확인</label>
+			</div>
+			<br />
+			<div v-if="!invalidPassowrd" style="color: red">
+				비밀번호를 다시 확인해 주세요.
+				<br />
+			</div>
 
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="info.name"
-								required
-							/>
-							<span class="bar"></span>
-							<label>이름</label>
-						</div>
-						<br />
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="info.companyName"
-								required
-							/>
-							<span class="bar"></span>
-							<label>기업 이름</label>
-						</div>
-						<br />
-						<div class="div-button">
-							<b-button
-								type="button"
-								variant="outline-primary"
-								class="div-button font-LINE-Bd"
-								@click="registerU"
-							>
-								회원등록
-							</b-button>
-						</div>
-					</div>
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="info.name"
+					required
+				/>
+				<span class="bar"></span>
+				<label>이름</label>
+			</div>
+			<br />
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="info.companyName"
+					required
+				/>
+				<span class="bar"></span>
+				<label>기업 이름</label>
+			</div>
+			<br />
+			<div class="div-button">
+				<button
+					type="button"
+					variant="outline-primary"
+					class="font-LINE-Bd btnLightBlue btnFade"
+					@click="registerU"
+				>
+					회원등록
+				</button>
+			</div>
+		</div>
 
-					<div class="register-company">
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="companyInfo.companyName"
-								required
-							/>
-							<span class="bar"></span>
-							<label>기업 이름</label>
-						</div>
-						<br />
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="companyInfo.companyAddress"
-								required
-							/>
-							<span class="bar"></span>
-							<label>기업 주소</label>
-						</div>
-						<br />
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="companyInfo.companyDesc"
-								required
-							/>
-							<span class="bar"></span>
-							<label>기업 설명</label>
-						</div>
-						<br />
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="companyInfo.employeeCnt"
-								required
-							/>
-							<span class="bar"></span>
-							<label>기업 설명</label>
-						</div>
-						<br />
-						<div class="group">
-							<input
-								class="register-form-input font-LINE-Rg"
-								type="text"
-								v-model="companyInfo.companyUrl"
-								required
-							/>
-							<span class="bar"></span>
-							<label>기업 홈페이지</label>
-						</div>
-						<br />
-						<div class="div-button">
-							<b-button
-								type="button"
-								variant="outline-primary"
-								class="div-button font-LINE-Bd"
-								@click="registerC"
-							>
-								회사등록
-							</b-button>
-						</div>
-					</div>
-				</div>
+		<div class="register-company">
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="companyInfo.companyName"
+					required
+				/>
+				<span class="bar"></span>
+				<label>기업 이름</label>
+			</div>
+			<br />
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="companyInfo.companyAddress"
+					required
+				/>
+				<span class="bar"></span>
+				<label>기업 주소</label>
+			</div>
+			<br />
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="companyInfo.companyDesc"
+					required
+				/>
+				<span class="bar"></span>
+				<label>기업 설명</label>
+			</div>
+			<br />
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="companyInfo.employeeCnt"
+					required
+				/>
+				<span class="bar"></span>
+				<label>기업 설명</label>
+			</div>
+			<br />
+			<div class="group">
+				<input
+					class="register-form-input font-LINE-Rg"
+					type="text"
+					v-model="companyInfo.companyUrl"
+					required
+				/>
+				<span class="bar"></span>
+				<label>기업 홈페이지</label>
+			</div>
+			<br />
+			<div class="div-button">
+				<button
+					type="button"
+					variant="outline-primary"
+					class="font-LINE-Bd btnLightBlue btnFade"
+					@click="registerC"
+				>
+					회사등록
+				</button>
 			</div>
 		</div>
 	</div>
@@ -162,6 +156,8 @@ import { watch } from 'vue';
 import { reactive, ref } from 'vue';
 import MemberService from '../../api/memberService';
 import CompanyService from '../../api/companyService';
+import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../api/firebase';
 export default {
 	name: 'registerView',
 	setup() {
@@ -170,7 +166,19 @@ export default {
 		const companyService = new CompanyService();
 		const invalidEmail = ref(true);
 		const invalidPassowrd = ref(true);
+		const fileName = ref('첨부파일');
+		const imgUpload = async e => {
+			fileName.value = e.target.files[0].name;
+			const uploaded_file = await uploadBytes(
+				fref(storage, `images/${e.target.files[0].name}`),
+				e.target.files[0],
+			);
+			console.log(uploaded_file);
+			const file_url = await getDownloadURL(uploaded_file.ref);
+			console.log(file_url);
 
+			companyInfo.companyLogo = file_url;
+		};
 		const info = reactive({
 			email: '',
 			password: '',
@@ -185,6 +193,7 @@ export default {
 			companyName: '',
 			companyUrl: '',
 			employeeCnt: '',
+			companyLogo: null,
 		});
 
 		const userInfo = reactive({
@@ -251,6 +260,7 @@ export default {
 		};
 
 		const registerCompany = async function (param) {
+			console.log(param);
 			await companyService
 				.registerCompany(param)
 				.then(data => {
@@ -371,43 +381,29 @@ export default {
 			companyInfo,
 			registerCompany,
 			registerUser,
+			imgUpload,
+			fileName,
 		};
 	},
 };
 </script>
 <style scoped>
-/* .register-form .register-form-input {
-	width: 500px;
-	height: 50px;
-	font-size: 20px;
-	border-left-width: 0;
-	border-right-width: 0;
-	border-top-width: 0;
-	border-bottom-width: 1;
-	padding-left: 10px;
-	display: block;
-	margin: 40px 79px 0 10px;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-.register-title {
-}
-.register-form .register-form-input:hover {
-	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}*/
 .div-button {
-	width: 100px;
-	padding-left: 10px;
-
 	margin-top: 10px;
 }
-.input-checkbox {
+.div-button > button {
+	padding: 10px;
+	width: 50%;
+	color: black;
+	border: 1px solid black;
+	font-size: 21px;
 }
-.register-company {
-	padding-left: 220px;
+.input-checkbox {
 }
 /*input ========================================*/
 .group {
 	position: relative;
+	margin: 10px 0px;
 }
 input {
 	font-size: 18px;
@@ -422,11 +418,10 @@ input:focus {
 }
 
 /* LABEL ======================================= */
-label {
+label.label-title {
 	color: #999;
 	font-size: 18px;
 	font-weight: normal;
-	position: absolute;
 	pointer-events: none;
 	left: 5px;
 	top: 10px;
@@ -436,8 +431,8 @@ label {
 }
 
 /* active state */
-input:focus ~ label,
-input:valid ~ label {
+input:focus ~ label.label-title,
+input:valid ~ label.label-title {
 	top: -20px;
 	font-size: 14px;
 	color: #5264ae;
@@ -447,7 +442,7 @@ input:valid ~ label {
 .bar {
 	position: relative;
 	display: block;
-	width: 300px;
+	width: 350px;
 }
 .bar:before,
 .bar:after {
@@ -472,5 +467,45 @@ input:valid ~ label {
 input:focus ~ .bar:before,
 input:focus ~ .bar:after {
 	width: 50%;
+}
+.filebox {
+	margin-top: 20px;
+	color: #999;
+	font-size: 18px;
+	font-weight: normal;
+	display: flex;
+}
+
+.filebox .upload-name {
+	/* display: inline-block; */
+	height: 40px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 85%;
+	color: #999999;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 7px 22px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	width: max-content;
+}
+
+.filebox input[type='file'] {
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+.file-btn {
+	margin-right: 80px;
+	text-align: right;
 }
 </style>
