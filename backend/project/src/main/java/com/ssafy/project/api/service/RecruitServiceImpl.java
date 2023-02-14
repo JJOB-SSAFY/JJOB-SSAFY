@@ -69,7 +69,7 @@ public class RecruitServiceImpl implements RecruitService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<RecruitResponseListDto> getReviewList(RecruitSearchCondition condition) {
+    public List<RecruitResponseListDto> getRecruitList(RecruitSearchCondition condition) {
         return recruitRepository.getRecruitByLocationAndDepartment(condition);
     }
 

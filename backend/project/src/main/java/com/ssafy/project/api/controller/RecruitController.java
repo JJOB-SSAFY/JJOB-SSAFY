@@ -32,7 +32,7 @@ public class RecruitController {
 
     @PostMapping("/list")
     public ResponseEntity<List<RecruitResponseListDto>> getRecruitList(@RequestBody RecruitSearchCondition condition) {
-        return new ResponseEntity<>(recruitService.getReviewList(condition), HttpStatus.OK);
+        return new ResponseEntity<>(recruitService.getRecruitList(condition), HttpStatus.OK);
     }
 
     @GetMapping("/detail/{recruit_id}")

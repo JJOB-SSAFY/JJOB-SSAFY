@@ -45,7 +45,7 @@
 				</li>
 				<li v-if="role === 'COMPANY'">
 					<router-link to="/recruit/resume" class="navbar-icon">
-						<fa-icon icon="fas fa-solid fa-building" />
+						<fa-icon icon="fas fa-solid fa-file" />
 						<span> &nbsp; 지원자이력서 </span>
 					</router-link>
 				</li>
@@ -91,7 +91,7 @@
 
 					<li v-if="role === 'COMPANY'">
 						<router-link to="/recruit/resume" class="navbar-icon menu-item">
-							<fa-icon icon="fas fa-solid fa-building" />
+							<fa-icon icon="far fa-solid fa-file" />
 							<span> &nbsp; 지원자이력서 </span>
 						</router-link>
 					</li>
