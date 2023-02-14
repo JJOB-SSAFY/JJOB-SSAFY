@@ -8,7 +8,6 @@
 }
 
 /* 왼쪽 내 정보 변경 */
-
 .myinfo-update-container {
   display: flex;
   justify-content: center;
@@ -145,18 +144,22 @@
   background-color: #e4e4e400;
 }
 
-.line-clamp-introduce {
-  border: none;
+textarea.line-clamp-introduce {
+  margin-left: 2px;
   resize: none;
-  font-size: 17px;
-  width: 70%;
+  border: none;
+
+  text-decoration: underline;
+  text-underline-offset: 6px;
+
+  line-height: 25px;
+  font-size: 13px;
+  width: 100%;
   word-break: break-all;
   white-space: normal;
   display: -webkit-box;
 
-  background-color: #e4e4e400;
-  border-bottom: 2px solid #b1b1b1;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
