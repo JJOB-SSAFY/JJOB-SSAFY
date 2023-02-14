@@ -5,7 +5,8 @@
 				<div class="register-title">
 					<h1 class="font-LINE-Bd mt-100 margin-auto">공고등록</h1>
 				</div>
-				<div class="register-form mt-80">
+				<hr class="hr-main2" />
+				<div class="register-form">
 					<div class="register-user">
 						<p>공고 이름</p>
 						<input
