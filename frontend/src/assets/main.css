@@ -107,6 +107,11 @@ a:hover {
   transition: 1s;
 }
 
+.non-hover:hover {
+  transform: scale(1.00);
+}
+
+
 /* Button 모음 */
 .btnBlueGreen {
   border-radius: 12px;
