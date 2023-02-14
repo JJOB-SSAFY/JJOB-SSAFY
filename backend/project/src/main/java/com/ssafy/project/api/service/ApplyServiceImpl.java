@@ -37,7 +37,6 @@ public class ApplyServiceImpl implements ApplyService {
     private final ProjectExpRepository projectExpRepository;
     private final SkillRepository skillRepository;
     private final UniversityRepository universityRepository;
-    private final CardRepository cardRepository;
     private final RecruitRepository recruitRepository;
 
     @Override
@@ -47,7 +46,6 @@ public class ApplyServiceImpl implements ApplyService {
         Optional<Member> member = memberRepository.findById(memberId);
         Optional<Recruit> recruit = recruitRepository.findById(recruitId);
         Optional<Resume> resume = resumeRepository.findById(resumeId);
-
 
         if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
         if(recruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
@@ -98,8 +96,6 @@ public class ApplyServiceImpl implements ApplyService {
         List<ProjectExp> cpProjectExpList = projectExpList.stream().map((o)-> new ProjectExp(o, cpResume)).collect(Collectors.toList());
         projectExpRepository.saveAll(cpProjectExpList);
 
-
-
         //Skill
         List<Skill> skillList = skillRepository.findAllByResumeId(resume.get().getId());
         List<Skill> cpSkillList = skillList.stream().map((o)-> new Skill(o, cpResume)).collect(Collectors.toList());
@@ -119,19 +115,17 @@ public class ApplyServiceImpl implements ApplyService {
     @Override
     @Transactional
     public void updateApplyStatus(Long applyId,ApplyRequestDto requestDto) {
-        Optional<ApplyStatus> applyStatus = applyStatusRepository.findById(applyId);
-        if(applyStatus.isEmpty()) throw  new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION);
+        ApplyStatus applyStatus = applyStatusRepository.findById(applyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION));
 
-        applyStatus.get().updateApplyStatus(requestDto);
-
-
+        applyStatus.updateApplyStatus(requestDto);
     }
 
     @Override
     @Transactional
     public void deleteApplyStatus(Long applyId) {
         Optional<ApplyStatus> applyStatus = applyStatusRepository.findById(applyId);
-        if(applyStatus.isEmpty()) throw  new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION);
+        if (applyStatus.isEmpty()) throw  new ApiException(ExceptionEnum.ApplyStatus_NOT_EXIT_EXCEPTION);
 
         //연관된 자소서 가져오고 삭제해준다
         Optional<Resume> resume = resumeRepository.findById(applyStatus.get().getResume().getId());
@@ -147,26 +141,27 @@ public class ApplyServiceImpl implements ApplyService {
     @Override
     @Transactional(readOnly = true)
     public List<ApplyCompRes> getApplyList(Long companyId) {
-        Optional<Company> company = companyRepository.findById(companyId);
-        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
 
         List<ApplyCompRes> list = new ArrayList<>();
-        List<Recruit> recruitList = recruitRepository.findAllByCompanyId(companyId);
-        for(int i=0; i<recruitList.size(); i++){
+        List<Recruit> recruitList = recruitRepository.findAllByCompanyId(company.getId());
+
+        for (int i = 0; i < recruitList.size(); i++) {
             Recruit recruit = recruitList.get(i);
             List<ApplyStatus> applyStatus = applyStatusRepository.findAllByRecruitId(recruit.getId());
-            for(int j=0; j<applyStatus.size(); j++){
+            for (int j = 0; j < applyStatus.size(); j++) {
                 Resume resume = applyStatus.get(j).getResume();
-                Card card = resume.getMember().getCard();
-                String skills = null;
-                if(card == null)    skills = "보유기술 없음";
-                Optional<Card> card1 = cardRepository.findById(card.getId());
 
-                if(card1.isPresent()) skills = card1.get().getSkills();
+                Card card = resume.getMember().getCard();
+
+                String skills = "보유기술 없음";
+
+                if (card != null) skills = card.getSkills();
+
                 ApplyCompRes applyCompRes = new ApplyCompRes(applyStatus.get(j), skills);
                 list.add(applyCompRes);
             }
-
         }
         return list;
     }
