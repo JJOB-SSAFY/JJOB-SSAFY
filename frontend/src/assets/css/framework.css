@@ -127,6 +127,10 @@ iframe {
   border: none !important;
 }
 
+.f32 {
+  font-size: 32px;
+}
+
 .f28 {
   font-size: 28px;
 }

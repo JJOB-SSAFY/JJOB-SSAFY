@@ -1264,7 +1264,8 @@ export default {
 }
 
 .left-container label {
-	font-size: 15px;
+	font-size: 17px;
+	font-family: 'LINE-Bd';
 }
 
 .resume-profile-image {
