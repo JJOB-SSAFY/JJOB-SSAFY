@@ -37,11 +37,8 @@ public class MyInfoController {
     @PatchMapping("/pwd")
     public ResponseEntity<BaseResponseBody> changePwd(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                       @RequestBody Map<String,String> map){
-//        logger.info(userDetails.getMember().getEmail());
-//        logger.info(map.get("password"));
-//        logger.info(new BCryptPasswordEncoder().encode(map.get("password")));
 
-        String status=myInfoService.changePwd(map.get("change"),map.get("current"),userDetails.getMember());
+        String status=myInfoService.changePwd(map.get("change"),map.get("current"), userDetails.getMember().getId());
         return new ResponseEntity<>(new BaseResponseBody(status, 200), HttpStatus.OK);
     }
 

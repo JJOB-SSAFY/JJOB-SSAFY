@@ -41,11 +41,12 @@ public class Member {
     @Builder.Default
     private Set<MemberRoleEnum> roleSet = new HashSet<>();
 
-    public static Member from(MemberJoinPostReq memberInfo) {
+    public static Member from(MemberJoinPostReq memberInfo, Card card) {
         return Member.builder()
                 .email(memberInfo.getEmail())
                 .password(new BCryptPasswordEncoder().encode(memberInfo.getPassword()))
                 .name(memberInfo.getName())
+                .card(card)
                 .build();
     }
 

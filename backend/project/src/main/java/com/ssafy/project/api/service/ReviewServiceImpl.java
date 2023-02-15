@@ -38,13 +38,12 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional
     public void writeReview(ReviewRequestDto requestDto, Long memberId, Long companyId) {
-        Optional<Member> member = memberRepository.findById(memberId);
-        Optional<Company> company = companyRepository.findById(companyId);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION));
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
 
-        if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
-
-        Review review = Review.of(member.get(), company.get(), requestDto);
+        Review review = Review.of(member, company, requestDto);
 
         reviewRepository.save(review);
     }
@@ -52,29 +51,29 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     @Transactional(readOnly = true)
     public ReviewResponseDto getDetailReview(Long reviewId) {
-        Optional<Review> review = reviewRepository.findById(reviewId);
-        if(review.isEmpty()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION));
 
-        return ReviewResponseDto.of(review.get());
+        return ReviewResponseDto.of(review);
     }
 
     @Override
     @Transactional
     public void deleteReview(Long reviewId) {
-        Optional<Review> review = reviewRepository.findById(reviewId);
-        if(review.isEmpty()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
-        reviewRepository.delete(review.get());
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION));
+        reviewRepository.delete(review);
     }
 
     @Override
     @Transactional
     public ReviewResponseDto updateReview(Long reviewId, ReviewRequestDto requestDto) {
-        Optional<Review> review = reviewRepository.findById(reviewId);
-        if(review.isEmpty()) throw new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION);
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.REVIEW_NOT_EXIST_EXCEPTION));
 
-        review.get().updateReview(requestDto);
+        review.updateReview(requestDto);
 
-        return ReviewResponseDto.of(review.get());
+        return ReviewResponseDto.of(review);
     }
 
 }
