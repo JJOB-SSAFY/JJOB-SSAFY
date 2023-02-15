@@ -11,7 +11,7 @@
 			<button @click="showDetailResume(resume.resumeId)" class="resume-view-bt">
 				보기
 			</button>
-			<button @click="deleteResume" class="resume-delete-bt">
+			<button @click="deleteResume(resume.resumeId)" class="resume-delete-bt">
 				<fa-icon icon="fas fa-solid fa-x"></fa-icon>
 			</button>
 		</div>
@@ -60,7 +60,17 @@ export default {
 			});
 		};
 
-		const deleteResume = () => {};
+		const deleteResume = id => {
+			resService
+				.deleteResume(id)
+				.then(alert('삭제 완료'))
+				.then(() => {
+					resService.getResumeList().then(data => {
+						getResumeList.state = data;
+					});
+				})
+				.catch(err => console.log(err));
+		};
 		return { store, getResumeList, showDetailResume, addResume, deleteResume };
 	},
 };
