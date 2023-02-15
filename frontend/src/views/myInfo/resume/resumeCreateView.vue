@@ -3,11 +3,7 @@
 		<div class="resume-container font-LINE-Rg">
 			<div class="left-container">
 				<div class="left-fix">
-					<img
-						src="../../../assets/images/blackbackground.jpg"
-						class="resume-profile-image"
-						alt="..."
-					/>
+					<img :src="profileImg" class="resume-profile-image" alt="..." />
 					<div class="mb-3">
 						<label for="phoneInput" class="form-label">휴대폰</label>
 						<input
@@ -343,6 +339,9 @@
 import resumeService from '../../../api/resumeService';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import { url } from '../../../api/http';
+
 const router = useRouter();
 
 export default {
@@ -550,10 +549,23 @@ export default {
 			portfolio: null,
 			github: null,
 			blog: null,
+			profileImg: '',
 		};
 	},
+
 	created() {
 		this.resumeService = new resumeService();
+
+		axios({
+			method: 'GET',
+			url: url + '/card/image',
+			headers: {
+				Authorization: localStorage.getItem('jjob.s.token'),
+			},
+		}).then(res => {
+			this.profileImg = res.data.profileImg;
+			// console.log(res.data);
+		});
 	},
 
 	methods: {

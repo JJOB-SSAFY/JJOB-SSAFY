@@ -3,11 +3,7 @@
 		<div class="resume-container font-LINE-Rg">
 			<div class="update left-container">
 				<div class="left-fix">
-					<img
-						src="../../../assets/images/blackbackground.jpg"
-						class="resume-profile-image"
-						alt="..."
-					/>
+					<img :src="profileImg" class="resume-profile-image" alt="..." />
 					<div class="mb-3">
 						<label for="phoneInput" class="form-label">휴대폰</label>
 						<input
@@ -550,6 +546,7 @@ export default {
 			portfolio: null,
 			github: null,
 			blog: null,
+			profileImg: '',
 
 			resumeId: this.$route.params.resumeId,
 			resumeInfo: null,
@@ -571,6 +568,7 @@ export default {
 			this.blog = res.blog;
 			this.resumeTitle = res.resumeTitle;
 			this.myName = res.name;
+			this.profileImg = res.imageUrl;
 
 			const resumeInfo = res;
 
