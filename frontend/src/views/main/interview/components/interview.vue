@@ -5,13 +5,17 @@
 			class="card-img-top"
 			alt="..."
 		/>
-		<div class="card-body">
-			<h4 class="card-title font-LINE-Bd">{{ info.title }}</h4>
+		<div class="card-body font-LINE-Rg">
+			<div class="card-title font-LINE-Bd" style="font-size: 24px">
+				{{ info.title }}
+			</div>
+			<div style="color: var(--primary-color-grey)">{{ info.companyName }}</div>
+
 			<p class="card-text font-LINE-Rg">
 				시작시간 : {{ startTime }} <br />
 				종료시간 : {{ endTime }}
 			</p>
-			<div class="div-button" style="margin-top: 0">
+			<div class="div-button mt-4" style="margin-top: 0">
 				<b-button
 					type="button"
 					variant="outline-primary"
@@ -84,3 +88,9 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.card-body {
+	display: block;
+	margin: 0px auto;
+}
+</style>
