@@ -116,12 +116,12 @@ import { useStore } from 'vuex';
 
 export default {
 	setup() {
-		const menuActive = ref(null);
+		const menuActive = ref(true);
 		const store = useStore();
 
 		const role = ref(store.getters['auth/getUserRole']);
 		const filterNav = computed(() => {
-			return role.value === 'USER'
+			return role.value === ''
 				? navigations.value.filter(nav => !nav.name.includes('지원자정보'))
 				: navigations.value;
 		});

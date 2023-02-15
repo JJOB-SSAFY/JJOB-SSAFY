@@ -32,7 +32,6 @@
 
 .div-infoCards-view {
   width: 90%;
-
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -46,10 +45,11 @@
   width: 30%;
   border-radius: 20px;
   box-shadow: 2px 3px 4px gray;
-
 }
 
 .div-infocard-item:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
   box-shadow: 2px 3px 4px 2px darkgray;
 }
 

@@ -133,4 +133,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.dropdown-menu {
+	inset: 0px auto auto -150px !important;
+}
+
+.dropdown-menu > li {
+	text-align: center;
+}
+</style>

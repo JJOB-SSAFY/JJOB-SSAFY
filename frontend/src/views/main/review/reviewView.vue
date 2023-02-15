@@ -35,10 +35,6 @@
 </template>
 
 <script>
-// v-model.lazy.trim="condition.form.location"
-// ref="inputLocation"
-// @keyup.enter="searchRecruit"
-// v-on:focusout="searchRecruit"
 import { ref, reactive } from 'vue';
 import ReviewViewItem from './components/reviewViewItem.vue';
 import reviewAPI from '../../../api/reviewService';

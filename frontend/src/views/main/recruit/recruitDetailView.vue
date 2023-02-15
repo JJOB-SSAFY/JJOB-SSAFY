@@ -107,6 +107,12 @@
 										id="dropdownMenuButton1"
 										data-bs-toggle="dropdown"
 										aria-expanded="false"
+										style="
+											position: relative;
+											display: flex;
+											justify-content: flex-end;
+											top: -30px;
+										"
 									>
 										{{ selectResume.selectedResumeTitle }}
 									</button>
