@@ -71,9 +71,11 @@
 								{{ info.result }}
 							</v-card-title>
 							<v-card-text class="text-h6"
-								>축하드립니다. {{ myName }} 님은 {{ info.companyName }}
-								{{ info.recruitTitle }} 서류 전형에 합격하셨습니다. <br />
+								>축하드립니다. {{ myName }}님은 {{ info.companyName }}
+								{{ info.recruitTitle }} 서류 전형에 합격하셨습니다. <br /><br />
+								면접 일정은 추후에 따로 연락드리겠습니다.
 							</v-card-text>
+							<br />
 							<v-card-actions>
 								<v-spacer></v-spacer>
 								<v-btn
@@ -81,14 +83,7 @@
 									variant="text"
 									@click="modalInfo.dialog = false"
 								>
-									Disagree
-								</v-btn>
-								<v-btn
-									color="green-darken-1"
-									variant="text"
-									@click="modalInfo.dialog = false"
-								>
-									Agree
+									나가기
 								</v-btn>
 							</v-card-actions>
 						</v-card>

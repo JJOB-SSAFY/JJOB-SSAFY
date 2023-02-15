@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="resume-container">
+		<div class="resume-container font-LINE-Rg">
 			<div class="left-container">
 				<div class="left-fix">
 					<img
@@ -45,19 +45,18 @@
 				</div>
 			</div>
 			<div class="right-container">
-				<div class="title-input-box">
+				<div class="title-input-box font-LINE-Bd">
 					<input
 						class="form-control title-input"
 						placeholder="이력서 제목(필수)"
-						style="font-size: 48px; font-weight: bold; border: none"
+						style="font-size: 48px; border: none"
 						v-model.trim="resumeTitle"
 					/>
 					<input
-						class="form-control"
+						class="form-control font-LINE-Bd"
 						placeholder="이 름(필수)"
 						style="
 							font-size: 24px;
-							font-weight: bold;
 							border: none;
 							margin-top: 25px;
 							margin-left: 5px;
@@ -67,9 +66,9 @@
 				</div>
 				<hr style="margin-bottom: 50px" />
 				<div class="resume-box">
-					<h4>학력사항</h4>
+					<h4 class="font-LINE-Bd">학력사항</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">기 간</th>
 								<th scope="cols">학 교 명</th>
@@ -92,9 +91,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>교육이수</h4>
+					<h4 class="font-LINE-Bd">교육이수</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">교 육 명</th>
 								<th scope="cols">교육 기간</th>
@@ -119,9 +118,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>대내외활동</h4>
+					<h4 class="font-LINE-Bd">대내외활동</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">활 동 명</th>
 								<th scope="cols">활동 기간</th>
@@ -144,9 +143,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>경력사항</h4>
+					<h4 class="font-LINE-Bd">경력사항</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">기 업 명</th>
 								<th scope="cols">재직 기간</th>
@@ -163,9 +162,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>수상내역</h4>
+					<h4 class="font-LINE-Bd">수상내역</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">수 상 명</th>
 								<th scope="cols">수상 일자</th>
@@ -182,9 +181,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>자격증</h4>
+					<h4 class="font-LINE-Bd">자격증</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">자 격 명</th>
 								<th scope="cols">취득 일자</th>
@@ -205,9 +204,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>어학능력</h4>
+					<h4 class="font-LINE-Bd">어학능력</h4>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">언 어</th>
 								<th scope="cols">시 험 명</th>
@@ -231,11 +230,11 @@
 				</div>
 				<div class="resume-box">
 					<div style="display: flex; align-items: center">
-						<h4>SW역량</h4>
+						<h4 class="font-LINE-Bd">SW역량</h4>
 						<span>&nbsp;(보유기술 및 프로그래밍 언어)</span>
 					</div>
 					<table class="type09">
-						<thead>
+						<thead class="font-LINE-Bd">
 							<tr>
 								<th scope="cols">보유기술 및 능력</th>
 								<th scope="cols">수 준</th>
@@ -252,10 +251,10 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>프로젝트 경험</h4>
+					<h4 class="font-LINE-Bd">프로젝트 경험</h4>
 					<div id="projectInfo" v-for="(item, i) in projectItems" :key="i">
 						<table class="type09">
-							<thead>
+							<thead class="font-LINE-Bd">
 								<tr>
 									<th scope="cols">타이틀</th>
 									<th scope="cols">내용</th>
@@ -303,7 +302,7 @@
 					</div>
 				</div>
 				<div class="resume-box">
-					<h4>자기소개서</h4>
+					<h4 class="font-LINE-Bd">자기소개서</h4>
 					<div
 						id="coverLetterInfo"
 						v-for="(item, i) in coverLetterItems"
@@ -337,8 +336,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="resume-write-footer">
-			<button class="resume-return" @click="backward">돌아가기</button>
+		<div class="resume-write-footer font-LINE-Bd">
+			<button class="resume-return" @click="backward">나가기</button>
 			<div class="save-btns">
 				<button class="resume-save-impl-btn" @click="saveImpl">임시저장</button>
 				<button class="resume-save-btn" @click="save">저장하기</button>
@@ -1196,19 +1195,17 @@ export default {
 
 <style scoped>
 .resume-container {
-	width: 90%;
-	margin: 50px auto 150px;
+	width: 100%;
+	padding-bottom: 50px;
 	display: flex;
 	border: 2px black solid;
-	border-radius: 10px;
 }
 
 .left-container {
 	width: 30%;
-	background-color: #aad6ff;
+	background-color: var(--primary-color-1);
 	padding: 0 50px;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
+	border-right: 2px solid black;
 }
 
 .left-fix {
@@ -1220,7 +1217,6 @@ export default {
 
 .left-container label {
 	font-size: 15px;
-	font-weight: bold;
 }
 
 .resume-profile-image {
@@ -1228,19 +1224,18 @@ export default {
 	aspect-ratio: 1/1;
 	margin: 50px auto 25px;
 	border: 10px white solid;
-	border-radius: 40%;
+	/* border-radius: 40%; */
 }
 
 .right-container {
 	width: 70%;
 	background-color: white;
 	padding: 60px 20px 20px 20px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/* border-top-right-radius: 10px; */
+	/* border-bottom-right-radius: 10px; */
 }
 
 .right-container h4 {
-	font-weight: bold;
 	margin: 10px;
 }
 
@@ -1265,7 +1260,6 @@ table.type09 {
 
 table.type09 thead th {
 	padding: 10px;
-	font-weight: bold;
 	vertical-align: top;
 	color: #369;
 	border-bottom: 3px solid #036;
@@ -1274,7 +1268,6 @@ table.type09 thead th {
 table.type09 tbody th {
 	width: 150px;
 	padding: 10px;
-	font-weight: bold;
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
 }
@@ -1306,21 +1299,20 @@ table.type09 td input {
 .resume-save-impl-btn {
 	width: 200px;
 	height: 40px;
-	border: 1px dodgerblue solid;
 	border-radius: 20px;
 	background: white;
-	font-weight: 900;
+	border: 1px solid var(--primary-color-1);
+	color: var(--primary-color-1);
 	margin-right: 20px;
 }
 
 .resume-save-btn {
 	width: 200px;
 	height: 40px;
-	border: 1px dodgerblue solid;
+	border: 1px solid var(--primary-color-1);
 	border-radius: 20px;
-	background: dodgerblue;
+	background: var(--primary-color-1);
 	color: white;
-	font-weight: 900;
 }
 .save-btns {
 	display: flex;
@@ -1331,6 +1323,5 @@ table.type09 td input {
 	border-radius: 20px;
 	background: rgb(49, 56, 52);
 	color: white;
-	font-weight: 900;
 }
 </style>

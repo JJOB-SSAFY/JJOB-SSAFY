@@ -14,15 +14,19 @@ public class ReviewResponseListDto {
     private String content;
     private String question;
     private String answer;
+    private String companyName;
     private String companyLogo;
+
     @QueryProjection
-    public ReviewResponseListDto(Long reviewId, String name, String title, String content, String question, String answer,String companyLogo) {
+    public ReviewResponseListDto(Long reviewId, String name, String title, String content, String question,
+                                 String answer, String companyName, String companyLogo) {
         this.reviewId = reviewId;
         this.name = name;
         this.title = title;
         this.content = content;
         this.question = question;
         this.answer = answer;
+        this.companyName = companyName;
         this.companyLogo=companyLogo;
     }
 }
