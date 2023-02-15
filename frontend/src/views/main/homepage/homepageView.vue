@@ -112,8 +112,6 @@
 
 <script>
 import { reactive } from 'vue';
-import { useStore } from 'vuex';
-import VueCookies from 'vue-cookies';
 import homeBanner from '../homepage/components/home-Banner.vue';
 import { url } from '../../../api/http';
 import axios from 'axios';
@@ -127,8 +125,6 @@ export default {
 	},
 
 	setup() {
-		const store = useStore();
-
 		const router = useRouter();
 
 		const recruitList = reactive({
@@ -198,27 +194,6 @@ export default {
 			).clientWidth;
 			document.getElementById('deadline-recruit-container').scrollLeft += width;
 		};
-
-		const type = VueCookies.get('type');
-
-		if (type === 'social') {
-			const accessToken = VueCookies.get('accessToken');
-			const name = VueCookies.get('name');
-			const role = VueCookies.get('role');
-
-			const loginInfo = {
-				accessToken: accessToken,
-				name: name,
-				role: role,
-			};
-
-			store.dispatch('auth/socialLogin', loginInfo);
-
-			VueCookies.remove('type');
-			VueCookies.remove('accessToken');
-			VueCookies.remove('name');
-			VueCookies.remove('role');
-		}
 
 		return {
 			recruitList,

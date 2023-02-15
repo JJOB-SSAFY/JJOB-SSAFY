@@ -19,6 +19,7 @@ import interviewView from '@/views/main/interview/interviewView.vue';
 import resumeCreateView from '@/views/myInfo/resume/resumeCreateView.vue';
 import resumeDetailView from '@/views/myInfo/resume/resumeDetailView.vue';
 import fileUploadTest from '@/views/fileUploadTest.vue';
+import loginRedirectView from '@/views/loginRedirectView.vue';
 import jwt from '@/common/jwt';
 
 const router = createRouter({
@@ -32,6 +33,11 @@ const router = createRouter({
 		{
 			path: '/login',
 			component: loginView,
+		},
+		{
+			name: 'loginRedirectPage',
+			path: '/loginRedirectPage',
+			component: loginRedirectView,
 		},
 		{
 			path: '/main',
@@ -129,7 +135,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	if (to.path != '/login') {
+	if (to.path === '/loginRedirectPage') {
+		next();
+	} else if (to.path != '/login') {
 		if (jwt.getToken()) {
 			next();
 		} else {
