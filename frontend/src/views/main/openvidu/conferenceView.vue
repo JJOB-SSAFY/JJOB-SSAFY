@@ -17,12 +17,13 @@
 				<hr />
 			</div>
 			<div id="join-dialog" class="jumbotron vertical-center mt-250">
-				<div class="form-group">
+				<div class="form-group font-LINE-Bd">
 					<p>
-						<label style="font-size: 32px; margin: 20px 0">방 이름</label>
+						<label style="font-size: 32px; margin: 20px 0">면접 이름</label>
 						<input
+							x
 							v-model="title"
-							class="form-control"
+							class="form-control font-LINE-Rg"
 							type="text"
 							required
 							readonly
@@ -33,7 +34,7 @@
 						<label style="font-size: 32px; margin: 20px 0">이름</label>
 						<input
 							v-model="myUserName"
-							class="form-control"
+							class="form-control font-LINE-Rg"
 							type="text"
 							required
 							style="font-size: 18px"
