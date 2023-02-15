@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="bottom-btn-div">
+		<div class="bottom-btn-div font-LINE-Rg">
 			<button
 				id="bot-bt-apply"
 				type="button"
@@ -18,7 +18,7 @@
 				목록으로
 			</button>
 		</div>
-		<div class="job-detail-con">
+		<div class="job-detail-con font-LINE-Rg">
 			<div class="job-detail-rel">
 				<div class="job-content">
 					<div class="content-box">
@@ -27,57 +27,94 @@
 								<img :src="detailList.imgUrl" />
 							</div>
 							<hr class="detail-hr" />
-							<div class="recruit-detail-companyName">
-								<span
-									><h5>
-										<p>{{ detailList.companyName }}</p>
-									</h5></span
-								><br />
-								<span id="content-left-title"
-									><h6>
-										<b>공고 타이틀 : {{ detailList.recruitTitle }}</b>
-									</h6></span
-								>
-								<hr class="detail-hr" />
-								<span id="content-left-title"
-									><h6>
-										<b>Location : {{ detailList.location }}</b>
-									</h6></span
-								><br />
+							<div class="recruit-detail-top">
+								<p class="detail-top-title f32 font-LINE-Bd">
+									{{ detailList.recruitTitle }}
+								</p>
+
+								<p class="f18">{{ detailList.companyName }}</p>
+								<div class="detail-top-set font-LINE-Bd f18 mt-6">
+									<div class="detail-coment">
+										<div>#{{ detailList.eduRequirement }}</div>
+										<div>#{{ detailList.workType }}</div>
+										<div>#{{ detailList.career }}</div>
+										<div>#{{ detailList.work }}</div>
+									</div>
+									<p>#{{ detailList.location }}</p>
+								</div>
 							</div>
-							<div class="detail-coment">
-								<span>#{{ detailList.eduRequirement }}</span>
-								<span>#{{ detailList.workType }}</span>
-								<span>#{{ detailList.career }}</span>
-								<span>#{{ detailList.work }}</span>
-							</div>
+
 							<hr class="detail-hr" />
-							<div class="content-area" style="white-space: pre-wrap">
+							<div class="content-area mt-20" style="white-space: pre-wrap">
 								{{ detailList.recruitContent }}
 							</div>
 						</section>
 						<aside class="content-right">
 							<div class="side-box">
 								<div class="side-box-content">
-									<div class="side-box-content-item">
-										<h5>
-											<b>{{ detailList.companyName }}</b>
-										</h5>
-										<div>
-											<b>( {{ detailList.location }} )</b>
-										</div>
+									<div class="side-box-content-title f24 font-LINE-Bd">
+										<p>{{ detailList.recruitTitle }}</p>
+									</div>
+
+									<div class="side-box-content-item-one">
+										<p>{{ detailList.companyName }}</p>
+										<p>( {{ detailList.location }} )</p>
 									</div>
 									<div class="side-box-content-item-two">
+										<div></div>
 										<div>
-											<b>{{ detailList.recruitTitle }}</b>
-										</div>
-										<div>
-											<b>모집분야 : {{ detailList.work }}</b>
+											<p>모집분야 {{ detailList.work }}</p>
 										</div>
 									</div>
 								</div>
+
 								<hr class="detail-hr" />
-								<div class="side-button">
+								<div class="resume-box" style="padding: 20px">
+									<h6
+										style="
+											font-weight: bold;
+											margin-bottom: 20px;
+											text-align: center;
+										"
+									>
+										이력서 선택
+									</h6>
+									<div class="dropdown">
+										<button
+											class="dropdown-toggle resume-dropdown-btn"
+											type="button"
+											id="dropdownMenuButton1"
+											data-bs-toggle="dropdown"
+											aria-expanded="false"
+											style="
+												position: relative;
+												display: flex;
+												justify-content: center;
+												width: 100%;
+												align-items: center;
+												bottom: 5px;
+											"
+										>
+											{{ selectResume.selectedResumeTitle }}
+										</button>
+										<ul
+											class="dropdown-menu w-100"
+											aria-labelledby="dropdownMenuButton1"
+										>
+											<li
+												v-for="resume in resumeList.resume"
+												:key="resume.resumeId"
+											>
+												<a
+													class="dropdown-item non-hover"
+													@click="select(resume.resumeId, resume.resumeTitle)"
+													>{{ resume.resumeTitle }}</a
+												>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="side-button mt-10">
 									<button
 										id="apply-bt"
 										type="button"
@@ -94,43 +131,6 @@
 									>
 										목록으로
 									</button>
-								</div>
-							</div>
-							<div class="side-box" style="padding: 20px">
-								<h6 style="font-weight: bold; margin-bottom: 20px">
-									이력서 선택
-								</h6>
-								<div class="dropdown">
-									<button
-										class="dropdown-toggle resume-dropdown-btn"
-										type="button"
-										id="dropdownMenuButton1"
-										data-bs-toggle="dropdown"
-										aria-expanded="false"
-										style="
-											position: relative;
-											display: flex;
-											justify-content: flex-end;
-											top: -30px;
-										"
-									>
-										{{ selectResume.selectedResumeTitle }}
-									</button>
-									<ul
-										class="dropdown-menu w-100"
-										aria-labelledby="dropdownMenuButton1"
-									>
-										<li
-											v-for="resume in resumeList.resume"
-											:key="resume.resumeId"
-										>
-											<a
-												class="dropdown-item non-hover"
-												@click="select(resume.resumeId, resume.resumeTitle)"
-												>{{ resume.resumeTitle }}</a
-											>
-										</li>
-									</ul>
 								</div>
 							</div>
 						</aside>
@@ -320,17 +320,37 @@ export default {
 	width: 70%;
 	object-fit: fill;
 }
-#content-left-title {
-	/* color: var(--vt-c-divider-light-2); */
-	/* color: var(--vt-c-text-light-2); */
+.detail-top-set {
+	display: flex;
+	justify-content: space-between;
 }
-.detail-coment span {
+.detail-top-set > p {
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	color: var(--primary-color-1);
+	background-color: #f3f5f8;
+
+	text-align: center;
+
+	padding: 5px;
+	border-radius: 20px;
+}
+
+.detail-coment {
+	display: flex;
+	align-items: center;
+}
+.detail-coment div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-right: 2%;
 	padding: 5px;
-	border-radius: 15px;
+	border-radius: 20px;
 	background-color: #f3f5f8;
 	text-align: center;
-	align-items: center;
 	color: var(--vt-c-divider-light-2);
 }
 .content-area {
@@ -351,10 +371,35 @@ export default {
 	transition: all 0.3s;
 	/* border: 1px solid; */
 }
-.side-box-content-item {
+.side-box {
+	padding: 30px;
+	border: 1px solid var(--primary-color-border-grey);
+}
+.dropdown > ul {
+	text-align: center;
+	transform: translate3d(5px, 30px, 0px) !important;
+	border: 1px solid #949494;
+}
+.resume-box {
+	height: 100%;
+	padding: 20px 0px;
+	background-color: #ffffff;
+	/* text-align: center; */
+	border-radius: 1px;
+	box-shadow: 4px 5px 9px;
+	margin-bottom: 20px;
+}
+.resume-box:hover {
+	box-shadow: 1px 1px 4px;
+}
+
+.side-box-content-item-one {
 	display: flex;
-	margin-bottom: 10%;
+	justify-content: space-between;
 	/* color: var(--vt-c-divider-light-1); */
+}
+.side-box-content-item-one > p + p {
+	color: #51bffe;
 }
 .side-box-content-item-two {
 	color: var(--vt-c-divider-light-2);
@@ -362,19 +407,22 @@ export default {
 }
 .side-button {
 	display: flex;
-	flex-direction: column;
 	justify-content: space-around;
+}
+.side-button > button {
 }
 #list-bt {
 	color: #13aaff;
 	background-color: white;
 	margin: 3px 0px;
-	width: 100%;
+	width: 45%;
+	height: 40px;
 	border: 1px solid var(--primary-color-1);
 }
 #apply-bt {
 	margin: 3px 0px;
-	width: 100%;
+	width: 45%;
+	height: 40px;
 	color: white;
 }
 
@@ -391,15 +439,6 @@ export default {
 	width: 40%;
 	height: 40%;
 	border: 1px solid var(--primary-color-1);
-}
-.side-box {
-	height: 100%;
-	padding: 5%;
-	background-color: #ffffff;
-	/* text-align: center; */
-	border-radius: 1px;
-	border: 1px solid var(--primary-color-border-grey);
-	margin-bottom: 20px;
 }
 
 .btnLightBlue {
@@ -420,13 +459,6 @@ export default {
 	transition: all 0.5s;
 	display: flex;
 	justify-content: center;
-}
-
-.resume-dropdown-btn {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 @media screen and (max-width: 1024px) {

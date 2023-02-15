@@ -42,7 +42,9 @@
 .div-infocard-item {
   background-color: rgba(240, 248, 255, 0.54);
   margin: 10px;
-  width: 30%;
+  min-width: 20%;
+  max-width: 30%;
+  height: 180px;
   border-radius: 20px;
   box-shadow: 2px 3px 4px gray;
 }
@@ -189,7 +191,10 @@
 
 @media only screen and (max-width: 1024px) {
   .div-infocard-item {
-    width: 45%;
+
+
+    min-width: 45%;
+    max-width: 50%;
   }
 
   .infoCards {
@@ -199,6 +204,7 @@
 
 @media only screen and (max-width: 650px) {
   .div-infocard-item {
-    width: 80%;
+    min-width: 70%;
+    max-width: 90%;
   }
 }

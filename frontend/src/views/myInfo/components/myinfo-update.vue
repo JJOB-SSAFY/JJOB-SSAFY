@@ -109,7 +109,7 @@
 									변경할 비밀번호 확인
 								</p>
 								<input
-									type="p-password"
+									type="password"
 									v-model="password.changeCk"
 									class="p-info-content"
 								/>
@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRaw, watch } from 'vue';
+import { ref, reactive, toRaw } from 'vue';
 import { useStore } from 'vuex';
 import MyinfoService from '../../../api/myinfoService';
 import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
