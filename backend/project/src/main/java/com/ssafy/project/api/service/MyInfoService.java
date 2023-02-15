@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface MyInfoService {
     MyInfoGetRes getMyInfo(String email);
-    String changePwd(String change,String current, Member member);
+    String changePwd(String change,String current, Long memberId);
 
     void changeInfo(MyInfoRequestDto myInfo,Long id);
 

@@ -42,7 +42,6 @@ public class ResumeServiceImpl implements ResumeService {
     private final SkillRepository skillRepository;
     private final UniversityRepository universityRepository;
     private final CardRepository cardRepository;
-
     private final ApplyStatusRepository applyStatusRepository;
 
     @Override
@@ -56,20 +55,17 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     @Transactional
     public void createResume(ResumeRequestDto requestDto, Long memberId) {
-        Optional<Member> member = memberRepository.findById(memberId);
-
-        if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
-
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION));
 
         //넣어야하는 resume 엔티티와 연결되어 있는 모든 엔티티를 생성해준다.
-        Resume resume = Resume.of(member.get(), requestDto);
+        Resume resume = Resume.of(member, requestDto);
         resumeRepository.save(resume);
 
         //activity entity
         List<ActivityRequestDto> activityDtoList = requestDto.getActivityDtoList();
         List<Activity> activityList = activityDtoList.stream().map((o) -> new Activity(resume, o)).collect(toList());
         activityRepository.saveAll(activityList);
-
 
         //award
         List<AwardRequestDto> awardRequestDtoList = requestDto.getAwardDtoList();
@@ -81,7 +77,6 @@ public class ResumeServiceImpl implements ResumeService {
         List<Career> careerList = careerRequestDtoList.stream().map((o)-> new Career(resume, o)).collect(toList());
         careerRepository.saveAll(careerList);
 
-
         //certificate
         List<CertificateRequestDto> certificateRequestDtoList = requestDto.getCertificateDtoList();
         List<Certificate> certificateList = certificateRequestDtoList.stream().map((o)-> new Certificate(resume, o)).collect(toList());
@@ -92,25 +87,20 @@ public class ResumeServiceImpl implements ResumeService {
         List<CoverLetter> coverLetterList = coverLetterRequestDtoList.stream().map((o)-> new CoverLetter(resume, o)).collect(toList());
         coverLetterRepository.saveAll(coverLetterList);
 
-
         //education
         List<EducationRequestDto> educationRequestDtoList = requestDto.getEducationDtoList();
         List<Education> educationList = educationRequestDtoList.stream().map((o)-> new Education(resume, o)).collect(toList());
         educationRepository.saveAll(educationList);
-
 
         //languageAbility
         List<LanguageAbilityRequestDto> languageAbilityRequestDtoList = requestDto.getLanguageAbilityDtoList();
         List<LanguageAbility> languageAbilityList = languageAbilityRequestDtoList.stream().map((o)-> new LanguageAbility(resume, o)).collect(toList());
         languageAbilityRepository.saveAll(languageAbilityList);
 
-
         //projectExp
         List<ProjectExpRequestDto> projectExpRequestDtoList = requestDto.getProjectExpDtoList();
         List<ProjectExp> projectExpList = projectExpRequestDtoList.stream().map((o)-> new ProjectExp(resume, o)).collect(toList());
         projectExpRepository.saveAll(projectExpList);
-
-
 
         //skill
         List<SkillRequestDto> skillRequestDtoList = requestDto.getSkillDtoList();
@@ -128,64 +118,62 @@ public class ResumeServiceImpl implements ResumeService {
     public void updateResume(ResumeRequestDto requestDto, Long resumeId) {
 
         //resume update
-        Optional<Resume> resume = resumeRepository.findById(resumeId);
-        if(resume.isEmpty()) throw new ApiException(ExceptionEnum.RESUME_NOT_EXIST_EXCEPTION);
+        Resume resume = resumeRepository.findById(resumeId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.RESUME_NOT_EXIST_EXCEPTION));
 
-        resume.get().updateResume(requestDto);
+        resume.updateResume(requestDto);
 
         //연관된 테이블들 전부 삭제
         deleteRelatedData(resumeId);
 
-        //수정된 내용대로 테이블들 재생성 및 resume 매핑
-
         //activity entity
         List<ActivityRequestDto> activityDtoList = requestDto.getActivityDtoList();
-        List<Activity> activityList = activityDtoList.stream().map((o) -> new Activity(resume.get(), o)).collect(toList());
+        List<Activity> activityList = activityDtoList.stream().map((o) -> new Activity(resume, o)).collect(toList());
         activityRepository.saveAll(activityList);
 
         //award
         List<AwardRequestDto> awardRequestDtoList = requestDto.getAwardDtoList();
-        List<Award> awardList = awardRequestDtoList.stream().map((o) -> new Award(resume.get(), o)).collect(toList());
+        List<Award> awardList = awardRequestDtoList.stream().map((o) -> new Award(resume, o)).collect(toList());
         awardRepository.saveAll(awardList);
 
         //career
         List<CareerRequestDto> careerRequestDtoList = requestDto.getCareerDtoList();
-        List<Career> careerList = careerRequestDtoList.stream().map((o)-> new Career(resume.get(), o)).collect(toList());
+        List<Career> careerList = careerRequestDtoList.stream().map((o)-> new Career(resume, o)).collect(toList());
         careerRepository.saveAll(careerList);
 
         //certificate
         List<CertificateRequestDto> certificateRequestDtoList = requestDto.getCertificateDtoList();
-        List<Certificate> certificateList = certificateRequestDtoList.stream().map((o)-> new Certificate(resume.get(), o)).collect(toList());
+        List<Certificate> certificateList = certificateRequestDtoList.stream().map((o)-> new Certificate(resume, o)).collect(toList());
         certificateRepository.saveAll(certificateList);
 
         //coverLetter
         List<CoverLetterRequestDto> coverLetterRequestDtoList = requestDto.getCoverLetterDtoList();
-        List<CoverLetter> coverLetterList = coverLetterRequestDtoList.stream().map((o)-> new CoverLetter(resume.get(), o)).collect(toList());
+        List<CoverLetter> coverLetterList = coverLetterRequestDtoList.stream().map((o)-> new CoverLetter(resume, o)).collect(toList());
         coverLetterRepository.saveAll(coverLetterList);
 
         //education
         List<EducationRequestDto> educationRequestDtoList = requestDto.getEducationDtoList();
-        List<Education> educationList = educationRequestDtoList.stream().map((o)-> new Education(resume.get(), o)).collect(toList());
+        List<Education> educationList = educationRequestDtoList.stream().map((o)-> new Education(resume, o)).collect(toList());
         educationRepository.saveAll(educationList);
 
         //languageAbility
         List<LanguageAbilityRequestDto> languageAbilityRequestDtoList = requestDto.getLanguageAbilityDtoList();
-        List<LanguageAbility> languageAbilityList = languageAbilityRequestDtoList.stream().map((o)-> new LanguageAbility(resume.get(), o)).collect(toList());
+        List<LanguageAbility> languageAbilityList = languageAbilityRequestDtoList.stream().map((o)-> new LanguageAbility(resume, o)).collect(toList());
         languageAbilityRepository.saveAll(languageAbilityList);
 
         //projectExp
         List<ProjectExpRequestDto> projectExpRequestDtoList = requestDto.getProjectExpDtoList();
-        List<ProjectExp> projectExpList = projectExpRequestDtoList.stream().map((o)-> new ProjectExp(resume.get(), o)).collect(toList());
+        List<ProjectExp> projectExpList = projectExpRequestDtoList.stream().map((o)-> new ProjectExp(resume, o)).collect(toList());
         projectExpRepository.saveAll(projectExpList);
 
         //skill
         List<SkillRequestDto> skillRequestDtoList = requestDto.getSkillDtoList();
-        List<Skill> skillList = skillRequestDtoList.stream().map((o)-> new Skill(resume.get(), o)).collect(toList());
+        List<Skill> skillList = skillRequestDtoList.stream().map((o)-> new Skill(resume, o)).collect(toList());
         skillRepository.saveAll(skillList);
 
         //University
         List<UniversityRequestDto> universityRequestDtoList = requestDto.getUniversityDtoList();
-        List<University> universityList = universityRequestDtoList.stream().map((o)-> new University(resume.get(), o)).collect(toList());
+        List<University> universityList = universityRequestDtoList.stream().map((o)-> new University(resume, o)).collect(toList());
         universityRepository.saveAll(universityList);
 
     }
@@ -207,8 +195,8 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     @Transactional(readOnly = true)
     public ResumeResponseDto getResume(Long resumeId) {
-        Optional<Resume> resume = resumeRepository.findById(resumeId);
-        if(resume.isEmpty()) throw new ApiException(ExceptionEnum.RESUME_NOT_EXIST_EXCEPTION);
+        Resume resume = resumeRepository.findById(resumeId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.RESUME_NOT_EXIST_EXCEPTION));
 
         //activityDto
         List<Activity> activityList = activityRepository.findAllByResumeId(resumeId);
@@ -250,14 +238,15 @@ public class ResumeServiceImpl implements ResumeService {
         List<University> universityList = universityRepository.findAllByResumeId(resumeId);
         List<UniversityResponseDto> universityResponseDtoList = universityList.stream().map(UniversityResponseDto::new).collect(toList());
 
-        Optional<Card> card = cardRepository.findById(resume.get().getMember().getCard().getId());
+        Card card = cardRepository.findById(resume.getMember().getCard().getId())
+                .orElseThrow(() -> new ApiException(ExceptionEnum.CARD_NOT_EXIST_EXCEPTION));
 
-        return ResumeResponseDto.of(resume.get(), activityResponseDtoList,
+        return ResumeResponseDto.of(resume, activityResponseDtoList,
                 awardResponseDtoList, careerResponseDtoList,
                 certificateResponseDtoList, coverLetterResponseDtoList,
                 educationResponseDtoList, languageAbilityResponseDtoList,
                 projectExpResponseDtoList, skillResponseDtoList,
-                universityResponseDtoList, card.get().getImageUrl());
+                universityResponseDtoList, card.getImageUrl());
 
     }
 

@@ -22,7 +22,7 @@ public class CardController {
 
     @GetMapping("")
     public ResponseEntity<?> getCard(){
-        List<CardResponseDto> cardList = cardList=cardService.getCard();
+        List<CardResponseDto> cardList = cardService.getCard();
         return new ResponseEntity<List<CardResponseDto>>(cardList, HttpStatus.OK);
     }
 
@@ -30,6 +30,5 @@ public class CardController {
     public ResponseEntity<List<CardResponseListDto>> getCardList(@RequestBody CardSearchCondition condition){
         return new ResponseEntity<>(cardService.getCardList(condition), HttpStatus.OK);
     }
-
 
 }

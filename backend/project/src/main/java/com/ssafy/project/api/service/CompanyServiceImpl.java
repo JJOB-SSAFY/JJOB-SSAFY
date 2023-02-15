@@ -36,29 +36,28 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional
     public CompanyResponseDto updateCompany(Long companyId, CompanyRequestDto requestDto){
-        Optional<Company> company = companyRepository.findById(companyId);
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
 
-        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        company.updateCompany(requestDto);
 
-        company.get().updateCompany(requestDto);
-
-        return CompanyResponseDto.from(company.get());
+        return CompanyResponseDto.from(company);
     }
 
     @Override
     @Transactional
     public void deleteCompany(Long companyId){
-        Optional<Company> company = companyRepository.findById(companyId);
-        if(company.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
         reviewRepository.deleteAllByCompanyId(companyId);
-        companyRepository.delete(company.get());
+        companyRepository.delete(company);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CompanyResponseDto> getCompany() {
         List<Company> companyList = companyRepository.findAll();
         return companyList.stream().map(CompanyResponseDto::new).collect(Collectors.toList());
-        // return cardList.stream().map(CardResponseDto::new).collect(Collectors.toList());
     }
 
 }

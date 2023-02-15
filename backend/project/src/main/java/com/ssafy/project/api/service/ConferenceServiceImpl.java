@@ -31,22 +31,19 @@ public class ConferenceServiceImpl implements ConferenceService {
     private final MemberRepository memberRepository;
     private final MemberConferenceRepository memberConferenceRepository;
     private final ConferenceRepository conferenceRepository;
-
     private final CompanyRepository companyRepository;
 
     @Override
     @Transactional
     public void createConference(ConferenceRequestDto requestDto, Long memberId, Long companyId) {
 
-        Optional<Member> member = memberRepository.findById(memberId);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-        if(member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
 
-        Optional<Company> findCompany = companyRepository.findById(companyId);
-
-        if(findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
-
-        Conference conference = Conference.of(requestDto, member.get(), findCompany.get());
+        Conference conference = Conference.of(requestDto, member, company);
 
         conferenceRepository.save(conference);
 
@@ -59,13 +56,13 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     private void saveInterviewParticipant(List<String> emailList, Conference conference) {
         for (String email : emailList) {
-            Optional<Member> memberEmail = memberRepository.findByEmail(email);
+            Member member = memberRepository.findByEmail(email)
+                    .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-            if (memberEmail.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
-
-            MemberConference memberConference = MemberConference.builder().
-                    member(memberEmail.get()).
-                    conference(conference).build();
+            MemberConference memberConference = MemberConference.builder()
+                    .member(member)
+                    .conference(conference)
+                    .build();
 
             memberConferenceRepository.save(memberConference);
         }
@@ -84,15 +81,13 @@ public class ConferenceServiceImpl implements ConferenceService {
     @Transactional
     public void deleteConference(Long memberId, Long conferenceId) {
 
-        Optional<Member> findMember = memberRepository.findById(memberId);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-        if (findMember.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+        Conference conference = conferenceRepository.findById(conferenceId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.CONFERENCE_NOT_EXIST_EXCEPTION));
 
-        Optional<Conference> findConference = conferenceRepository.findById(conferenceId);
-
-        if (findConference.isEmpty()) throw new ApiException(ExceptionEnum.CONFERENCE_NOT_EXIST_EXCEPTION);
-
-        if (!findMember.get().getId().equals(findConference.get().getMember().getId())) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+        if (!member.getId().equals(conference.getMember().getId())) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
         memberConferenceRepository.deleteAllByConferenceId(conferenceId);
         conferenceRepository.deleteAllById(conferenceId);

@@ -10,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class Card {
 
     @Id
@@ -25,7 +26,6 @@ public class Card {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String phone;
 
     private String github;
