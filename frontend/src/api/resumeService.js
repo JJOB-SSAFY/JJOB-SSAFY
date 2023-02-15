@@ -25,4 +25,8 @@ export default class resumeService {
 			.patch(`resume/${id}`, params, config)
 			.then(data => data.data);
 	}
+
+	async deleteResume(id) {
+		return await http.delete(`resume/${id}`, config).then(data => data.data);
+	}
 }
