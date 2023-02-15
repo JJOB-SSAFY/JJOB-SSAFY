@@ -584,7 +584,7 @@ export default {
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
+				cancelButtonColor: '#',
 				confirmButtonText: '네',
 				cancelButtonText: '아니요',
 			})
