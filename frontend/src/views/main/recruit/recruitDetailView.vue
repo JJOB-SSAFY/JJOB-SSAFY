@@ -254,7 +254,7 @@ export default {
 				})
 				.then(() => {
 					Swal.fire({
-						title: 'OOPS!',
+						title: 'Success!',
 						text:
 							detailList.companyName +
 							' ' +

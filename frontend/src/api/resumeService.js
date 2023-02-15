@@ -10,7 +10,7 @@ const config = {
 export default class resumeService {
 	async getMyResumeList() {
 		config.headers.Authorization = localStorage.getItem('jjob.s.token');
-		return await http.get(`resume`, config).then(data => data.data);
+		return await http.get(`resume/isapplied`, config).then(data => data.data);
 	}
 
 	async getResume(id, params) {
