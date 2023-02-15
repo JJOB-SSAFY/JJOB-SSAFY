@@ -66,7 +66,6 @@ public class Resume {
         this.portfolio = requestDto.getPortfolio();
         this.email = requestDto.getEmail();
         this.github = requestDto.getGithub();
-        this.isApplied = requestDto.getIsApplied();
     }
 
     public void updateStatus() {
