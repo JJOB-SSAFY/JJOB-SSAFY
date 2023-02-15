@@ -216,6 +216,7 @@ import { url } from '../../../api/http';
 import { useStore } from 'vuex';
 import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../../api/firebase';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'recruitCreateView',
@@ -298,7 +299,11 @@ export default {
 					console.log(res);
 				})
 				.then(() => {
-					alert('채용공고 등록 성공');
+					Swal.fire({
+					title: 'OOPS!',
+					text: '채용공고 등록 성공',
+					icon: 'success',
+				});
 					initData();
 				});
 		};

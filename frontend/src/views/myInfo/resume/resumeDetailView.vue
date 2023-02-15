@@ -354,6 +354,7 @@
 <script>
 import resumeService from '../../../api/resumeService';
 import { toRaw } from 'vue';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'resumeDetailView',
@@ -971,10 +972,18 @@ export default {
 			};
 
 			if (!resumeTitle) {
-				alert('이력서 제목을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '이력서 제목을 입력해주세요',
+					icon: 'warning',
+				});
 				return;
 			} else if (!name) {
-				alert('이름을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '이름을 입력해주세요',
+					icon: 'warning',
+				});
 				return;
 			}
 
