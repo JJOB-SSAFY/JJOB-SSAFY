@@ -4,7 +4,7 @@
 			<div class="left-container">
 				<div class="left-fix">
 					<img
-						src="../../../assets/images/blackbackground.jpg"
+						:src="resume.resumeInfo.imageUrl"
 						class="resume-profile-image"
 						alt="..."
 					/>
@@ -652,7 +652,7 @@
 </template>
 
 <script>
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, toRaw } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 import { url } from '../../../api/http';
