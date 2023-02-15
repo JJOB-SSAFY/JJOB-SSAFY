@@ -93,7 +93,11 @@
 				v-for="recruit in recruitList.recruitDeadlineList"
 				:key="recruit.recruitId"
 			>
-				<div class="card card-container" style="border: none">
+				<div
+					class="card card-container"
+					style="border: none"
+					@click="goToRecruitDetailView(recruit.recruitId)"
+				>
 					<img
 						:src="recruit.recruitImage"
 						class="card-img-top"
