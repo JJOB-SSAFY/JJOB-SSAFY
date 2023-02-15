@@ -27,10 +27,10 @@
 								<img :src="detailList.imgUrl" />
 							</div>
 							<hr class="detail-hr" />
-							<div>
+							<div class="recruit-detail-companyName">
 								<span
 									><h5>
-										<b>회사이름 : {{ detailList.companyName }}</b>
+										<p>{{ detailList.companyName }}</p>
 									</h5></span
 								><br />
 								<span id="content-left-title"

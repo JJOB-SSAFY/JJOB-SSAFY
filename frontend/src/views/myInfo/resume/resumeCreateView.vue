@@ -341,9 +341,7 @@
 
 <script>
 import resumeService from '../../../api/resumeService';
-import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
-const router = useRouter();
 
 export default {
 	name: 'resumeCreateView',
@@ -554,6 +552,9 @@ export default {
 	},
 	created() {
 		this.resumeService = new resumeService();
+	},
+	mounted() {
+		window.scrollTo(0, 0);
 	},
 
 	methods: {
