@@ -137,6 +137,8 @@ import { useStore } from 'vuex';
 import MyinfoService from '../../../api/myinfoService';
 import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../../api/firebase';
+import Swal from 'sweetalert2';
+
 export default {
 	setup() {
 		const myinfoService = new MyinfoService();
@@ -180,7 +182,11 @@ export default {
 			myinfoService
 				.updateCard(param)
 				.then(() => {
-					alert('정보 변경 성공');
+					Swal.fire({
+						title: 'WOW!',
+						text: '정보변경 성공!',
+						icon: 'success',
+					});
 					store.commit('auth/SET_USER_INFO', myInfo.state);
 				})
 				.catch(err => console.log(err));
@@ -195,11 +201,19 @@ export default {
 				password.change == '' ||
 				password.change == null
 			) {
-				alert('모든 정보를 입력해 주세요!!');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '모든 정보를 입력해주세요.',
+					icon: 'warning',
+				});
 				return;
 			}
 			if (password.change != password.changeCk) {
-				alert('비밀번호를 다시 확인해 주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '비밀번호를 다시 확인해주세요.',
+					icon: 'warning',
+				});
 				return;
 			}
 			const resPwd = {
@@ -211,9 +225,20 @@ export default {
 				.changePwd(resPwd)
 				.then(data => {
 					if (data.data.message == 'Fail') {
-						alert('비밀번호를 다시 확인해주세요');
+						Swal.fire({
+							title: 'OOPS!',
+							text: '비밀번호를 다시 확인해주세요.',
+							icon: 'warning',
+						});
 					} else if (data.data.message == 'Success') {
-						alert('비밀번호 변경 성공');
+						Swal.fire({
+							title: 'WOW!',
+							text: '비밀번호 변경 성공',
+							icon: 'success',
+						});
+						password.current = '';
+						password.change = '';
+						password.changeCk = '';
 					}
 				})
 				.catch(console.log('err'));

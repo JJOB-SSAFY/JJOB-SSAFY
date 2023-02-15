@@ -172,6 +172,8 @@ import MemberService from '../../api/memberService';
 import CompanyService from '../../api/companyService';
 import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../api/firebase';
+import Swal from 'sweetalert2';
+
 export default {
 	name: 'registerView',
 	setup() {
@@ -227,11 +229,19 @@ export default {
 				info.name == null ||
 				info.name == ''
 			) {
-				alert('모든 정보를 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '모든 정보를 입력해주세요.',
+					icon: 'warning',
+				});
 				return;
 			}
 			if (!invalidPassowrd.value) {
-				alert('비밀번호가 일치하지 않습니다.');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '비밀번호가 일치하지 않습니다.',
+					icon: 'warning',
+				});
 				return;
 			}
 
@@ -243,7 +253,11 @@ export default {
 			emailValid(userInfo.email);
 
 			if (!emailValidCk.value) {
-				alert('올바른 이메일 형식을 작성해주세요!');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '올바른 이메일 형식을 입력해주세요.',
+					icon: 'warning',
+				});
 				return;
 			}
 
@@ -265,7 +279,11 @@ export default {
 				companyInfo.employeeCnt == null ||
 				companyInfo.employeeCnt == ''
 			) {
-				alert('모든 정보를 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '모든 정보를 입력해주세요',
+					icon: 'warning',
+				});
 				return;
 			}
 
@@ -278,11 +296,19 @@ export default {
 			await companyService
 				.registerCompany(param)
 				.then(data => {
-					alert(param.companyName + ' 기업 등록 성공');
+					Swal.fire({
+					title: 'WOW!',
+					text: param.companyName + ' 기업 등록 성공',
+					icon: 'success',
+				});
 				})
 				.catch(err => {
 					console.log(err);
-					alert('기업 등록 실패');
+					Swal.fire({
+					title: 'OOPS!',
+					text: param.companyName + ' 기업 등록 실패',
+					icon: 'warning',
+				});
 					return;
 				});
 		};
@@ -292,10 +318,19 @@ export default {
 				.registerUser(param)
 				.then(data => {
 					console.log(data);
-					alert(info.email + '등록 성공');
+					Swal.fire({
+					title: 'WOW!',
+					text: info.email + '등록 성공',
+					icon: 'success',
+				});
 				})
 				.catch(err => {
 					alert('유저등록실패');
+					Swal.fire({
+					title: 'OOPS!',
+					text: '유저등록실패',
+					icon: 'warning',
+				});
 					console.log(err);
 				});
 		};

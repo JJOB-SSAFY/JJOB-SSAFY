@@ -35,9 +35,9 @@
 								/>
 								<span class="font-LINE-Rg">기억하기</span>
 							</div>
-							<div class="forget-password font-LINE-Rg">
+							<!-- <div class="forget-password font-LINE-Rg" >
 								<a href="#">비밀번호를 잊어버리셨나요? </a>
-							</div>
+							</div> -->
 						</div>
 						<div class="div-button">
 							<button

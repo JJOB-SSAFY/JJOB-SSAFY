@@ -54,15 +54,13 @@ public class RecruitServiceImpl implements RecruitService {
     @Override
     @Transactional
     public void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId) {
-        Optional<Company> findCompany = companyRepository.findById(companyId);
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
 
-        if (findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-        Optional<Member> findMember = memberRepository.findById(memberId);
-
-        if (findMember.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
-
-        Recruit recruit = Recruit.of(requestDto, findCompany.get(), findMember.get());
+        Recruit recruit = Recruit.of(requestDto, company, member);
 
         recruitRepository.save(recruit);
     }
@@ -76,33 +74,30 @@ public class RecruitServiceImpl implements RecruitService {
     @Override
     @Transactional(readOnly = true)
     public RecruitResponseDto getRecruitDetail(Long recruitId) {
-        Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
+        Recruit recruit = recruitRepository.findById(recruitId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION));
 
-        if (findRecruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
-
-        return RecruitResponseDto.of(findRecruit.get());
+        return RecruitResponseDto.of(recruit);
     }
 
     @Override
     @Transactional
     public void updateRecruit(Long memberId, Long recruitId, RecruitRequestDto requestDto) {
-        Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
+        Recruit recruit = recruitRepository.findById(recruitId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION));
 
-        if (findRecruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
+        if (!recruit.getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
-        if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
-
-        findRecruit.get().updateRecruit(requestDto);
+        recruit.updateRecruit(requestDto);
     }
 
     @Override
     @Transactional
     public void deleteRecruit(Long memberId, Long recruitId) {
-        Optional<Recruit> findRecruit = recruitRepository.findById(recruitId);
+        Recruit recruit = recruitRepository.findById(recruitId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION));
 
-        if (findRecruit.isEmpty()) throw new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION);
-
-        if (!findRecruit.get().getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+        if (!recruit.getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
         applyStatusRepository.deleteAllByRecruitId(recruitId);
 

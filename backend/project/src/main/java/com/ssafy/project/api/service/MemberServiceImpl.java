@@ -6,9 +6,11 @@ import com.ssafy.project.api.response.MemberLoginPostRes;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.common.util.JwtTokenUtil;
+import com.ssafy.project.db.entity.Card;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.MemberRoleEnum;
+import com.ssafy.project.db.repository.CardRepository;
 import com.ssafy.project.db.repository.CompanyRepository;
 import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +31,8 @@ import static org.springframework.util.StringUtils.hasText;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
-
     private final CompanyRepository companyRepository;
+    private final CardRepository cardRepository;
 
     @Override
     @Transactional
@@ -38,12 +40,15 @@ public class MemberServiceImpl implements MemberService {
 
         String email = joinInfo.getEmail();
         String companyName = joinInfo.getCompanyName();
+        String name = joinInfo.getName();
 
         Optional<Member> findEmail = memberRepository.findByEmail(email);
 
         if (findEmail.isPresent()) throw new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION);
 
-        Member member = Member.from(joinInfo);
+        Card card = createCard(email, name);
+
+        Member member = Member.from(joinInfo, card);
 
         if (hasText(companyName)) {
             Company company = companyExistCheck(companyName);
@@ -57,17 +62,23 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
     }
 
+    private Card createCard(String email, String name) {
+        Card card = new Card();
+        card.setImageUrl("https://firebasestorage.googleapis.com/v0/b/jjob-4c01e.appspot.com/o/images%2Fprofile-removebg.png?alt=media&token=167eb21d-70e0-4571-b044-97b72fa172f2");
+        card.setName(name);
+        card.setEmail(email);
+        cardRepository.save(card);
+        return card;
+    }
+
     @Override
     @Transactional(readOnly = true)
     public MemberLoginPostRes login(MemberLoginPostReq loginInfo) {
         String email = loginInfo.getEmail();
         String password = loginInfo.getPassword();
 
-        Optional<Member> findMember = memberRepository.findByEmail(email);
-
-        if (findMember.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
-
-        Member member = findMember.get();
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         Set<MemberRoleEnum> roleSet = member.getRoleSet();
 
@@ -94,11 +105,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private Company companyExistCheck(String companyName) {
-        Optional<Company> findCompany = companyRepository.findByCompanyName(companyName);
-
-        if (findCompany.isEmpty()) throw new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION);
-
-        return findCompany.get();
+        return companyRepository.findByCompanyName(companyName)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
     }
 
     private String getRole(Set<MemberRoleEnum> roleSet) {

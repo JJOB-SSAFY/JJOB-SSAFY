@@ -140,7 +140,7 @@ import { reactive, toRaw } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
 import { useRoute, useRouter } from 'vue-router';
-
+import Swal from 'sweetalert2';
 export default {
 	name: 'recruitDetailView',
 
@@ -224,7 +224,11 @@ export default {
 
 		const doApply = () => {
 			if (!selectResume.selectedResumeId) {
-				alert('선택된 이력서가 없습니다.');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '선택된 이력서가 없습니다.',
+					icon: 'warning',
+				});
 				return;
 			}
 			const resumeId = selectResume.selectedResumeId;
@@ -249,7 +253,11 @@ export default {
 					console.log(res);
 				})
 				.then(() => {
-					alert(detailList.companyName + detailList.recruitTitle + '지원완료');
+					Swal.fire({
+					title: 'OOPS!',
+					text: detailList.companyName+" "+ detailList.recruitTitle + ' 지원완료',
+					icon: 'success',
+				});
 				});
 		};
 
