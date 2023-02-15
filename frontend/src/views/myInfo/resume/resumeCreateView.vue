@@ -579,13 +579,13 @@ export default {
 			// }
 			let flag = false;
 			Swal.fire({
-				title: '저장하지 않았습니다!',
-				text: '지금 뒤로가면 저장되지 않습니다!',
+				title: '저장되지 않았습니다',
+				text: '이전 페이지로 돌아갈까요?',
 				icon: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
-				confirmButtonText: '예',
+				confirmButtonText: '네',
 				cancelButtonText: '아니요',
 			})
 				.then(result => {
