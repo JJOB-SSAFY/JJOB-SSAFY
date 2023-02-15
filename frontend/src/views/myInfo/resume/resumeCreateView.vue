@@ -340,7 +340,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import resumeService from '../../../api/resumeService';
 import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
@@ -559,13 +558,39 @@ export default {
 
 	methods: {
 		backward() {
-			if (confirm('지금 뒤로가면 저장되지 않습니다. 계속하시겠습니까?')) {
-				this.$router.push({
-					name: 'myInfo',
+			// if (confirm('지금 뒤로가면 저장되지 않습니다. 계속하시겠습니까?')) {
+			// 	this.$router.push({
+			// 		name: 'myInfo',
+			// 	});
+			// } else {
+			// 	return;
+			// }
+			let flag = false;
+			Swal.fire({
+				title: '저장하지 않았습니다!',
+				text: '지금 뒤로가면 저장되지 않습니다!',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '네 뒤로 갑니다.',
+				cancelButtonText: '아니요 뒤로 안갑니다.',
+			})
+				.then(result => {
+					if (result.isConfirmed) flag = true;
+					else flag = false;
+				})
+				.then(() => {
+					if (flag) {
+						{
+							this.$router.push({
+								name: 'myInfo',
+							});
+						}
+					} else {
+						return;
+					}
 				});
-			} else {
-				return;
-			}
 		},
 		saveImpl() {
 			const name = this.myName;
@@ -811,10 +836,18 @@ export default {
 			};
 
 			if (!resumeTitle) {
-				alert('이력서 제목을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '이력서 제목을 입력해주세요',
+					icon: 'warning',
+				});
 				return;
 			} else if (!name) {
-				alert('이름을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '이름을 입력해주세요',
+					icon: 'warning',
+				});
 				return;
 			}
 
