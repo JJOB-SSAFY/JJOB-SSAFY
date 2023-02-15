@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { useStore } from 'vuex';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import resumeService from '../../../api/resumeService';
@@ -31,8 +30,6 @@ import Swal from 'sweetalert2';
 export default {
 	name: 'MyinfoResume',
 	setup() {
-		const store = useStore();
-
 		const router = useRouter();
 
 		const getResumeList = reactive({
@@ -76,7 +73,8 @@ export default {
 				})
 				.catch(err => console.log(err));
 		};
-		return { store, getResumeList, showDetailResume, addResume, deleteResume };
+
+		return { getResumeList, showDetailResume, addResume, deleteResume };
 	},
 };
 </script>

@@ -60,7 +60,7 @@
 				<hr style="margin-bottom: 50px" />
 				<div class="resume-box">
 					<h4 class="font-LINE-Bd">학력사항</h4>
-					<table class="type09 font-LINE-Bd">
+					<table class="type09">
 						<thead>
 							<tr>
 								<th scope="cols">기 간</th>
@@ -68,16 +68,28 @@
 								<th scope="cols">학 과</th>
 							</tr>
 						</thead>
-						<tbody id="universityInfo" v-for="(item, i) in uniItems" :key="i">
+						<tbody
+							id="universityInfo"
+							v-for="(item, i) in resume.resumeInfo.universityDtoList"
+							:key="i"
+						>
 							<tr>
 								<td>
-									<input class="form-control" :id="item.period" />
+									<input
+										class="form-control"
+										v-model="item.universityPeriod"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" :id="item.name" />
+									<input
+										class="form-control"
+										v-model="item.universityName"
+										readonly
+									/>
 								</td>
 								<td>
-									<input class="form-control" :id="item.major" />
+									<input class="form-control" v-model="item.major" readonly />
 								</td>
 							</tr>
 						</tbody>
