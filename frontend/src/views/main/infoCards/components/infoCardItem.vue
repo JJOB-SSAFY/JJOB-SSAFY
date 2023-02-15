@@ -29,11 +29,15 @@
 				<div class="div-back">
 					<div class="back-item info-phone">
 						<fa-icon icon="fas fa-solid fa-phone" />
-						<p>&nbsp&nbsp {{ info.phone }}</p>
+						&nbsp
+						<p v-if="role === 'USER'">미공개정보입니다</p>
+						<p v-else>{{ info.phone }}</p>
 					</div>
 					<div class="back-item info-email">
-						<fa-icon icon="fas fa-solid fa-envelope" /> &nbsp
-						<p>&nbsp&nbsp {{ info.email }}</p>
+						<fa-icon icon="fas fa-solid fa-envelope" />
+						&nbsp
+						<p v-if="role === 'USER'">미공개정보입니다</p>
+						<p v-else>{{ info.email }}</p>
 					</div>
 					<div class="back-item info-github">
 						<img
@@ -54,21 +58,19 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
 export default {
 	props: {
 		info: String,
 	},
 	setup() {
-		return {};
+		const store = useStore();
+
+		const role = store.getters['auth/getUserRole'];
+
+		return { role };
 	},
 };
 </script>
 
-<style scoped>
-.card-info-title {
-	background-color: red;
-}
-.card-info-content {
-	background-color: blue;
-}
-</style>
+<style scoped></style>

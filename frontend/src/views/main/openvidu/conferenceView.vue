@@ -52,7 +52,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="openvidu-join-footer">
+			<div class="openvidu-join-footer font-LINE-Rg">
 				<p class="text-center mt-40 d-flex justify-content-end">
 					<button class="btn btn-lg btn-primary me-3" @click="joinSession()">
 						입장하기
@@ -99,7 +99,7 @@
 				<div class="openvidu-room-footer">
 					<button
 						type="button"
-						class="leave-session-btn"
+						class="leave-session-btn btnLightBlue btnPush font-LINE-Rg"
 						@click="dialog = true"
 					>
 						나가기
@@ -129,7 +129,7 @@
 					마일리지를 받습니다.</v-card-text
 				>
 				<v-card-actions>
-					<div class="review-write-btns">
+					<div class="review-write-btns font-LINE-Rg">
 						<button id="goto-review-bt" @click="goToReviewView">
 							리뷰쓰기
 						</button>
@@ -394,20 +394,18 @@ export default {
 	right: 0;
 	display: flex;
 	align-items: center;
-	border-bottom: 1px lightgray solid;
 }
 
 .openvidu-room-footer {
 	position: fixed;
 	width: 100%;
-	height: 80px;
+	height: 100px;
 	bottom: 0;
 	right: 0;
 	display: flex;
 	justify-content: right;
 	align-items: center;
-	border-top: 1px lightgray solid;
-	background-color: black;
+	background-color: #c3c3c349;
 }
 
 .openvidu-room-container {
@@ -415,13 +413,13 @@ export default {
 }
 
 .leave-session-btn {
-	width: 100px;
-	height: 40px;
-	background: red;
+	width: 150px;
+	height: 50px;
+	font-size: 24px;
 	color: white;
 	font-weight: bold;
 	border-radius: 5px;
-	margin-right: 130px;
+	margin-right: 50px;
 }
 .v-card {
 	width: 500px;
@@ -434,21 +432,32 @@ export default {
 	display: flex;
 }
 #goto-review-bt {
+	margin-right: 2px;
+	padding: 3px 0px;
+	width: 100px;
 	border-radius: 12px;
 	background: var(--primary-color-1);
 
-	box-shadow: 0px 5px 0px 0px #1487c9;
+	box-shadow: 0px 4px 0px 0px #1487c9;
 }
 #interview-out-bt {
+	margin-left: 2px;
+	padding: 3px 0px;
+	width: 70px;
 	border-radius: 12px;
 	background: #fc7e7e;
 
-	box-shadow: 0px 5px 0px 0px #a66615;
+	box-shadow: 0px 4px 0px 0px #a66615;
 }
 
 #goto-review-bt:hover {
+	margin-top: 6px;
+	margin-bottom: -3px;
+	box-shadow: 0px 2px 0px 0px #1487c9;
 }
 #interview-out-bt:hover {
-	background: rgb(255 126 126);
+	margin-top: 5px;
+	margin-bottom: -3px;
+	box-shadow: 0px 2px 0px 0px #a66615;
 }
 </style>

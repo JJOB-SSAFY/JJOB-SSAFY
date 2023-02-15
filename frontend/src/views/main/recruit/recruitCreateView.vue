@@ -4,26 +4,26 @@
 		<p class="banner-letter2">채용 공고를 작성해 주세요.</p>
 	</div>
 	<hr class="hr-main2" />
-	<div class="register-recruit-box">
+	<div class="register-recruit-box font-LINE-Rg">
 		<div class="register-recruit">
-			<h3>채용공고</h3>
+			<p class="font-LINE-Bd f28">채용공고</p>
 			<br />
 			<div class="register-recruit-detail">
 				<div class="register-recruit-detail">
 					<div class="row">
 						<div class="col-8">
-							<h6>*공고 이름</h6>
+							<p class="font-LINE-Bd f18">*공고 이름</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="공고이름"
 								v-model="info.recruitTitle"
 							/>
 						</div>
 						<div class="col">
-							<h6>*경력여부</h6>
+							<p class="font-LINE-Bd f18">*경력여부</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="경력여부"
 								v-model="info.career"
@@ -35,26 +35,17 @@
 				<div class="register-recruit-detail">
 					<div class="row">
 						<div class="col">
-							<h6>*근무지역</h6>
+							<p class="font-LINE-Bd f18">*근무지역</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="근무지역"
 								v-model="info.location"
 							/>
 						</div>
-						<!-- <div class="col">
-							<h6>*근무 형태</h6>
-							<input
-								class="register-recruit-form-input font-LINE-Rg"
-								type="text"
-								placeholder="근무 형태"
-								v-model="info.workType"
-							/>
-						</div> -->
 
 						<div class="col" style="position: relative">
-							<h6>*근무 형태</h6>
+							<p class="font-LINE-Bd f18">*근무 형태</p>
 							<div
 								class="dropdown"
 								style="
@@ -94,7 +85,7 @@
 							</div>
 							<input
 								id="recruit-create-workType"
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="근무 형태"
 								v-model.lazy.trim="info.workType"
@@ -106,28 +97,19 @@
 
 				<div class="register-recruit-detail">
 					<div class="row">
-						<!-- <div class="col">
-								<h6>*채용 기간</h6>
-								<input
-									class="register-recruit-form-input font-LINE-Rg"
-									type="date"
-									placeholder="시작 날짜"
-									v-model="info.recruitStartDate"
-								/>
-							</div> -->
 						<div class="col">
-							<h6>*시작 날짜</h6>
+							<p class="font-LINE-Bd f18">*시작 날짜</p>
 							<input
 								id="currentDate"
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="date"
 								v-model="info.recruitStartDate"
 							/>
 						</div>
 						<div class="col">
-							<h6>*종료 날짜</h6>
+							<p class="font-LINE-Bd f18">*종료 날짜</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="date"
 								v-model="info.recruitEndDate"
 							/>
@@ -138,27 +120,27 @@
 				<div class="register-recruit-detail">
 					<div class="row">
 						<div class="col">
-							<h6>*담당 업무</h6>
+							<p class="font-LINE-Bd f18">*담당 업무</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="담당 업무"
 								v-model="info.work"
 							/>
 						</div>
 						<div class="col">
-							<h6>*요구역량</h6>
+							<p class="font-LINE-Bd f18">*요구역량</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="요구역량"
 								v-model="info.requirement"
 							/>
 						</div>
 						<div class="col">
-							<h6>*부서</h6>
+							<p class="font-LINE-Bd f18">*부서</p>
 							<input
-								class="register-recruit-form-input font-LINE-Rg"
+								class="register-recruit-form-input"
 								type="text"
 								placeholder="부서"
 								v-model="info.department"
@@ -167,10 +149,10 @@
 					</div>
 				</div>
 
-				<p>*공고 이미지</p>
+				<p class="font-LINE-Bd f18">*공고 이미지</p>
 				<div class="filebox" style="display: block">
 					<input
-						class="register-recruit-form-input font-LINE-Rg"
+						class="register-recruit-form-input"
 						disabled
 						v-model="fileName"
 					/>
@@ -182,12 +164,12 @@
 				<br />
 
 				<div class="div-content-box">
-					<p>*공고내용</p>
+					<p class="font-LINE-Bd f18">*공고내용</p>
 					<p>
 						<textarea
 							name="content-area"
 							id="content-area"
-							class="register-recruit-form-input font-LINE-Rg"
+							class="register-recruit-form-input"
 							placeholder="자유형식으로 기재해주세요."
 							rows="20"
 							v-model="info.recruitContent"
@@ -226,6 +208,7 @@ export default {
 		const router = useRouter();
 		const fileName = ref('첨부파일');
 		const store = useStore();
+
 		const imgUpload = async e => {
 			fileName.value = e.target.files[0].name;
 			const uploaded_file = await uploadBytes(
@@ -348,9 +331,17 @@ export default {
 			info.workType = workType;
 		};
 
+		const startEl = docuemnt.querySelector('#currentDate');
+		startEl.valueAsDate = new Date();
+
 		return { info, recruitInfo, register, imgUpload, fileName, selectWorkType };
 	},
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#dropdownMenuButton1 {
+	position: relative;
+	top: 10px;
+}
+</style>

@@ -15,19 +15,19 @@
 			<!-- @click="clickDetail(info.recruitId) -->
 			<!-- @click="clickDetail(info.recruitId)" -->
 			<div class="rec-item-content">
-				<div class="rec-item-title font-LINE-Bd">
+				<div class="rec-item-title font-LINE-Bd line-clamp-default">
 					{{ info.recruitTitle }} [ {{ info.department }} ]
 				</div>
-				<div class="rec-item-company font-LINE-Rg">
+				<div class="rec-item-company font-LINE-Rg line-clamp-default">
 					{{ info.companyName }}
 				</div>
-				<div class="rec-item-require font-LINE-Rg">
+				<div class="rec-item-require font-LINE-Rg line-clamp-default">
 					{{ info.requirement }}
 				</div>
-				<div class="rec-item-location font-LINE-Rg">
+				<div class="rec-item-location font-LINE-Rg line-clamp-default">
 					{{ info.location }}
 				</div>
-				<div class="rec-item-end font-LINE-Rg">
+				<div class="rec-item-end font-LINE-Rg line-clamp-default">
 					{{ info.recruitStartDate }} ~ {{ info.recruitEndDate }}
 				</div>
 			</div>
