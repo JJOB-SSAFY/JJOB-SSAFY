@@ -350,7 +350,7 @@
 import axios from 'axios';
 import resumeService from '../../../api/resumeService';
 import { useRouter } from 'vue-router';
-
+import Swal from 'sweetalert2';
 const router = useRouter();
 
 export default {
@@ -1182,9 +1182,14 @@ export default {
 			this.saveImpl();
 			if (!this.resumeTitle) {
 				return;
-			} else if (this.myName) {
+			} else if (!this.myName) {
 				return;
 			}
+			Swal.fire({
+				title: '성공!',
+				text: '저장되었습니다.',
+				icon: 'success',
+			});
 			this.$router.push({
 				name: 'myInfo',
 			});
