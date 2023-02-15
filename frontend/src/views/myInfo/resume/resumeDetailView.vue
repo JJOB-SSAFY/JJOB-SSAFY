@@ -343,7 +343,6 @@
 
 <script>
 import resumeService from '../../../api/resumeService';
-import { toRaw } from 'vue';
 
 export default {
 	name: 'resumeDetailView',
@@ -709,6 +708,9 @@ export default {
 					res.coverLetterDtoList[i].content;
 			}
 		});
+	},
+	mounted() {
+		window.scrollTo(0, 0);
 	},
 	methods: {
 		goToMyPage() {

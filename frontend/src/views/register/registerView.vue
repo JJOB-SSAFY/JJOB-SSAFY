@@ -13,7 +13,7 @@
 					class="upload-name shadow"
 					v-model="fileName"
 				/>
-				<label for="file">로고등록</label>
+				<label class="btnLightBlue bthPush" for="file">로고등록</label>
 				<input type="file" id="file" @change="imgUpload" />
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 				</div>
 
 				<div v-if="!invalidEmail" style="color: red">
-					&nbsp 이미 등록된 이메일 입니다.
+					&nbsp; 이미 등록된 이메일 입니다.
 				</div>
 				<div class="group font-LINE-Rg">
 					<input
