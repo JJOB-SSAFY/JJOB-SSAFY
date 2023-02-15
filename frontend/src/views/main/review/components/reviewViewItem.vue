@@ -36,22 +36,30 @@
 				>
 				<hr style="margin: 10px 10px" />
 				<v-card-title class="font-LINE-Bd">면접 후기</v-card-title>
-				<v-card-text style="padding: 0px 24px">
+				<v-card-text style="padding: 0px 24px 10px 24px">
 					<fa-icon icon="fas fa-solid fa-magnifying-" />{{
 						info.content
 					}}</v-card-text
 				>
 				<v-card-title class="font-LINE-Bd mt-2">면접 질문</v-card-title>
-				<v-card-text style="padding: 0px 24px">{{ info.question }}</v-card-text>
+				<v-card-text style="padding: 0px 24px 10px 24px">{{
+					info.question
+				}}</v-card-text>
 				<v-card-title class="font-LINE-Bd mt-2">면접 답변</v-card-title>
-				<v-card-text style="padding: 0px 24px">{{ info.answer }}</v-card-text>
-				<v-card-actions>
+				<v-card-text style="padding: 0px 24px 10px 24px">{{
+					info.answer
+				}}</v-card-text>
+
+				<hr style="margin: 10px 10px" />
+
+				<v-card-actions style="margin-bottom: 10px">
 					<v-spacer></v-spacer>
+
 					<button
-						class="btnLightBlue btnFade font-LINE-Bd"
+						class="btnLightBlue btnPush font-LINE-Bd"
 						style="
 							width: 100px;
-							height: 30px;
+							height: 35px;
 							display: flex;
 							justify-content: center;
 							align-items: center;

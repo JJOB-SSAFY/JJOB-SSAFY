@@ -2,15 +2,22 @@
 	<home-banner />
 	<!-- <router-view /> -->
 	<div class="container">
-		<h2 class="font-LINE-Bd" style="text-align: center; margin: 60px 0 20px">
-			최근 올라온 공고
-		</h2>
 		<div class="scroll-box">
 			<fa-icon
 				@click="scrollLatestLeft"
 				icon="far fa-regular fa-circle-left"
 				style="font-size: 32px"
 			/>
+			<fa-icon
+				@click="scrollLatestRight"
+				icon="far fa-regular fa-circle-right"
+				style="font-size: 32px"
+			/>
+		</div>
+		<h2 class="font-LINE-Bd" style="text-align: center; margin: 60px 0 20px">
+			최근 올라온 공고
+		</h2>
+		<div class="container-subtitle">
 			<h6
 				class="font-LINE-Rg"
 				style="text-align: center; color: grey; cursor: pointer"
@@ -18,12 +25,8 @@
 			>
 				전체 공고 보기
 			</h6>
-			<fa-icon
-				@click="scrollLatestRight"
-				icon="far fa-regular fa-circle-right"
-				style="font-size: 32px"
-			/>
 		</div>
+
 		<div class="latest-recruit-container" id="latest-recruit-container">
 			<div
 				v-for="recruit in recruitList.recruitLatestList"
@@ -55,15 +58,23 @@
 			</div>
 		</div>
 		<hr />
-		<h2 class="font-LINE-Bd" style="text-align: center; margin: 60px 0 20px">
-			마감 임박 공고
-		</h2>
 		<div class="scroll-box">
 			<fa-icon
 				@click="scrollDeadLineLeft"
 				icon="far fa-regular fa-circle-left"
 				style="font-size: 32px"
 			/>
+
+			<fa-icon
+				@click="scrollDeadLineRight"
+				icon="far fa-regular fa-circle-right"
+				style="font-size: 32px"
+			/>
+		</div>
+		<h2 class="font-LINE-Bd" style="text-align: center; margin: 60px 0 20px">
+			마감 임박 공고
+		</h2>
+		<div class="container-subtitle">
 			<h6
 				style="
 					font-weight: bold;
@@ -75,12 +86,8 @@
 			>
 				전체 공고 보기
 			</h6>
-			<fa-icon
-				@click="scrollDeadLineRight"
-				icon="far fa-regular fa-circle-right"
-				style="font-size: 32px"
-			/>
 		</div>
+
 		<div class="end-recruit-container" id="deadline-recruit-container">
 			<div
 				v-for="recruit in recruitList.recruitDeadlineList"
@@ -217,6 +224,10 @@ export default {
 	scroll-behavior: smooth;
 }
 
+.latest-recruit-container {
+	display: flex;
+	align-items: flex-end;
+}
 .latest-recruit-container::-webkit-scrollbar {
 	display: none;
 }
@@ -241,6 +252,11 @@ export default {
 	display: none;
 }
 
+.end-recruit-container > div {
+	display: flex;
+	align-items: flex-end;
+}
+
 .end-recruit-container > div:first-child {
 	margin-left: -10px;
 }
@@ -249,15 +265,35 @@ export default {
 	margin-right: -10px;
 }
 
-.scroll-box {
+.container-subtitle {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+}
+.scroll-box {
+	margin: 0px -35px;
+	position: relative;
+	top: 356px;
+	display: flex;
+	z-index: 99;
+	justify-content: space-between;
+}
+.scroll-box > svg:hover {
+	transform: scale(1.1);
+	transition: 0.3s;
 }
 
 .card-container {
 	width: 18rem;
 	margin: 20px;
 	cursor: pointer;
+}
+.card-container > img:hover {
+	transform: scale(1.03);
+	transition: 0.3s;
+}
+.card-container > div:hover {
+	transform: scale(1.03);
+	transition: 0.3s;
 }
 </style>

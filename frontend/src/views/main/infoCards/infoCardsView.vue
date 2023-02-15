@@ -72,6 +72,7 @@
 import InfoCardService from '../../../api/infoCardService';
 import infoCardItem from './components/infoCardItem.vue';
 import { ref, reactive, toRaw } from 'vue';
+import { useStore } from 'vuex';
 export default {
 	namd: 'infoCardView',
 	components: {
@@ -88,7 +89,6 @@ export default {
 
 		infoCardService.getCardList().then(data => {
 			cardList.card = data;
-			console.log(data);
 		});
 
 		const searchForm = reactive({
@@ -105,7 +105,7 @@ export default {
 				.then(data => (cardList.card = data));
 		};
 		search();
-		// const search = () => {};
+
 		return {
 			cardList,
 			searchForm,

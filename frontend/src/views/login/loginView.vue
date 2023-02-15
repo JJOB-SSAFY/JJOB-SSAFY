@@ -13,7 +13,7 @@
 						<input
 							class="font-LINE-Rg"
 							v-model.lazy.trim="loginState.form.email"
-							type="email"
+							type="text"
 							ref="inputEmail"
 							placeholder="이메일을 입력해주세요"
 						/>
@@ -112,16 +112,18 @@ export default {
 					title: 'OOPS!',
 					text: '이메일을 입력해주세요',
 					icon: 'warning',
+					showConfirmButton: false,
+					timer: 1200,
 				});
-				inputEmail.value.focus();
 				return;
 			} else if (!loginState.form.password) {
 				Swal.fire({
 					title: 'OOPS!',
 					text: '비밀번호를 입력해주세요',
 					icon: 'warning',
+					showConfirmButton: false,
+					timer: 1200,
 				});
-				inputPassword.value.focus();
 				return;
 			}
 			// tlwkrwrkwkr
@@ -131,6 +133,8 @@ export default {
 					title: 'OOPS!',
 					text: '이메일 형식에 맞게 입력해주세요',
 					icon: 'warning',
+					showConfirmButton: false,
+					timer: 1200,
 				});
 				return;
 			}
@@ -148,25 +152,11 @@ export default {
 		};
 		const kakaoLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/kakao';
-			// axios({
-			// 	method: 'GET',
-			// 	url: REDIRECT_URL,
-			// }).then(res => {
-			// 	console.log(res);
-			// });
 		};
 
 		const googleLogin = () => {
 			location.href = 'http://localhost:8080/oauth2/authorization/google';
 		};
-		// watch(
-		// 	() => store.getters['auth/getUserInfo'],
-		// 	function () {
-		// 		console.log(store.getters['auth/getUserInfo']);
-		// 	},
-		// );
-		// const test = computed(() => store.getters['auth/getUserInfo']);
-
 		return {
 			loginState,
 			Login,

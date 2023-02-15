@@ -183,6 +183,15 @@ a:hover {
   overflow: hidden;
 }
 
+.line-clamp-default {
+  word-break: break-all;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* hr */
 .hr-main {
   background-color: black;
@@ -232,13 +241,6 @@ a:hover {
 }
 
 
-.dropdown-menu {
-  inset: 0px auto auto -150px !important;
-}
-
-.dropdown-menu>li {
-  text-align: center;
-}
 
 @media screen and (max-width:1024px) {
   .hr-main {

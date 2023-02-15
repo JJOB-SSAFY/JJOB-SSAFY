@@ -131,7 +131,7 @@
 				<div class="group font-LINE-Rg">
 					<input
 						class="register-form-input font-LINE-Rg"
-						type="text"
+						type="number"
 						v-model="companyInfo.employeeCnt"
 						required
 					/>
@@ -306,7 +306,7 @@ export default {
 					console.log(err);
 					Swal.fire({
 						title: 'OOPS!',
-						text: param.companyName + ' 기업 등록 실패',
+						text: '기업 등록 실패',
 						icon: 'warning',
 					});
 					return;
