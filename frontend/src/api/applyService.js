@@ -8,6 +8,7 @@ const config = {
 };
 export default class applyService {
 	async getApplyResumeList(id) {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
 		return await http.get(`apply/${id}`, config).then(data => data.data);
 	}
 

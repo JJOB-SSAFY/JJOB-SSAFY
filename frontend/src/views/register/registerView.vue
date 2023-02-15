@@ -297,18 +297,18 @@ export default {
 				.registerCompany(param)
 				.then(data => {
 					Swal.fire({
-					title: 'WOW!',
-					text: param.companyName + ' 기업 등록 성공',
-					icon: 'success',
-				});
+						title: 'WOW!',
+						text: param.companyName + ' 기업 등록 성공',
+						icon: 'success',
+					});
 				})
 				.catch(err => {
 					console.log(err);
 					Swal.fire({
-					title: 'OOPS!',
-					text: param.companyName + ' 기업 등록 실패',
-					icon: 'warning',
-				});
+						title: 'OOPS!',
+						text: param.companyName + ' 기업 등록 실패',
+						icon: 'warning',
+					});
 					return;
 				});
 		};
@@ -319,18 +319,18 @@ export default {
 				.then(data => {
 					console.log(data);
 					Swal.fire({
-					title: 'WOW!',
-					text: info.email + '등록 성공',
-					icon: 'success',
-				});
+						title: 'WOW!',
+						text: info.email + '등록 성공',
+						icon: 'success',
+					});
 				})
 				.catch(err => {
 					alert('유저등록실패');
 					Swal.fire({
-					title: 'OOPS!',
-					text: '유저등록실패',
-					icon: 'warning',
-				});
+						title: 'OOPS!',
+						text: '유저등록실패',
+						icon: 'warning',
+					});
 					console.log(err);
 				});
 		};
