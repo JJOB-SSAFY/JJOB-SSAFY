@@ -22,12 +22,11 @@ public class CardServiceImpl implements CardService {
 
     private final CardRepository cardRepository;
 
-
     @Override
     @Transactional(readOnly = true)
     public List<CardResponseDto> getCard() {
 
-        List<Card> cardList=cardRepository.findAllByVisible(true);
+        List<Card> cardList = cardRepository.findAllByVisible(true);
         return cardList.stream().map(CardResponseDto::new).collect(Collectors.toList());
     }
 
@@ -36,6 +35,5 @@ public class CardServiceImpl implements CardService {
     public List<CardResponseListDto> getCardList(CardSearchCondition condition) {
         return cardRepository.getCardBySkillsAndNameAndPreferredJob(condition);
     }
-
 
 }

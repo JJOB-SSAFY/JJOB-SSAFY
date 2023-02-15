@@ -33,59 +33,40 @@ public class MyInfoServiceImpl implements MyInfoService {
     @Transactional(readOnly = true)
     public MyInfoGetRes getMyInfo(String email) {
 
-        Optional<Member> myInfo = memberRepository.findByEmail(email);
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-        if (myInfo.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+        Card cardInfo = cardRepository.findById(member.getCard().getId())
+                .orElseThrow(() -> new ApiException(ExceptionEnum.CARD_NOT_EXIST_EXCEPTION));
 
-        if (myInfo.get().getCard() == null) return MyInfoGetRes.from(myInfo.get());
-
-        Optional<Card> cardInfo = cardRepository.findById(myInfo.get().getCard().getId());
-
-        if (cardInfo.isEmpty()) throw new ApiException(ExceptionEnum.CARD_NOT_EXIST_EXCEPTION);
-
-        return MyInfoGetRes.from(cardInfo.get());
+        return MyInfoGetRes.from(cardInfo);
     }
 
     @Override
     @Transactional
-    public String changePwd(String change, String current, Member member) {
-        System.out.println("222");
-        Optional<Member> memberOptional = memberRepository.findById(member.getId());
+    public String changePwd(String change, String current, Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-        if (memberOptional.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
-
-        if (new BCryptPasswordEncoder().matches(current, memberOptional.get().getPassword())) {
-            System.out.println("111");
-            memberOptional.get().changePassword(new BCryptPasswordEncoder().encode(change));
+        if (new BCryptPasswordEncoder().matches(current, member.getPassword())) {
+            member.changePassword(new BCryptPasswordEncoder().encode(change));
             return "Success";
         }else{
             return "Fail";
         }
-
     }
 
     @Override
     @Transactional
     public void changeInfo(MyInfoRequestDto myInfo, Long id) {
 
-        Optional<Member> member = memberRepository.findById(id);
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
-        if (member.isEmpty()) throw new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION);
+        Card card = cardRepository.findById(member.getCard().getId())
+                .orElseThrow(() -> new ApiException(ExceptionEnum.CARD_NOT_EXIST_EXCEPTION));
 
-        // 초기 카드가 없을때
-        if (member.get().getCard() == null) {
-            Card card = Card.of(member.get(), myInfo);
-            cardRepository.save(card);
-            member.get().createCard(card);
-            return;
-        }
-
-        // 초기 카드가 존재할때
-        Optional<Card> info = cardRepository.findById(member.get().getCard().getId());
-
-        if (info.isEmpty()) throw new ApiException(ExceptionEnum.CARD_NOT_EXIST_EXCEPTION);
-
-        info.get().changeInfo(myInfo);
+        card.changeInfo(myInfo);
     }
 
     @Override

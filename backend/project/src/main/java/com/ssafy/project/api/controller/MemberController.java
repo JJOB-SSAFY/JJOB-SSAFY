@@ -20,6 +20,7 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity<BaseResponseBody> join(@RequestBody MemberJoinPostReq joinInfo) {
         //임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
+        System.out.println(joinInfo.getName());
         memberService.join(joinInfo);
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
