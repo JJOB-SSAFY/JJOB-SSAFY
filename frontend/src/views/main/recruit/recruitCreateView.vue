@@ -217,11 +217,13 @@ import { useStore } from 'vuex';
 import { ref as fref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../../api/firebase';
 import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
 
 export default {
 	name: 'recruitCreateView',
 
 	setup() {
+		const router = useRouter();
 		const fileName = ref('첨부파일');
 		const store = useStore();
 		const imgUpload = async e => {
@@ -300,10 +302,14 @@ export default {
 				})
 				.then(() => {
 					Swal.fire({
-					title: 'OOPS!',
-					text: '채용공고 등록 성공',
-					icon: 'success',
-				});
+						title: 'Success!',
+						text: '채용공고 등록 성공',
+						icon: 'success',
+					}).then(() => {
+						router.push({
+							name: 'recruit',
+						});
+					});
 					initData();
 				});
 		};
