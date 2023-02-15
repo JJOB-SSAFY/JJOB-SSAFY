@@ -337,12 +337,9 @@
 
 <script>
 import resumeService from '../../../api/resumeService';
-import { useRouter } from 'vue-router';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { url } from '../../../api/http';
-
-const router = useRouter();
 
 export default {
 	name: 'resumeCreateView',
@@ -567,6 +564,9 @@ export default {
 			// console.log(res.data);
 		});
 	},
+	mounted() {
+		window.scrollTo(0, 0);
+	},
 
 	methods: {
 		backward() {
@@ -585,8 +585,8 @@ export default {
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
-				confirmButtonText: '네 뒤로 갑니다.',
-				cancelButtonText: '아니요 뒤로 안갑니다.',
+				confirmButtonText: '예',
+				cancelButtonText: '아니요',
 			})
 				.then(result => {
 					if (result.isConfirmed) flag = true;

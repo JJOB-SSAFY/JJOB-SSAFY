@@ -339,7 +339,6 @@
 
 <script>
 import resumeService from '../../../api/resumeService';
-import { toRaw } from 'vue';
 import Swal from 'sweetalert2';
 
 export default {
@@ -708,6 +707,9 @@ export default {
 					res.coverLetterDtoList[i].content;
 			}
 		});
+	},
+	mounted() {
+		window.scrollTo(0, 0);
 	},
 	methods: {
 		goToMyPage() {

@@ -236,6 +236,9 @@ export default {
 							text: '비밀번호 변경 성공',
 							icon: 'success',
 						});
+						password.current = '';
+						password.change = '';
+						password.changeCk = '';
 					}
 				})
 				.catch(console.log('err'));
