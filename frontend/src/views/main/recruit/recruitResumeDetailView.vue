@@ -771,19 +771,17 @@ export default {
 
 <style scoped>
 .resume-container {
-	width: 90%;
-	margin: 50px auto 150px;
+	width: 100%;
+	padding-bottom: 50px;
 	display: flex;
 	border: 2px black solid;
-	border-radius: 10px;
 }
 
 .left-container {
 	width: 30%;
-	background-color: #aad6ff;
+	background-color: var(--primary-color-1);
 	padding: 0 50px;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
+	border-right: 2px solid black;
 }
 
 .left-fix {
@@ -795,7 +793,6 @@ export default {
 
 .left-container label {
 	font-size: 15px;
-	font-weight: bold;
 }
 
 .resume-profile-image {
@@ -803,19 +800,18 @@ export default {
 	aspect-ratio: 1/1;
 	margin: 50px auto 25px;
 	border: 10px white solid;
-	border-radius: 40%;
+	/* border-radius: 40%; */
 }
 
 .right-container {
 	width: 70%;
 	background-color: white;
 	padding: 60px 20px 20px 20px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/* border-top-right-radius: 10px; */
+	/* border-bottom-right-radius: 10px; */
 }
 
 .right-container h4 {
-	font-weight: bold;
 	margin: 10px;
 }
 
@@ -840,7 +836,6 @@ table.type09 {
 
 table.type09 thead th {
 	padding: 10px;
-	font-weight: bold;
 	vertical-align: top;
 	color: #369;
 	border-bottom: 3px solid #036;
@@ -849,7 +844,6 @@ table.type09 thead th {
 table.type09 tbody th {
 	width: 150px;
 	padding: 10px;
-	font-weight: bold;
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
 }
@@ -872,70 +866,38 @@ table.type09 td input {
 	background: white;
 	bottom: 0;
 	display: flex;
-	justify-content: right;
+	justify-content: space-between;
 	align-items: center;
 	border-top: 1px lightgray solid;
+	padding: 0px 40px;
 }
 
 .resume-save-impl-btn {
 	width: 200px;
 	height: 40px;
-	border: 1px dodgerblue solid;
 	border-radius: 20px;
 	background: white;
-	font-weight: 900;
-	margin-right: 50px;
+	border: 1px solid var(--primary-color-1);
+	color: var(--primary-color-1);
+	margin-right: 20px;
 }
 
 .resume-save-btn {
 	width: 200px;
 	height: 40px;
-	border: 1px dodgerblue solid;
+	border: 1px solid var(--primary-color-1);
 	border-radius: 20px;
-	background: dodgerblue;
+	background: var(--primary-color-1);
 	color: white;
-	font-weight: 900;
-	margin-right: 100px;
 }
-
-.recruit-resume-detail-footer {
-	position: fixed;
-	width: 100%;
-	height: 80px;
-	background: white;
-	bottom: 0;
+.save-btns {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	border-top: 1px lightgray solid;
 }
-
-.back-btn {
+.resume-return {
 	width: 200px;
-	height: 35px;
+	height: 40px;
 	border-radius: 20px;
-	background: gray;
+	background: rgb(49, 56, 52);
 	color: white;
-	font-weight: 900;
-	margin-left: 50%;
-}
-
-.btn-box-right {
-	display: flex;
-	align-items: center;
-	margin-right: 100px;
-}
-
-.pass-btn {
-	width: 200px;
-	border-radius: 20px;
-	font-weight: 900;
-	margin-right: 50px;
-}
-
-.nonpass-btn {
-	width: 200px;
-	border-radius: 20px;
-	font-weight: 900;
 }
 </style>

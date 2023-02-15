@@ -155,20 +155,20 @@ a:hover {
 }
 
 .btnPush:hover {
-  margin-top: 15px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 
 .btnBlueGreen.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #007144;
+  box-shadow: 0px 2px 0px 0px #007144;
 }
 
 .btnLightBlue.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #1487c9;
+  box-shadow: 0px 2px 0px 0px #1487c9;
 }
 
 .btnOrange.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #A66615;
+  box-shadow: 0px 2px 0px 0px #A66615;
 }
 
 /* input design(줄수, 크기) */
