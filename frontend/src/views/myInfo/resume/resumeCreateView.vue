@@ -1364,7 +1364,7 @@ table.type09 td input {
 	width: 200px;
 	height: 40px;
 	border-radius: 20px;
-	background: rgb(49, 56, 52);
+	background: rgb(255 126 126);
 	color: white;
 }
 </style>

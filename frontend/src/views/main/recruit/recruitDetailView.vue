@@ -254,10 +254,14 @@ export default {
 				})
 				.then(() => {
 					Swal.fire({
-					title: 'OOPS!',
-					text: detailList.companyName+" "+ detailList.recruitTitle + ' 지원완료',
-					icon: 'success',
-				});
+						title: 'OOPS!',
+						text:
+							detailList.companyName +
+							' ' +
+							detailList.recruitTitle +
+							' 지원완료',
+						icon: 'success',
+					});
 				});
 		};
 

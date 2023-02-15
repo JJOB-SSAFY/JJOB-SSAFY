@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="resume-container">
+		<div class="resume-container font-LINE-Rg">
 			<div class="left-container">
 				<div class="left-fix">
 					<img
@@ -9,7 +9,9 @@
 						alt="..."
 					/>
 					<div class="mb-3">
-						<label for="phoneInput" class="form-label">휴대폰</label>
+						<label for="phoneInput" class="form-label font-LINIE-Bd"
+							>휴대폰</label
+						>
 						<input
 							class="form-control"
 							id="phoneInput"
@@ -18,7 +20,9 @@
 						/>
 					</div>
 					<div class="mb-3">
-						<label for="emailInput" class="form-label">이메일</label>
+						<label for="emailInput" class="form-label font-LINIE-Bd"
+							>이메일</label
+						>
 						<input
 							class="form-control"
 							id="emailInput"
@@ -26,17 +30,11 @@
 							readonly
 						/>
 					</div>
+
 					<div class="mb-3">
-						<label for="portfolioInput" class="form-label">포트폴리오</label>
-						<input
-							class="form-control"
-							id="portfolioInput"
-							v-model="resume.resumeInfo.portfolio"
-							readonly
-						/>
-					</div>
-					<div class="mb-3">
-						<label for="githubInput" class="form-label">Github</label>
+						<label for="githubInput" class="form-label font-LINIE-Bd"
+							>Github</label
+						>
 						<input
 							class="form-control"
 							id="githubInput"
@@ -45,7 +43,9 @@
 						/>
 					</div>
 					<div class="mb-3">
-						<label for="blogInput" class="form-label">블로그</label>
+						<label for="blogInput" class="form-label font-LINIE-Bd"
+							>블로그</label
+						>
 						<input
 							class="form-control"
 							id="blogInput"
@@ -78,9 +78,9 @@
 				</div>
 				<hr style="margin-bottom: 50px" />
 				<div class="resume-box">
-					<h4>학력사항</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">학력사항</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">기 간</th>
 								<th scope="cols">학 교 명</th>
@@ -115,9 +115,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>교육이수</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">교육이수</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">교 육 명</th>
 								<th scope="cols">교육 기간</th>
@@ -164,9 +164,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>대내외활동</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">대내외활동</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">활 동 명</th>
 								<th scope="cols">활동 기간</th>
@@ -213,9 +213,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>경력사항</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">경력사항</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">기 업 명</th>
 								<th scope="cols">재직 기간</th>
@@ -254,9 +254,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>수상내역</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">수상내역</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">수 상 명</th>
 								<th scope="cols">수상 일자</th>
@@ -295,9 +295,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>자격증</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">자격증</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">자 격 명</th>
 								<th scope="cols">취득 일자</th>
@@ -336,9 +336,9 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>어학능력</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">어학능력</p>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">언 어</th>
 								<th scope="cols">시 험 명</th>
@@ -382,11 +382,11 @@
 				</div>
 				<div class="resume-box">
 					<div style="display: flex; align-items: center">
-						<h4>SW역량</h4>
+						<p style="font-size: 24px" class="font-LINE-Bd">SW역량</p>
 						<span>&nbsp;(보유기술 및 프로그래밍 언어)</span>
 					</div>
 					<table class="type09">
-						<thead>
+						<thead class="type09 font-LINE-Bd">
 							<tr>
 								<th scope="cols">보유기술 및 능력</th>
 								<th scope="cols">수 준</th>
@@ -421,14 +421,14 @@
 					</table>
 				</div>
 				<div class="resume-box">
-					<h4>프로젝트 경험</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">프로젝트 경험</p>
 					<div
 						id="projectInfo"
 						v-for="(item, i) in resume.resumeInfo.projectExpDtoList"
 						:key="i"
 					>
 						<table class="type09">
-							<thead>
+							<thead class="type09 font-LINE-Bd">
 								<tr>
 									<th scope="cols">타이틀</th>
 									<th scope="cols">내용</th>
@@ -526,14 +526,14 @@
 					</div>
 				</div>
 				<div class="resume-box">
-					<h4>자기소개서</h4>
+					<p style="font-size: 24px" class="font-LINE-Bd">자기소개서</p>
 					<div
 						id="coverLetterInfo"
 						v-for="(item, i) in resume.resumeInfo.coverLetterDtoList"
 						:key="i"
 					>
 						<table class="type09">
-							<thead>
+							<thead class="type09 font-LINE-Bd">
 								<tr>
 									<th scope="cols">
 										<input
@@ -562,89 +562,99 @@
 				</div>
 			</div>
 		</div>
-		<div class="recruit-resume-detail-footer">
-			<div class="btn-box-left">
-				<button class="back-btn" @click="goToRecruitResume">나가기</button>
-			</div>
-			<div class="btn-box-right">
-				<div>
-					<v-row justify="center">
-						<v-dialog v-model="modalInfo.dialog1" persistent width="auto">
-							<template v-slot:activator="{ props }">
-								<v-btn class="pass-btn" color="green" v-bind="props">
-									합격
-								</v-btn>
-							</template>
-							<v-card style="padding: 20px">
-								<v-card-title class="text-h5" style="width: 600px">
-									최종 확인
-								</v-card-title>
-								<br />
-								<h5 style="margin-left: 10px">정말로 합격시키겠습니까?</h5>
-								<br />
-								<v-card-actions>
-									<v-spacer></v-spacer>
-									<v-btn
-										color="green-darken-1"
-										variant="text"
-										@click="resumepass"
-									>
+		<div class="recruit-resume-footer">
+			<button class="resume-return font-LINE-Bd" @click="goToRecruitResume">
+				나가기
+			</button>
+			<div class="recruit-resume-btns font-LINE-Bd">
+				<div class="footer-btns">
+					<v-dialog v-model="modalInfo.dialog1" persistent width="auto">
+						<template v-slot:activator="{ props }">
+							<button class="pass-btn" @click="dialog2 = true" v-bind="props">
+								합격
+							</button>
+						</template>
+						<v-card style="padding: 20px">
+							<v-card-title
+								class="font-LINE-Bd"
+								style="
+									width: 100%;
+									font-size: 28px;
+									border-bottom: 2px solid black;
+								"
+							>
+								최종 확인
+							</v-card-title>
+							<h5 class="font-LINE-Rg mt-2" style="margin-left: 10px">
+								정말로 합격시키겠습니까?
+							</h5>
+							<br />
+							<v-card-actions>
+								<div style="display: flex">
+									<button @click="resumepass" class="pass-btns-y font-LINE-Rg">
 										합격
-									</v-btn>
-									<v-btn
-										color="green-darken-1"
-										variant="text"
+									</button>
+									<button
 										@click="modalInfo.dialog1 = false"
+										class="pass-btns-n font-LINE-Rg"
 									>
 										돌아가기
-									</v-btn>
-								</v-card-actions>
-							</v-card>
-						</v-dialog>
-					</v-row>
-				</div>
-				<div>
-					<v-row justify="center">
-						<v-dialog v-model="modalInfo.dialog2" persistent width="auto">
-							<template v-slot:activator="{ props }">
-								<v-btn class="nonpass-btn" color="red" v-bind="props">
-									불합격
-								</v-btn>
-							</template>
-							<v-card style="padding: 20px">
-								<v-card-title class="text-h5" style="width: 600px">
-									불합격 사유
-								</v-card-title>
-								<br />
-								<v-select
-									v-model="selectReason.reason"
-									:items="reasons"
-									label="사유"
-								></v-select>
-								<v-textarea
-									label="피드백"
-									v-model="selectReason.feedback"
-								></v-textarea>
-								<v-card-actions>
-									<v-spacer></v-spacer>
-									<v-btn
-										color="green-darken-1"
-										variant="text"
+									</button>
+								</div>
+							</v-card-actions>
+						</v-card>
+					</v-dialog>
+					<v-dialog v-model="modalInfo.dialog2" persistent width="auto">
+						<template v-slot:activator="{ props }">
+							<button
+								class="update nonpass-btn"
+								v-bind="props"
+								@click="dialog1 = true"
+							>
+								불합격
+							</button>
+						</template>
+						<v-card style="padding: 20px">
+							<v-card-title
+								class="font-LINE-Bd"
+								style="
+									width: 100%;
+									font-size: 28px;
+									border-bottom: 2px solid black;
+								"
+							>
+								불합격 사유
+							</v-card-title>
+							<br />
+							<v-select
+								class="font-LINE-Bd"
+								v-model="selectReason.reason"
+								:items="reasons"
+								label="사유"
+							></v-select>
+							<v-textarea
+								class="font-LINE-Bd"
+								label="피드백"
+								v-model="selectReason.feedback"
+							></v-textarea>
+							<v-card-actions>
+								<div style="display: flex">
+									<button
 										@click="saveFailReason"
+										class="pass-btns-y font-LINE-Rg"
 									>
 										저장하기
-									</v-btn>
-									<v-btn
-										color="green-darken-1"
-										variant="text"
+									</button>
+									<button
 										@click="modalInfo.dialog2 = false"
+										class="pass-btns-n font-LINE-Rg"
 									>
 										돌아가기
-									</v-btn>
-								</v-card-actions>
-							</v-card>
-						</v-dialog>
-					</v-row>
+									</button>
+								</div>
+							</v-card-actions>
+						</v-card>
+					</v-dialog>
 				</div>
 			</div>
 		</div>
@@ -859,7 +869,7 @@ table.type09 td input {
 	border: none;
 }
 
-.resume-write-footer {
+.recruit-resume-footer {
 	position: fixed;
 	width: 100%;
 	height: 80px;
@@ -871,24 +881,53 @@ table.type09 td input {
 	border-top: 1px lightgray solid;
 	padding: 0px 40px;
 }
-
-.resume-save-impl-btn {
+.footer-btns {
+	display: flex;
+}
+.nonpass-btn {
 	width: 200px;
 	height: 40px;
 	border-radius: 20px;
-	background: white;
-	border: 1px solid var(--primary-color-1);
-	color: var(--primary-color-1);
-	margin-right: 20px;
+	background: rgb(255 126 126);
+	color: white;
 }
-
-.resume-save-btn {
+.pass-btn {
 	width: 200px;
 	height: 40px;
 	border: 1px solid var(--primary-color-1);
 	border-radius: 20px;
 	background: var(--primary-color-1);
 	color: white;
+	margin-right: 20px;
+}
+.pass-btns-y {
+	color: white;
+	padding: 4px 0px;
+	margin: 0px 2px;
+	width: 100px;
+	border-radius: 12px;
+	background: var(--primary-color-1);
+	box-shadow: 0px 5px 0px 0px #1487c9;
+}
+.pass-btns-y:hover {
+	box-shadow: 0px 2px 0px 0px #1487c9;
+	margin-top: 8px;
+	margin-bottom: -5px;
+}
+
+.pass-btns-n {
+	color: white;
+	padding: 4px 0px;
+	margin: 0px 2px;
+	width: 100px;
+	border-radius: 12px;
+	background: #ff6d5a;
+	box-shadow: 0px 5px 0px 0px #7b3329;
+}
+.pass-btns-n:hover {
+	box-shadow: 0px 2px 0px 0px #7b3329;
+	margin-top: 8px;
+	margin-bottom: -5px;
 }
 .save-btns {
 	display: flex;
