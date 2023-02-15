@@ -2,12 +2,15 @@ package com.ssafy.project.api.controller;
 
 
 import com.ssafy.project.api.request.CardSearchCondition;
+import com.ssafy.project.api.response.CardImageResponseDto;
 import com.ssafy.project.api.response.CardResponseDto;
 import com.ssafy.project.api.response.CardResponseListDto;
 import com.ssafy.project.api.service.CardService;
+import com.ssafy.project.common.auth.SsafyUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,6 +27,11 @@ public class CardController {
     public ResponseEntity<?> getCard(){
         List<CardResponseDto> cardList = cardService.getCard();
         return new ResponseEntity<List<CardResponseDto>>(cardList, HttpStatus.OK);
+    }
+
+    @GetMapping("/image")
+    public ResponseEntity<CardImageResponseDto> getImage(@AuthenticationPrincipal SsafyUserDetails userDetails) {
+        return new ResponseEntity<>(cardService.getImage(userDetails.getMember().getId()), HttpStatus.OK);
     }
 
     @PostMapping("")

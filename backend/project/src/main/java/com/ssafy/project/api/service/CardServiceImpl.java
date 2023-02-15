@@ -1,11 +1,16 @@
 package com.ssafy.project.api.service;
 
 import com.ssafy.project.api.request.CardSearchCondition;
+import com.ssafy.project.api.response.CardImageResponseDto;
 import com.ssafy.project.api.response.CardResponseDto;
 import com.ssafy.project.api.response.CardResponseListDto;
 import com.ssafy.project.api.response.MainResponseDto;
+import com.ssafy.project.common.exception.ApiException;
+import com.ssafy.project.common.exception.ExceptionEnum;
 import com.ssafy.project.db.entity.Card;
+import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.repository.CardRepository;
+import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +27,8 @@ public class CardServiceImpl implements CardService {
 
     private final CardRepository cardRepository;
 
+    private final MemberRepository memberRepository;
+
     @Override
     @Transactional(readOnly = true)
     public List<CardResponseDto> getCard() {
@@ -34,6 +41,17 @@ public class CardServiceImpl implements CardService {
     @Transactional(readOnly = true)
     public List<CardResponseListDto> getCardList(CardSearchCondition condition) {
         return cardRepository.getCardBySkillsAndNameAndPreferredJob(condition);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public CardImageResponseDto getImage(Long id) {
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
+
+        return CardImageResponseDto.builder()
+                .profileImg(member.getCard().getImageUrl())
+                .build();
     }
 
 }
