@@ -64,28 +64,18 @@
 								<th scope="cols">학 과</th>
 							</tr>
 						</thead>
-						<tbody
-							id="universityInfo"
-							v-for="(item, i) in resume.resumeInfo.universityDtoList"
-							:key="i"
-						>
+						<tbody id="universityInfo" v-for="(item, i) in uniItems" :key="i">
 							<tr>
 								<td>
-									<input
-										class="form-control"
-										v-model="item.universityPeriod"
-										readonly
+									<input class="form-control" :id="item.period" />
 									/>
 								</td>
 								<td>
-									<input
-										class="form-control"
-										v-model="item.universityName"
-										readonly
+									<input class="form-control" :id="item.name" />
 									/>
 								</td>
 								<td>
-									<input class="form-control" v-model="item.major" readonly />
+									<input class="form-control" :id="item.major" />
 								</td>
 							</tr>
 						</tbody>
