@@ -26,14 +26,7 @@
 							v-model="email"
 						/>
 					</div>
-					<div class="mb-3">
-						<label for="portfolioInput" class="form-label">포트폴리오</label>
-						<input
-							class="form-control"
-							id="portfolioInput"
-							v-model="portfolio"
-						/>
-					</div>
+
 					<div class="mb-3">
 						<label for="githubInput" class="form-label">Github</label>
 						<input class="form-control" id="githubInput" v-model="github" />
