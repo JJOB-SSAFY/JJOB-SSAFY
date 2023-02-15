@@ -95,26 +95,23 @@ export default {
 			form: {
 				skills: '',
 				preferredJob: '',
-				name:'',
+				name: '',
 			},
 		});
 
-	
-
-			const search = async function(){
-				infoCardService.
-				getCardList(toRaw(searchForm.form))
+		const search = async function () {
+			infoCardService
+				.getSearchCardList(toRaw(searchForm.form))
 				.then(data => (cardList.card = data));
-			};
-			search();
-				// const search = () => {};
+		};
+		search();
+		// const search = () => {};
 		return {
 			cardList,
 			searchForm,
 			searchCardList,
 			search,
 		};
-
 	},
 };
 </script>

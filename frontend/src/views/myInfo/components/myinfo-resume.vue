@@ -39,8 +39,9 @@ export default {
 			state: {},
 		});
 		const resService = new resumeService();
-		resService.getResumeList().then(data => {
+		resService.getMyResumeList().then(data => {
 			getResumeList.state = data;
+			console.log(data);
 		});
 		const showDetailResume = e => {
 			router.push({
@@ -65,16 +66,28 @@ export default {
 			});
 		};
 
-		const deleteResume = id => {
+		const deleteResume = function (id) {
 			resService
 				.deleteResume(id)
-				.then(alert('삭제 완료'))
 				.then(() => {
-					resService.getResumeList().then(data => {
+					Swal.fire({
+						title: 'SUCCESS!',
+						text: '삭제완료.',
+						icon: 'success',
+					});
+				})
+				.then(() => {
+					resService.getMyResumeList().then(data => {
 						getResumeList.state = data;
 					});
 				})
-				.catch(err => console.log(err));
+				.catch(() => {
+					Swal.fire({
+						title: '삭제 실패!',
+						text: '지원중인 이력서인지 확인해 주세요.',
+						icon: 'warning',
+					});
+				});
 		};
 		return { store, getResumeList, showDetailResume, addResume, deleteResume };
 	},

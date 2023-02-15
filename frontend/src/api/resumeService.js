@@ -6,27 +6,33 @@ const config = {
 		Authorization: token,
 	},
 };
+
 export default class resumeService {
-	async getResumeList() {
-		return await http.get(`resume/isapplied`, config).then(data => data.data);
+	async getMyResumeList() {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
+		return await http.get(`resume`, config).then(data => data.data);
 	}
 
 	async getResume(id, params) {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
 		return await http
 			.get(`resume/${id}`, params, config)
 			.then(data => data.data);
 	}
 	async register(params) {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
 		return await http.post(`resume`, params, config).then(data => data.data);
 	}
 
 	async modify(id, params) {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
 		return await http
 			.patch(`resume/${id}`, params, config)
 			.then(data => data.data);
 	}
 
 	async deleteResume(id) {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
 		return await http.delete(`resume/${id}`, config).then(data => data.data);
 	}
 }

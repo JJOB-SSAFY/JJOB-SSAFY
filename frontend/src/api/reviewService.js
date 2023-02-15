@@ -9,6 +9,8 @@ const config = {
 
 export default class reviewService {
 	async getList(param) {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
+
 		return await http
 			.post(`/review/list`, param, config)
 			.then(data => data.data);

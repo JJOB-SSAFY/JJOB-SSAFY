@@ -8,6 +8,8 @@ const config = {
 };
 export default class interviewService {
 	async getPresentList() {
+		config.headers.Authorization = localStorage.getItem('jjob.s.token');
+
 		return await http
 			.get(`/conference/list/PRESENTATION`, config)
 			.then(data => data.data);
