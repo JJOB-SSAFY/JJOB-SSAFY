@@ -87,6 +87,7 @@ import { ref, reactive } from 'vue';
 import axios from 'axios';
 import { url } from '../../../api/http';
 import { useRouter } from 'vue-router';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'reviewWriteView',
@@ -117,19 +118,35 @@ export default {
 
 		const saveReview = function (companyId) {
 			if (!interviewState.form.title) {
-				alert('제목을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '제목을 입력해주세요',
+					icon: 'warning',
+				});
 				interviewTitle.value.focus();
 				return;
 			} else if (!interviewState.form.review) {
-				alert('면접 리뷰를 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '면접리뷰를 입력해주세요',
+					icon: 'warning',
+				});
 				interviewReview.value.focus();
 				return;
 			} else if (!interviewState.form.question) {
-				alert('질문을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '질문을 입력해주세요',
+					icon: 'warning',
+				});
 				interviewQuestion.value.focus();
 				return;
 			} else if (!interviewState.form.answer) {
-				alert('답변을 입력해주세요');
+				Swal.fire({
+					title: 'OOPS!',
+					text: '답변을 입력해주세요',
+					icon: 'warning',
+				});
 				interviewAnswer.value.focus();
 				return;
 			}
