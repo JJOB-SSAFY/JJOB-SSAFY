@@ -10,7 +10,7 @@
 					<div class="col col-1">지원자</div>
 					<div class="col col-2">지원 공고</div>
 					<div class="col col-4">보유기술</div>
-					<div class="col col-1">자기소개서</div>
+					<div class="col col-1">이력서</div>
 					<div class="col col-2"></div>
 				</li>
 				<li
@@ -36,11 +36,10 @@
 							<v-dialog v-model="modalInfo.dialog" persistent width="auto">
 								<template v-slot:activator="{ props }">
 									<button
-										class="btnOrange btnPush"
+										class="btnOrange btnPush btnPush:hover"
 										@click="modalInfo.dialog === true"
 										v-bind="props"
 										style="
-											margin-top: 7px;
 											margin-right: 50px;
 											border-radius: 12px;
 											height: 40px;

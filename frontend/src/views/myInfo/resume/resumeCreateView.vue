@@ -3,7 +3,12 @@
 		<div class="resume-container font-LINE-Rg">
 			<div class="left-container">
 				<div class="left-fix">
-					<img :src="profileImg" class="resume-profile-image" alt="..." />
+					<img
+						:src="profileImg"
+						class="resume-profile-image"
+						alt="..."
+						style="border: 10px white solid; border-radius: 25% 35% / 35% 40%"
+					/>
 					<div class="mb-3">
 						<label for="phoneInput" class="form-label">휴대폰</label>
 						<input

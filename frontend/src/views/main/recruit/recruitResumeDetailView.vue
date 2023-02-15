@@ -810,7 +810,7 @@ export default {
 	aspect-ratio: 1/1;
 	margin: 50px auto 25px;
 	border: 10px white solid;
-	/* border-radius: 40%; */
+	border-radius: 25% 35% / 35% 40%;
 }
 
 .right-container {

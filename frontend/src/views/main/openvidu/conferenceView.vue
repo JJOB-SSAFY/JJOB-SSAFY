@@ -108,78 +108,38 @@
 			</div>
 		</div>
 
-		<v-dialog v-model="dialog" width="auto"
-			><v-card style="border-radius: 10px">
+		<v-dialog v-model="dialog" width="40%"
+			><v-card style="border-radius: 10px; padding: 10px">
 				<v-card-title
-					class="text-h5"
-					style="background-color: red; padding-left: 50px"
+					class="font-LINE-Bd"
+					style="
+						border-bottom: 1px solid black;
+						margin: 0px 15px;
+						font-size: 24px;
+						text-align: center;
+					"
 				>
-					리뷰작성해주세요
+					리뷰를 작성해주세요!
 				</v-card-title>
-				<v-card-text>
+				<v-card-text
+					class="font-LINE-Rg"
+					style="font-size: 16px; text-align: center"
+				>
 					싸피 후배들을 위해 후기를 써주세요. <br />지금 리뷰를 작성하면 500
 					마일리지를 받습니다.</v-card-text
 				>
-				>
 				<v-card-actions>
-					<v-spacer></v-spacer>
-					<v-btn
-						color="green-darken-1"
-						variant="text"
-						@click="goToInterviewView"
-					>
-						나가기
-					</v-btn>
-					<v-btn color="green-darken-1" variant="text" @click="goToReviewView">
-						리뷰쓰기
-					</v-btn>
-				</v-card-actions>
-			</v-card>
-		</v-dialog>
-		<!-- Modal -->
-		<!-- <div
-			class="modal fade"
-			id="exampleModal"
-			tabindex="-1"
-			aria-labelledby="exampleModalLabel"
-			aria-hidden="true"
-		>
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">리뷰쓰기</h5>
-						<button
-							type="button"
-							class="btn-close"
-							data-bs-dismiss="modal"
-							aria-label="Close"
-						></button>
-					</div>
-					<div class="modal-body">
-						싸피 후배들을 위해 후기를 써주세요. 지금 리뷰를 작성하면 500
-						마일리지를 받습니다.
-					</div>
-					<div class="modal-footer">
-						<button
-							type="button"
-							class="btn btn-primary"
-							data-bs-dismiss="modal"
-							@click="goToReviewView"
-						>
+					<div class="review-write-btns">
+						<button id="goto-review-bt" @click="goToReviewView">
 							리뷰쓰기
 						</button>
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-bs-dismiss="modal"
-							@click="goToInterviewView"
-						>
+						<button id="interview-out-bt" @click="goToInterviewView">
 							나가기
 						</button>
 					</div>
-				</div>
-			</div>
-		</div> -->
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -189,7 +149,6 @@ import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
 import { useRouter } from 'vue-router';
 import { url } from '../../../api/http';
-import { ref } from 'vue';
 import Swal from 'sweetalert2';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -463,5 +422,33 @@ export default {
 	font-weight: bold;
 	border-radius: 5px;
 	margin-right: 130px;
+}
+.v-card {
+	width: 500px;
+}
+.v-card-actions {
+	display: flex;
+	justify-content: center;
+}
+.review-write-btns {
+	display: flex;
+}
+#goto-review-bt {
+	border-radius: 12px;
+	background: var(--primary-color-1);
+
+	box-shadow: 0px 5px 0px 0px #1487c9;
+}
+#interview-out-bt {
+	border-radius: 12px;
+	background: #fc7e7e;
+
+	box-shadow: 0px 5px 0px 0px #a66615;
+}
+
+#goto-review-bt:hover {
+}
+#interview-out-bt:hover {
+	background: rgb(255 126 126);
 }
 </style>

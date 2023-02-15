@@ -126,7 +126,7 @@ a:hover {
 
 .btnOrange {
   border-radius: 12px;
-  background: #FFAA40;
+  background: rgb(255 126 126);
 }
 
 /* FADE */
@@ -139,7 +139,7 @@ a:hover {
 }
 
 .btnFade.btnOrange:hover {
-  background: #FF8E00;
+  background: #fc7e7e;
 }
 
 .btnBlueGreen.btnPush {
@@ -151,11 +151,11 @@ a:hover {
 }
 
 .btnOrange.btnPush {
-  box-shadow: 0px 5px 0px 0px #A66615;
+  box-shadow: 0px 5px 0px 0px #9b4848;
 }
 
 .btnPush:hover {
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: -5px;
 }
 
@@ -168,7 +168,7 @@ a:hover {
 }
 
 .btnOrange.btnPush:hover {
-  box-shadow: 0px 2px 0px 0px #A66615;
+  box-shadow: 0px 2px 0px 0px #9b4848;
 }
 
 /* input design(줄수, 크기) */
