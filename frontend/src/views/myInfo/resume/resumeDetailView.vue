@@ -68,11 +68,9 @@
 							<tr>
 								<td>
 									<input class="form-control" :id="item.period" />
-									/>
 								</td>
 								<td>
 									<input class="form-control" :id="item.name" />
-									/>
 								</td>
 								<td>
 									<input class="form-control" :id="item.major" />
