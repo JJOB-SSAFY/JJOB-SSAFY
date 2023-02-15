@@ -1,7 +1,9 @@
 package com.ssafy.project.common.auth;
 
+import com.ssafy.project.db.entity.Card;
 import com.ssafy.project.db.entity.Member;
 import com.ssafy.project.db.entity.MemberRoleEnum;
+import com.ssafy.project.db.repository.CardRepository;
 import com.ssafy.project.db.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
 
     private final MemberRepository memberRepository;
+    private final CardRepository cardRepository;
 
     @Override
     @Transactional
@@ -88,10 +91,13 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         String password = email + UUID.randomUUID().toString();
 
+        Card card = createCard(email, name);
+
         Member member = Member.builder()
                 .email(email)
                 .name(name)
                 .password(new BCryptPasswordEncoder().encode(password))
+                .card(card)
                 .build();
 
         member.addMemberRole(MemberRoleEnum.USER);
@@ -99,6 +105,15 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
         memberRepository.save(member);
 
         return member;
+    }
+
+    private Card createCard(String email, String name) {
+        Card card = new Card();
+        card.setImageUrl("https://firebasestorage.googleapis.com/v0/b/jjob-4c01e.appspot.com/o/images%2Fprofile-removebg.png?alt=media&token=167eb21d-70e0-4571-b044-97b72fa172f2");
+        card.setName(name);
+        card.setEmail(email);
+        cardRepository.save(card);
+        return card;
     }
 
 }
