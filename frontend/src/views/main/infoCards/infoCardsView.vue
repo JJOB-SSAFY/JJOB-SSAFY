@@ -103,7 +103,6 @@ export default {
 				.getSearchCardList(toRaw(searchForm.form))
 				.then(data => (cardList.card = data));
 		};
-		search();
 
 		return {
 			cardList,

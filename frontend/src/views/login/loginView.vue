@@ -100,10 +100,8 @@ export default {
 			var expert = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 			if (expert.test(param)) {
 				emailValidCk.value = true;
-				console.log('true');
 			} else {
 				emailValidCk.value = false;
-				console.log('false');
 			}
 		};
 		const Login = () => {

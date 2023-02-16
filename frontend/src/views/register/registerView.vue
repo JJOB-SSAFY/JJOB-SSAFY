@@ -189,9 +189,7 @@ export default {
 				fref(storage, `images/${e.target.files[0].name}`),
 				e.target.files[0],
 			);
-			console.log(uploaded_file);
 			const file_url = await getDownloadURL(uploaded_file.ref);
-			console.log(file_url);
 
 			companyInfo.companyLogo = file_url;
 		};
@@ -220,7 +218,6 @@ export default {
 		});
 
 		const registerU = async () => {
-			console.log('register');
 			if (
 				info.email == null ||
 				info.email == '' ||
@@ -292,7 +289,6 @@ export default {
 		};
 
 		const registerCompany = async function (param) {
-			console.log(param);
 			await companyService
 				.registerCompany(param)
 				.then(data => {
@@ -302,8 +298,7 @@ export default {
 						icon: 'success',
 					});
 				})
-				.catch(err => {
-					console.log(err);
+				.catch(() => {
 					Swal.fire({
 						title: 'OOPS!',
 						text: '기업 등록 실패',
@@ -317,21 +312,18 @@ export default {
 			memberService
 				.registerUser(param)
 				.then(data => {
-					console.log(data);
 					Swal.fire({
 						title: 'WOW!',
 						text: info.email + '등록 성공',
 						icon: 'success',
 					});
 				})
-				.catch(err => {
-					alert('유저등록실패');
+				.catch(() => {
 					Swal.fire({
 						title: 'OOPS!',
 						text: '유저등록실패',
 						icon: 'warning',
 					});
-					console.log(err);
 				});
 		};
 
@@ -358,14 +350,17 @@ export default {
 				.emailCheck(param)
 				.then(() => {
 					invalidEmail.value = true;
-					console.log('success');
 				})
 				.catch(() => {
 					if (info.email == '' || info.email == null) {
-						console.log('null');
+						Swal.fire({
+							title: 'OOPS!',
+							text: '실패!',
+							icon: 'warning',
+							timer: 1500,
+						});
 					} else {
 						invalidEmail.value = false;
-						console.log('error');
 					}
 				});
 		};
@@ -374,17 +369,14 @@ export default {
 			var expert = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 			if (expert.test(param)) {
 				emailValidCk.value = true;
-				console.log('유효성 통과');
 			} else {
 				emailValidCk.value = false;
-				console.log('유효성 실패');
 			}
 		};
 
 		watch(
 			() => info.email,
 			function () {
-				console.log(info.email);
 				emailCk(info.email);
 			},
 		);

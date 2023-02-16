@@ -158,7 +158,6 @@ export default {
 		};
 
 		const logout = () => {
-			// console.log(localToken);
 			if (localStorage.getItem('jjob.s.token')) {
 				store.dispatch('auth/logout');
 			}

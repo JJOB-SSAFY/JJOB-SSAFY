@@ -566,7 +566,6 @@ export default {
 			},
 		}).then(res => {
 			this.profileImg = res.data.profileImg;
-			// console.log(res.data);
 		});
 	},
 	mounted() {

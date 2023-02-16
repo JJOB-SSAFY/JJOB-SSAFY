@@ -68,13 +68,6 @@ export default {
 
 		myInfo.state = toRaw(getMyInfo);
 
-		watch(
-			() => store.getters['auth/getUserInfo'],
-			function () {
-				console.log('aa');
-				// getMyInfo = store.getters[]
-			},
-		);
 		return { myInfo };
 	},
 };

@@ -15,7 +15,6 @@ export default {
 	setup() {
 		const image = ref(null);
 		const imgUpload = async e => {
-			console.log(e.target.files);
 			const uploaded_file = await uploadBytes(
 				fref(storage, `images/${e.target.files[0].name}`),
 				e.target.files[0],

@@ -145,7 +145,6 @@ export default {
 		const visible = ref(true);
 		const image = ref(null);
 		const imgUpload = async e => {
-			console.log(e.target.files);
 			const uploaded_file = await uploadBytes(
 				fref(storage, `images/${e.target.files[0].name}`),
 				e.target.files[0],
@@ -186,7 +185,14 @@ export default {
 					});
 					store.commit('auth/SET_USER_INFO', myInfo.state);
 				})
-				.catch(err => console.log(err));
+				.catch(() => {
+					Swal.fire({
+						title: 'OOPS!',
+						text: '정보변경 실패!',
+						icon: 'warning',
+						timer: 1500,
+					});
+				});
 		};
 
 		const changePwd = () => {
@@ -238,7 +244,14 @@ export default {
 						password.changeCk = '';
 					}
 				})
-				.catch(console.log('err'));
+				.catch(() => {
+					Swal.fire({
+						title: 'OOPS!',
+						text: '실패!',
+						icon: 'warning',
+						timer: 1500,
+					});
+				});
 		};
 
 		return {

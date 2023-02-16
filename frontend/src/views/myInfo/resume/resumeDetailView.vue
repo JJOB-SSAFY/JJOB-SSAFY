@@ -576,8 +576,6 @@ export default {
 
 			const resumeInfo = res;
 
-			console.log(resumeInfo);
-
 			for (let i = 0; i < resumeInfo.universityDtoList.length; i++) {
 				document.getElementById(`uniperiod${i + 1}`).value =
 					res.universityDtoList[i].universityPeriod;

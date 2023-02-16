@@ -46,6 +46,7 @@ export default {
 </script>
 <style scoped>
 .interview-container {
+	margin: 0px 10px;
 	display: flex;
 	justify-content: center;
 }
