@@ -331,7 +331,7 @@
 			</div>
 		</div>
 		<div class="resume-write-footer font-LINE-Bd">
-			<button class="resume-return" @click="goToMyPage">나가기</button>
+			<button class="resume-return" @click="backward">나가기</button>
 			<div class="save-btns">
 				<button class="update resume-save-impl-btn" @click="updateImpl">
 					임시저장
@@ -717,10 +717,33 @@ export default {
 		window.scrollTo(0, 0);
 	},
 	methods: {
-		goToMyPage() {
-			this.$router.push({
-				name: 'myInfo',
-			});
+		backward() {
+			let flag = false;
+			Swal.fire({
+				title: '저장되지 않았습니다',
+				text: '이전 페이지로 돌아갈까요?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#',
+				confirmButtonText: '네',
+				cancelButtonText: '아니요',
+			})
+				.then(result => {
+					if (result.isConfirmed) flag = true;
+					else flag = false;
+				})
+				.then(() => {
+					if (flag) {
+						{
+							this.$router.push({
+								name: 'myInfo',
+							});
+						}
+					} else {
+						return;
+					}
+				});
 		},
 
 		updateImpl() {

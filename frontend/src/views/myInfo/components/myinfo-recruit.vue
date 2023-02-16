@@ -3,7 +3,7 @@
 		<div
 			v-for="info in recruitList.recruit"
 			:key="info.recruit"
-			class="myapply-container"
+			class="myapply-container font-LINE-Rg"
 		>
 			<div class="myapply-companyname font-LINE-Bd">{{ info.companyName }}</div>
 

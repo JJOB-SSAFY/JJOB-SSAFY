@@ -1,6 +1,5 @@
 <template class="homepage">
 	<home-banner />
-	<!-- <router-view /> -->
 	<div class="container">
 		<div class="scroll-box">
 			<fa-icon

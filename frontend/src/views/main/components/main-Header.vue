@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<nav class="navbar">
+		<nav class="navbar font-LINE-Rg">
 			<div class="navbar-logo">
 				<router-link to="/main">
 					<img

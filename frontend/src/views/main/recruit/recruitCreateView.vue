@@ -215,11 +215,8 @@ export default {
 				fref(storage, `images/${e.target.files[0].name}`),
 				e.target.files[0],
 			);
-			console.log(uploaded_file);
 			const file_url = await getDownloadURL(uploaded_file.ref);
-			console.log(file_url);
 			info.imgUrl = file_url;
-			console.log(info.imgUrl);
 		};
 		const info = reactive({
 			recruitTitle: '',
@@ -279,22 +276,18 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: recruitInfo,
-			})
-				.then(res => {
-					console.log(res);
-				})
-				.then(() => {
-					Swal.fire({
-						title: 'Success!',
-						text: '채용공고 등록 성공',
-						icon: 'success',
-					}).then(() => {
-						router.push({
-							name: 'recruit',
-						});
+			}).then(() => {
+				Swal.fire({
+					title: 'Success!',
+					text: '채용공고 등록 성공',
+					icon: 'success',
+				}).then(() => {
+					router.push({
+						name: 'recruit',
 					});
-					initData();
 				});
+				initData();
+			});
 		};
 
 		const initData = () => {
@@ -330,9 +323,6 @@ export default {
 		const selectWorkType = workType => {
 			info.workType = workType;
 		};
-
-		const startEl = docuemnt.querySelector('#currentDate');
-		startEl.valueAsDate = new Date();
 
 		return { info, recruitInfo, register, imgUpload, fileName, selectWorkType };
 	},

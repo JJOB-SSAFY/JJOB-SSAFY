@@ -62,8 +62,47 @@ export default {
 				name: 'resumeCreate',
 			});
 		};
-
 		const deleteResume = function (id) {
+			Swal.fire({
+				title: '삭제하시겠습니까?',
+				showDenyButton: false,
+				showCancelButton: true,
+				confirmButtonText: '삭제',
+				confirmButtonColor: '#DC3741',
+			}).then(result => {
+				if (result.isConfirmed) {
+					resService
+						.deleteResume(id)
+						.then(() => {
+							Swal.fire({
+								title: 'SUCCESS!',
+								text: '삭제완료.',
+								icon: 'success',
+							});
+						})
+						.then(() => {
+							resService.getMyResumeList().then(data => {
+								getResumeList.state = data;
+							});
+						})
+						.catch(() => {
+							Swal.fire({
+								title: '삭제 실패!',
+								text: '지원중인 이력서인지 확인해 주세요.',
+								icon: 'warning',
+							});
+						});
+				}
+			});
+
+			// resService.deleteResume(id).then().Swal.fire({
+			// 	title: 'Do you want to save the changes?',
+			// 	showDenyButton: true,
+			// 	showCancelButton: true,
+			// 	confirmButtonText: '삭제',
+			// });
+		};
+		const delete1Resume = function (id) {
 			resService
 				.deleteResume(id)
 				.then(() => {

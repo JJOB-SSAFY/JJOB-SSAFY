@@ -4,7 +4,7 @@
 			<div class="company-logo">
 				<img :src="info.companyLogo" />
 			</div>
-			<div class="review-item-title font-LINE-Bd">
+			<div class="review-item-title font-LINE-Bd mt-3">
 				<p>{{ info.title }}</p>
 			</div>
 
@@ -16,7 +16,7 @@
 					<p>작성자 | {{ info.name }}</p>
 				</div>
 			</div>
-			<div class="div-review-bt btnLightBlue btnPush font-LINE-Bd">
+			<div class="div-review-bt btnLightBlue btnPush font-LINE-Bd mt-2">
 				<button @click="dialog = true">상세보기</button>
 			</div>
 		</div>

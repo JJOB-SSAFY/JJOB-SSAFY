@@ -575,13 +575,6 @@ export default {
 
 	methods: {
 		backward() {
-			// if (confirm('지금 뒤로가면 저장되지 않습니다. 계속하시겠습니까?')) {
-			// 	this.$router.push({
-			// 		name: 'myInfo',
-			// 	});
-			// } else {
-			// 	return;
-			// }
 			let flag = false;
 			Swal.fire({
 				title: '저장되지 않았습니다',

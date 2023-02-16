@@ -124,7 +124,9 @@ export const auth = {
 			state.isAuthenticated = false;
 			state.user = null;
 			state.role = null;
+			state.name = null;
 			state.resumeList = null;
+			state.companyId = null;
 			jwt.destroyToken();
 		},
 		SET_USER_INFO(state, user) {
