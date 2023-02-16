@@ -40,7 +40,7 @@ public class CardServiceImpl implements CardService {
     @Override
     @Transactional(readOnly = true)
     public List<CardResponseListDto> getCardList(CardSearchCondition condition) {
-        return cardRepository.getCardBySkillsAndNameAndPreferredJob(condition);
+        return cardRepository.getCardBySkillsAndNameAndPreferredJobAndVisible(condition);
     }
 
     @Override

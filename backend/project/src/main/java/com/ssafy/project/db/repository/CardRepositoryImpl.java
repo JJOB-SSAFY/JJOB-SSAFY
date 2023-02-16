@@ -18,7 +18,7 @@ public class CardRepositoryImpl implements CardRepositoryCustom {
 
 
     @Override
-    public List<CardResponseListDto> getCardBySkillsAndNameAndPreferredJob(CardSearchCondition condition) {
+    public List<CardResponseListDto> getCardBySkillsAndNameAndPreferredJobAndVisible(CardSearchCondition condition) {
         return queryFactory
                 .select(new QCardResponseListDto(
                         QCard.card.preferredJob,
@@ -33,7 +33,7 @@ public class CardRepositoryImpl implements CardRepositoryCustom {
                         QCard.card.id
                 ))
                 .from(QCard.card)
-                .where(skillsEq(condition.getSkills()), preferredJobEq(condition.getPreferredJob()), nameEq(condition.getName()))
+                .where(allEq(condition.getSkills(), condition.getPreferredJob(), condition.getName()))
                 .fetch();
     }
     private BooleanExpression skillsEq(String skills){
@@ -48,5 +48,12 @@ public class CardRepositoryImpl implements CardRepositoryCustom {
         return StringUtils.hasText(name) ? QCard.card.name.contains(name) : null;
     }
 
+    private BooleanExpression visibleEq() {
+        return QCard.card.visible.eq(true);
+    }
+
+    private BooleanExpression allEq(String skills, String preferredJob, String name) {
+        return skillsEq(skills).and(preferredJobEq(preferredJob)).and(nameEq(name)).and(visibleEq());
+    }
 
 }

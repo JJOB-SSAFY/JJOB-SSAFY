@@ -139,6 +139,7 @@ import Swal from 'sweetalert2';
 
 export default {
 	setup() {
+		const test = ref(true);
 		const myinfoService = new MyinfoService();
 		const store = useStore();
 		const visible = ref(true);
@@ -175,7 +176,7 @@ export default {
 				preferredJob: myInfo.state.preferredJob,
 				introduce: myInfo.state.introduce,
 				imageUrl: myInfo.state.imgUrl,
-				visible: parseInt(visible.value),
+				visible: myInfo.state.visible,
 			};
 			myinfoService
 				.updateCard(param)
@@ -249,6 +250,7 @@ export default {
 			updateCard,
 			imgUpload,
 			changePwd,
+			test,
 		};
 	},
 };

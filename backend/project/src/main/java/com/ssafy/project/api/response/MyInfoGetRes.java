@@ -20,13 +20,14 @@ public class MyInfoGetRes {
     private String preferredJob;
     private String introduce;
     private String imgUrl;
+    private Boolean visible;
 
-    public static MyInfoGetRes from(Member member) {
-        return MyInfoGetRes.builder()
-                .name(member.getName())
-                .email(member.getEmail())
-                .build();
-    }
+//    public static MyInfoGetRes from(Member member) {
+//        return MyInfoGetRes.builder()
+//                .name(member.getName())
+//                .email(member.getEmail())
+//                .build();
+//    }
 
     public static MyInfoGetRes from(Card card) {
         return MyInfoGetRes.builder()
@@ -39,6 +40,7 @@ public class MyInfoGetRes {
                 .skills(card.getSkills())
                 .imgUrl(card.getImageUrl())
                 .preferredJob(card.getPreferredJob())
+                .visible(card.getVisible())
                 .build();
     }
 
