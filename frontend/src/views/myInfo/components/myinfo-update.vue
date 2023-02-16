@@ -63,9 +63,7 @@
 							<input
 								class="input-checkbox"
 								type="checkbox"
-								v-model="visible"
-								true-value="1"
-								false-value="0"
+								v-model="myInfo.state.visible"
 								id="checkBox"
 							/>
 						</span>
@@ -143,7 +141,7 @@ export default {
 	setup() {
 		const myinfoService = new MyinfoService();
 		const store = useStore();
-		const visible = ref(0);
+		const visible = ref(true);
 		const image = ref(null);
 		const imgUpload = async e => {
 			console.log(e.target.files);

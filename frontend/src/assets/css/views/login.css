@@ -9,7 +9,7 @@
   position: relative;
   min-height: 100vh;
   max-width: 60%;
-  background: url("../../images/logo-background.jpg") no-repeat center center scroll;
+  background: url("../../images/SSAFY2.png") no-repeat center center scroll;
   background-size: cover;
   float: left;
   -webkit-animation: bgslide 1.8s forwards;
@@ -63,6 +63,7 @@
 }
 
 .div-login .login-container h1 {
+  margin-top: 100px;
   font-size: 230%;
   text-align: center;
 }
@@ -128,6 +129,12 @@
   margin-left: 5px;
 }
 
+#login-kakao-bt:hover,
+#login-google-bt:hover {
+  transform: scale(1.04);
+  transition: 0.3s;
+}
+
 .div-sub-option {
   margin: 15px 5px;
   display: flex;
@@ -157,7 +164,7 @@
 @media only screen and (min-width: 1024px) and (max-width: 1400px) {
   .div-illustration {
     width: 60%;
-    min-height: 120vh;
+    min-height: 100vh;
     -webkit-animation: none;
     animation: none;
   }
@@ -197,7 +204,7 @@
 
   .div-illustration {
     float: none;
-    background: url("../../images/logo-background.jpg") center center;
+    background: url("../../images/SSAFY2.png") center center;
     background-size: cover;
     -webkit-animation: slideIn 0.8s ease-in-out forwards;
     animation: slideIn 0.8s ease-in-out forwards;
@@ -227,13 +234,9 @@
     float: none;
   }
 
-  .div-login .login-container f {
-    font-size: 25px;
-    margin-top: 40px;
-  }
-
-  .login-form {
-    margin-top: 90px;
+  .div-login .login-container {
+    font-size: 16px;
+    margin-top: 60px;
   }
 
   .login-form form input {
@@ -318,16 +321,17 @@
   .div-illustration {
     margin: auto;
     float: none;
-    background: url("../../images/logo-background.jpg") center center;
+    background: url("../../images/SSAFY2.png") center center;
     background-size: cover;
     -webkit-animation: slideIn 0.8s ease-in-out forwards;
     animation: slideIn 0.8s ease-in-out forwards;
     width: 100%;
-    min-height: 30vh;
+    min-height: 44vh;
     text-align: center;
   }
 
-  .div-illustration img {
+  .div-illustration>img {
+    visibility: hidden;
     width: 100px;
     height: auto;
     margin: 20px auto !important;
