@@ -35,7 +35,6 @@
 }
 
 .review-item:hover {
-
   transform: scale(1.04);
   transition: 0.3s;
 }
@@ -86,6 +85,18 @@
   justify-content: center;
   width: 100%;
   padding-top: 4px;
+
+  border-radius: 12px;
+  background: var(--primary-color-1);
+
+  box-shadow: 0px 5px 0px 0px #1487c9;
+}
+
+
+.div-review-bt>button:hover {
+  box-shadow: 0px 2px 0px 0px #1487c9;
+  margin-top: 3px;
+  margin-bottom: -3px;
 }
 
 @media only screen and (max-width: 1024px) {

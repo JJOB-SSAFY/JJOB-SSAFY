@@ -16,7 +16,7 @@
 					<p>작성자 | {{ info.name }}</p>
 				</div>
 			</div>
-			<div class="div-review-bt btnLightBlue btnPush font-LINE-Bd mt-2">
+			<div class="div-review-bt font-LINE-Bd">
 				<button @click="dialog = true">상세보기</button>
 			</div>
 		</div>

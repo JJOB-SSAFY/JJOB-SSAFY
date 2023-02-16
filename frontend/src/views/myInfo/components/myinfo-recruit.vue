@@ -22,9 +22,9 @@
 			<div v-if="info.result === '불합격'">
 				<v-row justify="center">
 					<v-dialog v-model="modalInfo.dialog" persistent width="auto">
-						<v-card>
-							<v-card-title class="text-h4 modal-title" style="color: red">
-								{{ info.result }}
+						<v-card class="font-LINE-Rg">
+							<v-card-title class="font-LINE-Bd f28" style="color: #ff7e7e">
+								불합격
 							</v-card-title>
 							<!-- <v-card-text>
 								안녕하세요 {{ myName }}님, {{ info.companyName }} 인사팀입니다.
@@ -41,23 +41,30 @@
 								좋은 인연으로 만나 뵙기를 진심으로 바라겠습니다. 감사합니다.
 								{{ info.companyName }} 인사팀 드림.
 							</v-card-text> -->
-							<br />
-							<h4 style="margin-left: 25px">불합격 사유</h4>
-							<v-card-text>{{ info.title }}</v-card-text>
-							<div v-if="info.content !== ''"></div>
-							<br />
-							<h4 style="margin-left: 25px">피드백</h4>
-							<v-card-text>{{ info.content }}</v-card-text>
-							<v-card-actions>
-								<v-spacer></v-spacer>
-								<v-btn
-									color="green-darken-1"
-									variant="text"
-									@click="modalInfo.dialog = false"
-									class="text-h6"
+							<p class="font-LINE-Bd f21" style="margin-left: 25px">
+								불합격 사유
+							</p>
+							<v-card-text style="padding: 5px 0px 0px 10px; margin-left: 25px">
+								{{ info.title }}</v-card-text
+							>
+							<hr style="margin: 10px 15px 0px 15px" />
+							<div v-if="info.content !== ''">
+								<p class="font-LINE-Bd f21 mt-5" style="margin-left: 25px">
+									피드백
+								</p>
+								<v-card-text
+									style="
+										padding: 5px 0px 0px 10px;
+										margin-left: 25px;
+										font-size: 15px;
+									"
+									>{{ info.content }}</v-card-text
 								>
+							</div>
+							<v-card-actions>
+								<button id="out-bt" @click="modalInfo.dialog = false">
 									나가기
-								</v-btn>
+								</button>
 							</v-card-actions>
 						</v-card>
 					</v-dialog>
@@ -66,25 +73,20 @@
 			<div v-else-if="info.result === '합격'">
 				<v-row justify="center">
 					<v-dialog v-model="modalInfo.dialog" persistent width="auto">
-						<v-card>
-							<v-card-title class="text-h4 modal-title" style="color: green">
-								{{ info.result }}
+						<v-card class="font-LINE-Rg">
+							<v-card-title class="font-LINE-Bd f28" style="color: green">
+								축하드립니다
 							</v-card-title>
-							<v-card-text class="text-h6"
-								>축하드립니다. {{ myName }}님은 {{ info.companyName }}
-								{{ info.recruitTitle }} 서류 전형에 합격하셨습니다. <br /><br />
+							<v-card-text style="font-size: 18px">
+								{{ myName }}님은 {{ info.companyName }}
+								{{ info.recruitTitle }} 서류 전형에 합격하셨습니다. <br />
 								면접 일정은 추후에 따로 연락드리겠습니다.
 							</v-card-text>
 							<br />
 							<v-card-actions>
-								<v-spacer></v-spacer>
-								<v-btn
-									color="green-darken-1"
-									variant="text"
-									@click="modalInfo.dialog = false"
-								>
+								<button id="out-bt" @click="modalInfo.dialog = false">
 									나가기
-								</v-btn>
+								</button>
 							</v-card-actions>
 						</v-card>
 					</v-dialog>
@@ -119,3 +121,18 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.v-card {
+	padding: 6px 2px;
+}
+.v-card-title {
+	font-size: 24px;
+}
+.v-card-actions > button {
+	width: 100px;
+	border-radius: 12px;
+	background: #ff7e7e;
+	padding: 5px 0px;
+}
+</style>

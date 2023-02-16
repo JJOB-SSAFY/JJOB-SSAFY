@@ -52,8 +52,15 @@
 										면접방 생성하기
 									</button>
 								</template>
-								<v-card style="padding: 20px">
-									<v-card-title class="text-h5" style="width: 600px">
+								<v-card class="font-LINE-Rg" style="padding: 20px">
+									<v-card-title
+										class="font-LINE-Bd"
+										style="
+											display: flex;
+											justify-content: flex-start;
+											font-size: 28px;
+										"
+									>
 										면접방 생성
 									</v-card-title>
 									<br />
@@ -101,21 +108,22 @@
 									</form>
 									<br />
 									<v-card-actions>
-										<v-spacer></v-spacer>
-										<v-btn
-											color="green-darken-1"
-											variant="text"
-											@click="createRoom"
-										>
-											생성하기
-										</v-btn>
-										<v-btn
-											color="green-darken-1"
-											variant="text"
-											@click="modalInfo.dialog = false"
-										>
-											돌아가기
-										</v-btn>
+										<div class="review-write-btns font-LINE-Rg">
+											<button
+												id="create-room-bt"
+												class="btnLightBlue btnPush"
+												@click="createRoom"
+											>
+												등록하기
+											</button>
+											<button
+												id="exit-room-bt"
+												class="btnOrange btnPush"
+												@click="modalInfo.dialog = false"
+											>
+												나가기
+											</button>
+										</div>
 									</v-card-actions>
 								</v-card>
 							</v-dialog>
@@ -225,5 +233,23 @@ export default {
 <style scoped>
 .interview-date-box {
 	display: flex;
+}
+.v-card-actions {
+	align-items: center;
+	display: flex;
+	min-height: 60px;
+	padding: 0.5rem;
+	justify-content: flex-end;
+}
+
+.review-write-btns {
+	display: flex;
+	justify-content: end;
+}
+.review-write-btns > button,
+.review-write-btns > button + button {
+	width: 100px;
+	margin: 0px 2px;
+	padding: 4px 0px;
 }
 </style>

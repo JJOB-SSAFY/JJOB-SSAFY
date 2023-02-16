@@ -127,6 +127,10 @@ iframe {
   border: none !important;
 }
 
+.f36 {
+  font-size: 36px;
+}
+
 .f32 {
   font-size: 32px;
 }
@@ -137,6 +141,10 @@ iframe {
 
 .f24 {
   font-size: 24px;
+}
+
+.f21 {
+  font-size: 21px;
 }
 
 .f18 {
