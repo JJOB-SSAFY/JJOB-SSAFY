@@ -1,5 +1,9 @@
 <template>
-	<div id="main-container" class="container" style="overflow: hidden">
+	<div
+		id="main-container"
+		class="container font-LINE-Bd"
+		style="overflow: hidden"
+	>
 		<div id="join" v-if="!session" class="openvidu-join-form">
 			<div class="mb-60 openvidu-join-header">
 				<div class="d-flex align-items-center" style="margin-left: 7%">

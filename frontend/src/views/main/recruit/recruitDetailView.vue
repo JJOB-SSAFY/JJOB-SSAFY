@@ -204,8 +204,12 @@ export default {
 				detailList.recruitContent = response.data.recruitContent;
 				detailList.requirement = response.data.requirement;
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(() => {
+				Swal.fire({
+					title: 'OOPS!',
+					text: '존재하지 않는 채용공고입니다.',
+					icon: 'warning',
+				});
 			});
 
 		axios({
@@ -215,7 +219,6 @@ export default {
 				Authorization: localStorage.getItem('jjob.s.token'),
 			},
 		}).then(res => {
-			console.log(res.data);
 			resumeList.resume = res.data;
 		});
 
@@ -254,21 +257,17 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: config,
-			})
-				.then(res => {
-					console.log(res);
-				})
-				.then(() => {
-					Swal.fire({
-						title: 'Success!',
-						text:
-							detailList.companyName +
-							' ' +
-							detailList.recruitTitle +
-							' 지원완료',
-						icon: 'success',
-					});
+			}).then(() => {
+				Swal.fire({
+					title: 'Success!',
+					text:
+						detailList.companyName +
+						' ' +
+						detailList.recruitTitle +
+						' 지원완료',
+					icon: 'success',
 				});
+			});
 		};
 
 		return {

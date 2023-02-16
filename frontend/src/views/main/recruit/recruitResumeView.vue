@@ -209,8 +209,7 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: config,
-			}).then(res => {
-				console.log(res);
+			}).then(() => {
 				modalInfo.dialog = false;
 				router.push({
 					name: 'recruitResume',

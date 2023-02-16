@@ -676,8 +676,6 @@ export default {
 
 		const router = useRouter();
 
-		const store = useStore();
-
 		const modalInfo = reactive({
 			dialog1: false,
 			dialog2: false,
@@ -735,8 +733,6 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: config,
-			}).then(res => {
-				console.log(res);
 			});
 		};
 
@@ -758,8 +754,6 @@ export default {
 						headers: {
 							Authorization: localStorage.getItem('jjob.s.token'),
 						},
-					}).then(res => {
-						console.log(res);
 					});
 				}
 			});

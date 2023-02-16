@@ -20,11 +20,8 @@ export default {
 				fref(storage, `images/${e.target.files[0].name}`),
 				e.target.files[0],
 			);
-			console.log(uploaded_file);
 			const file_url = await getDownloadURL(uploaded_file.ref);
-			console.log(file_url);
 			image.value = file_url;
-			console.log(image);
 		};
 		return {
 			imgUpload,

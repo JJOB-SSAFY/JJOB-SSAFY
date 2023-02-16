@@ -38,7 +38,6 @@ export default {
 		const resService = new resumeService();
 		resService.getMyResumeList().then(data => {
 			getResumeList.state = data;
-			console.log(data);
 		});
 		const showDetailResume = e => {
 			router.push({

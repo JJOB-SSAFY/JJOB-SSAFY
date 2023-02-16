@@ -7,21 +7,21 @@
 					<div class="img-container">
 						<img class="profile-img" :src="info.imageUrl" />
 					</div>
-					<p class="profile-name">{{ info.name }}</p>
+					<p class="profile-name line-clamp-default-1">{{ info.name }}</p>
 				</div>
 				<div class="div-front font-LINE-Rg">
 					<div class="front-item info-skill">
 						<img src="@/assets/images/icon/skill.png" width="19" height="19" />
-						<p>&nbsp {{ info.skills }}</p>
+						<p class="line-clamp-default">&nbsp {{ info.skills }}</p>
 					</div>
 
 					<div class="front-item info-preferredJob">
 						<img src="@/assets/images/icon/job.png" width="19" height="19" />
-						<p>&nbsp {{ info.preferredJob }}</p>
+						<p class="line-clamp-default">&nbsp {{ info.preferredJob }}</p>
 					</div>
 					<div class="front-item info-introduce">
 						<fa-icon icon="fas fa-solid fa-star" />
-						<p>&nbsp&nbsp {{ info.introduce }}</p>
+						<p class="line-clamp-default">&nbsp&nbsp {{ info.introduce }}</p>
 					</div>
 				</div>
 			</div>
@@ -30,14 +30,18 @@
 					<div class="back-item info-phone">
 						<fa-icon icon="fas fa-solid fa-phone" />
 						&nbsp
-						<p v-if="role === 'USER'">미공개정보입니다</p>
-						<p v-else>{{ info.phone }}</p>
+						<p v-if="role === 'USER'" class="line-clamp-default">
+							미공개정보입니다
+						</p>
+						<p v-else class="line-clamp-default">{{ info.phone }}</p>
 					</div>
 					<div class="back-item info-email">
 						<fa-icon icon="fas fa-solid fa-envelope" />
 						&nbsp
-						<p v-if="role === 'USER'">미공개정보입니다</p>
-						<p v-else>{{ info.email }}</p>
+						<p v-if="role === 'USER'" class="line-clamp-default">
+							미공개정보입니다
+						</p>
+						<p v-else class="line-clamp-default">{{ info.email }}</p>
 					</div>
 					<div class="back-item info-github">
 						<img
@@ -45,11 +49,11 @@
 							width="19"
 							height="19"
 						/>
-						<p>&nbsp {{ info.github }}</p>
+						<p class="line-clamp-default">&nbsp {{ info.github }}</p>
 					</div>
 					<div class="back-item info-blog">
 						<img src="@/assets/images/icon/blog.png" width="19" height="19" />
-						<p>&nbsp {{ info.blog }}</p>
+						<p class="line-clamp-default">&nbsp {{ info.blog }}</p>
 					</div>
 				</div>
 			</div>

@@ -158,10 +158,6 @@ export default {
 		};
 
 		const logout = () => {
-			console.log(store.getters['auth/getUserInfo']);
-			console.log(store.getters['auth/getUserRole']);
-			console.log(localStorage.getItem('jjob.s.token'));
-
 			// console.log(localToken);
 			if (localStorage.getItem('jjob.s.token')) {
 				store.dispatch('auth/logout');

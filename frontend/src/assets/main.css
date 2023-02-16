@@ -192,6 +192,15 @@ a:hover {
   overflow: hidden;
 }
 
+.line-clamp-default-1 {
+  word-break: break-all;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* hr */
 .hr-main {
   background-color: black;

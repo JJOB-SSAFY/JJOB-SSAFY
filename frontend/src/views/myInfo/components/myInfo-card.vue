@@ -6,12 +6,14 @@
 				<div class="img-container">
 					<img class="profile-img" :src="myInfo.state.imgUrl" />
 				</div>
-				<p class="profile-name">{{ myInfo.state.name }}</p>
+				<p class="profile-name line-clamp-default-1">{{ myInfo.state.name }}</p>
 			</div>
 			<div class="div-info-first font-LINE-Rg">
 				<div class="first-detail info-phone">
 					<p class="info-title">휴대폰</p>
-					<div class="info-content">{{ myInfo.state.phone }}</div>
+					<div class="info-content line-clamp">
+						{{ myInfo.state.phone }}
+					</div>
 				</div>
 				<div class="first-detail info-email">
 					<p class="info-title">이메일</p>

@@ -67,7 +67,6 @@ export default {
 
 		const searchReview = function () {
 			reviewService.getList(reviewSearchCond.form).then(res => {
-				console.log(res);
 				state.interviewReviewList = res;
 			});
 		};

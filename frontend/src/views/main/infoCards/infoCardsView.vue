@@ -71,8 +71,7 @@
 <script>
 import InfoCardService from '../../../api/infoCardService';
 import infoCardItem from './components/infoCardItem.vue';
-import { ref, reactive, toRaw } from 'vue';
-import { useStore } from 'vuex';
+import { reactive, toRaw } from 'vue';
 export default {
 	namd: 'infoCardView',
 	components: {

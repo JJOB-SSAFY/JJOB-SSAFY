@@ -68,7 +68,6 @@ export default {
 		const store = useStore();
 
 		const clickConference = function (title, id, companyId, companyName) {
-			// const loadingInstance1 = ElLoading.service({ fullscreen: true })
 			const name = store.getters['auth/getName'];
 
 			router.push({
