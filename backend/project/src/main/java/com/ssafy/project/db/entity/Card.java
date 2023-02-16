@@ -39,7 +39,7 @@ public class Card {
     private String preferredJob;
 
     @Column(columnDefinition="BOOLEAN DEFAULT false")
-    private boolean visible;
+    private Boolean visible;
 
     public static Card of(Member member, MyInfoRequestDto requestDto) {
         return Card.builder()
