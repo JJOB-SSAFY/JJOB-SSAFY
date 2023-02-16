@@ -49,7 +49,7 @@ export default {
 
 .image-container1 {
 	aspect-ratio: 3/1;
-	background-image: url('../../../../assets/images/ssafybanner1.jpg');
+	background-image: url('../../../../assets/images/ssafybanner1.png');
 	background-size: cover;
 	background-position: center center;
 }
@@ -63,7 +63,7 @@ export default {
 
 .image-container3 {
 	aspect-ratio: 3/1;
-	background-image: url('../../../../assets/images/ssafybanner3.png');
+	background-image: url('../../../../assets/images/ssafybanner3.jpg');
 	background-size: cover;
 	background-position: center center;
 }
