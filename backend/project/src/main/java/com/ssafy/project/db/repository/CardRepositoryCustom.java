@@ -6,6 +6,6 @@ import com.ssafy.project.api.response.CardResponseListDto;
 import java.util.List;
 
 public interface CardRepositoryCustom {
-    List<CardResponseListDto> getCardBySkillsAndNameAndPreferredJob(CardSearchCondition condition);
+    List<CardResponseListDto> getCardBySkillsAndNameAndPreferredJobAndVisible(CardSearchCondition condition);
 
 }
