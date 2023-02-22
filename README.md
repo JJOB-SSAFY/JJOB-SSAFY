@@ -1,11 +1,23 @@
 # 프로젝트 진행 기간
+2023.01.09(월) ~ 2023.02.17(금)
+SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 
-# JJOB-SSAFY 배경
+# JJOB-SSAFY 개요
+싸피 누적 취업생 3486명!
+개발자 채용시장에서 점점 커지는 싸피의 영향력을 반영한 
+싸피생 전용 채용 솔루션 서비스!!!
+기존 잡싸피에 이력서 관리, 화상면접 기능, 싸피인 정보 카드, 채용결과
+피드백 기능등이 추가된 서비스를 만들었습니다.
 
-# 개요
 
 # 서비스 구조도
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/58547a35-291b-4615-b142-15eecb1437b2/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/66864811/220613265-dee09370-fa52-4302-a4a1-b1217f118263.png)
+
+###erd
+![jjob_ssafy_erd](https://user-images.githubusercontent.com/66864811/220617540-c775a42a-5866-4848-86ed-2053d4e629f3.png)
+
+### 포팅매뉴얼(https://github.com/JJOB-SSAFY/JJOB-SSAFY/blob/main/exec/%ED%8F%AC%ED%8C%85_%EB%A7%A4%EB%89%B4%EC%96%BC.pdf)
+
 
 # 서비스 기능
 - webRTC를 통한 실시간 면접
@@ -64,5 +76,52 @@
 # 서비스 화면
 
 
+#폴더 구조
+### Backend
+JJOB-SSAFY/
+├── api/
+│   ├── controller
+│   ├── request/
+│   │   └── resume
+│   ├── response/
+│   │   └── resume
+│   └── service
+├── common/
+│   ├── auth
+│   ├── exception
+│   └── util
+├── config
+└── db/
+    ├── entity/
+    │   └── resume
+    └── repository/
+        └── resume
+### Frontend
+JJOB-SSAFY /
+├── node_modules
+├── public
+└── src/
+    ├── api
+    ├── assets/
+    │   ├── css
+    │   ├── fonts
+    │   └── images
+    ├── common
+    ├── router
+    ├── store
+    └── views/
+        ├── login
+        ├── main/
+        │   ├── components
+        │   ├── homepage
+        │   ├── infoCards
+        │   ├── interview
+        │   ├── openvidu
+        │   ├── presentation
+        │   ├── recruit
+        │   └── review
+        ├── myInfo/
+        │   └── resume
+        └── register
 
 
