@@ -1,9 +1,5 @@
 <template>
-	<div
-		id="main-container"
-		class="container font-LINE-Bd"
-		style="overflow: hidden"
-	>
+	<div id="main-container" class="font-LINE-Bd" style="overflow: hidden">
 		<div id="join" v-if="!session" class="openvidu-join-form">
 			<div class="mb-60 openvidu-join-header">
 				<div class="d-flex align-items-center" style="margin-left: 7%">
@@ -85,18 +81,52 @@
 							<h1 id="session-title">{{ title }}</h1>
 						</div>
 					</div>
-					<div id="flex-container" class="mt-170 w-100" style="display: flex">
-						<div id="main-video" class="col-md-6" style="margin-right: 12px">
-							<user-video :stream-manager="mainStreamManager" />
+					<div class="middle-container">
+						<div class="left-container">
+							<div
+								id="flex-container"
+								class="mt-170 w-100"
+								style="display: flex"
+							>
+								<div
+									id="main-video"
+									class="col-md-6"
+									style="margin-right: 12px"
+								>
+									<user-video :stream-manager="mainStreamManager" />
+								</div>
+								<div id="video-container" class="row">
+									<user-video
+										v-for="sub in subscribers"
+										:key="sub.stream.connection.connectionId"
+										:stream-manager="sub"
+										@click="updateMainVideoStreamManager(sub)"
+										class="col-6"
+									/>
+								</div>
+							</div>
 						</div>
-						<div id="video-container" class="row">
-							<user-video
-								v-for="sub in subscribers"
-								:key="sub.stream.connection.connectionId"
-								:stream-manager="sub"
-								@click="updateMainVideoStreamManager(sub)"
-								class="col-6"
-							/>
+						<div class="right-container">
+							<div class="room">
+								<h5>{{ title }}</h5>
+								<hr />
+								<div v-for="(m, idx) in msg" :key="idx">
+									<div v-bind:class="m.style">
+										<h5 style="margin: 3px">
+											{{ m.senderName }}
+										</h5>
+										{{ m.content }}
+									</div>
+								</div>
+								<hr />
+								<input
+									type="text"
+									v-model="content"
+									placeholder="보낼 메세지"
+									size="100"
+								/>
+								<button @click="sendMessage()">SEND</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -151,23 +181,17 @@
 import { OpenVidu } from 'openvidu-browser';
 import axios from 'axios';
 import UserVideo from './components/UserVideo.vue';
-import { useRouter } from 'vue-router';
 import { url } from '../../../api/http';
 import Swal from 'sweetalert2';
-
+import Stomp from 'webstomp-client';
+import SockJS from 'sockjs-client/dist/sockjs';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-
 const APPLICATION_SERVER_URL = url;
-
-const router = useRouter();
-
 export default {
 	name: 'conferenceView',
-
 	components: {
 		UserVideo,
 	},
-
 	data() {
 		return {
 			//Modal
@@ -178,17 +202,76 @@ export default {
 			mainStreamManager: undefined,
 			publisher: undefined,
 			subscribers: [],
-
 			// Join form
 			title: this.$route.params.title,
 			mySessionId: this.$route.params.session,
 			myUserName: this.$route.params.participant,
 			companyId: this.$route.params.companyId,
 			companyName: this.$route.params.companyName,
+			// chatting
+			content: '',
+			idx: 0,
+			email: '',
+			msg: [],
 		};
 	},
-
+	created() {
+		const userInfo = this.$store.getters['auth/getUserInfo'];
+		this.email = userInfo.email;
+		// 채팅방 내용 불러오기
+		// axios({
+		// 	method: 'get',
+		// 	url: '/api/chat/room/message/' + this.mySessionId + "?page=" + this.idx,
+		// 	baseURL: 'http://localhost:8080/'
+		// }).then(res => {
+		// 	this.msg = []
+		// 	for (let i = res.data.length - 1; i > -1; i--) {
+		// 		let m = {
+		// 			'senderName': res.data[i].senderName,
+		// 			'content': res.data[i].content,
+		// 			'style': res.data[i].senderEmail == this.id ? 'myMsg' : 'otherMsg'
+		// 		}
+		// 		this.msg.push(m)
+		// 	}
+		// }, err => {
+		// 	console.log(err)
+		// 	alert("error : 새로고침하세요")
+		// })
+		// socket 연결
+		let socket = new SockJS('http://localhost:8080/ws');
+		this.stompClient = Stomp.over(socket);
+		this.stompClient.connect(
+			{},
+			frame => {
+				console.log('success', frame);
+				this.stompClient.subscribe('/sub/' + this.mySessionId, res => {
+					let jsonBody = JSON.parse(res.body);
+					let m = {
+						senderName: jsonBody.senderName,
+						content: jsonBody.content,
+						style: jsonBody.senderEmail == this.email ? 'myMsg' : 'otherMsg',
+					};
+					this.msg.push(m);
+				});
+			},
+			err => {
+				console.log('fail', err);
+			},
+		);
+	},
 	methods: {
+		sendMessage() {
+			if (this.content.trim() != '' && this.stompClient != null) {
+				let chatMessage = {
+					content: this.content,
+					senderEmail: this.email,
+					senderName: this.myUserName,
+					roomNumber: this.mySessionId,
+				};
+				this.stompClient.send('/pub/message', JSON.stringify(chatMessage), {});
+				this.content = '';
+			}
+		},
 		joinSession() {
 			if (this.subscribers.length >= 5) {
 				Swal.fire({
@@ -198,21 +281,16 @@ export default {
 				});
 				return;
 			}
-
 			// --- 1) Get an OpenVidu object ---
 			this.OV = new OpenVidu();
-
 			// --- 2) Init a session ---
 			this.session = this.OV.initSession();
-
 			// --- 3) Specify the actions when events take place in the session ---
-
 			// On every new Stream received...
 			this.session.on('streamCreated', ({ stream }) => {
 				const subscriber = this.session.subscribe(stream);
 				this.subscribers.push(subscriber);
 			});
-
 			// On every Stream destroyed...
 			this.session.on('streamDestroyed', ({ stream }) => {
 				const index = this.subscribers.indexOf(stream.streamManager, 0);
@@ -220,14 +298,11 @@ export default {
 					this.subscribers.splice(index, 1);
 				}
 			});
-
 			// On every asynchronous exception...
 			this.session.on('exception', ({ exception }) => {
 				console.warn(exception);
 			});
-
 			// --- 4) Connect to the session with a valid user token ---
-
 			// Get a token from the OpenVidu deployment
 			this.getToken(this.mySessionId).then(token => {
 				// First param is the token. Second param can be retrieved by every user on event
@@ -236,7 +311,6 @@ export default {
 					.connect(token, { clientData: this.myUserName })
 					.then(() => {
 						// --- 5) Get your own camera stream with the desired properties ---
-
 						// Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
 						// element: we will manage it on our own) and with the desired properties
 						let publisher = this.OV.initPublisher(undefined, {
@@ -249,13 +323,10 @@ export default {
 							insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
 							mirror: false, // Whether to mirror your local video or not
 						});
-
 						// Set the main video in the page to display our webcam and store our Publisher
 						this.mainStreamManager = publisher;
 						this.publisher = publisher;
-
 						// --- 6) Publish your stream ---
-
 						this.session.publish(this.publisher);
 					})
 					.catch(error => {
@@ -266,30 +337,24 @@ export default {
 						);
 					});
 			});
-
 			window.addEventListener('beforeunload', this.leaveSession);
 		},
-
 		leaveSession() {
 			// --- 7) Leave the session by calling 'disconnect' method over the Session object ---
 			if (this.session) this.session.disconnect();
-
 			// Empty all properties...
 			this.session = undefined;
 			this.mainStreamManager = undefined;
 			this.publisher = undefined;
 			this.subscribers = [];
 			this.OV = undefined;
-
 			// Remove beforeunload listener
 			window.removeEventListener('beforeunload', this.leaveSession);
 		},
-
 		updateMainVideoStreamManager(stream) {
 			if (this.mainStreamManager === stream) return;
 			this.mainStreamManager = stream;
 		},
-
 		goToReviewView() {
 			this.leaveSession();
 			this.$router.push({
@@ -300,20 +365,17 @@ export default {
 				},
 			});
 		},
-
 		goToInterviewView() {
 			this.leaveSession();
 			this.$router.push({
 				name: 'interview',
 			});
 		},
-
 		backToInterviewView() {
 			this.$router.push({
 				name: 'interview',
 			});
 		},
-
 		/**
 		 * --------------------------------------------
 		 * GETTING A TOKEN FROM YOUR APPLICATION SERVER
@@ -333,7 +395,6 @@ export default {
 			const sessionId = await this.createSession(mySessionId);
 			return await this.createToken(sessionId);
 		},
-
 		async createSession(sessionId) {
 			const response = await axios.post(
 				APPLICATION_SERVER_URL + '/api/sessions',
@@ -344,7 +405,6 @@ export default {
 			);
 			return response.data; // The sessionId
 		},
-
 		async createToken(sessionId) {
 			const response = await axios.post(
 				APPLICATION_SERVER_URL + '/api/sessions/' + sessionId + '/connections',
@@ -360,11 +420,17 @@ export default {
 </script>
 
 <style>
+.myMsg {
+	text-align: right;
+	color: gray;
+}
+.otherMsg {
+	text-align: left;
+}
 .openvidu-join-form {
 	width: 80%;
 	margin: auto;
 }
-
 .openvidu-join-header {
 	position: fixed;
 	width: 100%;
@@ -373,7 +439,6 @@ export default {
 	align-items: center;
 	border-top: 1px lightgray solid;
 }
-
 .openvidu-join-footer {
 	position: fixed;
 	width: 100%;
@@ -388,7 +453,6 @@ export default {
 	padding-right: 130px;
 	padding-bottom: 40px;
 }
-
 .openvidu-room-header {
 	position: fixed;
 	width: 100%;
@@ -399,7 +463,17 @@ export default {
 	display: flex;
 	align-items: center;
 }
-
+.middle-container {
+	display: flex;
+	width: 100%;
+}
+.left-container {
+	width: 80%;
+}
+.right-container {
+	width: 20%;
+	padding-top: 200px;
+}
 .openvidu-room-footer {
 	position: fixed;
 	width: 100%;
@@ -411,11 +485,9 @@ export default {
 	align-items: center;
 	background-color: #c3c3c349;
 }
-
 .openvidu-room-container {
 	display: flex;
 }
-
 .leave-session-btn {
 	width: 150px;
 	height: 50px;
@@ -441,7 +513,6 @@ export default {
 	width: 100px;
 	border-radius: 12px;
 	background: var(--primary-color-1);
-
 	box-shadow: 0px 4px 0px 0px #1487c9;
 }
 #interview-out-bt {
@@ -450,10 +521,8 @@ export default {
 	width: 70px;
 	border-radius: 12px;
 	background: #fc7e7e;
-
 	box-shadow: 0px 4px 0px 0px #a66615;
 }
-
 #goto-review-bt:hover {
 	margin-top: 6px;
 	margin-bottom: -3px;

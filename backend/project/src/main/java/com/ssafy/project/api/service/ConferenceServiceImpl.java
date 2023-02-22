@@ -35,7 +35,7 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     @Transactional
-    public void createConference(ConferenceRequestDto requestDto, String email, Long companyId) {
+    public Long createConference(ConferenceRequestDto requestDto, String email, Long companyId) {
 
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
@@ -45,13 +45,14 @@ public class ConferenceServiceImpl implements ConferenceService {
 
         Conference conference = Conference.of(requestDto, member, company);
 
-        conferenceRepository.save(conference);
+        Conference saveConference = conferenceRepository.save(conference);
 
         List<String> emailList = requestDto.getMemberEmail();
 
         // 면접대상 이메일로 조회
         saveInterviewParticipant(emailList, conference);
 
+        return saveConference.getId();
     }
 
     private void saveInterviewParticipant(List<String> emailList, Conference conference) {

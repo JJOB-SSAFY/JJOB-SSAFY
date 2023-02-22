@@ -17,7 +17,7 @@ export const recruit = {
 				const response = await http.post('/recruit/list', payload);
 
 				commit('GET_LIST', response.data);
-			} catch (error) { }
+			} catch (error) {}
 		},
 	},
 	mutations: {

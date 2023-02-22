@@ -29,8 +29,8 @@ public class ConferenceController {
                                                              @PathVariable Long companyId) {
         logger.info(conReq.getCallEndTime().toString());
         System.out.println(conReq.getMemberEmail());
-        conferenceService.createConference(conReq, userDetails.getEmail(), companyId);
-        return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
+        return new ResponseEntity<>(
+                new BaseResponseBody(conferenceService.createConference(conReq, userDetails.getEmail(), companyId).toString(), 200), HttpStatus.OK);
     }
 
     @GetMapping("/list/{type}")

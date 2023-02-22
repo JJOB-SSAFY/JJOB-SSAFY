@@ -142,20 +142,15 @@ import { useRouter } from 'vue-router';
 import applyService from '../../../api/applyService';
 import axios from 'axios';
 import { url } from '../../../api/http';
-
 export default {
 	name: 'RecruitResume',
 	setup() {
 		const store = useStore();
-
 		const router = useRouter();
-
 		const companyId = store.getters['auth/getCompanyId'];
-
 		const modalInfo = reactive({
 			dialog: false,
 		});
-
 		const interviewInfo = reactive({
 			title: '',
 			participants: '',
@@ -163,16 +158,13 @@ export default {
 			starttime: '',
 			endtime: '',
 		});
-
 		const getApplyResumeList = reactive({
 			state: {},
 		});
-
 		const appService = new applyService();
 		appService.getApplyResumeList(companyId).then(data => {
 			getApplyResumeList.state = data;
 		});
-
 		const showDetailResume = (e, k) => {
 			router.push({
 				name: 'recruitResumeDetail',
@@ -182,18 +174,14 @@ export default {
 				},
 			});
 		};
-
 		const createRoom = () => {
 			const companyId = store.getters['auth/getCompanyId'];
-
 			const title = interviewInfo.title;
 			const participants = interviewInfo.participants;
 			const date = interviewInfo.date;
 			const starttime = interviewInfo.starttime;
 			const endtime = interviewInfo.endtime;
-
 			let participantList = participants.split(',').map(item => item.trim());
-
 			const config = {
 				conferenceTitle: title,
 				callEndTime: date + 'T' + endtime + ':00',
@@ -201,7 +189,6 @@ export default {
 				conferenceCategory: 'INTERVIEW',
 				memberEmail: participantList,
 			};
-
 			axios({
 				method: 'POST',
 				url: url + '/conference/' + companyId,
@@ -209,14 +196,32 @@ export default {
 					Authorization: localStorage.getItem('jjob.s.token'),
 				},
 				data: config,
-			}).then(() => {
+			}).then(res => {
 				modalInfo.dialog = false;
+				console.log(res);
+				const conferenceId = res.data.message;
+				createChatRoom(conferenceId);
 				router.push({
 					name: 'recruitResume',
 				});
 			});
 		};
-
+		const createChatRoom = roomNumber => {
+			const config = {
+				roomNumber: roomNumber,
+				title: interviewInfo.title,
+			};
+			axios({
+				method: 'POST',
+				url: url + '/api/chat/room',
+				headers: {
+					Authorization: localStorage.getItem('jjob.s.token'),
+				},
+				data: config,
+			}).then(res => {
+				console.log(res.data);
+			});
+		};
 		return {
 			store,
 			modalInfo,
@@ -224,6 +229,7 @@ export default {
 			getApplyResumeList,
 			showDetailResume,
 			createRoom,
+			createChatRoom,
 		};
 	},
 };
@@ -240,7 +246,6 @@ export default {
 	padding: 0.5rem;
 	justify-content: flex-end;
 }
-
 .review-write-btns {
 	display: flex;
 	justify-content: end;

@@ -37,7 +37,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation("org.springframework.security:spring-security-test")
-    //    implementation("com.auth0:java-jwt:3.10.3")
 
     // JsonWebToken
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -62,6 +61,10 @@ dependencies {
 
     // OpenVidu 추가
     implementation 'io.openvidu:openvidu-java-client:2.25.0'
+
+    // websocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.webjars:stomp-websocket:2.3.3-1'
 }
 
 tasks.named('test') {
