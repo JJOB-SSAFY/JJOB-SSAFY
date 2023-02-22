@@ -75,6 +75,7 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 
 # 서비스 화면
 로그인
+
 ![로그인_AdobeExpress (1)](https://user-images.githubusercontent.com/75572705/220621201-76864200-eb73-40b6-9fe0-3dc67cb486b8.gif)
 
 
