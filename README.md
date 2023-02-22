@@ -157,7 +157,7 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 ### 리뷰 확인
 
 ![리뷰_확인_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622634-d716a469-2b50-4588-8885-244e91f37a28.gif)
----
+
 
 # 폴더 구조
 ### Backend
