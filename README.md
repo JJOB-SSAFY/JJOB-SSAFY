@@ -78,6 +78,7 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 
 #폴더 구조
 ### Backend
+```
 JJOB-SSAFY/
 ├── api/
 │   ├── controller
@@ -96,7 +97,9 @@ JJOB-SSAFY/
     │   └── resume
     └── repository/
         └── resume
+```
 ### Frontend
+```
 JJOB-SSAFY /
 ├── node_modules
 ├── public
@@ -123,5 +126,5 @@ JJOB-SSAFY /
         ├── myInfo/
         │   └── resume
         └── register
-
+```
 
