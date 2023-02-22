@@ -1,8 +1,8 @@
-# 프로젝트 진행 기간
+# 🔥 프로젝트 진행 기간
 2023.01.09(월) ~ 2023.02.17(금)  
 SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 
-# JJOB-SSAFY 개요
+# 📜 JJOB-SSAFY 개요
 싸피 누적 취업생 3486명!
 개발자 채용시장에서 점점 커지는 싸피의 영향력을 반영한 
 싸피생 전용 채용 솔루션 서비스!!!
@@ -10,23 +10,23 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 피드백 기능등이 추가된 서비스를 만들었습니다.
 
 
-# 서비스 구조도
+# 📦 서비스 구조도
 ![Untitled](https://user-images.githubusercontent.com/66864811/220613265-dee09370-fa52-4302-a4a1-b1217f118263.png)
 
-# erd
+# 🌊 erd
 ![jjob_ssafy_erd](https://user-images.githubusercontent.com/66864811/220617540-c775a42a-5866-4848-86ed-2053d4e629f3.png)
 
 ### [포팅매뉴얼](https://github.com/JJOB-SSAFY/JJOB-SSAFY/blob/main/exec/%ED%8F%AC%ED%8C%85_%EB%A7%A4%EB%89%B4%EC%96%BC.pdf)
 
 
-# 서비스 기능
+# 🛠️ 서비스 기능
 - webRTC를 통한 실시간 면접
 - 자기소개서 관리
 - 각 회사의 리뷰 (채용 프로세스를 진행한 싸피인들이 느낀 후기들)
 - 지원자 카드 (인사 채용자가 지원자들을 한 눈에 파악할 수 있도록 지원자 정보를 카드로 정리)
 - 서류 전형 피드백 기능 (서류 전형 탈락 시 어떤 이유로 탈락되었는지 인사 담당자가 적시할 수 있음)
 
-# 주요 기술
+# 🔧 주요 기술
 ### 🖱️Backend
 
 - IntelliJ
@@ -73,7 +73,7 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 
 - postman
 
-# 서비스 화면
+# 📺 서비스 화면
 ### 로그인
 
 ![로그인_AdobeExpress (1)](https://user-images.githubusercontent.com/75572705/220621201-76864200-eb73-40b6-9fe0-3dc67cb486b8.gif)
@@ -126,7 +126,7 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 
 ![회원등록_회원__AdobeExpress](https://user-images.githubusercontent.com/75572705/220622253-432fc901-9722-4d65-a383-0da8708d7298.gif)
 
-## 합격
+### 합격
 
 ![합격_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622331-0888a083-f417-4b8d-ba5a-d9ddfcb53985.gif)
 
@@ -211,3 +211,40 @@ JJOB-SSAFY /
         └── register
 ```
 
+### eslint, prettier
+```
+module.exports = {
+	root: true,
+	extends: [
+		'plugin:vue/vue3-essential',
+		'eslint:recommended',
+		'@vue/eslint-config-prettier',
+	],
+	parserOptions: {
+		ecmaVersion: 'latest',
+	},
+	env: {
+		'vue/setup-compiler-macros': true,
+	},
+	rules: {
+		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+		'no-unused-vars': 'off',
+
+		'prettier/prettier': [
+			'error',
+			{
+				singleQuote: true,
+				semi: true,
+				useTabs: true,
+				tabWidth: 2,
+				trailingComma: 'all',
+				printWidth: 80,
+				bracketSpacing: true,
+				arrowParens: 'avoid',
+				endOfLine: 'auto',
+			},
+		],
+	},
+};
+
+```
