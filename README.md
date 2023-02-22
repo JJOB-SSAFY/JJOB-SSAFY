@@ -16,7 +16,7 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 ###erd
 ![jjob_ssafy_erd](https://user-images.githubusercontent.com/66864811/220617540-c775a42a-5866-4848-86ed-2053d4e629f3.png)
 
-### 포팅매뉴얼(https://github.com/JJOB-SSAFY/JJOB-SSAFY/blob/main/exec/%ED%8F%AC%ED%8C%85_%EB%A7%A4%EB%89%B4%EC%96%BC.pdf)
+### [포팅매뉴얼](https://github.com/JJOB-SSAFY/JJOB-SSAFY/blob/main/exec/%ED%8F%AC%ED%8C%85_%EB%A7%A4%EB%89%B4%EC%96%BC.pdf)
 
 
 # 서비스 기능
