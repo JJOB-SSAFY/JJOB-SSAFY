@@ -74,90 +74,90 @@ SSAFY 8기 2학기 공통프로젝트 - JJOB-SSAFY
 - postman
 
 # 서비스 화면
-로그인
+### 로그인
 
 ![로그인_AdobeExpress (1)](https://user-images.githubusercontent.com/75572705/220621201-76864200-eb73-40b6-9fe0-3dc67cb486b8.gif)
 
-메인페이지
+### 메인페이지
 
 ![메인페이지_AdobeExpress (1)](https://user-images.githubusercontent.com/75572705/220621432-17cabff1-f786-41b7-b7ce-698baa72da3a.gif)
 
-채용공고_리스트
+### 채용공고_리스트
 
 ![채용공고_리스트_AdobeExpress](https://user-images.githubusercontent.com/75572705/220621550-cafbc399-e047-449b-b39a-0f87e1e6cb61.gif)
 
-내 정보 변경
+### 내 정보 변경
 
 ![내_정보_변경_AdobeExpress](https://user-images.githubusercontent.com/75572705/220621755-ecae05e0-0779-40d4-b530-33d5777bdca7.gif)
 
-이력서 작성
+### 이력서 작성
 
 ![이력서_작성_AdobeExpress](https://user-images.githubusercontent.com/75572705/220621830-c3f08c1d-b43e-4dc8-ba9b-ebb61ecd570c.gif)
 
-이력서 수정
+### 이력서 수정
 
 ![이력서_수정_AdobeExpress](https://user-images.githubusercontent.com/75572705/220621886-82c2c0d6-c90c-41a3-91bf-5c8802a66c47.gif)
 
-이력서 삭제
+### 이력서 삭제
 
 ![이력서_삭제_AdobeExpress](https://user-images.githubusercontent.com/75572705/220621903-84b5f9b3-7115-4301-8350-5dae0cf05184.gif)
 
-리뷰 리스트
+### 리뷰 리스트
 
 ![리뷰_리스트_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622008-47de6973-f5ac-4db7-97c4-58f48d9af75b.gif)
 
-이력서 지원
+### 이력서 지원
 
 ![이력서지원_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622024-64534794-0173-468a-b859-2268118f6e3a.gif)
 
-지원자 정보 (유저)
+### 지원자 정보 (유저)
 
 ![지원자_정보__유저__AdobeExpress](https://user-images.githubusercontent.com/75572705/220622152-a1a73bb9-28bc-4217-8087-8102c6782069.gif)
 
-지원자 정보 (회사, 관리자)
+### 지원자 정보 (회사, 관리자)
 
 ![지원자_정보__관리자__회사__AdobeExpress](https://user-images.githubusercontent.com/75572705/220622201-b988060e-41ae-417c-9dcd-2de012ba997a.gif)
 
-회사 등록
+### 회사 등록
 
 ![회원등록_회사__AdobeExpress](https://user-images.githubusercontent.com/75572705/220622249-c4769cc5-0632-4bd1-87d0-fc8b3223a14a.gif)
 
-회원 등록
+### 회원 등록
 
 ![회원등록_회원__AdobeExpress](https://user-images.githubusercontent.com/75572705/220622253-432fc901-9722-4d65-a383-0da8708d7298.gif)
 
-합격
+## 합격
 
 ![합격_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622331-0888a083-f417-4b8d-ba5a-d9ddfcb53985.gif)
 
-불합격
+### 불합격
 
 ![불합격_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622376-b099bddb-ad0b-4696-a426-72b44d791dbc.gif)
 
-유저 불합격 확인
+### 유저 불합격 확인
 
 ![유저_불합격_확인_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622431-0bf605d7-5e07-45ed-832b-30c7d6480535.gif)
 
-유저 합격 확인
+### 유저 합격 확인
 
 ![유저_합격확인_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622418-a90c4cfa-b617-4adf-97d2-39ca72bb0d35.gif)
 
-면접방 생성하기
+### 면접 방 생성하기
 
 ![면접방생성하기_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622571-3d6b6a6f-78a8-483d-b1fa-023277df70ce.gif)
 
-면접 화면
+### 면접 화면
 
 ![면접화면_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622596-3b9ceb78-c741-4143-b76e-402ad67ee209.gif)
 
-
-리뷰 쓰기
+### 리뷰 쓰기
 
 ![리뷰쓰기_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622605-2834efc9-e4b9-436d-9631-ac1e5538f536.gif)
 
-리뷰 확인
+### 리뷰 확인
 
 ![리뷰_확인_AdobeExpress](https://user-images.githubusercontent.com/75572705/220622634-d716a469-2b50-4588-8885-244e91f37a28.gif)
+---
 
 # 폴더 구조
 ### Backend
