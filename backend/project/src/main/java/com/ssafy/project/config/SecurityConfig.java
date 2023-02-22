@@ -5,6 +5,7 @@ import com.ssafy.project.common.auth.JwtAuthenticationFilter;
 import com.ssafy.project.common.auth.SsafyLoginSuccessHandler;
 import com.ssafy.project.common.auth.SsafyOAuth2UserDetailService;
 import com.ssafy.project.common.auth.SsafyUserDetailService;
+import com.ssafy.project.common.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,17 +18,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
     private final SsafyUserDetailService ssafyUserDetailService;
 
     private final SsafyOAuth2UserDetailService ssafyOAuth2UserDetailService;
 
     private final SsafyLoginSuccessHandler successHandler;
+
+    private final JWTUtil jwtUtil;
 
     // Password 인코딩 방식에 BCrypt 암호화 방식 사용
     @Bean
@@ -46,19 +51,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // DAO 기반의 Authentication Provider가 적용되도록 설정
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(authenticationProvider());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) {
+//        auth.authenticationProvider(authenticationProvider());
+//    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 사용 하지않음
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), ssafyUserDetailService)) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
+                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class) //HTTP 요청에 JWT 토큰 인증 필터를 거치도록 필터를 추가
                 .authorizeRequests()
                 .antMatchers("/member/**").permitAll()
                 .antMatchers("/user/login").permitAll()
@@ -68,6 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().cors()
                 .and()
                 .oauth2Login().userInfoEndpoint().userService(ssafyOAuth2UserDetailService).and().successHandler(successHandler);
+
+        return http.build();
     }
 
 }

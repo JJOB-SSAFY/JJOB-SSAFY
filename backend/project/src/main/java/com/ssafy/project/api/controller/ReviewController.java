@@ -33,7 +33,7 @@ public class ReviewController {
                                                                   @PathVariable Long company_id,
                                                                   @RequestBody ReviewRequestDto requestDto){
 
-        reviewService.writeReview(requestDto, userDetails.getMember().getId(), company_id);
+        reviewService.writeReview(requestDto, userDetails.getEmail(), company_id);
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }

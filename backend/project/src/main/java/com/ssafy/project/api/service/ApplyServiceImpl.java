@@ -41,9 +41,9 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     @Transactional
-    public void createApply(Long recruitId, Long resumeId, Long memberId, ApplyRequestDto requestDto) {
+    public void createApply(Long recruitId, Long resumeId, String email, ApplyRequestDto requestDto) {
 
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION));
         Recruit recruit = recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION));

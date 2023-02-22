@@ -45,8 +45,8 @@ public class CardServiceImpl implements CardService {
 
     @Override
     @Transactional(readOnly = true)
-    public CardImageResponseDto getImage(Long id) {
-        Member member = memberRepository.findById(id)
+    public CardImageResponseDto getImage(String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         return CardImageResponseDto.builder()

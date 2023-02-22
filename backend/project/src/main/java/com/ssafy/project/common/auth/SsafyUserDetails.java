@@ -1,60 +1,50 @@
 package com.ssafy.project.common.auth;
 
-import com.ssafy.project.db.entity.Member;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 
-public class SsafyUserDetails implements UserDetails {
+@Log4j2
+@Getter
+@Setter
+@ToString
+public class SsafyUserDetails extends User implements OAuth2User {
 
-    Member member;
-    boolean accountNonExpired;
-    boolean accountNonLocked;
-    boolean credentialNonExpired;
-    boolean enabled = false;
-    List<GrantedAuthority> roles = new ArrayList<>();
+    private String email;
 
-    public SsafyUserDetails(Member member) {
-        super();
-        this.member = member;
+    private String password;
+
+    private String name;
+
+    private Map<String, Object> attr;
+
+    public SsafyUserDetails(String username,
+                            String password,
+                            Collection<? extends GrantedAuthority> authorities,
+                            Map<String, Object> attr) {
+        this(username, password, authorities);
+        this.attr = attr;
     }
 
-    public Member getMember() {
-        return this.member;
+    public SsafyUserDetails(String username,
+                            String password,
+                            Collection<? extends GrantedAuthority> authorities) {
+
+        super(username, password, authorities);
+        this.email = username;
+        this.password = password;
     }
 
     @Override
-    public String getPassword() {
-        return this.member.getPassword();
+    public Map<String, Object> getAttributes() {
+        return this.attr;
     }
-    @Override
-    public String getUsername() {
-        return this.member.getEmail();
-    }
-    @Override
-    public boolean isAccountNonExpired() {
-        return this.accountNonExpired;
-    }
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.accountNonLocked;
-    }
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return this.credentialNonExpired;
-    }
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles;
-    }
-    public void setAuthorities(List<GrantedAuthority> roles) {
-        this.roles = roles;
-    }
+
 }

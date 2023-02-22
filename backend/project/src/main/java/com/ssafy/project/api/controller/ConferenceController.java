@@ -29,21 +29,21 @@ public class ConferenceController {
                                                              @PathVariable Long companyId) {
         logger.info(conReq.getCallEndTime().toString());
         System.out.println(conReq.getMemberEmail());
-        conferenceService.createConference(conReq, userDetails.getMember().getId(), companyId);
+        conferenceService.createConference(conReq, userDetails.getEmail(), companyId);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
     @GetMapping("/list/{type}")
     public ResponseEntity<?> getConferenceList(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                @PathVariable String type) {
-        List<ConferenceResponseDto> list = conferenceService.getConferenceList(userDetails.getMember().getId(), type);
+        List<ConferenceResponseDto> list = conferenceService.getConferenceList(userDetails.getEmail(), type);
         return new ResponseEntity<List<ConferenceResponseDto>>(list, HttpStatus.OK);
     }
 
     @DeleteMapping("/{conferenceId}")
     public ResponseEntity<BaseResponseBody> deleteConference(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                              @PathVariable Long conferenceId){
-        conferenceService.deleteConference(userDetails.getMember().getId(), conferenceId);
+        conferenceService.deleteConference(userDetails.getEmail(), conferenceId);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 

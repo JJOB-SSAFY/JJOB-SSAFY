@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface MyInfoService {
     MyInfoGetRes getMyInfo(String email);
-    String changePwd(String change,String current, Long memberId);
+    String changePwd(String change,String current, String email);
 
-    void changeInfo(MyInfoRequestDto myInfo,Long id);
+    void changeInfo(MyInfoRequestDto myInfo, String email);
 
-    List<ApplyStatusRes> applyStatus(Long id);
+    List<ApplyStatusRes> applyStatus(String email);
 
 
 

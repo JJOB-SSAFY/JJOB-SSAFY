@@ -44,8 +44,8 @@ public class MyInfoServiceImpl implements MyInfoService {
 
     @Override
     @Transactional
-    public String changePwd(String change, String current, Long memberId) {
-        Member member = memberRepository.findById(memberId)
+    public String changePwd(String change, String current, String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         if (new BCryptPasswordEncoder().matches(current, member.getPassword())) {
@@ -58,9 +58,9 @@ public class MyInfoServiceImpl implements MyInfoService {
 
     @Override
     @Transactional
-    public void changeInfo(MyInfoRequestDto myInfo, Long id) {
+    public void changeInfo(MyInfoRequestDto myInfo, String email) {
 
-        Member member = memberRepository.findById(id)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         Card card = cardRepository.findById(member.getCard().getId())
@@ -71,8 +71,8 @@ public class MyInfoServiceImpl implements MyInfoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ApplyStatusRes> applyStatus(Long id) {
-        List<ApplyStatus> applyStatusList = applyStatueRepository.findAllByMemberId(id);
+    public List<ApplyStatusRes> applyStatus(String email) {
+        List<ApplyStatus> applyStatusList = applyStatueRepository.findAllByMemberEmail(email);
         return applyStatusList.stream().map(ApplyStatusRes::new).collect(toList());
     }
 

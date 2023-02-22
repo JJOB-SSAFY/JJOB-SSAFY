@@ -24,19 +24,19 @@ public class ResumeController{
 
     @GetMapping
     ResponseEntity<List<ResumeListResponseDto>> getResumeList(@AuthenticationPrincipal SsafyUserDetails userDetails) {
-        return new ResponseEntity<>(resumeService.getResumeList(userDetails.getMember().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(resumeService.getResumeList(userDetails.getEmail()), HttpStatus.OK);
     }
 
     @GetMapping("/isapplied")
     ResponseEntity<List<ResumeListResponseDto>> getIsAppliedResumeList(@AuthenticationPrincipal SsafyUserDetails userDetails) {
-        return new ResponseEntity<>(resumeService.getIsAppliedResumeList(userDetails.getMember().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(resumeService.getIsAppliedResumeList(userDetails.getEmail()), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<BaseResponseBody> createResume(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                          @RequestBody ResumeRequestDto requestDto) {
         System.out.println(requestDto);
-        resumeService.createResume(requestDto, userDetails.getMember().getId());
+        resumeService.createResume(requestDto, userDetails.getEmail());
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 

@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ConferenceService {
 
-    void createConference(ConferenceRequestDto requestDto,Long memberId, Long companyId);
-    List<ConferenceResponseDto> getConferenceList(Long id, String type);
-    void deleteConference(Long memberId, Long conferenceId);
+    void createConference(ConferenceRequestDto requestDto,String email, Long companyId);
+    List<ConferenceResponseDto> getConferenceList(String email, String type);
+    void deleteConference(String email, Long conferenceId);
 
     void updateConference(ConferenceRequestDto requestDto,Long id);
 

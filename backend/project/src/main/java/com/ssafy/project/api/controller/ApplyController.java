@@ -26,7 +26,7 @@ public class ApplyController {
                                                         @PathVariable Long resume_id,
                                                         @RequestBody ApplyRequestDto requestDto) {
 
-        applyService.createApply(recruit_id, resume_id, userDetails.getMember().getId(), requestDto);
+        applyService.createApply(recruit_id, resume_id, userDetails.getEmail(), requestDto);
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 

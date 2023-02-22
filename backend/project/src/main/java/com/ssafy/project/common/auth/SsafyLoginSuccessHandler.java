@@ -1,11 +1,10 @@
 package com.ssafy.project.common.auth;
 
-import com.ssafy.project.common.util.JwtTokenUtil;
+import com.ssafy.project.common.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -24,7 +23,7 @@ import java.util.Collection;
 @Component
 public class SsafyLoginSuccessHandler implements AuthenticationSuccessHandler {
 
-    private final JwtTokenUtil jwtUtil;
+    private final JWTUtil jwtUtil;
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -35,9 +34,9 @@ public class SsafyLoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info("----------------------------");
         log.info("onAuthenticationSuccess");
 
-        SsafyOAuth2UserDetails authMember = (SsafyOAuth2UserDetails)authentication.getPrincipal();
+        SsafyUserDetails authMember = (SsafyUserDetails)authentication.getPrincipal();
 
-        String accessToken = jwtUtil.getToken(authMember.getEmail());
+        String accessToken = jwtUtil.createToken(authMember.getEmail());
         String name = authMember.getName();
         String role = getRole(authMember.getAuthorities());
 

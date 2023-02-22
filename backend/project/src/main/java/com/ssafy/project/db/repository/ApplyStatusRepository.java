@@ -13,8 +13,9 @@ import java.util.Optional;
 
 public interface ApplyStatusRepository extends JpaRepository<ApplyStatus, Long> {
 
-    List<ApplyStatus> findAllByMemberId(Long memberId);
     List<ApplyStatus> findAllByRecruitId(Long recruitId);
     void deleteAllByRecruitId(Long recruitId);
     Optional<ApplyStatus> findByResumeId(Long resumeId);
+
+    List<ApplyStatus> findAllByMemberEmail(String email);
 }

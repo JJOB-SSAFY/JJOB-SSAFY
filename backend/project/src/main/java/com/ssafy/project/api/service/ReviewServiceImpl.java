@@ -37,8 +37,8 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public void writeReview(ReviewRequestDto requestDto, Long memberId, Long companyId) {
-        Member member = memberRepository.findById(memberId)
+    public void writeReview(ReviewRequestDto requestDto, String email, Long companyId) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION));
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));

@@ -27,17 +27,19 @@ public class SsafyUserDetailService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<Member> findMember = memberRepository.findByEmail(email);
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Check User Email or from Social"));
 
-        if (findMember.isEmpty()) throw new UsernameNotFoundException("Check User Email or from Social ");
+        SsafyUserDetails userDetails = new SsafyUserDetails(
+                member.getEmail(),
+                member.getPassword(),
+                member.getRoleSet().stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                        .collect(Collectors.toSet())
+        );
 
-        Member member = findMember.get();
+        userDetails.setName(member.getName());
 
-        SsafyUserDetails userDetails = new SsafyUserDetails(member);
-        userDetails.setAuthorities(member.getRoleSet()
-                .stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
-                .collect(toList()));
         return userDetails;
     }
 }

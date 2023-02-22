@@ -53,11 +53,11 @@ public class RecruitServiceImpl implements RecruitService {
 
     @Override
     @Transactional
-    public void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId) {
+    public void createRecruit(Long companyId, RecruitRequestDto requestDto, String email) {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.COMPANY_NOT_EXIST_EXCEPTION));
 
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         Recruit recruit = Recruit.of(requestDto, company, member);
@@ -82,22 +82,22 @@ public class RecruitServiceImpl implements RecruitService {
 
     @Override
     @Transactional
-    public void updateRecruit(Long memberId, Long recruitId, RecruitRequestDto requestDto) {
+    public void updateRecruit(String email, Long recruitId, RecruitRequestDto requestDto) {
         Recruit recruit = recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION));
 
-        if (!recruit.getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+        if (!recruit.getMember().getEmail().equals(email)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
         recruit.updateRecruit(requestDto);
     }
 
     @Override
     @Transactional
-    public void deleteRecruit(Long memberId, Long recruitId) {
+    public void deleteRecruit(String email, Long recruitId) {
         Recruit recruit = recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.RECRUIT_NOT_EXIST_EXCEPTION));
 
-        if (!recruit.getMember().getId().equals(memberId)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
+        if (!recruit.getMember().getEmail().equals(email)) throw new ApiException(ExceptionEnum.MEMBER_ACCESS_EXCEPTION);
 
         applyStatusRepository.deleteAllByRecruitId(recruitId);
 

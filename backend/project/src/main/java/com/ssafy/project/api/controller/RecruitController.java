@@ -26,7 +26,7 @@ public class RecruitController {
     public ResponseEntity<BaseResponseBody> createRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                           @PathVariable Long company_id,
                                                           @RequestBody RecruitRequestDto requestDto) {
-        recruitService.createRecruit(company_id, requestDto, userDetails.getMember().getId());
+        recruitService.createRecruit(company_id, requestDto, userDetails.getEmail());
         return new ResponseEntity<>(new BaseResponseBody("Success", 201), HttpStatus.CREATED);
     }
 
@@ -44,14 +44,14 @@ public class RecruitController {
     public ResponseEntity<BaseResponseBody> updateRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                             @PathVariable Long recruit_id,
                                                             @RequestBody RecruitRequestDto requestDto) {
-        recruitService.updateRecruit(userDetails.getMember().getId(), recruit_id, requestDto);
+        recruitService.updateRecruit(userDetails.getEmail(), recruit_id, requestDto);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
     @DeleteMapping("/{recruit_id}")
     public ResponseEntity<BaseResponseBody> deleteRecruit(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                           @PathVariable Long recruit_id) {
-        recruitService.deleteRecruit(userDetails.getMember().getId(), recruit_id);
+        recruitService.deleteRecruit(userDetails.getEmail(), recruit_id);
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 }

@@ -66,7 +66,7 @@ public class SsafyOAuth2UserDetailService extends DefaultOAuth2UserService {
 
         Member member = saveSocialMember(email, name);
 
-        SsafyOAuth2UserDetails ssafyOauth2Member = new SsafyOAuth2UserDetails(
+        SsafyUserDetails ssafyOauth2Member = new SsafyUserDetails(
                 member.getEmail(),
                 member.getPassword(),
                 member.getRoleSet()

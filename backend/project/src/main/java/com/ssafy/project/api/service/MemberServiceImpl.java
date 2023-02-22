@@ -5,7 +5,7 @@ import com.ssafy.project.api.request.MemberLoginPostReq;
 import com.ssafy.project.api.response.MemberLoginPostRes;
 import com.ssafy.project.common.exception.ApiException;
 import com.ssafy.project.common.exception.ExceptionEnum;
-import com.ssafy.project.common.util.JwtTokenUtil;
+import com.ssafy.project.common.util.JWTUtil;
 import com.ssafy.project.db.entity.Card;
 import com.ssafy.project.db.entity.Company;
 import com.ssafy.project.db.entity.Member;
@@ -31,6 +31,7 @@ import static org.springframework.util.StringUtils.hasText;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final JWTUtil jwtUtil;
     private final CompanyRepository companyRepository;
     private final CardRepository cardRepository;
 
@@ -86,10 +87,10 @@ public class MemberServiceImpl implements MemberService {
         if (new BCryptPasswordEncoder().matches(password, member.getPassword())) {
             // 유효한 패스워드가 맞는 경우, 로그인 성공으로 응답.(액세스 토큰을 포함하여 응답값 전달)
             if (member.getCompany() == null) {
-                return MemberLoginPostRes.from(JwtTokenUtil.getToken(email), member.getName(), getRole(roleSet));
+                return MemberLoginPostRes.from(jwtUtil.createToken(email), member.getName(), getRole(roleSet));
             }
 
-            return MemberLoginPostRes.from(JwtTokenUtil.getToken(email), member.getName(), getRole(roleSet), member.getCompany().getId());
+            return MemberLoginPostRes.from(jwtUtil.createToken(email), member.getName(), getRole(roleSet), member.getCompany().getId());
         }
 
         // 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.

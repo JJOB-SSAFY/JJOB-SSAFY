@@ -28,17 +28,17 @@ public class MyInfoController {
     // 내 정보 조회
     @GetMapping("")
     public ResponseEntity<?> getMyInfo(@AuthenticationPrincipal SsafyUserDetails userDetails) {
-        logger.info(userDetails.getMember().getEmail());
-        MyInfoGetRes myInfo = myInfoService.getMyInfo(userDetails.getMember().getEmail());
+        logger.info(userDetails.getEmail());
+        MyInfoGetRes myInfo = myInfoService.getMyInfo(userDetails.getEmail());
 
         return new ResponseEntity<MyInfoGetRes>(myInfo, HttpStatus.OK);
     }
 
     @PatchMapping("/pwd")
     public ResponseEntity<BaseResponseBody> changePwd(@AuthenticationPrincipal SsafyUserDetails userDetails,
-                                                      @RequestBody Map<String,String> map){
+                                                      @RequestBody Map<String,String> map) {
 
-        String status=myInfoService.changePwd(map.get("change"),map.get("current"), userDetails.getMember().getId());
+        String status = myInfoService.changePwd(map.get("change"), map.get("current"), userDetails.getEmail());
         return new ResponseEntity<>(new BaseResponseBody(status, 200), HttpStatus.OK);
     }
 
@@ -46,17 +46,15 @@ public class MyInfoController {
     @PatchMapping("")
     public ResponseEntity<BaseResponseBody> changeInfo(@AuthenticationPrincipal SsafyUserDetails userDetails,
                                                        @RequestBody MyInfoRequestDto requestDto){
-        myInfoService.changeInfo(requestDto,userDetails.getMember().getId());
+        myInfoService.changeInfo(requestDto, userDetails.getEmail());
 
         return new ResponseEntity<>(new BaseResponseBody("Success", 200), HttpStatus.OK);
     }
 
     // 지원현황
     @GetMapping("/apply")
-    public ResponseEntity<?> applyStatus(@AuthenticationPrincipal SsafyUserDetails userDetails){
-        Long id=userDetails.getMember().getId();
-        List<ApplyStatusRes> list = myInfoService.applyStatus(id);
-        return new ResponseEntity<List<ApplyStatusRes>>(list,HttpStatus.OK);
+    public ResponseEntity<?> applyStatus(@AuthenticationPrincipal SsafyUserDetails userDetails) {
+        return new ResponseEntity<List<ApplyStatusRes>>(myInfoService.applyStatus(userDetails.getEmail()),HttpStatus.OK);
     }
 
 }

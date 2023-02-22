@@ -14,7 +14,7 @@ import java.util.List;
 public interface ReviewService {
 
     List<ReviewResponseListDto> getReviewList(ReviewSearchCondition condition);
-    void writeReview(ReviewRequestDto requestDto, Long memberId, Long companyId);
+    void writeReview(ReviewRequestDto requestDto, String email, Long companyId);
 
     ReviewResponseDto getDetailReview(Long reviewId);
 

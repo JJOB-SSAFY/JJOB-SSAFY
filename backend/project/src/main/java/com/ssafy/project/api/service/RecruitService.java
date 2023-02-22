@@ -13,13 +13,13 @@ public interface RecruitService {
     List<MainResponseDto> getRecruitOrderByEndDate();
     List<MainResponseDto> getRecruitOrderByStartDate();
 
-    void createRecruit(Long companyId, RecruitRequestDto requestDto, Long memberId);
+    void createRecruit(Long companyId, RecruitRequestDto requestDto, String email);
 
     List<RecruitResponseListDto> getRecruitList(RecruitSearchCondition condition);
 
     RecruitResponseDto getRecruitDetail(Long recruitId);
 
-    void updateRecruit(Long memberId, Long recruitId, RecruitRequestDto requestDto);
+    void updateRecruit(String email, Long recruitId, RecruitRequestDto requestDto);
 
-    void deleteRecruit(Long memberId, Long recruitId);
+    void deleteRecruit(String email, Long recruitId);
 }

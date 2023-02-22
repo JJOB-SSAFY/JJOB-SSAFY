@@ -31,7 +31,7 @@ public class CardController {
 
     @GetMapping("/image")
     public ResponseEntity<CardImageResponseDto> getImage(@AuthenticationPrincipal SsafyUserDetails userDetails) {
-        return new ResponseEntity<>(cardService.getImage(userDetails.getMember().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(cardService.getImage(userDetails.getEmail()), HttpStatus.OK);
     }
 
     @PostMapping("")

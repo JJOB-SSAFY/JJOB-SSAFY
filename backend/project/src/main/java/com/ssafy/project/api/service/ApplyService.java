@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ApplyService {
 
-    void createApply(Long recruitId, Long resumeId, Long memberId, ApplyRequestDto requestDto);
+    void createApply(Long recruitId, Long resumeId, String email, ApplyRequestDto requestDto);
     void updateApplyStatus(Long applyId, ApplyRequestDto requestDto);
     void deleteApplyStatus(Long applyId);
     List<ApplyCompRes> getApplyList(Long companyId);

@@ -46,16 +46,16 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ResumeListResponseDto> getResumeList(Long memberId) {
-        List<Resume> list = resumeRepository.findAllByMemberId(memberId);
+    public List<ResumeListResponseDto> getResumeList(String email) {
+        List<Resume> list = resumeRepository.findAllByMemberEmail(email);
 
         return list.stream().map(ResumeListResponseDto::new).collect(toList());
     }
 
     @Override
     @Transactional
-    public void createResume(ResumeRequestDto requestDto, Long memberId) {
-        Member member = memberRepository.findById(memberId)
+    public void createResume(ResumeRequestDto requestDto, String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION));
 
         //넣어야하는 resume 엔티티와 연결되어 있는 모든 엔티티를 생성해준다.
@@ -266,8 +266,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ResumeListResponseDto> getIsAppliedResumeList(Long memberId) {
-        List<Resume> list = resumeRepository.findAllByMemberIdAndIsApplied(memberId, false);
+    public List<ResumeListResponseDto> getIsAppliedResumeList(String email) {
+        List<Resume> list = resumeRepository.findAllByMemberEmailAndIsApplied(email, false);
 
         return list.stream().map(ResumeListResponseDto::new).collect(toList());
     }

@@ -35,9 +35,9 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     @Transactional
-    public void createConference(ConferenceRequestDto requestDto, Long memberId, Long companyId) {
+    public void createConference(ConferenceRequestDto requestDto, String email, Long companyId) {
 
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         Company company = companyRepository.findById(companyId)
@@ -70,18 +70,18 @@ public class ConferenceServiceImpl implements ConferenceService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ConferenceResponseDto> getConferenceList(Long memberId, String type) {
+    public List<ConferenceResponseDto> getConferenceList(String email, String type) {
         List<MemberConference> memberConferenceList = memberConferenceRepository
-                .findAllByMemberIdAndConference_conferenceCategoryOrderByConference_callStartTimeDesc(memberId, ConferenceEnum.valueOf(type));
+                .findAllByMemberEmailAndConference_conferenceCategoryOrderByConference_callStartTimeDesc(email, ConferenceEnum.valueOf(type));
 
         return memberConferenceList.stream().map((o) -> new ConferenceResponseDto(o.getConference())).collect(toList());
     }
 
     @Override
     @Transactional
-    public void deleteConference(Long memberId, Long conferenceId) {
+    public void deleteConference(String email, Long conferenceId) {
 
-        Member member = memberRepository.findById(memberId)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_NOT_EXIST_EXCEPTION));
 
         Conference conference = conferenceRepository.findById(conferenceId)

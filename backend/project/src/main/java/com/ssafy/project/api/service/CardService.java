@@ -14,5 +14,5 @@ public interface CardService {
 
     List<CardResponseDto> getCard();
     List<CardResponseListDto> getCardList(CardSearchCondition condition);
-    CardImageResponseDto getImage(Long id);
+    CardImageResponseDto getImage(String email);
 }
