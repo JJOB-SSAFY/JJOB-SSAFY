@@ -33,24 +33,34 @@ public class ResumeResponseDto {
 
     private String imageUrl;
 
+    @Builder.Default
     private List<UniversityResponseDto> universityDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<EducationResponseDto> educationDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<ActivityResponseDto> activityDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<CareerResponseDto> careerDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<AwardResponseDto> awardDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<CertificateResponseDto> certificateDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<LanguageAbilityResponseDto> languageAbilityDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<SkillResponseDto> skillDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<ProjectExpResponseDto> projectExpDtoList = new ArrayList<>();
 
+    @Builder.Default
     private List<CoverLetterResponseDto> coverLetterDtoList = new ArrayList<>();
 
     public static ResumeResponseDto of(Resume dto, List<ActivityResponseDto> activityDtoList, List<AwardResponseDto> awardDtoList,
