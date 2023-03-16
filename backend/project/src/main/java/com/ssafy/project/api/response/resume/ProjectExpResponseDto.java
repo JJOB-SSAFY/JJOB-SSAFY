@@ -33,7 +33,7 @@ public class ProjectExpResponseDto {
         this.summary = projectExp.getSummary();
         this.techEnv = projectExp.getTechEnv();
         this.position = projectExp.getPosition();
-        this.function = projectExp.getFunction();
+        this.function = projectExp.getFunctions();
         this.result = projectExp.getResult();
         this.link = projectExp.getLink();
 

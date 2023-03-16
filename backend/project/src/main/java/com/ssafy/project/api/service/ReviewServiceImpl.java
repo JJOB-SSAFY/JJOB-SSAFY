@@ -1,6 +1,5 @@
 package com.ssafy.project.api.service;
 
-import com.ssafy.project.api.request.CompanyRequestDto;
 import com.ssafy.project.api.request.ReviewRequestDto;
 import com.ssafy.project.api.request.ReviewSearchCondition;
 import com.ssafy.project.api.response.ReviewResponseDto;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service("reviewService")
 @RequiredArgsConstructor
@@ -37,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public void writeReview(ReviewRequestDto requestDto, String email, Long companyId) {
+    public ReviewResponseDto writeReview(ReviewRequestDto requestDto, String email, Long companyId) {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new ApiException(ExceptionEnum.MEMBER_EXIST_EXCEPTION));
         Company company = companyRepository.findById(companyId)
@@ -45,7 +43,8 @@ public class ReviewServiceImpl implements ReviewService {
 
         Review review = Review.of(member, company, requestDto);
 
-        reviewRepository.save(review);
+        Review saveReview = reviewRepository.save(review);
+        return ReviewResponseDto.of(saveReview);
     }
 
     @Override

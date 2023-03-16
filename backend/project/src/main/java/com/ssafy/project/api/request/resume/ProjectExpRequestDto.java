@@ -21,7 +21,7 @@ public class ProjectExpRequestDto {
 
     private String position;
 
-    private String function;
+    private String functions;
 
     private String result;
 

@@ -13,6 +13,7 @@ import java.util.List;
 @Builder
 public class ApplyCompResList {
 
+    @Builder.Default
     private List<ApplyCompRes> applyCompResList = new ArrayList<>();
 
     public static ApplyCompResList of(List<ApplyCompRes> applyCompResList){

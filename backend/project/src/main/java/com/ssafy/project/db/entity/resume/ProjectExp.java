@@ -29,7 +29,7 @@ public class ProjectExp {
 
     private String position;
 
-    private String function;
+    private String functions;
 
     private String result;
 
@@ -47,7 +47,7 @@ public class ProjectExp {
         this.summary = requestDto.getSummary();
         this.techEnv = requestDto.getTechEnv();
         this.position = requestDto.getPosition();
-        this.function = requestDto.getFunction();
+        this.functions = requestDto.getFunctions();
         this.result = requestDto.getResult();
         this.link = requestDto.getLink();
     }
@@ -59,7 +59,7 @@ public class ProjectExp {
         this.summary = requestDto.getSummary();
         this.techEnv = requestDto.getTechEnv();
         this.position = requestDto.getPosition();
-        this.function = requestDto.getFunction();
+        this.functions = requestDto.getFunctions();
         this.result = requestDto.getResult();
         this.link = requestDto.getLink();
     }
@@ -71,7 +71,7 @@ public class ProjectExp {
         this.summary = projectExp.getSummary();
         this.techEnv = projectExp.getTechEnv();
         this.position = projectExp.getPosition();
-        this.function = projectExp.getFunction();
+        this.functions = projectExp.getFunctions();
         this.result = projectExp.getResult();
         this.link = projectExp.getLink();
         this.resume = resume;
