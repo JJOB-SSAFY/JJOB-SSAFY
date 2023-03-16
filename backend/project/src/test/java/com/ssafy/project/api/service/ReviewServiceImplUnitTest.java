@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,8 @@ class ReviewServiceImplUnitTest {
     @Mock
     private ReviewRepository reviewRepository;
 
-    @Mock
-    private CompanyRepository companyRepository;
-
-    @Mock
-    private MemberRepository memberRepository;
+    @InjectMocks
+    private ReviewServiceImpl reviewService;
 
     @Test
     @DisplayName("리뷰 상세 조회 성공")
@@ -50,7 +48,6 @@ class ReviewServiceImplUnitTest {
 
         Review review = Review.of(getMember(), getCompany(), requestDto);
 
-        ReviewServiceImpl reviewService = new ReviewServiceImpl(reviewRepository, companyRepository, memberRepository);
         given(this.reviewRepository.findById(reviewId))
                 .willReturn(Optional.ofNullable(review));
 
